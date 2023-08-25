@@ -157,7 +157,7 @@ if (isset($_SESSION['usuario'])) {
 
 
 
-            <!-- SELECT EMPRESA / CEDULA Y FICHA TECNICA -->
+            <!-- SELECT CAPOS EMPRESA / CEDULA Y FICHA TECNICA -->
             <form method="POST">
 
                 <div class="container">
@@ -198,19 +198,30 @@ if (isset($_SESSION['usuario'])) {
                                         <div class="col-md-8">
                                             <div class="card-body">
                                                 <div class="card-body">
-                                                    <?php
-                                                    foreach ($arr as $row) {
+                                                    <?php foreach ($arr as $row) {
                                                         $nombreCompleto = $row['NOMBRE'] . ' ' . $row['NOMBRE2'] . ' ' . $row['APELLIDO'] . ' ' . $row['APELLIDO2'];
+                                                        $primernombre = $row['NOMBRE'];
+                                                        $segundonombre = $row['NOMBRE2'];
+                                                        $primerapellido = $row['APELLIDO'];
+                                                        $segundoapellido = $row['APELLIDO2'];
                                                         $cedula = $row['CEDULA'];
                                                         $cargo = $row['CARGO'];
 
+                                                        // Agrega los valores como valores de entrada ocultos
+                                                        echo '<input type="hidden" name="primernombre" value="' . htmlspecialchars($primernombre) . '">';
+                                                        echo '<input type="hidden" name="segundonombre" value="' . htmlspecialchars($segundonombre) . '">';
+                                                        echo '<input type="hidden" name="primerapellido" value="' . htmlspecialchars($primerapellido) . '">';
+                                                        echo '<input type="hidden" name="segundoapellido" value="' . htmlspecialchars($segundoapellido) . '">';
+
+                                                        echo '<input type="hidden" name="cedula" value=" id="cedula"' . htmlspecialchars($cedula) . '">';
+                                                        echo '<input type="hidden" name="cargo" value="' . htmlspecialchars($cargo) . '">';
+
+                                                        // Muestra los valores en el card-body si lo deseas
                                                         echo '<h6 class="card-title"><strong>' . $nombreCompleto . '</strong></h6>';
                                                         echo '<p class=""><strong>Cedula: ' . $cedula . '</strong></p>';
                                                         echo '<p class=""><strong>Cargo: ' . $cargo . '</strong></p>';
-                                                    }
-                                                    ?>
-                                                    <input type="text" name="empresaOption" id="empresaOption" value=<?php echo $empresaOption ?>></input>
-                                                    
+                                                    } ?>
+                                                    <input type="hidden" name="empresaOption" id="empresaOption" value="<?php echo $empresaOption ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -221,30 +232,25 @@ if (isset($_SESSION['usuario'])) {
 
                     </div>
                 </div>
+
             </form>
-
-
-
 
             <!-- DEPENDIENDO SI HAY INFORMACION DE USUARIO, EL SISTEMA MOSTRARA LOS DATOS SI NO PUES PERMANECERAN OCULTOS  -->
             <?php
             if (isset($showSections)) {
-
             ?>
-
 
                 <!-- AQUI MUESTRA LAS SECCION  COMPUTADOR -->
                 <div class="container " style="margin-top: 50px;">
                     <div class="row">
-
-                        <div class="col-md-3 ">
+                        <!-- PRIMER BLOQUE CHECK -->
+                        <div class="col-md-3">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="1" name="selecciondelcomputador">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">Cumputador</label>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Computador</label>
                             </div>
                         </div>
-
-
+                        <!-- SEGUNDO BLOQUE  SELECCION DEL TIPO DE COMPUTADOR-->
                         <div class="col-md-2" id="fila1" style="display: none;">
                             <!-- CONSULTA POR MEDIO DE CHECKS -->
                             <?php
@@ -268,25 +274,77 @@ if (isset($_SESSION['usuario'])) {
                                 <?php
                                 }
                                 ?>
-                                <input type="text" name="tipocomputador" id="tipocomputador" value="">
+                                <input type="hidden" name="tipocomputador" id="tipocomputador" value="">
 
                             </form>
                         </div>
-
+                        <!-- TERCER BLOQUE LUEGO DE LA CONSULTA CON EL TIPO DE COMPUTADOR LISTAR -->
                         <div class="col-md-2" id="fila2" style="display: none;">
                             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalcomputador">
                                 Ver listado
                             </button>
                         </div>
+                        <!-- CUARTO BLOQUE VERIFICAR SI HAY COMPUTADORES ASIGNADOS -->
+                        <div class="col-md-5" id="fila3" style="display: none; text-align: center; font-family: 'Courier New', monospace;">
+                            <?php
+                            include '../../conexionbd.php';
+                            $consulta = "SELECT tipo_maquina, Nombre_equipo, Marca_computador, Memoria_ram, capacidad_discoduro, Procesador FROM [ControlTIC].[dbo].[asignacion_computador]";
+                            $resultado = odbc_exec($conexion, $consulta);
 
-                        <div class="col-md-5" id="fila3" style="display: none;text-align: center;">
+                            echo "<pre>"; // Mantener el formato monoespaciado
 
-                            <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#verinfocomputador" aria-expanded="false" aria-controls="verinfocomputador">
+                            if (odbc_num_rows($resultado) > 0) {
+                                while ($fila = odbc_fetch_array($resultado)) {
+                                    echo "Actualmente el usuario tiene asignado\n";
+                                    echo "-------------------------------------\n";
+                                    echo "Nombre del equipo: " . $fila['Nombre_equipo'] . "\n";
+                                    echo "Marca del computador: " . $fila['Marca_computador'] . "\n";
+                                    echo "Memoria RAM: " . $fila['Memoria_ram'] . "\n";
+                                    echo "Capacidad del disco duro: " . $fila['capacidad_discoduro'] . "\n";
+                                    echo "Procesador: " . $fila['Procesador'] . "\n";
+                                }
+                            } else {
+                                echo "-------------------------------------\n";;
+                            }
+
+                            echo "-------------------------------------\n";
+                            echo "</pre>";
+
+                            odbc_close($conexion);
+                            ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AQUI MUESTRA LAS SECCION  CELULAR -->
+                <div class="container" style="margin-top: 50px;">
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCelular" value="2" name="selecciondelcelular">
+                                <label class="form-check-label" for="flexSwitchCheckCelular">Celulares</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" id="fila1celular" style="display: none;">
+
+                        </div>
+
+                        <div class="col-md-2" id="fila2celular" style="display: none;">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalcelular">
+                                Ver listado
+                            </button>
+                        </div>
+
+                        <div class="col-md-5" id="fila3celular" style="display: none;text-align: center;">
+
+                            <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#verinfocelular" aria-expanded="false" aria-controls="verinfocelular">
                                 VER INFORMACIÓN
                             </button>
                             </p>
 
-                            <div class="collapse" id="verinfocomputador">
+                            <div class="collapse" id="verinfocelular">
                                 <div class="card card-body">
                                     <table class="table table-bordered table-hover">
                                         <thead>
@@ -295,27 +353,16 @@ if (isset($_SESSION['usuario'])) {
                                                 <th scope="col">Valor</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="nombreEquipoDisplay">
+                                        <tbody id="nombreEquipoDisplay1">
                                             <!-- Aquí se insertarán las filas de la tabla con los datos -->
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-
-                            <div id="datosRecolectadosDialog" title="Datos Recolectados">
-                                <!-- Aquí se mostrarán los datos recolectados -->
-                            </div>
-
-
                         </div>
 
                     </div>
                 </div>
-
-
-                <button  class="btn btn-primary" name="asignar" id="asignar">Asignar</button>
-
-
 
             <?php
             }
@@ -328,7 +375,9 @@ if (isset($_SESSION['usuario'])) {
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modalcomputadorLabel">Listado de Equipos</h1>
+                        <h1 class="modal-title fs-5" id="modalcomputadorLabel">
+                            <h6>Equipo de Computo para el Cargo: <?php echo $cargo ?></h6>
+                        </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -343,11 +392,25 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
 
+        <!-- MODAL DE CELULARES -->
+        <div class="modal fade" id="modalcelular" tabindex="-1" aria-labelledby="modalmodalcelularLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalmodalcelularLabel">Listado de Equipos Celular</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </body>
-
-
 
     <!-- SCRIPT DE CHECKS COMPUTADOR -->
     <script>
@@ -355,6 +418,8 @@ if (isset($_SESSION['usuario'])) {
             $('#flexSwitchCheckDefault').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#fila1').show();
+                    $('#fila2').show();
+                    $('#fila3').show();
                 } else {
                     $('#fila1').hide();
                     $('#fila2').hide();
@@ -375,7 +440,53 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
+    <!-- SCRIPT DE CHECKS CELULARES -->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckCelular').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila1celular').show();
+                    $('#fila2celular').show();
+                } else {
+                    $('#fila1celular').hide();
+                    $('#fila2celular').hide();
+                    $('#fila3celular').hide();
+                }
+            });
+        });
+    </script>
 
+
+
+    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN-->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckDefault').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila3').show();
+                    // Realizar la llamada AJAX para actualizar #fila3
+                    actualizarFila3();
+                } else {
+                    $('#fila3').hide();
+                }
+            });
+            $('#fila2 button').on('click', function() {
+                $('#fila3').show();
+                // Realizar la llamada AJAX para actualizar #fila3
+                actualizarFila3();
+            });
+        });
+
+        function actualizarFila3() {
+            $.ajax({
+                url: 'fichatecnica/actualizarcomputador.php', // Archivo PHP que realizará la consulta
+                method: 'GET',
+                success: function(response) {
+                    $('#fila3').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
+                }
+            });
+        }
+    </script>
 
     <script>
         function updateTipoComputador(radio) {
@@ -383,96 +494,68 @@ if (isset($_SESSION['usuario'])) {
         }
     </script>
 
-
-    <!-- AJAX DE CHECK LISTADO COMPUTADORES -->
+    <!-- AJAX DE CHECK LISTADO COMPUTADORES PARA CONSULTAR Y LLEVAR INFORMACIÓN -->
     <script>
         $(document).ready(function() {
             $('#fila2 button').on('click', function() {
-                var tipocomputador = $('#tipocomputador').val(); // Obtén el valor del campo oculto
-                var empresaOption = $('#empresaOption').val(); // Obtén el valor del campo oculto
+                var tipocomputador = $('#tipocomputador').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
 
                 $.ajax({
-                    url: 'consultas/consultacomputador.php', // Cambia esto a la ruta correcta
+                    url: 'consultas/consultacomputador.php',
                     type: 'POST',
                     data: {
                         tipocomputador: tipocomputador,
-                        empresaOption: empresaOption
+                        empresaOption: empresaOption,
+
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
                     },
                     success: function(response) {
                         $('#modalcomputador .modal-body').html(response); // Agrega los resultados al cuerpo del modal
                     }
                 });
+
             });
         });
     </script>
 
-
-
-
+    <!-- AJAX PARA CONSULTA DE CELULARES -->
     <script>
         $(document).ready(function() {
-            $('#saveChangesModalButton').on('click', function() {
-                var selectedRowData = $('input[name="flexRadioDefault"]:checked').closest('tr').find('td:not(:last-child)');
-
-                $('#nombreEquipoDisplay').empty(); // Limpiar la tabla antes de agregar nuevos datos
-
-                selectedRowData.each(function(index) {
-                    var fieldName = $(this).closest('table').find('thead th:eq(' + index + ')').text();
-                    var fieldValue = $(this).text();
-
-                    $('#nombreEquipoDisplay').append('<tr><td>' + fieldName + '</td><td>' + fieldValue + '</td></tr>');
-                });
-                $('#fila3').show();
-            });
-        });
-    </script>
-
-
-    <script>
-        $(document).ready(function() {
-            $('#asignar').on('click', function() {
-                var selectedRowData = $('input[name="flexRadioDefault"]:checked')
-                    .closest('tr')
-                    .find('td:not(:last-child)');
-
-                var dataToInsert = {};
-
-                selectedRowData.each(function(index) {
-                    var fieldName = $(this)
-                        .closest('table')
-                        .find('thead th:eq(' + index + ')')
-                        .text();
-                    var fieldValue = $(this).text();
-
-                    dataToInsert[fieldName] = fieldValue;
-                });
+            $('#modalcelular').on('show.bs.modal', function(event) {
 
                 $.ajax({
-                    url: 'consultas/insertar_en_bd.php', // Cambia esto a la ruta correcta del script que manejará la inserción
+                    url: 'consultas/consultacelular.php',
                     type: 'POST',
-                    data: dataToInsert,
-                    success: function(response) {
-                        // Mostrar los datos recolectados en un cuadro de diálogo
-                        $('#datosRecolectadosDialog').html('<p>Datos recolectados:</p><pre>' + JSON.stringify(dataToInsert, null, 2) + '</pre>');
-                        $('#datosRecolectadosDialog').dialog({
-                            resizable: false,
-                            height: 'auto',
-                            width: 400,
-                            modal: true,
-                            buttons: {
-                                'Aceptar': function() {
-                                    $(this).dialog('close');
-                                }
-                            }
-                        });
+                    data: {
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
 
-                        // Mostrar un mensaje de éxito
-                        alert('Datos insertados correctamente.');
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modalcelular .modal-body').html(response); // Agrega los resultados al cuerpo del modal
                     }
                 });
+
             });
         });
     </script>
+
+
 
 
 
