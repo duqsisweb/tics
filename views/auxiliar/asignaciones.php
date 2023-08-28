@@ -94,6 +94,7 @@ if (isset($_SESSION['usuario'])) {
 
 </section> 
 
+
             <?php
             // SELECT PARA HACER LA CONSULTA
             if (isset($_POST['consultar'])) {
