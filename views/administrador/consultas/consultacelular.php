@@ -198,6 +198,7 @@ while ($Element = odbc_fetch_array($data)) {
 <script>
     $(document).ready(function() {
         $('.showAlertButton').click(function() {
+
             var $asignarBtn = $(this).prev('.asignar-btn'); // Obtener el botón oculto previo
             var idToUpdate = $asignarBtn.data('id'); // Obtener el ID del botón oculto
 
@@ -224,13 +225,11 @@ while ($Element = odbc_fetch_array($data)) {
                         },
                         success: function(response) {
                             console.log("Actualización exitosa:", response);
+
+                            // Activar el botón oculto correspondiente a la fila seleccionada
+                            $asignarBtn.trigger('click');
                         }
                     });
-
-                    // Ejecutar el trigger después de 2 segundos
-                    setTimeout(function() {
-                        $('#enviarcelular').trigger('click');
-                    }, 2000);
 
                 } else if (result.isDenied) {
                     Swal.fire('Los cambios no se guardaron', '', 'info');

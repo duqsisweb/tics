@@ -10,7 +10,7 @@ if ($_POST['iniciar']) {
     $password = rtrim($_POST['password']);
     $typeUser = $_POST['typeUser'];
 
-    $resul = odbc_exec($conexion, " SELECT MV.NOMBRE, RTRIM(MV.CODUSUARIO) AS CODUSUARIO, RTRIM(MV.PASSWORD) AS CLAVE FROM CONTROL_OFIMAEnterprise..MTUSUARIO AS MV WHERE (MV.CODUSUARIO = '$usuario' AND MV.CODUSUARIO IN ('YFGONZALEZ','COORDSISTEMAS','YALONSO')) AND MV.PASSWORD = '$password'") or die(exit("Error al ejecutar consulta"));
+    $resul = odbc_exec($conexion, " SELECT MV.NOMBRE, RTRIM(MV.CODUSUARIO) AS CODUSUARIO, RTRIM(MV.PASSWORD) AS CLAVE FROM CONTROL_OFIMAEnterprise..MTUSUARIO AS MV WHERE (MV.CODUSUARIO = '$usuario' AND MV.CODUSUARIO IN ('YFGONZALEZ','COORDSISTEMAS','YALONSO','DORTEGA','ANALISTAV','AROBAYO')) AND MV.PASSWORD = '$password'") or die(exit("Error al ejecutar consulta"));
 
     $Nombre = odbc_result($resul, 'NOMBRE');
     $usua = rtrim(odbc_result($resul, 'CODUSUARIO'));
@@ -27,6 +27,9 @@ if ($_POST['iniciar']) {
         // Redireccionar a diferentes vistas según el perfil del usuario
         switch ($usua) {
             case 'YFGONZALEZ':
+            case 'AROBAYO':
+            case 'ANALISTAV':
+            case 'DORTEGA':
                 header("Location: views/administrador/inicio_administrador.php");
                 break;
             case 'COORDSISTEMAS':

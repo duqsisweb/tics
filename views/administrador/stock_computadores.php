@@ -29,7 +29,7 @@ if (isset($_SESSION['usuario'])) {
                         <table class="table table-bordered dt-responsive table-hover display nowrap" id="infodetallefactura" cellspacing="0" style="text-align: center;">
                             <thead>
                                 <tr class="encabezado table-dark">
-                                    <th>ID</th>
+                                    <th>Estado</th>
                                     <th>Service Tag</th>
                                     <th>Serial Equipo</th>
                                     <th>Nombre Equipo</th>
@@ -52,7 +52,6 @@ if (isset($_SESSION['usuario'])) {
                                     <th>Serial Activo</th>
                                     <th>Fecha Ingreso</th>
                                     <th>Targeta Video</th>
-                                    <th>Estado</th>
                                     <th>Fecha Garantia</th>
                                     <th>Usuario Crea</th>
 
@@ -65,7 +64,7 @@ if (isset($_SESSION['usuario'])) {
                             <tbody>
                                 <?php
                                 $sql = "SELECT  
-                                    mc.[id],
+                                    e2.[nombre_estado] AS [Estado],
                                     mc.[Service_tag],
                                     mc.[Serial_equipo],
                                     mc.[Nombre_equipo],
@@ -88,7 +87,6 @@ if (isset($_SESSION['usuario'])) {
                                     mc.[Serial_activo_fijo],
                                     mc.[Fecha_ingreso],
                                     mc.[Targeta_Video],
-                                    e2.[nombre_estado] AS [Estado],
                                     mc.[Fecha_garantia],
                                     mc.[Usua_crea]
                                 FROM [ControlTIC].[dbo].[maquina_computador] AS mc

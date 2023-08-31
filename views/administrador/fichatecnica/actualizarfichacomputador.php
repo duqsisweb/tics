@@ -1,9 +1,12 @@
 <?php
 include '../../../conexionbd.php';
-$consulta = "SELECT tipo_maquina, Nombre_equipo, Marca_computador, Memoria_ram, capacidad_discoduro, Procesador FROM [ControlTIC].[dbo].[asignacion_computador]";
+
+$cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
+
+$consulta = "SELECT tipo_maquina, Nombre_equipo, Marca_computador, Memoria_ram, capacidad_discoduro, Procesador FROM [ControlTIC].[dbo].[asignacion_computador] WHERE cedula = '$cedula'";
 $resultado = odbc_exec($conexion, $consulta);
 
-$output = "<pre>"; // Mantener el formato monoespaciado
+$output = "<pre>";
 
 if (odbc_num_rows($resultado) > 0) {
     while ($fila = odbc_fetch_array($resultado)) {
@@ -24,4 +27,5 @@ $output .= "</pre>";
 
 odbc_close($conexion);
 
-echo $output; // Enviar la respuesta al cliente (JavaScript)
+echo $output;
+?>

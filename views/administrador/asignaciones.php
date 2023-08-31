@@ -25,7 +25,6 @@ if (isset($_SESSION['usuario'])) {
 
         <section style="margin-top: 100px;">
 
-
             <!-- Estilos para cambiar borde de color -->
             <style>
                 .empresa-1 {
@@ -65,34 +64,34 @@ if (isset($_SESSION['usuario'])) {
                 }
             </style>
 
-<section style="margin-top: 100px;">
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#"></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="../administrador/inicio_administrador.php">Inicio</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Usuarios
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Asignaciones</a></li>
-                                </ul>
-                            </li>
+            <section style="margin-top: 100px;">
+                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#"></a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="../administrador/inicio_administrador.php">Inicio</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Usuarios
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Asignaciones</a></li>
+                                    </ul>
+                                </li>
 
-                        </ul>
+                            </ul>
 
+                        </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
 
-</section> 
+            </section>
 
             <?php
             // SELECT PARA HACER LA CONSULTA
@@ -142,10 +141,10 @@ if (isset($_SESSION['usuario'])) {
 
                     //  MENSAJES SI LA CONSULTA ES EXITOSA O NO HAY INFORMACIÓN
                     echo '<div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
+                            <div class="toast-header">
                     <strong class="me-auto">Éxito</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
-                </div>
+                             </div>
                 <div class="toast-body">
                     Consulta satisfactoria.
                 </div>
@@ -184,8 +183,8 @@ if (isset($_SESSION['usuario'])) {
                     <div class="row">
 
                         <div class="col-md-3" style="margin: 50px 0px 0px 0px;">
-                            <label for="" class="form-label">Empresa</label>
-                            <select name="empresa" class="form-select" aria-label="Default select example" required>
+                            <label class="form-label">Empresa</label>
+                            <select id="empresaSelect" name="empresa" class="form-select" aria-label="Default select example" required>
                                 <option selected disabled>SELECCIONE EMPRESA</option>
                                 <option value="1">Duquesa S.A. BIC</option>
                                 <option value="2">Palmeras del Llano S.A. BIC</option>
@@ -193,16 +192,37 @@ if (isset($_SESSION['usuario'])) {
                             </select>
                         </div>
 
-                        <div class="col-md-2" style="margin: 50px 0px 0px 0px;">
-                            <label for="" class="form-label">Identificación</label>
-                            <input type="text" class="form-control" id="" placeholder="" name="CEDULA" pattern="[0-9]+" required>
+                        <div class="col-md-2" style="margin: 50px 0px 0px 0px;display: none;">
+                            <label class="form-label">Identificación</label>
+                            <input type="text" class="form-control" id="identificacionInput" placeholder="" name="CEDULA" pattern="[0-9]+" required>
                         </div>
+
+                        <div class="col-md-2" style="margin: 50px 0px 0px 0px;">
+                            <div class="form-group">
+                                <label class="form-label">Nombre</label>
+                                <input list="asiste" class="form-control" type="text" id="nombreInput" name="asiste" required>
+                                <datalist id="asiste">
+                                    <?php
+                                    include '../../../conexionbd.php';
+                                    $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM DUQUESA..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 ORDER BY NOMBRE ASC;";
+                                    $result = odbc_exec($conexion, $query);
+
+                                    while ($admon = odbc_fetch_array($result)) {
+                                        $nombreCompleto = trim(utf8_decode($admon['NOMBRE'])) . ' ' . trim(utf8_decode($admon['NOMBRE2'])) . ' ' . trim(utf8_decode($admon['APELLIDO'])) . ' ' . trim(utf8_decode($admon['APELLIDO2']));
+                                        echo '<option value="' . trim($admon['CEDULA']) . '">' . $nombreCompleto . ' - ' . trim($admon['CEDULA']) . '</option>';
+                                    }
+                                    ?>
+                                </datalist>
+                            </div>
+                        </div>
+
 
                         <div class="col-md-2">
                             <div style="margin: 80px 0px 0px 0px;text-align: center;">
                                 <button type="submit" class="btn btn-success" name="consultar" id="consultar">CONSULTAR</button>
                             </div>
                         </div>
+
 
                         <!-- SECCION TARGETA DE PERFIL -->
                         <div class="col-md-5">
@@ -294,7 +314,7 @@ if (isset($_SESSION['usuario'])) {
                                 <?php
                                 }
                                 ?>
-                                <input type="hidden" name="tipocomputador" id="tipocomputador" value="">
+                                <input type="text" name="tipocomputador" id="tipocomputador" value="">
 
                             </form>
                         </div>
@@ -339,11 +359,245 @@ if (isset($_SESSION['usuario'])) {
                     </div>
                 </div>
 
+                <!-- AQUI MUESTRA LAS SECCION  ACCESORIOS -->
+                <div class="container" style="margin-top: 50px;">
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckAccesorios" value="1" name="selecciondelaccesorio">
+                                <label class="form-check-label" for="flexSwitchCheckAccesorios">Accesorios</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2" id="fila1accesorios" style="display: none;">
+                            <!-- CONSULTA POR MEDIO DE CHECKS -->
+                            <?php
+                            include '../../conexionbd.php';
+                            $consulta = "SELECT id, nombre_descripcion FROM [ControlTIC].[dbo].[descripcion_accesorios]";
+                            $resultado = odbc_exec($conexion, $consulta);
+                            ?>
+
+                            <form>
+                                <?php
+                                while ($fila = odbc_fetch_array($resultado)) {
+                                    $id = $fila['id'];
+                                    $nombre = $fila['nombre_descripcion'];
+                                ?>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="tipo_accesorio[]" id="tipo_accesorio_<?php echo $id; ?>" value="<?php echo $id; ?>">
+                                        <label class="form-check-label" for="tipo_accesorio_<?php echo $id; ?>">
+                                            <?php echo $nombre; ?>
+                                        </label>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                                <input type="hidden" name="tipoaccesorio" id="tipoaccesorio" value="">
+                            </form>
+                        </div>
+
+                        <div class="col-md-2" id="fila2accesorios" style="display: none;">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalaccesorios">
+                                Ver listado
+                            </button>
+                        </div>
+
+                        <div class="col-md-5" id="fila3accesorios" style="display: none;text-align: center;">
+
+                            <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#verinfoaccesorios" aria-expanded="false" aria-controls="verinfoaccesorios">
+                                VER INFORMACIÓN
+                            </button>
+                            </p>
+
+                            <div class="collapse" id="verinfoaccesorios">
+                                <div class="card card-body">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr class="table-dark">
+                                                <th scope="col">Tipo Caracteristica</th>
+                                                <th scope="col">Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="nombreEquipoDisplay">
+                                            <!-- Aquí se insertarán las filas de la tabla con los datos -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- AQUI MUESTRA LAS SECCION  EDCOMUNICACION -->
+                <div class="container" style="margin-top: 50px;">
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckedcomunicacion" value="4" name="selecciondeledcomunicacion">
+                                <label class="form-check-label" for="flexSwitchCheckedcomunicacion">E.D Comunucación</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2" id="fila1edcomunicacion" style="display: none;">
+                            <!-- CONSULTA POR MEDIO DE CHECKS -->
+
+                            <?php
+                            include '../../conexionbd.php';
+                            $consulta = "SELECT id, nombre_descripcion FROM [ControlTIC].[dbo].[descripcion_edcomunicacion]";
+                            $resultado = odbc_exec($conexion, $consulta);
+                            ?>
+
+                            <form>
+                                <?php
+                                while ($fila = odbc_fetch_array($resultado)) {
+                                    $id = $fila['id'];
+                                    $nombre = $fila['nombre_descripcion'];
+                                ?>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="descripcion" id="descripcion_<?php echo $id; ?>" value="<?php echo $id; ?>" onchange="updateDescripcionedcomunicacion(this)">
+                                        <label class="form-check-label" for="descripcion_<?php echo $id; ?>">
+                                            <?php echo $nombre; ?>
+                                        </label>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                                <input type="text" name="tipo_edcomunicacion" id="tipo_edcomunicacion" value="">
+
+                            </form>
+                        </div>
+
+                        <div class="col-md-2" id="fila2edcomunicacion" style="display: none;">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaledcomunicacion">
+                                Ver listado
+                            </button>
+                        </div>
+
+                        <div class="col-md-5" id="fila3edcomunicacion" style="display: none;text-align: center;">
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- AQUI MUESTRA LAS SECCION  PERIFERICOS -->
+                <div class="container" style="margin-top: 50px;">
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckperifericos" value="5" name="selecciondelperifericos">
+                                <label class="form-check-label" for="flexSwitchCheckperifericos">Perifericos</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2" id="fila1perifericos" style="display: none;">
+                            <!-- CONSULTA POR MEDIO DE CHECKS -->
+
+                            <?php
+                            include '../../conexionbd.php';
+                            $consulta = "SELECT id, nombre_descripcion FROM [ControlTIC].[dbo].[descripcion_perifericos]";
+                            $resultado = odbc_exec($conexion, $consulta);
+                            ?>
+
+                            <form>
+                                <?php
+                                while ($fila = odbc_fetch_array($resultado)) {
+                                    $id = $fila['id'];
+                                    $nombre = $fila['nombre_descripcion'];
+                                ?>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="descripcionperifericos" id="descripcionperifericos_<?php echo $id; ?>" value="<?php echo $id; ?>" onchange="updateDescripcionperifericos(this)">
+                                        <label class="form-check-label" for="descripcionperifericos_<?php echo $id; ?>">
+                                            <?php echo $nombre; ?>
+                                        </label>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                                <input type="text" name="tipo_perifericos" id="tipo_perifericos" value="">
+
+                            </form>
+                        </div>
+
+                        <div class="col-md-2" id="fila2perifericos" style="display: none;">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalperifericos">
+                                Ver listado
+                            </button>
+                        </div>
+
+                        <div class="col-md-5" id="fila3perifericos" style="display: none;text-align: center;">
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- AQUI MUESTRA LAS SECCION  ALMACENAMIENTO -->
+                <div class="container" style="margin-top: 50px;">
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckalmacenamiento" value="5" name="selecciondelalmacenamiento">
+                                <label class="form-check-label" for="flexSwitchCheckalmacenamiento">Almacenamiento</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2" id="fila1almacenamiento" style="display: none;">
+                            <!-- CONSULTA POR MEDIO DE CHECKS -->
+
+                            <?php
+                            include '../../conexionbd.php';
+                            $consulta = "SELECT id, nombre_descripcion FROM [ControlTIC].[dbo].[descripcion_almacenamiento]";
+                            $resultado = odbc_exec($conexion, $consulta);
+                            ?>
+
+                            <form>
+                                <?php
+                                while ($fila = odbc_fetch_array($resultado)) {
+                                    $id = $fila['id'];
+                                    $nombre = $fila['nombre_descripcion'];
+                                ?>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="descripcionalmacenamiento" id="descripcionalmacenamiento_<?php echo $id; ?>" value="<?php echo $id; ?>" onchange="updateDescripcionalmacenamiento(this)">
+                                        <label class="form-check-label" for="descripcionalmacenamiento_<?php echo $id; ?>">
+                                            <?php echo $nombre; ?>
+                                        </label>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                                <input type="text" name="tipo_almacenamiento" id="tipo_almacenamiento" value="">
+
+                            </form>
+                        </div>
+
+                        <div class="col-md-2" id="fila2almacenamiento" style="display: none;">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalalmacenamiento">
+                                Ver listado
+                            </button>
+                        </div>
+
+                        <div class="col-md-5" id="fila3almacenamiento" style="display: none;text-align: center;">
+
+                        </div>
+
+                    </div>
+                </div>
+
             <?php
             }
             ?>
         </section>
-
 
         <!-- MODAL DE COMPUTADORES-->
         <div class="modal fade" id="modalcomputador" tabindex="-1" aria-labelledby="modalcomputadorLabel" aria-hidden="true">
@@ -356,7 +610,7 @@ if (isset($_SESSION['usuario'])) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <!-- Aquí se llenará el contenido de la consulta  -->
                     </div>
                     <div class="modal-footer">
                         <div class="modal-footer">
@@ -368,17 +622,17 @@ if (isset($_SESSION['usuario'])) {
         </div>
 
         <!-- MODAL DE CELULARES -->
-        <div class="modal fade" id="modalcelular" tabindex="-1" aria-labelledby="modalmodalcelularLabel" aria-hidden="true">
+        <div class="modal fade" id="modalcelular" tabindex="-1" aria-labelledby="modalcelularLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modalmodalcelularLabel">
+                        <h1 class="modal-title fs-5" id="modalcelularLabel">
                             <h6>Equipo Celular para el Cargo: <?php echo $cargo ?></h6>
                         </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
+                        <!-- Aquí se llenará el contenido de la consulta  -->
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
@@ -387,8 +641,82 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
 
+        <!-- MODAL DE ACCESORIOS-->
+
+        <!-- MODAL DE EDCOMUNICACION -->
+        <div class="modal fade" id="modaledcomunicacion" tabindex="-1" aria-labelledby="modaledcomunicacionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modaledcomunicacionLabel">Listado de Ed Comunicacion</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL DE PERIFERICOS -->
+        <div class="modal fade" id="modalperifericos" tabindex="-1" aria-labelledby="modalperifericosLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalperifericosLabel">Listado de Perifericos</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL DE ALMACENAMIENTO -->
+        <div class="modal fade" id="modalalmacenamiento" tabindex="-1" aria-labelledby="modalalmacenamientoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalalmacenamientoLabel">Listado de Almacenamiento</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </body>
+
+
+    <script>
+        function updateTipoComputador(radio) {
+            document.getElementById('tipocomputador').value = radio.value;
+        }
+
+        function updateDescripcionedcomunicacion(radio) {
+            document.getElementById('tipo_edcomunicacion').value = radio.value;
+        }
+
+        function updateDescripcionperifericos(radio) {
+            document.getElementById('tipo_perifericos').value = radio.value;
+        }
+
+        function updateDescripcionalmacenamiento(radio) {
+            document.getElementById('tipo_almacenamiento').value = radio.value;
+        }
+    </script>
 
     <!-- SCRIPT DE CHECKS COMPUTADOR -->
     <script>
@@ -434,8 +762,108 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
+    <!-- SCRIPT DE CHECKS ACCESORIOS -->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckAccesorios').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila1accesorios').show();
+                } else {
+                    $('#fila1accesorios').hide();
+                    $('#fila2accesorios').hide();
+                    $('#fila3accesorios').hide();
+                }
+            });
+        });
+    </script>
+    <!-- SCRIPT DE CHECKS EDCOMUNICACION -->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckedcomunicacion').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila1edcomunicacion').show();
+                    $('#fila2edcomunicacion').show();
+                    $('#fila3edcomunicacion').show();
+                } else {
+                    $('#fila1edcomunicacion').hide();
+                    $('#fila2edcomunicacion').hide();
+                    $('#fila3edcomunicacion').hide();
+                }
+            });
 
-    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN CPMPUTADOR-->
+            $('input[name="descripcion"]').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila2edcomunicacion').show();
+                } else {
+                    $('#fila2edcomunicacion').hide();
+                }
+            });
+
+            $('#fila2edcomuniacion button').on('click', function() {
+                $('#fila3edcomunicacion').show();
+            });
+        });
+    </script>
+    <!-- SCRIPT DE CHECKS PERIFERICOS -->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckperifericos').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila1perifericos').show();
+                    $('#fila2perifericos').show();
+                    $('#fila3perifericos').show();
+                } else {
+                    $('#fila1perifericos').hide();
+                    $('#fila2perifericos').hide();
+                    $('#fila3perifericos').hide();
+                }
+            });
+
+            $('input[name="descripcionperifericos"]').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila2perifericos').show();
+                } else {
+                    $('#fila2perifericos').hide();
+                }
+            });
+
+            $('#fila2perifericos button').on('click', function() {
+                $('#fila3perifericos').show();
+            });
+        });
+    </script>
+    <!-- SCRIPT DE CHECKS ALMACENAMINETO -->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckalmacenamiento').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila1almacenamiento').show();
+                    $('#fila2almacenamiento').show();
+                    $('#fila3almacenamiento').show();
+                } else {
+                    $('#fila1almacenamiento').hide();
+                    $('#fila2almacenamiento').hide();
+                    $('#fila3almacenamiento').hide();
+                }
+            });
+
+            $('input[name="descripcionalmacenamiento"]').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila2almacenamiento').show();
+                } else {
+                    $('#fila2almacenamiento').hide();
+                }
+            });
+
+            $('#fila2almacenamiento button').on('click', function() {
+                $('#fila3almacenamiento').show();
+            });
+        });
+    </script>
+
+
+
+    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN COMPUTADOR-->
     <script>
         $(document).ready(function() {
             $('#flexSwitchCheckDefault').on('change', function() {
@@ -455,11 +883,15 @@ if (isset($_SESSION['usuario'])) {
         });
 
         function actualizarFila3() {
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
             $.ajax({
-                url: 'fichatecnica/actualizarfichacomputador.php', // Archivo PHP que realizará la consulta
+                url: 'fichatecnica/actualizarfichacomputador.php',
                 method: 'GET',
+                data: {
+                    cedula: cedula
+                }, // Pasar la cédula como parámetro
                 success: function(response) {
-                    $('#fila3').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
+                    $('#fila3').html(response);
                 }
             });
         }
@@ -495,11 +927,98 @@ if (isset($_SESSION['usuario'])) {
         }
     </script>
 
+
+    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN EDCOMUNICACION-->
     <script>
-        function updateTipoComputador(radio) {
-            document.getElementById('tipocomputador').value = radio.value;
+        $(document).ready(function() {
+            $('#flexSwitchCheckedcomunicacion').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila3edcomunicacion').show();
+                    // Realizar la llamada AJAX para actualizar #fila3
+                    actualizarFila3edcomunicacion();
+                } else {
+                    $('#fila3edcomunicacion').hide();
+                }
+            });
+            $('#fila2edcomunicacion button').on('click', function() {
+                $('#fila3edcomunicacion').show();
+                // Realizar la llamada AJAX para actualizar #fila3
+                actualizarFila3edcomunicacion();
+            });
+        });
+
+        function actualizarFila3edcomunicacion() {
+            $.ajax({
+                url: 'fichatecnica/actualizarfichaedcomunicacion.php', // Archivo PHP que realizará la consulta
+                method: 'GET',
+                success: function(response) {
+                    $('#fila3edcomunicacion').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
+                }
+            });
         }
     </script>
+
+    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN PERIFERICOS-->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckperifericos').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila3perifericos').show();
+                    // Realizar la llamada AJAX para actualizar #fila3
+                    actualizarFila3perifericos();
+                } else {
+                    $('#fila3perifericos').hide();
+                }
+            });
+            $('#fila2perifericos button').on('click', function() {
+                $('#fila3perifericos').show();
+                // Realizar la llamada AJAX para actualizar #fila3
+                actualizarFila3perifericos();
+            });
+        });
+
+        function actualizarFila3perifericos() {
+            $.ajax({
+                url: 'fichatecnica/actualizarfichaperifericos.php', // Archivo PHP que realizará la consulta
+                method: 'GET',
+                success: function(response) {
+                    $('#fila3perifericos').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
+                }
+            });
+        }
+    </script>
+
+    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN ALMACENAMIENTO-->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckalmacenamiento').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila3almacenamiento').show();
+                    // Realizar la llamada AJAX para actualizar #fila3
+                    actualizarFila3almacenamiento();
+                } else {
+                    $('#fila3almacenamiento').hide();
+                }
+            });
+            $('#fila2almacenamiento button').on('click', function() {
+                $('#fila3almacenamiento').show();
+                // Realizar la llamada AJAX para actualizar #fila3
+                actualizarFila3almacenamiento();
+            });
+        });
+
+        function actualizarFila3almacenamiento() {
+            $.ajax({
+                url: 'fichatecnica/actualizarfichaalmacenamiento.php', // Archivo PHP que realizará la consulta
+                method: 'GET',
+                success: function(response) {
+                    $('#fila3almacenamiento').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
+                }
+            });
+        }
+    </script>
+
+
 
     <!-- AJAX DE CHECK LISTADO COMPUTADORES PARA CONSULTAR Y LLEVAR INFORMACIÓN -->
     <script>
@@ -561,8 +1080,190 @@ if (isset($_SESSION['usuario'])) {
         });
     </script>
 
+    <!-- AJAX PARA CONSULTA DE EDCOMUNICACION -->
+    <script>
+        var empresaOptionValue = "<?php echo $empresaOption; ?>";
+        $(document).ready(function() {
+            $('#fila2edcomunicacion button').on('click', function() {
+                var tipo_edcomunicacion = $('#tipo_edcomunicacion').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                $.ajax({
+                    url: 'consultas/consultaedcomunicacion.php',
+                    type: 'POST',
+                    data: {
+                        empresa: empresaOptionValue,
+                        tipo_edcomunicacion: tipo_edcomunicacion,
 
 
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modaledcomunicacion .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                    }
+                });
+
+            });
+        });
+    </script>
+
+    <!-- AJAX PARA CONSULTA DE PERIFERICOS -->
+    <script>
+        var empresaOptionValue = "<?php echo $empresaOption; ?>";
+        $(document).ready(function() {
+            $('#fila2perifericos button').on('click', function() {
+                var tipo_perifericos = $('#tipo_perifericos').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                $.ajax({
+                    url: 'consultas/consultaperifericos.php',
+                    type: 'POST',
+                    data: {
+                        empresa: empresaOptionValue,
+                        tipo_perifericos: tipo_perifericos,
+
+
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modalperifericos .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                    }
+                });
+
+            });
+        });
+    </script>
+
+    <!-- AJAX PARA CONSULTA DE ALMACENAMIENTO -->
+    <script>
+        var empresaOptionValue = "<?php echo $empresaOption; ?>";
+        $(document).ready(function() {
+            $('#fila2almacenamiento button').on('click', function() {
+                var tipo_almacenamiento = $('#tipo_almacenamiento').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                $.ajax({
+                    url: 'consultas/consultaalmacenamiento.php',
+                    type: 'POST',
+                    data: {
+                        empresa: empresaOptionValue,
+                        tipo_almacenamiento: tipo_almacenamiento,
+
+
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modalalmacenamiento .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                    }
+                });
+
+            });
+        });
+    </script>
+
+
+
+
+
+    <script>
+        document.getElementById('asisteInput').addEventListener('input', function() {
+            var selectedValue = this.value;
+            var cedulaIndex = selectedValue.lastIndexOf('-'); // Índice del último guión
+            if (cedulaIndex !== -1) {
+                this.value = selectedValue.substring(cedulaIndex + 1).trim(); // Eliminar espacio adicional antes de la cédula
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const asisteInput = document.getElementById('nombreInput');
+            const identificacionInput = document.getElementById('identificacionInput');
+            const asisteDatalist = document.getElementById('asiste');
+
+            asisteInput.addEventListener('change', function() {
+                const selectedOption = asisteDatalist.querySelector(`option[value="${asisteInput.value}"]`);
+                if (selectedOption) {
+                    const cedula = selectedOption.textContent.split(' - ')[1];
+                    identificacionInput.value = cedula;
+                } else {
+                    identificacionInput.value = '';
+                }
+            });
+
+
+            empresaSelect.addEventListener('change', function() {
+                const selectedOptionValue = empresaSelect.value;
+                asisteDatalist.innerHTML = ''; // Limpiar las opciones actuales
+
+                if (selectedOptionValue === '1') {
+                    // Consulta para Duquesa S.A. BIC
+                    <?php
+                    $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM DUQUESA..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 ORDER BY NOMBRE ASC;";
+                    $result = odbc_exec($conexion, $query);
+
+                    while ($admon = odbc_fetch_array($result)) {
+                        $nombreCompleto = trim(utf8_decode($admon['NOMBRE'])) . ' ' . trim(utf8_decode($admon['NOMBRE2'])) . ' ' . trim(utf8_decode($admon['APELLIDO'])) . ' ' . trim(utf8_decode($admon['APELLIDO2']));
+                        echo "asisteDatalist.innerHTML += '<option value=\"" . trim($admon['CEDULA']) . "\">" . $nombreCompleto . ' - ' . trim($admon['CEDULA']) . "</option>';\n";
+                    }
+                    ?>
+                } else if (selectedOptionValue === '2') {
+                    // Consulta para Palmeras del Llano S.A. BIC
+                    <?php
+                    $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM PALMERAS2013..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 ORDER BY NOMBRE ASC;";
+                    $result = odbc_exec($conexion2, $query);
+
+                    while ($admon = odbc_fetch_array($result)) {
+                        $nombreCompleto = trim(utf8_decode($admon['NOMBRE'])) . ' ' . trim(utf8_decode($admon['NOMBRE2'])) . ' ' . trim(utf8_decode($admon['APELLIDO'])) . ' ' . trim(utf8_decode($admon['APELLIDO2']));
+                        echo "asisteDatalist.innerHTML += '<option value=\"" . trim($admon['CEDULA']) . "\">" . $nombreCompleto . ' - ' . trim($admon['CEDULA']) . "</option>';\n";
+                    }
+                    ?>
+                } else if (selectedOptionValue === '3') {
+                    // Consulta para Palmeras del Llano S.A. BIC
+                    <?php
+                    $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM J25..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 ORDER BY NOMBRE ASC;";
+                    $result = odbc_exec($conexion2, $query);
+
+                    while ($admon = odbc_fetch_array($result)) {
+                        $nombreCompleto = trim(utf8_decode($admon['NOMBRE'])) . ' ' . trim(utf8_decode($admon['NOMBRE2'])) . ' ' . trim(utf8_decode($admon['APELLIDO'])) . ' ' . trim(utf8_decode($admon['APELLIDO2']));
+                        echo "asisteDatalist.innerHTML += '<option value=\"" . trim($admon['CEDULA']) . "\">" . $nombreCompleto . ' - ' . trim($admon['CEDULA']) . "</option>';\n";
+                    }
+                    ?>
+                }
+
+            });
+        });
+    </script>
 
 
     </html>
