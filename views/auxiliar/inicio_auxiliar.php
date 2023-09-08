@@ -11,27 +11,27 @@ if (isset($_SESSION['usuario'])) {
     <!DOCTYPE html>
     <html lang="en">
 
-<!-- PARTE DEL HEAD -->
-        <?php
-        require '../../views/head.php';
-        ?>
-   
+    <!-- PARTE DEL HEAD -->
+    <?php
+    require '../../views/head.php';
+    ?>
+
 
     <body>
 
 
-    <!-- PARTE DEL NAV -->
-    <?php
+        <!-- PARTE DEL NAV -->
+        <?php
         require '../../views/nav.php';
-    ?>
+        ?>
 
         <section style="margin-top: 100px;">
 
-            <div class="alert alert-danger" role="alert">
-            <p><?php echo utf8_encode($_SESSION['NOMBRE']);?> Auxiliar</p>
+            <div class="alert alert-success" role="alert">
+                <p><?php echo utf8_encode($_SESSION['NOMBRE']); ?> Administrador</p>
             </div>
-      
 
+            <!-- PRIMER BLOQUE -->
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
@@ -42,97 +42,141 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Ingresar Productos al stock</h5>
                                 <p class="card-text">Aquí puede ingresar Dispositivos o Maquinas de computo al inventario</p>
-                                <a href="ingresos.php" class="btn btn-primary">Ingresar</a>
+                                <a href="ingresos.php" class="btn btn-success">Ingresar</a>
                             </div>
-                            <div class="card-footer text-body-secondary">
-                                2 days ago
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                Inventario
                             </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Equipos En El Inventario</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="inventario.php" class="btn btn-success">Ingresar</a>
+                            </div>
+
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card text-center">
                             <div class="card-header">
-                               Asignaciones
+                                Estado
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Asignacion de Equipos a Personal</h5>
-                                <p class="card-text">Aquí puede asignar los dispositivos o equipos a los trabajadores</p>
-                                <a href="asignaciones.php" class="btn btn-primary">Ingresar</a>
+                                <h5 class="card-title">Estado De Equipos</h5>
+                                <p class="card-text">Aquí puede visualizar el estado de las máquinas o dispositivos</p>
+                                <a href="estadoequipos.php" class="btn btn-success">Ingresar</a>
                             </div>
-                            <div class="card-footer text-body-secondary">
-                                2 days ago
-                            </div>
+
                         </div>
                     </div>
-                    <!-- <div class="col-md-4">
-                        <div class="card text-center">
-                            <div class="card-header">
-                                Featured
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="asignaciones2.php" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                            <div class="card-footer text-body-secondary">
-                                2 days ago
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
 
             <br>
 
-            <!-- <div class="container">
+            <!-- SEGUNDO BLOQUE -->
+            <div class="container">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card text-center">
                             <div class="card-header">
-                                Featured
+                                Mantenimiento
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <h5 class="card-title">Mantenimiento a Equipos</h5>
+                                <p class="card-text">...</p>
+                                <a href="" class="btn btn-success">Ingresar</a>
                             </div>
-                            <div class="card-footer text-body-secondary">
-                                2 days ago
-                            </div>
+
                         </div>
                     </div>
+
+                    <div class="col-md-4">
+                        <!-- <div class="card text-center">
+                            <div class="card-header">
+                                ...
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                <p class="card-text">Aquí puede verificar que Dispositivos o Máquinas están asociadas a los usuarios</p>
+                                <a href="asignacionesusuario.php" class="btn btn-success">Ingresar</a>
+                            </div>
+
+                        </div> -->
+                    </div>
+
+                    <div class="col-md-4">
+                        <!-- <div class="card text-center">
+                            <div class="card-header">
+                                ...
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                <p class="card-text">Aquí puede liberar o des asignar equipos de los usuarios</p>
+                                <a href="inventario.php" class="btn btn-success">Ingresar</a>
+                            </div>
+
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <!-- TERCER BLOQUE -->
+            <div class="container">
+                <div class="row">
                     <div class="col-md-4">
                         <div class="card text-center">
                             <div class="card-header">
-                                Featured
+                                Asignaciones
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <h5 class="card-title">Asignar Equipos a Usuarios</h5>
+                                <p class="card-text">Aquí puede asignar los dispositivos o equipos a los trabajadores</p>
+                                <a href="asignaciones.php" class="btn btn-success">Ingresar</a>
                             </div>
-                            <div class="card-footer text-body-secondary">
-                                2 days ago
-                            </div>
+
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="card text-center">
                             <div class="card-header">
-                                Featured
+                                Asignaciones
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <h5 class="card-title">Usuarios con Equipos Asignados</h5>
+                                <p class="card-text">Aquí puede verificar que Dispositivos o Máquinas están asociadas a los usuarios</p>
+                                <a href="asignacionesusuario.php" class="btn btn-success">Ingresar</a>
                             </div>
-                            <div class="card-footer text-body-secondary">
-                                2 days ago
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                Des asignar
                             </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Remover Asignación</h5>
+                                <p class="card-text">Aquí puede liberar o des asignar equipos de los usuarios</p>
+                                <a href="inventario.php" class="btn btn-success">Ingresar</a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
+
+
+
+
 
 
 
@@ -143,7 +187,36 @@ if (isset($_SESSION['usuario'])) {
 
 
 
+    <script>
+        // Función para obtener la fecha y hora actual en español
+        function getCurrentDateTime() {
+            const now = new Date();
+            const options = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            return now.toLocaleDateString('es-ES', options);
+        }
 
+        // Función para actualizar la fecha en la página
+        function updateLastAccessTime() {
+            const lastAccessTimeElement = document.getElementById('last-access-time');
+            if (lastAccessTimeElement) {
+                const currentDateTime = getCurrentDateTime();
+                lastAccessTimeElement.textContent = 'Último acceso: ' + currentDateTime;
+            }
+        }
+
+        // Llama a la función para actualizar la fecha cuando la página se carga
+        window.addEventListener('load', updateLastAccessTime);
+
+        // También puedes actualizar la fecha periódicamente, por ejemplo, cada 60 segundos
+        setInterval(updateLastAccessTime, 60000);
+    </script>
 
 
 

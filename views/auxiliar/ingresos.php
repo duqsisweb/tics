@@ -30,8 +30,8 @@ if (isset($_SESSION['usuario'])) {
 
         <section style="margin-top: 100px;">
 
-              <!-- NAVINGRESOS -->
-         <?php require '../../views/navingresos.php'; ?>
+            <!-- NAVINGRESOS -->
+            <?php require '../../views/navinventario.php'; ?>
 
 
 
@@ -172,26 +172,26 @@ if (isset($_SESSION['usuario'])) {
                 $serial_edcomunicacion = $_POST['serial_edcomunicacion'];
                 $fecha_de_ingreso = $_POST['fecha_de_ingreso'];
                 $estado = $_POST['estado'];
-                $placa_activo = $_POST['placa_activo'];
-                $sede = $_POST['sede'];
-                $ubicacion = $_POST['ubicacion'];
-                $observaciones = $_POST['observaciones'];
+                $placa_activo_edcomunicacion = $_POST['placa_activo_edcomunicacion'];
+                $sede_edcomunicacion = $_POST['sede_edcomunicacion'];
+                $ubicacion_edcomunicacion = $_POST['ubicacion_edcomunicacion'];
+                $observaciones_edcomunicacion = $_POST['observaciones_edcomunicacion'];
                 $fecha_garantia = $_POST['fecha_garantia'];
                 $usuario = $_SESSION['usuario'];
 
 
 
-                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_edcomunicacion]
-                //  (tipo_maquina,marca_edcomunicacion,modelo_edcomunicacion,descripcion_edcomunicacion,serial_edcomunicacion,fecha_de_ingreso,estado,placa_activo,sede,ubicacion,observaciones,fecha_garantia,Fecha_crea,usua_crea) 
-                //                                 VALUES ('$tipomaquina','$marca_edcomunicacion','$modelo_edcomunicacion','$descripcion_edcomunicacion','$serial_edcomunicacion',
-                //                                     '$fecha_de_ingreso','$estado','$placa_activo','$sede','$ubicacion','$observaciones','$fecha_garantia',Getdate(),'$usuario')";
+                echo "INSERT INTO [ControlTIC].[dbo].[maquina_edcomunicacion]
+                 (tipo_maquina,marca_edcomunicacion,modelo_edcomunicacion,descripcion_edcomunicacion,serial_edcomunicacion,fecha_de_ingreso,estado,placa_activo_edcomunicacion,sede_edcomunicacion,ubicacion_edcomunicacion,observaciones_edcomunicacion,fecha_garantia,Fecha_crea,usua_crea) 
+                                                VALUES ('$tipomaquina','$marca_edcomunicacion','$modelo_edcomunicacion','$descripcion_edcomunicacion','$serial_edcomunicacion',
+                                                    '$fecha_de_ingreso','$estado','$placa_activo_edcomunicacion','$sede_edcomunicacion','$ubicacion_edcomunicacion','$observaciones_edcomunicacion','$fecha_garantia',Getdate(),'$usuario')";
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_edcomunicacion]
-                                                  (tipo_maquina,marca_edcomunicacion,modelo_edcomunicacion,descripcion_edcomunicacion,serial_edcomunicacion,fecha_de_ingreso,estado,placa_activo,sede,ubicacion,observaciones,fecha_garantia,Fecha_crea,usua_crea) 
+                                                  (tipo_maquina,marca_edcomunicacion,modelo_edcomunicacion,descripcion_edcomunicacion,serial_edcomunicacion,fecha_de_ingreso,estado,placa_activo_edcomunicacion,sede_edcomunicacion,ubicacion_edcomunicacion,observaciones_edcomunicacion,fecha_garantia,Fecha_crea,usua_crea) 
                                                   VALUES
                                                   ('$tipomaquina','$marca_edcomunicacion','$modelo_edcomunicacion','$descripcion_edcomunicacion','$serial_edcomunicacion',
-                                                    '$fecha_de_ingreso','$estado','$placa_activo','$sede','$ubicacion','$observaciones','$fecha_garantia',Getdate(),'$usuario')");
+                                                    '$fecha_de_ingreso','$estado','$placa_activo_edcomunicacion','$sede_edcomunicacion','$ubicacion_edcomunicacion','$observaciones_edcomunicacion','$fecha_garantia',Getdate(),'$usuario')");
             }
 
             ?>
@@ -207,27 +207,28 @@ if (isset($_SESSION['usuario'])) {
                 $marca_perifericos = $_POST['marca_perifericos'];
                 $modelo_perifericos = $_POST['modelo_perifericos'];
                 $placa_activo_perifericos = $_POST['placa_activo_perifericos'];
-                $sede = $_POST['sede'];
-                $ubicacion = $_POST['ubicacion'];
+                $sede_perifericos = $_POST['sede_perifericos'];
+                $ubicacion_perifericos = $_POST['ubicacion_perifericos'];
                 $tipo = $_POST['tipo'];
                 $tipo_toner = $_POST['tipo_toner'];
                 $empresa = $_POST['Empresa'];
                 $fecha_garantia = $_POST['fecha_de_garantia'];
                 $usuario = $_SESSION['usuario'];
+                $estado = $_POST['estado'];
 
 
 
                 // echo "INSERT INTO [ControlTIC].[dbo].[maquina_perifericos]
-                //  (tipo_maquina,serial_perifericos,descripcion_perifericos,marca_perifericos,modelo_perifericos,placa_activo_perifericos,sede,ubicacion,tipo,tipo_toner,Empresa,fecha_de_garantia,Fecha_crea,usua_crea) 
-                //                                 VALUES ('$tipomaquina','$serial_perifericos','$descripcion_perifericos','$marca_perifericos','$modelo_perifericos','$placa_activo_perifericos','$sede','$ubicacion','$tipo',
-                //                                 '$tipo_toner','$empresa','$fecha_de_garantia',Getdate(),'$usuario')";
+                //  (tipo_maquina,serial_perifericos,descripcion_perifericos,marca_perifericos,modelo_perifericos,placa_activo_perifericos,sede_perifericos,ubicacion_perifericos,tipo,tipo_toner,Empresa,fecha_de_garantia,Fecha_crea,usua_crea,estado) 
+                //                                 VALUES ('$tipomaquina','$serial_perifericos','$descripcion_perifericos','$marca_perifericos','$modelo_perifericos','$placa_activo_perifericos','$sede_perifericos','$ubicacion_perifericos','$tipo',
+                //                                 '$tipo_toner','$empresa','$fecha_de_garantia',Getdate(),'$usuario','$estado')";
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_perifericos]
-                 (tipo_maquina,serial_perifericos,descripcion_perifericos,marca_perifericos,modelo_perifericos,placa_activo_perifericos,sede,ubicacion,tipo,tipo_toner,Empresa,fecha_de_garantia,Fecha_crea,usua_crea) 
+                 (tipo_maquina,serial_perifericos,descripcion_perifericos,marca_perifericos,modelo_perifericos,placa_activo_perifericos,sede_perifericos,ubicacion_perifericos,tipo,tipo_toner,Empresa,fecha_de_garantia,Fecha_crea,usua_crea,estado) 
                                                   VALUES
-                                                  ('$tipomaquina','$serial_perifericos','$descripcion_perifericos','$marca_perifericos','$modelo_perifericos','$placa_activo_perifericos','$sede','$ubicacion','$tipo',
-                                                '$tipo_toner','$empresa','$fecha_de_garantia',Getdate(),'$usuario')");
+                                                  ('$tipomaquina','$serial_perifericos','$descripcion_perifericos','$marca_perifericos','$modelo_perifericos','$placa_activo_perifericos','$sede_perifericos','$ubicacion_perifericos','$tipo',
+                                                '$tipo_toner','$empresa','$fecha_de_garantia',Getdate(),'$usuario','$estado')");
             }
 
             ?>
@@ -241,11 +242,11 @@ if (isset($_SESSION['usuario'])) {
                 $marca_almacenamiento = $_POST['marca_almacenamiento'];
                 $modelo_almacenamiento = $_POST['modelo_almacenamiento'];
                 $descripcion_almacenamiento = $_POST['descripcion_almacenamiento'];
-                $capacidad = $_POST['capacidad'];
-                $tipo_almacenamiento = $_POST['tipo_almacenamiento'];
-                $caracteristica = $_POST['caracteristica'];
-                $sede = $_POST['sede'];
-                $ubicacion = $_POST['ubicacion'];
+                $capacidad_almacenamiento = $_POST['capacidad_almacenamiento'];
+                $tipo_almacenamiento  = $_POST['tipo_almacenamiento'];
+                $caracteristica_almacenamiento  = $_POST['caracteristica_almacenamiento'];
+                $sede_almacenamiento = $_POST['sede_almacenamiento'];
+                $ubicacion_almacenamiento = $_POST['ubicacion_almacenamiento'];
                 $fecha_de_ingreso = $_POST['fecha_de_ingreso'];
                 $estado = $_POST['estado'];
                 $fecha_de_garantia = $_POST['fecha_de_garantia'];
@@ -254,21 +255,20 @@ if (isset($_SESSION['usuario'])) {
 
 
 
-                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_almacenamiento]
-                //  (tipo_maquina,marca_almacenamiento,modelo_almacenamiento,descripcion_almacenamiento,capacidad,
-                //  tipo_almacenamiento,caracteristica,sede,ubicacion,fecha_de_ingreso,estado,fecha_de_garantia,Fecha_crea,usua_crea) 
-                //                                 VALUES ('$tipomaquina','$marca_almacenamiento','$modelo_almacenamiento','$descripcion_almacenamiento',
-                //                                 '$capacidad','$tipo_almacenamiento','$caracteristica','$sede','$ubicacion',
-                //                                 '$fecha_de_ingreso','$estado','$fecha_de_garantia',Getdate(),'$usuario')";
+                echo "INSERT INTO [ControlTIC].[dbo].[maquina_almacenamiento]
+                 (tipo_maquina,marca_almacenamiento,modelo_almacenamiento,descripcion_almacenamiento,capacidad_almacenamiento ,
+                 tipo_almacenamiento,caracteristica_almacenamiento ,sede_almacenamiento ,ubicacion_almacenamiento ,fecha_de_ingreso,estado,fecha_de_garantia,Fecha_crea,usua_crea) 
+                                                VALUES ('$tipomaquina','$marca_almacenamiento','$modelo_almacenamiento','$descripcion_almacenamiento',
+                                                '$capacidad_almacenamiento','$tipo_almacenamiento','$caracteristica_almacenamiento','$sede_almacenamiento','$ubicacion_almacenamiento',
+                                                '$fecha_de_ingreso','$estado','$fecha_de_garantia',Getdate(),'$usuario')";
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_almacenamiento]
-                 (tipo_maquina,marca_almacenamiento,modelo_almacenamiento,descripcion_almacenamiento,capacidad,
-                 tipo_almacenamiento,caracteristica,sede,ubicacion,fecha_de_ingreso,estado,fecha_de_garantia,Fecha_crea,usua_crea) 
-                                                  VALUES
-                                                  ('$tipomaquina','$marca_almacenamiento','$modelo_almacenamiento','$descripcion_almacenamiento',
-                                                '$capacidad','$tipo_almacenamiento','$caracteristica','$sede','$ubicacion',
-                                                '$fecha_de_ingreso','$estado','$fecha_de_garantia',Getdate(),'$usuario')");
+                (tipo_maquina,marca_almacenamiento,modelo_almacenamiento,descripcion_almacenamiento,capacidad_almacenamiento,
+                tipo_almacenamiento, caracteristica_almacenamiento, sede_almacenamiento ,ubicacion_almacenamiento ,fecha_de_ingreso,estado,fecha_de_garantia,Fecha_crea,usua_crea) 
+                                               VALUES ('$tipomaquina','$marca_almacenamiento','$modelo_almacenamiento','$descripcion_almacenamiento',
+                                               '$capacidad_almacenamiento','$tipo_almacenamiento','$caracteristica_almacenamiento','$sede_almacenamiento','$ubicacion_almacenamiento',
+                                               '$fecha_de_ingreso','$estado','$fecha_de_garantia',Getdate(),'$usuario')");
             }
 
             ?>
@@ -291,10 +291,10 @@ if (isset($_SESSION['usuario'])) {
                 $usuario = $_SESSION['usuario'];
 
 
-                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_simcard]
-                //  (tipo_maquina,numero_linea,nombre_plan,fecha_apertura,valor_plan,operador,cod_cliente,observaciones_sim,fecha_fin_plan,estado,Fecha_crea,usua_crea) 
-                //                                 VALUES ('$tipo_maquina','$numero_linea','$nombre_plan','$fecha_apertura','$valor_plan','$operador',
-                //                                 '$cod_cliente','$observaciones_sim','$fecha_fin_plan','$estado',Getdate(),'$usuario')";
+                echo "INSERT INTO [ControlTIC].[dbo].[maquina_simcard]
+                 (tipo_maquina,numero_linea,nombre_plan,fecha_apertura,valor_plan,operador,cod_cliente,observaciones_sim,fecha_fin_plan,estado,Fecha_crea,usua_crea) 
+                                                VALUES ('$tipo_maquina','$numero_linea','$nombre_plan','$fecha_apertura','$valor_plan','$operador',
+                                                '$cod_cliente','$observaciones_sim','$fecha_fin_plan','$estado',Getdate(),'$usuario')";
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_simcard]
@@ -307,7 +307,7 @@ if (isset($_SESSION['usuario'])) {
             ?>
 
 
-            <!-- inicio de POST enviarsimcard -->
+            <!-- inicio de POST DVR -->
             <?php
             if (isset($_POST['enviarDvr'])) {
 
@@ -317,8 +317,8 @@ if (isset($_SESSION['usuario'])) {
                 $descripcion_dvr = $_POST['descripcion_dvr'];
                 $capacidad_dvr = $_POST['capacidad_dvr'];
                 $tipo_dvr = $_POST['tipo_dvr'];
-                $sede = $_POST['sede'];
-                $ubicacion = $_POST['ubicacion'];
+                $sede_dvr = $_POST['sede_dvr'];
+                $ubicacion_dvr = $_POST['ubicacion_dvr'];
                 $software = $_POST['software'];
                 $fecha_ingreso = $_POST['fecha_ingreso'];
                 $num_canales = $_POST['num_canales'];
@@ -330,27 +330,27 @@ if (isset($_SESSION['usuario'])) {
                 $usuario = $_SESSION['usuario'];
 
 
-                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_dvr]
-                //  (tipo_maquina,marca_dvr,modelo_dvr,descripcion_dvr,capacidad_dvr,tipo_dvr,sede,ubicacion,software,fecha_ingreso,num_canales,num_discos,
-                //  dias_grabacion,ip_dvr,estado,fecha_garantia,Fecha_crea,usua_crea) 
-                //                                 VALUES ('$tipo_maquina','$marca_dvr','$modelo_dvr','$descripcion_dvr','$capacidad_dvr',
-                //                                 '$tipo_dvr','$sede','$ubicacion','$software','$fecha_ingreso',
-                //                                 '$num_canales','$num_discos','$dias_grabacion','$ip_dvr','$estado','$fecha_garantia',Getdate(),'$usuario')";
+                echo "INSERT INTO [ControlTIC].[dbo].[maquina_dvr]
+                 (tipo_maquina,marca_dvr,modelo_dvr,descripcion_dvr,capacidad_dvr,tipo_dvr,sede_dvr,ubicacion_dvr,software,fecha_ingreso,num_canales,num_discos,
+                 dias_grabacion,ip_dvr,estado,fecha_garantia,Fecha_crea,usua_crea) 
+                                                VALUES ('$tipo_maquina','$marca_dvr','$modelo_dvr','$descripcion_dvr','$capacidad_dvr',
+                                                '$tipo_dvr','$sede_dvr','$ubicacion_dvr','$software','$fecha_ingreso',
+                                                '$num_canales','$num_discos','$dias_grabacion','$ip_dvr','$estado','$fecha_garantia',Getdate(),'$usuario')";
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_dvr]
-                 (tipo_maquina,marca_dvr,modelo_dvr,descripcion_dvr,capacidad_dvr,tipo_dvr,sede,ubicacion,software,fecha_ingreso,num_canales,num_discos,
+                 (tipo_maquina,marca_dvr,modelo_dvr,descripcion_dvr,capacidad_dvr,tipo_dvr,sede_dvr,ubicacion_dvr,software,fecha_ingreso,num_canales,num_discos,
                  dias_grabacion,ip_dvr,estado,fecha_garantia,Fecha_crea,usua_crea) 
                                                   VALUES
                                                   ('$tipo_maquina','$marca_dvr','$modelo_dvr','$descripcion_dvr','$capacidad_dvr',
-                                                '$tipo_dvr','$sede','$ubicacion','$software','$fecha_ingreso',
+                                                '$tipo_dvr','$sede_dvr','$ubicacion_dvr','$software','$fecha_ingreso',
                                                 '$num_canales','$num_discos','$dias_grabacion','$ip_dvr','$estado','$fecha_garantia',Getdate(),'$usuario')");
             }
 
             ?>
 
 
-            <!-- inicio de POST enviarsimcard -->
+            <!-- inicio de POST CCTV -->
             <?php
             if (isset($_POST['enviarCctv'])) {
 
@@ -358,7 +358,7 @@ if (isset($_SESSION['usuario'])) {
                 $marca_cctv = $_POST['marca_cctv'];
                 $modelo_cctv = $_POST['modelo_cctv'];
                 $descripcion_cctv = $_POST['descripcion_cctv'];
-                $sede = $_POST['sede'];
+                $sede_cctv = $_POST['sede_cctv'];
                 $ubicacion_cctv = $_POST['ubicacion_cctv'];
                 $fecha_ingreso = $_POST['fecha_ingreso'];
                 $ip_cctv = $_POST['ip_cctv'];
@@ -370,19 +370,19 @@ if (isset($_SESSION['usuario'])) {
                 $usuario = $_SESSION['usuario'];
 
 
-                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_cctv]
-                //  (tipo_maquina,marca_cctv,modelo_cctv,descripcion_cctv,sede,ubicacion_cctv,fecha_ingreso,ip_cctv,
-                //  vision_enfoque,serial_dvr,canal,estado,fecha_garantia,Fecha_crea,usua_crea) 
-                //                                 VALUES ('$tipo_maquina','$marca_cctv','$modelo_cctv','$descripcion_cctv','$sede',
-                //                                 '$ubicacion_cctv','$fecha_ingreso','$ip_cctv','$vision_enfoque','$serial_drv',
-                //                                 '$canal','$estado','$fecha_garantia',Getdate(),'$usuario')";
+                echo "INSERT INTO [ControlTIC].[dbo].[maquina_cctv]
+                 (tipo_maquina,marca_cctv,modelo_cctv,descripcion_cctv,sede_cctv,ubicacion_cctv,fecha_ingreso,ip_cctv,
+                 vision_enfoque,serial_dvr,canal,estado,fecha_garantia,Fecha_crea,usua_crea) 
+                                                VALUES ('$tipo_maquina','$marca_cctv','$modelo_cctv','$descripcion_cctv','$sede_cctv',
+                                                '$ubicacion_cctv','$fecha_ingreso','$ip_cctv','$vision_enfoque','$serial_drv',
+                                                '$canal','$estado','$fecha_garantia',Getdate(),'$usuario')";
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_cctv]
-                 (tipo_maquina,marca_cctv,modelo_cctv,descripcion_cctv,sede,ubicacion_cctv,fecha_ingreso,ip_cctv,
+                 (tipo_maquina,marca_cctv,modelo_cctv,descripcion_cctv,sede_cctv,ubicacion_cctv,fecha_ingreso,ip_cctv,
                  vision_enfoque,serial_dvr,canal,estado,fecha_garantia,Fecha_crea,usua_crea) 
                                                   VALUES
-                                                  ('$tipo_maquina','$marca_cctv','$modelo_cctv','$descripcion_cctv','$sede',
+                                                  ('$tipo_maquina','$marca_cctv','$modelo_cctv','$descripcion_cctv','$sede_cctv',
                                                 '$ubicacion_cctv','$fecha_ingreso','$ip_cctv','$vision_enfoque','$serial_drv',
                                                 '$canal','$estado','$fecha_garantia',Getdate(),'$usuario')");
             }
@@ -390,34 +390,35 @@ if (isset($_SESSION['usuario'])) {
             ?>
 
 
-            <!-- inicio de POST enviarTorre-->
+            <!-- inicio de POST TORRE-->
             <?php
             if (isset($_POST['enviarTorre'])) {
 
                 $tipo_maquina = $_POST['tipo_maquina'];
-                $placa_activo = $_POST['placa_activo'];
+                $placa_activo_torre = $_POST['placa_activo_torre'];
                 $descripcion_torre = $_POST['descripcion_torre'];
-                $sede = $_POST['sede'];
+                $sede_torre = $_POST['sede'];
                 $tipo_torre = $_POST['tipo_torre'];
                 $altura_metros = $_POST['altura_metros'];
                 $fecha_ingreso = $_POST['fecha_ingreso'];
                 $fecha_ult_mantenimiento = $_POST['fecha_ult_mantenimiento'];
                 $usuario = $_SESSION['usuario'];
+                $estado = $_POST['estado'];
 
 
-                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_torre]
-                //  (tipo_maquina,placa_activo,descripcion_torre,sede,tipo_torre,altura_metros,fecha_ingreso,fecha_ult_mantenimiento,Fecha_crea,usua_crea) 
-                //                                 VALUES ('$tipo_maquina','$placa_activo','$descripcion_torre','$sede','$tipo_torre','$altura_metros',
-                //                                 '$fecha_ingreso','$fecha_ult_mantenimiento',
-                //                                 Getdate(),'$usuario')";
+                echo "INSERT INTO [ControlTIC].[dbo].[maquina_torre]
+                 (tipo_maquina,placa_activo_torre,descripcion_torre,sede_torre,tipo_torre,altura_metros,fecha_ingreso,fecha_ult_mantenimiento,Fecha_crea,usua_crea,estado) 
+                                                VALUES ('$tipo_maquina','$placa_activo_torre','$descripcion_torre','$sede_torre','$tipo_torre','$altura_metros',
+                                                '$fecha_ingreso','$fecha_ult_mantenimiento',
+                                                Getdate(),'$usuario','$estado')";
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_torre]
-                 (tipo_maquina,placa_activo,descripcion_torre,sede,tipo_torre,altura_metros,fecha_ingreso,fecha_ult_mantenimiento,Fecha_crea,usua_crea) 
+                 (tipo_maquina,placa_activo_torre,descripcion_torre,sede_torre,tipo_torre,altura_metros,fecha_ingreso,fecha_ult_mantenimiento,Fecha_crea,usua_crea,estado) 
                                                   VALUES
-                                                  ('$tipo_maquina','$placa_activo','$descripcion_torre','$sede','$tipo_torre','$altura_metros',
+                                                  ('$tipo_maquina','$placa_activo_torre','$descripcion_torre','$sede_torre','$tipo_torre','$altura_metros',
                                                 '$fecha_ingreso','$fecha_ult_mantenimiento',
-                                                Getdate(),'$usuario')");
+                                                Getdate(),'$usuario','$estado')");
             }
 
             ?>
@@ -432,6 +433,14 @@ if (isset($_SESSION['usuario'])) {
 
 
 
+
+            <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
+                <div class="container" >
+                    <div>
+                        <h3>Subir Maquinas Al stock</h3>
+                    </div>
+                </div>
+            </div> 
 
             <form method="POST" class="row g-3 needs-validation" novalidate>
 
@@ -476,18 +485,163 @@ if (isset($_SESSION['usuario'])) {
                     </div>
                 </div>
 
-
-                <div class="container-fluid" style="margin-top: 30px;">
+                <div class="container-fluid" style="margin-top: 30px;padding-left: 150px;padding-right: 150px;">
                     <div class="row">
-                        <div class="col-md-12">
 
-                            <div action="" id="formulario1" style="display: none;">
 
-                                <!-- PRIMER BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label for="" class="form-label">Sede</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="Sede" required>
+                        <!-- FORMULARIO COMPUTADOR -->
+                        <div action="" id="formulario1" style="display: none;">
+                            <!-- PRIMER BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="" class="form-label">Sede</label>
+                                    <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="Sede" required>
+                                        <option selected>SELECCIONE</option>
+
+                                        <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
+                                        <?php
+                                        include '../../conexionbd.php';
+
+                                        // Realizar la consulta a la base de datos para obtener las sedes
+                                        $consulta = "SELECT id, nombre_sede FROM [ControlTIC].[dbo].[sede]";
+                                        $resultado = odbc_exec($conexion, $consulta);
+
+                                        // Iterar sobre los resultados y generar las opciones del select
+                                        while ($fila = odbc_fetch_array($resultado)) {
+                                            $id = $fila['id'];
+                                            $nombre = $fila['nombre_sede'];
+                                            echo "<option value='$id'>$nombre</option>";
+                                        }
+
+                                        // Liberar recursos
+                                        odbc_free_result($resultado);
+                                        ?>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Empresa</label>
+                                        <select class="form-select" aria-label="Default select example" id="" onchange="mostrarFormulario()" name="Empresa_computador" required>
+                                            <option selected>SELECCIONE</option>
+
+                                            <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de empresa -->
+                                            <?php
+                                            include '../../conexionbd.php';
+
+                                            // Realizar la consulta a la base de datos para obtener las empresas
+                                            $consulta = "SELECT id, nombre_empresa FROM [ControlTIC].[dbo].[empresa]";
+                                            $resultado = odbc_exec($conexion, $consulta);
+
+                                            // Iterar sobre los resultados y generar las opciones del select
+                                            while ($fila = odbc_fetch_array($resultado)) {
+                                                $id = $fila['id'];
+                                                $nombre = $fila['nombre_empresa'];
+                                                echo "<option value='$id'>$nombre</option>";
+                                            }
+
+                                            // Liberar recursos
+                                            odbc_free_result($resultado);
+                                            ?>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Marca</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Marca_computador" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SEGUNDO BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Service Tag</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Service_tag" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Serial</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_equipo" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Nombre Equipo</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Nombre_equipo" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TERCER BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Modelo</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Modelo_computador" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Tipo Comp.</label>
+                                        <select class="form-select" aria-label="Default select example" id="Tipo_comp" onchange="mostrarFormulario()" name="Tipo_comp" required>
+                                            <option selected>SELECCIONE</option>
+
+                                            <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de computadores -->
+                                            <?php
+                                            include '../../conexionbd.php';
+
+                                            // Realizar la consulta a la base de datos para obtener los computadores
+                                            $consulta = "SELECT id, nombre_tipo_comp FROM [ControlTIC].[dbo].[tipo_comp]";
+                                            $resultado = odbc_exec($conexion, $consulta);
+
+                                            // Iterar sobre los resultados y generar las opciones del select
+                                            while ($fila = odbc_fetch_array($resultado)) {
+                                                $id = $fila['id'];
+                                                $nombre = $fila['nombre_tipo_comp'];
+                                                echo "<option value='$id'>$nombre</option>";
+                                            }
+
+                                            // Liberar recursos
+                                            odbc_free_result($resultado);
+                                            ?>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Tipo de Ram</label>
+                                        <select class="form-select" aria-label="Default select example" name="Tipo_ram" required>
+                                            <option selected>SELECCIONE</option>
+                                            <option value="DDR">DDR</option>
+                                            <option value="DDR2">DDR2</option>
+                                            <option value="DDR3">DDR3</option>
+                                            <option value="DDR4">DDR4</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- CUARTO BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Cant Memoria RAM</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Memoria_ram" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Tipo Disco duro</label>
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="Tipo_discoduro" required>
                                             <option selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
@@ -495,13 +649,387 @@ if (isset($_SESSION['usuario'])) {
                                             include '../../conexionbd.php';
 
                                             // Realizar la consulta a la base de datos para obtener las sedes
-                                            $consulta = "SELECT id, nombre_sede FROM [ControlTIC].[dbo].[sede]";
+                                            $consulta = "SELECT id, nombre_tipo_discoduro FROM [ControlTIC].[dbo].[tipo_discoduro]";
                                             $resultado = odbc_exec($conexion, $consulta);
 
                                             // Iterar sobre los resultados y generar las opciones del select
                                             while ($fila = odbc_fetch_array($resultado)) {
                                                 $id = $fila['id'];
-                                                $nombre = $fila['nombre_sede'];
+                                                $nombre = $fila['nombre_tipo_discoduro'];
+                                                echo "<option value='$id'>$nombre</option>";
+                                            }
+
+                                            // Liberar recursos
+                                            odbc_free_result($resultado);
+                                            ?>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Capacidad Disco Duro</label>
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="Capacidad_discoduro" required>
+                                            <option selected>SELECCIONE</option>
+
+                                            <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
+                                            <?php
+                                            include '../../conexionbd.php';
+
+                                            // Realizar la consulta a la base de datos para obtener las sedes
+                                            $consulta = "SELECT id, capacidad_discoduro FROM [ControlTIC].[dbo].[capacidad_discoduro]";
+                                            $resultado = odbc_exec($conexion, $consulta);
+
+                                            // Iterar sobre los resultados y generar las opciones del select
+                                            while ($fila = odbc_fetch_array($resultado)) {
+                                                $id = $fila['id'];
+                                                $nombre = $fila['capacidad_discoduro'];
+                                                echo "<option value='$id'>$nombre</option>";
+                                            }
+
+                                            // Liberar recursos
+                                            odbc_free_result($resultado);
+                                            ?>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- QUINTO BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Procesador</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Procesador" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Propietario</label>
+                                        <select class="form-select" aria-label="Default select example" id="Propietario" onchange="mostrarFormulario()" name="Propietario" required>
+                                            <option selected>SELECCIONE</option>
+
+                                            <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
+                                            <?php
+                                            include '../../conexionbd.php';
+
+                                            // Realizar la consulta a la base de datos para obtener las sedes
+                                            $consulta = "SELECT id, descripcion FROM [ControlTIC].[dbo].[propietario]";
+                                            $resultado = odbc_exec($conexion, $consulta);
+
+                                            // Iterar sobre los resultados y generar las opciones del select
+                                            while ($fila = odbc_fetch_array($resultado)) {
+                                                $id = $fila['id'];
+                                                $nombre = $fila['descripcion'];
+                                                echo "<option value='$id'>$nombre</option>";
+                                            }
+
+                                            // Liberar recursos
+                                            odbc_free_result($resultado);
+                                            ?>
+                                            <select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Proveedor</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Proveedor" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SEXTO BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Sistema Operativo</label>
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="Sistema_Operativo" required>
+                                            <option selected>SELECCIONE</option>
+
+                                            <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
+                                            <?php
+                                            include '../../conexionbd.php';
+
+                                            // Realizar la consulta a la base de datos para obtener las sedes
+                                            $consulta = "SELECT id, nombre_sistema_operativo FROM [ControlTIC].[dbo].[sistema_operativo]";
+                                            $resultado = odbc_exec($conexion, $consulta);
+
+                                            // Iterar sobre los resultados y generar las opciones del select
+                                            while ($fila = odbc_fetch_array($resultado)) {
+                                                $id = $fila['id'];
+                                                $nombre = $fila['nombre_sistema_operativo'];
+                                                echo "<option value='$id'>$nombre</option>";
+                                            }
+
+                                            // Liberar recursos
+                                            odbc_free_result($resultado);
+                                            ?>
+                                            <select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Serial del Cargador</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_cargador" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Dominio</label>
+                                        <select class="form-select" aria-label="Default select example" name="Dominio" required>
+                                            <option selected>SELECCIONE</option>
+                                            <option value="SI">SI</option>
+                                            <option value="NO">NO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SEPTIMO BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Usuario</label>
+                                        <select class="form-select" aria-label="Default select example" name="Tipo_usuario" required>
+                                            <option selected>SELECCIONE</option>
+                                            <option value="Administrador">Administrador</option>
+                                            <option value="Estandar">Estandar</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Serial de Activo</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_activo_fijo" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Fecha de Ingreso</label>
+                                        <input type="date" class="form-control" id="" placeholder="" name="Fecha_ingreso" max="<?php echo date('Y-m-d'); ?>" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- OCTAVO BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Modelo T. Video</label>
+                                        <input type="text" class="form-control" id="" placeholder="N/A" name="Targeta_Video" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Fecha de Garantia</label>
+                                        <input type="date" class="form-control" id="" placeholder="" name="Fecha_garantia" min="<?php echo date('Y-m-d'); ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+
+                                </div>
+                            </div>
+
+                            <!-- SE CREA ESTE INPUT PARA CAMBIAR EL PARAMETRO DE USUARIO/USUA_CREA Y TOME EL VALOR
+                                    SE DEJA OCULTO -->
+                            <div>
+                                <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
+                                <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
+                            </div>
+
+
+
+
+                            <div style="text-align: center;margin-top:15px;">
+                                <!-- <button type="submit" class="btn btn-warning" name="enviarComputador" id="enviarComputador">GUARDAR</button> -->
+                                <button id="enviarComputador" type="submit" class="btn btn-warning enviarComputador" name="enviarComputador" value="" style="display:none"></button>
+                                <button type="button" id="guardarButton" class="btn btn-success showAlertButton" name="enviarComputador">GUARDAR</button>
+                            </div>
+
+                        </div>
+
+                        <!-- FORMULARIO CELULAR -->
+                        <div action="" id="formulario2" style="display: none;">
+
+
+                            <!-- PRIMER BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">IMEI</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Imei">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Serial</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_equipo_celular">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Marca</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Marca">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- SEGUNDO BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Modelo</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Modelo">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Fecha de Ingreso</label>
+                                        <input type="date" class="form-control" id="" placeholder="" name="Fecha_ingreso" max="<?php echo date('Y-m-d'); ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Capacidad</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Capacidad">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TERCER BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Ram</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Ram_celular">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Fecha Garantia</label>
+                                        <input type="Date" class="form-control" id="" placeholder="" name="Fecha_garantia" min="<?php echo date('Y-m-d'); ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+
+                                </div>
+                            </div>
+
+                            <div style="text-align: center;margin-top:15px;">
+                                <button type="submit" class="btn btn-warning" name="enviarCelular" id="enviarCelular">GUARDAR</button>
+                            </div>
+
+                            <!-- CAMPOS OCULTOS -->
+                            <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
+                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
+
+                        </div>
+
+                        <!-- FORMULARIO ACCESORIOS -->
+                        <div id="formulario3" style="display: none;">
+
+                            <!-- PRIMER BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Marca</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="marca">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Modelo</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="modelo">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Descripción</label>
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="descripcion">
+                                            <option selected>SELECCIONE</option>
+
+                                            <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
+                                            <?php
+                                            include '../../conexionbd.php';
+
+                                            // Realizar la consulta a la base de datos para obtener las sedes
+                                            $consulta = "SELECT id, nombre_descripcion FROM [ControlTIC].[dbo].[descripcion_accesorios]";
+                                            $resultado = odbc_exec($conexion, $consulta);
+
+                                            // Iterar sobre los resultados y generar las opciones del select
+                                            while ($fila = odbc_fetch_array($resultado)) {
+                                                $id = $fila['id'];
+                                                $nombre = $fila['nombre_descripcion'];
+                                                echo "<option value='$id'>$nombre</option>";
+                                            }
+
+                                            // Liberar recursos
+                                            odbc_free_result($resultado);
+                                            ?>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SEGUNDO  BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Tipo</label>
+                                        <select class="form-select" aria-label="" name="tipo">
+                                            <option selected>SELECCIONE</option>
+                                            <option value="INALAMBRICA">INALAMBRICA</option>
+                                            <option value="ALAMBRICA">ALAMBRICA</option>
+                                            <option value="NINGUNA">NINGUNA</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Cantidad</label>
+                                        <input type="number" class="form-control" id="" placeholder="" name="cantidad">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Fecha Ingreso</label>
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_de_ingreso" max="<?php echo date('Y-m-d'); ?>">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="text-align: center;margin-top:15px;">
+                                <button type="submit" class="btn btn-warning" name="enviarAccesorios" id="enviarComputador">GUARDAR</button>
+                            </div>
+
+                        </div>
+
+                        <!-- FORMULARIO EDCOMUNICACION -->
+                        <div id="formulario4" style="display: none;">
+
+                            <!-- PRIMER BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Descripción</label>
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="descripcion_edcomunicacion">
+                                            <option selected>SELECCIONE</option>
+
+                                            <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
+                                            <?php
+                                            include '../../conexionbd.php';
+
+                                            // Realizar la consulta a la base de datos para obtener las sedes
+                                            $consulta = "SELECT id, nombre_descripcion FROM [ControlTIC].[dbo].[descripcion_edcomunicacion]";
+                                            $resultado = odbc_exec($conexion, $consulta);
+
+                                            // Iterar sobre los resultados y generar las opciones del select
+                                            while ($fila = odbc_fetch_array($resultado)) {
+                                                $id = $fila['id'];
+                                                $nombre = $fila['nombre_descripcion'];
                                                 echo "<option value='$id'>$nombre</option>";
                                             }
 
@@ -510,443 +1038,50 @@ if (isset($_SESSION['usuario'])) {
                                             ?>
                                         </select>
                                     </div>
-
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Empresa</label>
-                                            <select class="form-select" aria-label="Default select example" id="" onchange="mostrarFormulario()" name="Empresa_computador" required>
-                                                <option selected>SELECCIONE</option>
-
-                                                <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de empresa -->
-                                                <?php
-                                                include '../../conexionbd.php';
-
-                                                // Realizar la consulta a la base de datos para obtener las empresas
-                                                $consulta = "SELECT id, nombre_empresa FROM [ControlTIC].[dbo].[empresa]";
-                                                $resultado = odbc_exec($conexion, $consulta);
-
-                                                // Iterar sobre los resultados y generar las opciones del select
-                                                while ($fila = odbc_fetch_array($resultado)) {
-                                                    $id = $fila['id'];
-                                                    $nombre = $fila['nombre_empresa'];
-                                                    echo "<option value='$id'>$nombre</option>";
-                                                }
-
-                                                // Liberar recursos
-                                                odbc_free_result($resultado);
-                                                ?>
-
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Marca</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Marca_computador" required>
-                                        </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Marca</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="marca_edcomunicacion">
                                     </div>
                                 </div>
-
-                                <!-- SEGUNDO BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Service Tag</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Service_tag" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Serial</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Serial_equipo" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Nombre Equipo</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Nombre_equipo" required>
-                                        </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Modelo</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="modelo_edcomunicacion">
                                     </div>
                                 </div>
-
-                                <!-- TERCER BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Modelo</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Modelo_computador" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Tipo Comp.</label>
-                                            <select class="form-select" aria-label="Default select example" id="Tipo_comp" onchange="mostrarFormulario()" name="Tipo_comp" required>
-                                                <option selected>SELECCIONE</option>
-
-                                                <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de computadores -->
-                                                <?php
-                                                include '../../conexionbd.php';
-
-                                                // Realizar la consulta a la base de datos para obtener los computadores
-                                                $consulta = "SELECT id, nombre_tipo_comp FROM [ControlTIC].[dbo].[tipo_comp]";
-                                                $resultado = odbc_exec($conexion, $consulta);
-
-                                                // Iterar sobre los resultados y generar las opciones del select
-                                                while ($fila = odbc_fetch_array($resultado)) {
-                                                    $id = $fila['id'];
-                                                    $nombre = $fila['nombre_tipo_comp'];
-                                                    echo "<option value='$id'>$nombre</option>";
-                                                }
-
-                                                // Liberar recursos
-                                                odbc_free_result($resultado);
-                                                ?>
-
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Tipo de Ram</label>
-                                            <select class="form-select" aria-label="Default select example" name="Tipo_ram" required>
-                                                <option selected>SELECCIONE</option>
-                                                <option value="DDR">DDR</option>
-                                                <option value="DDR2">DDR2</option>
-                                                <option value="DDR3">DDR3</option>
-                                                <option value="DDR4">DDR4</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <!-- CUARTO BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Cant Memoria RAM</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Memoria_ram" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Tipo Disco duro</label>
-                                            <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="Tipo_discoduro" required>
-                                                <option selected>SELECCIONE</option>
-
-                                                <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
-                                                <?php
-                                                include '../../conexionbd.php';
-
-                                                // Realizar la consulta a la base de datos para obtener las sedes
-                                                $consulta = "SELECT id, nombre_tipo_discoduro FROM [ControlTIC].[dbo].[tipo_discoduro]";
-                                                $resultado = odbc_exec($conexion, $consulta);
-
-                                                // Iterar sobre los resultados y generar las opciones del select
-                                                while ($fila = odbc_fetch_array($resultado)) {
-                                                    $id = $fila['id'];
-                                                    $nombre = $fila['nombre_tipo_discoduro'];
-                                                    echo "<option value='$id'>$nombre</option>";
-                                                }
-
-                                                // Liberar recursos
-                                                odbc_free_result($resultado);
-                                                ?>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Capacidad Disco Duro</label>
-                                            <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="Capacidad_discoduro" required>
-                                                <option selected>SELECCIONE</option>
-
-                                                <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
-                                                <?php
-                                                include '../../conexionbd.php';
-
-                                                // Realizar la consulta a la base de datos para obtener las sedes
-                                                $consulta = "SELECT id, capacidad_discoduro FROM [ControlTIC].[dbo].[capacidad_discoduro]";
-                                                $resultado = odbc_exec($conexion, $consulta);
-
-                                                // Iterar sobre los resultados y generar las opciones del select
-                                                while ($fila = odbc_fetch_array($resultado)) {
-                                                    $id = $fila['id'];
-                                                    $nombre = $fila['capacidad_discoduro'];
-                                                    echo "<option value='$id'>$nombre</option>";
-                                                }
-
-                                                // Liberar recursos
-                                                odbc_free_result($resultado);
-                                                ?>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- QUINTO BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Procesador</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Procesador" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Propietario</label>
-                                            <select class="form-select" aria-label="Default select example" id="Propietario" onchange="mostrarFormulario()" name="Propietario" required>
-                                                <option selected>SELECCIONE</option>
-
-                                                <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
-                                                <?php
-                                                include '../../conexionbd.php';
-
-                                                // Realizar la consulta a la base de datos para obtener las sedes
-                                                $consulta = "SELECT id, descripcion FROM [ControlTIC].[dbo].[propietario]";
-                                                $resultado = odbc_exec($conexion, $consulta);
-
-                                                // Iterar sobre los resultados y generar las opciones del select
-                                                while ($fila = odbc_fetch_array($resultado)) {
-                                                    $id = $fila['id'];
-                                                    $nombre = $fila['descripcion'];
-                                                    echo "<option value='$id'>$nombre</option>";
-                                                }
-
-                                                // Liberar recursos
-                                                odbc_free_result($resultado);
-                                                ?>
-                                                <select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Proveedor</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Proveedor" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- SEXTO BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Sistema Operativo</label>
-                                            <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="Sistema_Operativo" required>
-                                                <option selected>SELECCIONE</option>
-
-                                                <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
-                                                <?php
-                                                include '../../conexionbd.php';
-
-                                                // Realizar la consulta a la base de datos para obtener las sedes
-                                                $consulta = "SELECT id, nombre_sistema_operativo FROM [ControlTIC].[dbo].[sistema_operativo]";
-                                                $resultado = odbc_exec($conexion, $consulta);
-
-                                                // Iterar sobre los resultados y generar las opciones del select
-                                                while ($fila = odbc_fetch_array($resultado)) {
-                                                    $id = $fila['id'];
-                                                    $nombre = $fila['nombre_sistema_operativo'];
-                                                    echo "<option value='$id'>$nombre</option>";
-                                                }
-
-                                                // Liberar recursos
-                                                odbc_free_result($resultado);
-                                                ?>
-                                                <select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Serial del Cargador</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Serial_cargador" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Dominio</label>
-                                            <select class="form-select" aria-label="Default select example" name="Dominio" required>
-                                                <option selected>SELECCIONE</option>
-                                                <option value="SI">SI</option>
-                                                <option value="NO">NO</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- SEPTIMO BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Usuario</label>
-                                            <select class="form-select" aria-label="Default select example" name="Tipo_usuario" required>
-                                                <option selected>SELECCIONE</option>
-                                                <option value="Administrador">Administrador</option>
-                                                <option value="Estandar">Estandar</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Serial de Activo</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Serial_activo_fijo" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Fecha de Ingreso</label>
-                                            <input type="date" class="form-control" id="" placeholder="" name="Fecha_ingreso" max="<?php echo date('Y-m-d'); ?>" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- OCTAVO BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Modelo T. Video</label>
-                                            <input type="text" class="form-control" id="" placeholder="N/A" name="Targeta_Video" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Fecha de Garantia</label>
-                                            <input type="date" class="form-control" id="" placeholder="" name="Fecha_garantia" min="<?php echo date('Y-m-d'); ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-
-                                    </div>
-                                </div>
-
-                                <!-- SE CREA ESTE INPUT PARA CAMBIAR EL PARAMETRO DE USUARIO/USUA_CREA Y TOME EL VALOR
-                                    SE DEJA OCULTO -->
-                                <div>
-                                    <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
-                                    <input type="hidden" class="form-control" id="" placeholder="" value="6" name="Estado">
-                                </div>
-
-
-
-
-                                <div style="text-align: center;margin-top:15px;">
-                                    <!-- <button type="submit" class="btn btn-warning" name="enviarComputador" id="enviarComputador">GUARDAR</button> -->
-                                    <button id="enviarComputador" type="submit" class="btn btn-warning enviarComputador" name="enviarComputador" value="" style="display:none"></button>
-                                    <button type="button" id="guardarButton" class="btn btn-success showAlertButton" name="enviarComputador">GUARDAR</button>
-                                </div>
-
                             </div>
 
-
-
-
-
-
-
-                            <!-- FORMULARIO CELULAR -->
-                            <div action="" id="formulario2" style="display: none;">
-
-
-                                <!-- PRIMER BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">IMEI</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Imei">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Serial</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Serial_equipo_celular">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Marca</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Marca">
-                                        </div>
+                            <!-- SEGUNDO BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Serial</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="serial_edcomunicacion">
                                     </div>
                                 </div>
-
-
-                                <!-- SEGUNDO BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Modelo</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Modelo">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Fecha de Ingreso</label>
-                                            <input type="date" class="form-control" id="" placeholder="" name="Fecha_ingreso" max="<?php echo date('Y-m-d'); ?>">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Capacidad</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Capacidad">
-                                        </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Fecha de Ingreso</label>
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_de_ingreso" max="<?php echo date('Y-m-d'); ?>">
                                     </div>
                                 </div>
-
-                                <!-- TERCER BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Ram</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="Ram_celular">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Fecha Garantia</label>
-                                            <input type="Date" class="form-control" id="" placeholder="" name="Fecha_garantia" min="<?php echo date('Y-m-d'); ?>">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Placa Activo fijo</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="placa_activo_edcomunicacion">
                                     </div>
                                 </div>
-
-                                <div style="text-align: center;margin-top:15px;">
-                                    <button type="submit" class="btn btn-warning" name="enviarCelular" id="enviarCelular">GUARDAR</button>
-                                </div>
-
-                                <!-- CAMPOS OCULTOS -->
-                                <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
-                                <input type="hidden" class="form-control" id="" placeholder="" value="6" name="Estado">
-
                             </div>
 
-
-                            <!-- FORMULARIO ACCESORIOS -->
-                            <div id="formulario3" style="display: none;">
-
-                                <!-- PRIMER BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
+                            <!-- TERCER BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Sede</label>
                                         <div class="mb-3">
-                                            <label for="" class="form-label">Marca</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="marca">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Modelo</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="modelo">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Descripción</label>
-                                            <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="descripcion">
+                                            <select class="form-select" aria-label="Default select example" id="sede_edcomunicacion" onchange="mostrarFormulario()" name="sede_edcomunicacion">
                                                 <option selected>SELECCIONE</option>
 
                                                 <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
@@ -954,82 +1089,13 @@ if (isset($_SESSION['usuario'])) {
                                                 include '../../conexionbd.php';
 
                                                 // Realizar la consulta a la base de datos para obtener las sedes
-                                                $consulta = "SELECT id, nombre_descripcion FROM [ControlTIC].[dbo].[descripcion_accesorios]";
+                                                $consulta = "SELECT id, nombre_sede FROM [ControlTIC].[dbo].[sede]";
                                                 $resultado = odbc_exec($conexion, $consulta);
 
                                                 // Iterar sobre los resultados y generar las opciones del select
                                                 while ($fila = odbc_fetch_array($resultado)) {
                                                     $id = $fila['id'];
-                                                    $nombre = $fila['nombre_descripcion'];
-                                                    echo "<option value='$id'>$nombre</option>";
-                                                }
-
-                                                // Liberar recursos
-                                                odbc_free_result($resultado);
-                                                ?>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- SEGUNDO  BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Tipo</label>
-                                            <select class="form-select" aria-label="" name="tipo">
-                                                <option selected>SELECCIONE</option>
-                                                <option value="INALAMBRICA">INALAMBRICA</option>
-                                                <option value="ALAMBRICA">ALAMBRICA</option>
-                                                <option value="NINGUNA">NINGUNA</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Cantidad</label>
-                                            <input type="number" class="form-control" id="" placeholder="" name="cantidad">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Fecha Ingreso</label>
-                                            <input type="date" class="form-control" id="" placeholder="" name="fecha_de_ingreso" max="<?php echo date('Y-m-d'); ?>">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div style="text-align: center;margin-top:15px;">
-                                    <button type="submit" class="btn btn-warning" name="enviarAccesorios" id="enviarComputador">GUARDAR</button>
-                                </div>
-
-                            </div>
-
-
-                            <!-- FORMULARIO EDCOMUNICACION -->
-                            <div id="formulario4" style="display: none;">
-
-                                <!-- PRIMER BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Descripción</label>
-                                            <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="descripcion_edcomunicacion">
-                                                <option selected>SELECCIONE</option>
-
-                                                <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
-                                                <?php
-                                                include '../../conexionbd.php';
-
-                                                // Realizar la consulta a la base de datos para obtener las sedes
-                                                $consulta = "SELECT id, nombre_descripcion FROM [ControlTIC].[dbo].[descripcion_edcomunicacion]";
-                                                $resultado = odbc_exec($conexion, $consulta);
-
-                                                // Iterar sobre los resultados y generar las opciones del select
-                                                while ($fila = odbc_fetch_array($resultado)) {
-                                                    $id = $fila['id'];
-                                                    $nombre = $fila['nombre_descripcion'];
+                                                    $nombre = $fila['nombre_sede'];
                                                     echo "<option value='$id'>$nombre</option>";
                                                 }
 
@@ -1039,115 +1105,46 @@ if (isset($_SESSION['usuario'])) {
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Marca</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="marca_edcomunicacion">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Modelo</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="modelo_edcomunicacion">
-                                        </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Ubicación</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_edcomunicacion">
                                     </div>
                                 </div>
-
-                                <!-- SEGUNDO BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Serial</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="serial_edcomunicacion">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Fecha de Ingreso</label>
-                                            <input type="date" class="form-control" id="" placeholder="" name="fecha_de_ingreso" max="<?php echo date('Y-m-d'); ?>">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Placa Activo fijo</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="placa_activo">
-                                        </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Observaciones</label>
+                                        <input type="text" class="form-control" id="" placeholder="" name="observaciones_edcomunicacion">
                                     </div>
                                 </div>
-
-                                <!-- TERCER BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Sede</label>
-                                            <div class="mb-3">
-                                                <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede">
-                                                    <option selected>SELECCIONE</option>
-
-                                                    <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
-                                                    <?php
-                                                    include '../../conexionbd.php';
-
-                                                    // Realizar la consulta a la base de datos para obtener las sedes
-                                                    $consulta = "SELECT id, nombre_sede FROM [ControlTIC].[dbo].[sede]";
-                                                    $resultado = odbc_exec($conexion, $consulta);
-
-                                                    // Iterar sobre los resultados y generar las opciones del select
-                                                    while ($fila = odbc_fetch_array($resultado)) {
-                                                        $id = $fila['id'];
-                                                        $nombre = $fila['nombre_sede'];
-                                                        echo "<option value='$id'>$nombre</option>";
-                                                    }
-
-                                                    // Liberar recursos
-                                                    odbc_free_result($resultado);
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Ubicación</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="ubicacion">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Observaciones</label>
-                                            <input type="text" class="form-control" id="" placeholder="" name="observaciones">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- CUARTO BLOQUE DE FORMULARIO -->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Fecha de Garantia</label>
-                                            <input type="date" class="form-control" id="" placeholder="" name="fecha_garantia" min="<?php echo date('Y-m-d'); ?>">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-
-                                    </div>
-                                    <div class="col-md-4">
-
-                                    </div>
-                                </div>
-
-                                <div style="text-align: center;margin-top:15px;">
-                                    <button type="submit" class="btn btn-warning" name="enviarEdcomunicacion" id="enviarComputador">GUARDAR</button>
-                                </div>
-
-                                <!-- CAMPOS OCULTOS -->
-                                <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
-                                <input type="hidden" class="form-control" id="" placeholder="" value="6" name="Estado">
-
                             </div>
+
+                            <!-- CUARTO BLOQUE DE FORMULARIO -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Fecha de Garantia</label>
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_garantia" min="<?php echo date('Y-m-d'); ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+
+                                </div>
+                                <div class="col-md-4">
+
+                                </div>
+                            </div>
+
+                            <div style="text-align: center;margin-top:15px;">
+                                <button type="submit" class="btn btn-warning" name="enviarEdcomunicacion" id="enviarComputador">GUARDAR</button>
+                            </div>
+
+                            <!-- CAMPOS OCULTOS -->
+                            <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
+                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
+
                         </div>
-
-
 
                         <!-- FORMULARIO PERIFERICOS -->
                         <div id="formulario5" style="display: none;">
@@ -1213,7 +1210,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Sede</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede">
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_perifericos">
                                             <option selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
@@ -1245,7 +1242,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ubicación</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion">
+                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_perifericos">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1315,6 +1312,10 @@ if (isset($_SESSION['usuario'])) {
                                 <button type="submit" class="btn btn-warning" name="enviarPerifericos" id="enviarPerifericos">GUARDAR</button>
                             </div>
 
+                            <!-- CAMPOS OCULTOS -->
+                            <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
+                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
+
                         </div>
 
                         <!-- FORMULARIO ALMACENAMIENTO -->
@@ -1371,7 +1372,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Capacidad</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="capacidad">
+                                        <input type="text" class="form-control" id="" placeholder="" name="capacidad_almacenamiento">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1388,7 +1389,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Caracterisica</label>
-                                        <select class="form-select" aria-label="" name="caracteristica">
+                                        <select class="form-select" aria-label="" name="caracteristica_almacenamiento">
                                             <option selected>SELECCIONE</option>
                                             <option value="INTERNO">INTERNO</option>
                                             <option value="EXTERNO">EXTERNO</option>
@@ -1404,7 +1405,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Sede</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede">
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_almacenamiento">
                                             <option selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
@@ -1432,7 +1433,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ubicación</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion">
+                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_almacenamiento">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1444,7 +1445,6 @@ if (isset($_SESSION['usuario'])) {
 
 
                             </div>
-
 
                             <!-- CUARTO BLOQUE DE FORMULARIO -->
                             <div class="row">
@@ -1471,7 +1471,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
-                            <input type="hidden" class="form-control" id="" placeholder="" value="6" name="estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="estado">
 
                         </div>
 
@@ -1551,7 +1551,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
-                            <input type="hidden" class="form-control" id="" placeholder="" value="6" name="estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="estado">
 
                         </div>
 
@@ -1597,7 +1597,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Sede</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede">
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_dvr">
                                             <option selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
@@ -1630,7 +1630,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ubicación</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion">
+                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_dvr">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1730,7 +1730,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Sede</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede">
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_cctv">
                                             <option selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
@@ -1828,7 +1828,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Placa Activo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="placa_activo">
+                                        <input type="text" class="form-control" id="" placeholder="" name="placa_activo_torre">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1840,7 +1840,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Sede</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede">
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_torre">
                                             <option selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
@@ -1914,12 +1914,15 @@ if (isset($_SESSION['usuario'])) {
                                 <button type="submit" class="btn btn-warning" name="enviarTorre" id="enviarTorre">GUARDAR</button>
                             </div>
 
+                            <!-- CAMPOS OCULTOS -->
+                            <input type="hidden" class="form-control" id="" placeholder="" value="6" name="estado">
+
                         </div>
 
+                    </div>
+                </div>
 
             </form>
-
-
 
 
 

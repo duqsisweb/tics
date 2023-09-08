@@ -49,8 +49,8 @@ if (
         '$primerapellido', '$segundoapellido', '$cedula', '$cargo', '$empresa'
     )";
 
-     // INSERTAR DATOS A LA TABLA
-     $queryHistorial = "INSERT INTO ControlTIC..historial_celular (
+    // INSERTAR DATOS A LA TABLA
+    $queryHistorial = "INSERT INTO ControlTIC..historial_celular (
         id, tipo_maquina, imei, serial_equipo_celular, marca, modelo,
         fecha_ingreso, capacidad, ram_celular, estado, gestion, fecha_garantia,
         fecha_crea, usua_crea, fecha_modifica, usua_modifica, primernombre, segundonombre,
@@ -62,22 +62,21 @@ if (
         '$primerapellido', '$segundoapellido', '$cedula', '$cargo', '$empresa'
     )";
 
-         // Ejecuta la consulta en la tabla 'asignacion_computador'
-         $resultAsignacion = odbc_exec($conexion, $queryAsignacion);
+    // Ejecuta la consulta en la tabla 'asignacion_computador'
+    $resultAsignacion = odbc_exec($conexion, $queryAsignacion);
 
-         if ($resultAsignacion) {
-             echo "Inserción exitosa en la tabla asignacion_celular<br>";
-             
-             // Ahora se procede a insertar en la tabla 'historial_computador'
-             $resultHistorial = odbc_exec($conexion, $queryHistorial);
-             
-             if ($resultHistorial) {
-                 echo "Inserción exitosa en la tabla historial_celular";
-             } else {
-                 echo "Error en la inserción en la tabla historial_celular: " . odbc_errormsg();
-             }
-         } else {
-             echo "Error en la inserción en la tabla asignacion_celular: " . odbc_errormsg();
-         }
-     }
- 
+    if ($resultAsignacion) {
+        echo "Inserción exitosa en la tabla asignacion_celular<br>";
+
+        // Ahora se procede a insertar en la tabla 'historial_computador'
+        $resultHistorial = odbc_exec($conexion, $queryHistorial);
+
+        if ($resultHistorial) {
+            echo "Inserción exitosa en la tabla historial_celular";
+        } else {
+            echo "Error en la inserción en la tabla historial_celular: " . odbc_errormsg();
+        }
+    } else {
+        echo "Error en la inserción en la tabla asignacion_celular: " . odbc_errormsg();
+    }
+}

@@ -16,6 +16,9 @@ if (isset($_SESSION['usuario'])) {
     require '../../views/head.php';
     ?>
 
+    <!-- Asegúrate de cargar jQuery primero -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <body>
 
         <!-- NAV -->
@@ -23,75 +26,53 @@ if (isset($_SESSION['usuario'])) {
         require '../../views/nav.php';
         ?>
 
+        <!-- Estilos para cambiar borde de color -->
+        <style>
+            .empresa-1 {
+                border-color: rgb(247, 4, 4) !important;
+                /* Otros estilos... */
+            }
+
+            .empresa-2 {
+                border-color: rgb(5, 87, 28);
+                /* Otros estilos... */
+            }
+
+            .empresa-3 {
+                border-color: rgb(138, 137, 147);
+                /* Otros estilos... */
+            }
+
+            .background-container {
+                position: relative;
+            }
+
+            .background-image {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0.8;
+                padding-top: 50px;
+                padding-left: 190px;
+                /* Ajusta la opacidad y el padding según tus necesidades */
+            }
+
+            .card-body {
+                background-color: white !important;
+                opacity: 0.9 !important;
+            }
+        </style>
+
+
+
         <section style="margin-top: 100px;">
 
-            <!-- Estilos para cambiar borde de color -->
-            <style>
-                .empresa-1 {
-                    border-color: rgb(247, 4, 4) !important;
-                    /* Otros estilos... */
-                }
 
-                .empresa-2 {
-                    border-color: rgb(5, 87, 28);
-                    /* Otros estilos... */
-                }
+            <!-- NAVINGRESOS -->
+            <?php require '../../views/navasignaciones.php'; ?>
 
-                .empresa-3 {
-                    border-color: rgb(138, 137, 147);
-                    /* Otros estilos... */
-                }
-
-                .background-container {
-                    position: relative;
-                }
-
-                .background-image {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    opacity: 0.8;
-                    padding-top: 50px;
-                    padding-left: 190px;
-                    /* Ajusta la opacidad y el padding según tus necesidades */
-                }
-
-                .card-body {
-                    background-color: white !important;
-                    opacity: 0.9 !important;
-                }
-            </style>
-
-            <section style="margin-top: 100px;">
-                <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#"></a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="../administrador/inicio_administrador.php">Inicio</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Usuarios
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Asignaciones</a></li>
-                                    </ul>
-                                </li>
-
-                            </ul>
-
-                        </div>
-                    </div>
-                </nav>
-
-            </section>
 
             <?php
             // SELECT PARA HACER LA CONSULTA
@@ -174,6 +155,16 @@ if (isset($_SESSION['usuario'])) {
             }
 
             ?>
+
+
+
+            <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
+                <div class="container" style="text-align: center;">
+                    <div>
+                        <h3>Asignar Maquinas a usuarios</h3>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -284,7 +275,7 @@ if (isset($_SESSION['usuario'])) {
                 <div class="container " style="margin-top: 50px;">
                     <div class="row">
                         <!-- PRIMER BLOQUE CHECK -->
-                        <div class="col-md-3 ">
+                        <div class="col-md-2">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="1" name="selecciondelcomputador">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Computador</label>
@@ -314,7 +305,7 @@ if (isset($_SESSION['usuario'])) {
                                 <?php
                                 }
                                 ?>
-                                <input type="text" name="tipocomputador" id="tipocomputador" value="">
+                                <input type="hidden" name="tipocomputador" id="tipocomputador" value="">
 
                             </form>
                         </div>
@@ -325,9 +316,12 @@ if (isset($_SESSION['usuario'])) {
                             </button>
                         </div>
                         <!-- CUARTO BLOQUE VERIFICAR SI HAY COMPUTADORES ASIGNADOS -->
-                        <div class="col-md-5" id="fila3" style="display: none; text-align: center; font-family: 'Courier New', monospace;">
+                        <div class="col-md-4" id="fila3" style="display: none; font-family: 'Courier New', monospace;"></div>
 
+                        <div class="col-md-2" id="fila4" style="display: none;text-align: center;">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalcomputadorinformacion">Ver información</button>
                         </div>
+
                     </div>
                 </div>
 
@@ -335,7 +329,7 @@ if (isset($_SESSION['usuario'])) {
                 <div class="container" style="margin-top: 50px;">
                     <div class="row">
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCelular" value="2" name="selecciondelcelular">
                                 <label class="form-check-label" for="flexSwitchCheckCelular">Celulares</label>
@@ -352,10 +346,11 @@ if (isset($_SESSION['usuario'])) {
                             </button>
                         </div>
 
-                        <div class="col-md-5" id="fila3celular" style="display: none; text-align: center; font-family: 'Courier New', monospace;">
+                        <div class="col-md-4" id="fila3celular" style="display: none; font-family: 'Courier New', monospace;"></div>
 
+                        <div class="col-md-2" id="fila4celular" style="display: none;text-align: center;">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalcelularinformacion">Ver información</button>
                         </div>
-
                     </div>
                 </div>
 
@@ -436,10 +431,10 @@ if (isset($_SESSION['usuario'])) {
                 <div class="container" style="margin-top: 50px;">
                     <div class="row">
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckedcomunicacion" value="4" name="selecciondeledcomunicacion">
-                                <label class="form-check-label" for="flexSwitchCheckedcomunicacion">E.D Comunucación</label>
+                                <label class="form-check-label" for="flexSwitchCheckedcomunicacion">E.D Comunicación</label>
                             </div>
                         </div>
 
@@ -468,7 +463,7 @@ if (isset($_SESSION['usuario'])) {
                                 <?php
                                 }
                                 ?>
-                                <input type="text" name="tipo_edcomunicacion" id="tipo_edcomunicacion" value="">
+                                <input type="hidden" name="tipo_edcomunicacion" id="tipo_edcomunicacion" value="">
 
                             </form>
                         </div>
@@ -479,8 +474,10 @@ if (isset($_SESSION['usuario'])) {
                             </button>
                         </div>
 
-                        <div class="col-md-5" id="fila3edcomunicacion" style="display: none;text-align: center;">
+                        <div class="col-md-4" id="fila3edcomunicacion" style="display: none;"></div>
 
+                        <div class="col-md-2" id="fila4edcomunicacion" style="display: none;text-align: center;">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modaledcomunicacioninformacion">Ver información</button>
                         </div>
 
                     </div>
@@ -489,8 +486,7 @@ if (isset($_SESSION['usuario'])) {
                 <!-- AQUI MUESTRA LAS SECCION  PERIFERICOS -->
                 <div class="container" style="margin-top: 50px;">
                     <div class="row">
-
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckperifericos" value="5" name="selecciondelperifericos">
                                 <label class="form-check-label" for="flexSwitchCheckperifericos">Perifericos</label>
@@ -522,7 +518,7 @@ if (isset($_SESSION['usuario'])) {
                                 <?php
                                 }
                                 ?>
-                                <input type="text" name="tipo_perifericos" id="tipo_perifericos" value="">
+                                <input type="hidden" name="tipo_perifericos" id="tipo_perifericos" value="">
 
                             </form>
                         </div>
@@ -533,8 +529,10 @@ if (isset($_SESSION['usuario'])) {
                             </button>
                         </div>
 
-                        <div class="col-md-5" id="fila3perifericos" style="display: none;text-align: center;">
+                        <div class="col-md-4" id="fila3perifericos" style="display: none;"></div>
 
+                        <div class="col-md-2" id="fila4perifericos" style="display: none;">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalperifericosinformacion">Ver información</button>
                         </div>
 
                     </div>
@@ -544,9 +542,9 @@ if (isset($_SESSION['usuario'])) {
                 <div class="container" style="margin-top: 50px;">
                     <div class="row">
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckalmacenamiento" value="5" name="selecciondelalmacenamiento">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckalmacenamiento" value="6" name="selecciondelalmacenamiento">
                                 <label class="form-check-label" for="flexSwitchCheckalmacenamiento">Almacenamiento</label>
                             </div>
                         </div>
@@ -576,7 +574,7 @@ if (isset($_SESSION['usuario'])) {
                                 <?php
                                 }
                                 ?>
-                                <input type="text" name="tipo_almacenamiento" id="tipo_almacenamiento" value="">
+                                <input type="hidden" name="tipo_almacenamiento" id="tipo_almacenamiento" value="">
 
                             </form>
                         </div>
@@ -587,12 +585,136 @@ if (isset($_SESSION['usuario'])) {
                             </button>
                         </div>
 
-                        <div class="col-md-5" id="fila3almacenamiento" style="display: none;text-align: center;">
+                        <div class="col-md-4" id="fila3almacenamiento" style="display: none;"></div>
 
+                        <div class="col-md-2" id="fila4almacenamiento" style="display: none;">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalalmacenamientoinformacion">Ver información</button>
                         </div>
 
                     </div>
                 </div>
+
+                <!-- AQUI MUESTRA LAS SECCION  SIMCARD -->
+                <div class="container" style="margin-top: 50px;">
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchChecksimcard" value="7" name="selecciondelsimcard">
+                                <label class="form-check-label" for="flexSwitchChecksimcard">SimCard</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2" id="fila1simcard" style="display: none;">
+
+                        </div>
+
+                        <div class="col-md-2" id="fila2simcard" style="display: none;">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalsimcard">
+                                Ver listado
+                            </button>
+                        </div>
+
+                        <div class="col-md-4" id="fila3simcard" style="display: none;"></div>
+
+                        <div class="col-md-2" id="fila4simcard" style="display: none;text-align: center;">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalsimcardinformacion">Ver información</button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- AQUI MUESTRA LAS SECCION  DVR -->
+                <div class="container" style="margin-top: 50px;">
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckdvr" value="8" name="selecciondeldvr">
+                                <label class="form-check-label" for="flexSwitchCheckdvr">DVR</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2" id="fila1dvr" style="display: none;">
+
+                        </div>
+
+                        <div class="col-md-2" id="fila2dvr" style="display: none;">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaldvr">
+                                Ver listado
+                            </button>
+                        </div>
+
+                        <div class="col-md-4" id="fila3dvr" style="display: none;"></div>
+
+                        <div class="col-md-2" id="fila4dvr" style="display: none;text-align: center;">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modaldvrinformacion">Ver información</button>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- AQUI MUESTRA LAS SECCION  CCTV -->
+                <!-- <div class="container" style="margin-top: 50px;">
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckcctv" value="9" name="selecciondelcctv">
+                                <label class="form-check-label" for="flexSwitchCheckcctv">CCTV</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2" id="fila1cctv" style="display: none;">
+
+                        </div>
+
+                        <div class="col-md-2" id="fila2cctv" style="display: none;">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalcctv">
+                                Ver listado
+                            </button>
+                        </div>
+
+                        <div class="col-md-5" id="fila3cctv" style="display: none;text-align: center;">
+
+                        </div>
+
+                    </div>
+                </div> -->
+
+                <!-- AQUI MUESTRA LAS SECCION  CCTV -->
+                <!-- <div class="container" style="margin-top: 50px;">
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchChecktorre" value="10" name="selecciondeltorre">
+                                <label class="form-check-label" for="flexSwitchChecktorre">Torre</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2" id="fila1torre" style="display: none;">
+
+                        </div>
+
+                        <div class="col-md-2" id="fila2torre" style="display: none;">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaltorre">
+                                Ver listado
+                            </button>
+                        </div>
+
+                        <div class="col-md-5" id="fila3torre" style="display: none;text-align: center;">
+
+                        </div>
+
+                    </div>
+                </div> -->
+
 
             <?php
             }
@@ -607,6 +729,25 @@ if (isset($_SESSION['usuario'])) {
                         <h1 class="modal-title fs-5" id="modalcomputadorLabel">
                             <h6>Equipo de Computo para el Cargo: <?php echo $cargo ?></h6>
                         </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL DE COMPUTADORES VER INFORMACION-->
+        <div class="modal fade" id="modalcomputadorinformacion" tabindex="-1" aria-labelledby="modalcomputadorinformacionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalcomputadorinformacionLabel"></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -640,6 +781,23 @@ if (isset($_SESSION['usuario'])) {
                 </div>
             </div>
         </div>
+        <!-- MODAL DE CELULARES VER INFORMACION -->
+        <div class="modal fade" id="modalcelularinformacion" tabindex="-1" aria-labelledby="modalcelularinformacionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalcelularinformacionLabel"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- MODAL DE ACCESORIOS-->
 
@@ -649,6 +807,23 @@ if (isset($_SESSION['usuario'])) {
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="modaledcomunicacionLabel">Listado de Ed Comunicacion</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL DE EDCOMUNICACION VER INFORMACION-->
+        <div class="modal fade" id="modaledcomunicacioninformacion" tabindex="-1" aria-labelledby="modaledcomunicacioninformacionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modaledcomunicacioninformacionLabel">Listado de Ed Comunicacion</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -678,6 +853,23 @@ if (isset($_SESSION['usuario'])) {
                 </div>
             </div>
         </div>
+        <!-- MODAL DE PERIFERICOS VER INFORMACION -->
+        <div class="modal fade" id="modalperifericosinformacion" tabindex="-1" aria-labelledby="modalperifericosinformacionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalperifericosinformacionLabel">Listado de Perifericos</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- MODAL DE ALMACENAMIENTO -->
         <div class="modal fade" id="modalalmacenamiento" tabindex="-1" aria-labelledby="modalalmacenamientoLabel" aria-hidden="true">
@@ -685,6 +877,130 @@ if (isset($_SESSION['usuario'])) {
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="modalalmacenamientoLabel">Listado de Almacenamiento</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL DE ALMACENAMIENTO VER INFORMACION-->
+        <div class="modal fade" id="modalalmacenamientoinformacion" tabindex="-1" aria-labelledby="modalalmacenamientoinformacionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalalmacenamientoinformacionLabel">Listado de Almacenamiento</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL DE SIMCARD -->
+        <div class="modal fade" id="modalsimcard" tabindex="-1" aria-labelledby="modalsimcardLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalsimcardLabel">Listado de SimCard</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL DE SIMCARD VER INFORMACION -->
+        <div class="modal fade" id="modalsimcardinformacion" tabindex="-1" aria-labelledby="modalsimcardinformacionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalsimcardinformacionLabel">Listado de SimCard</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL DE DVR -->
+        <div class="modal fade" id="modaldvr" tabindex="-1" aria-labelledby="modaldvrLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modaldvrLabel">Listado de Perifericos</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL DE DVR VER INFORMACION-->
+        <div class="modal fade" id="modaldvrinformacion" tabindex="-1" aria-labelledby="modaldvrinformacionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modaldvrinformacionLabel">DVR</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- MODAL DE CCTV -->
+        <div class="modal fade" id="modalcctv" tabindex="-1" aria-labelledby="modalcctvLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalcctvLabel">Listado de CCTV</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL DE TORRE -->
+        <div class="modal fade" id="modaltorre" tabindex="-1" aria-labelledby="modaltorreLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modaltorreLabel">Listado de Torre</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -716,6 +1032,22 @@ if (isset($_SESSION['usuario'])) {
         function updateDescripcionalmacenamiento(radio) {
             document.getElementById('tipo_almacenamiento').value = radio.value;
         }
+
+        function updateDescripcionsimcard(radio) {
+            document.getElementById('tipo_simcard').value = radio.value;
+        }
+
+        function updateDescripciondvr(radio) {
+            document.getElementById('tipo_dvr').value = radio.value;
+        }
+
+        function updateDescripcioncctv(radio) {
+            document.getElementById('tipo_cctv').value = radio.value;
+        }
+
+        function updateDescripciontorre(radio) {
+            document.getElementById('tipo_torre').value = radio.value;
+        }
     </script>
 
     <!-- SCRIPT DE CHECKS COMPUTADOR -->
@@ -725,11 +1057,12 @@ if (isset($_SESSION['usuario'])) {
                 if ($(this).is(':checked')) {
                     $('#fila1').show();
                     $('#fila2').show();
-                    $('#fila3').show();
+                    $('#fila4').show();
                 } else {
                     $('#fila1').hide();
                     $('#fila2').hide();
                     $('#fila3').hide();
+                    $('#fila4').hide();
                 }
             });
 
@@ -754,10 +1087,12 @@ if (isset($_SESSION['usuario'])) {
                     $('#fila1celular').show();
                     $('#fila2celular').show();
                     $('#fila3celular').show();
+                    $('#fila4celular').show();
                 } else {
                     $('#fila1celular').hide();
                     $('#fila2celular').hide();
                     $('#fila3celular').hide();
+                    $('#fila4celular').hide();
                 }
             });
         });
@@ -784,10 +1119,12 @@ if (isset($_SESSION['usuario'])) {
                     $('#fila1edcomunicacion').show();
                     $('#fila2edcomunicacion').show();
                     $('#fila3edcomunicacion').show();
+                    $('#fila4edcomunicacion').show();
                 } else {
                     $('#fila1edcomunicacion').hide();
                     $('#fila2edcomunicacion').hide();
                     $('#fila3edcomunicacion').hide();
+                    $('#fila4edcomunicacion').hide();
                 }
             });
 
@@ -812,10 +1149,12 @@ if (isset($_SESSION['usuario'])) {
                     $('#fila1perifericos').show();
                     $('#fila2perifericos').show();
                     $('#fila3perifericos').show();
+                    $('#fila4perifericos').show();
                 } else {
                     $('#fila1perifericos').hide();
                     $('#fila2perifericos').hide();
                     $('#fila3perifericos').hide();
+                    $('#fila4perifericos').hide();
                 }
             });
 
@@ -832,7 +1171,7 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
-    <!-- SCRIPT DE CHECKS ALMACENAMINETO -->
+    <!-- SCRIPT DE CHECKS ALMACENAMIENTO -->
     <script>
         $(document).ready(function() {
             $('#flexSwitchCheckalmacenamiento').on('change', function() {
@@ -840,10 +1179,12 @@ if (isset($_SESSION['usuario'])) {
                     $('#fila1almacenamiento').show();
                     $('#fila2almacenamiento').show();
                     $('#fila3almacenamiento').show();
+                    $('#fila4almacenamiento').show();
                 } else {
                     $('#fila1almacenamiento').hide();
                     $('#fila2almacenamiento').hide();
                     $('#fila3almacenamiento').hide();
+                    $('#fila4almacenamiento').hide();
                 }
             });
 
@@ -857,6 +1198,122 @@ if (isset($_SESSION['usuario'])) {
 
             $('#fila2almacenamiento button').on('click', function() {
                 $('#fila3almacenamiento').show();
+            });
+        });
+    </script>
+    <!-- SCRIPT DE CHECKS SIMCARD -->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchChecksimcard').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila1simcard').show();
+                    $('#fila2simcard').show();
+                    $('#fila3simcard').show();
+                    $('#fila4simcard').show();
+                } else {
+                    $('#fila1simcard').hide();
+                    $('#fila2simcard').hide();
+                    $('#fila3simcard').hide();
+                    $('#fila4simcard').hide();
+                }
+            });
+
+            $('input[name="descripcionsimcard"]').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila2simcard').show();
+                } else {
+                    $('#fila2simcard').hide();
+                }
+            });
+
+            $('#fila2simcard button').on('click', function() {
+                $('#fila3simcard').show();
+            });
+        });
+    </script>
+    <!-- SCRIPT DE CHECKS DVR -->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckdvr').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila1dvr').show();
+                    $('#fila2dvr').show();
+                    $('#fila3dvr').show();
+                    $('#fila4dvr').show();
+                } else {
+                    $('#fila1dvr').hide();
+                    $('#fila2dvr').hide();
+                    $('#fila3dvr').hide();
+                    $('#fila4dvr').hide();
+                }
+            });
+
+            $('input[name="descripciondvr"]').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila2dvr').show();
+                } else {
+                    $('#fila2dvr').hide();
+                }
+            });
+
+            $('#fila2dvr button').on('click', function() {
+                $('#fila3dvr').show();
+            });
+        });
+    </script>
+    <!-- SCRIPT DE CHECKS CCTV -->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckcctv').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila1cctv').show();
+                    $('#fila2cctv').show();
+                    $('#fila3cctv').show();
+                } else {
+                    $('#fila1cctv').hide();
+                    $('#fila2cctv').hide();
+                    $('#fila3cctv').hide();
+                }
+            });
+
+            $('input[name="descripcioncctv"]').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila2cctv').show();
+                } else {
+                    $('#fila2cctv').hide();
+                }
+            });
+
+            $('#fila2cctv button').on('click', function() {
+                $('#fila3cctv').show();
+            });
+        });
+    </script>
+    <!-- SCRIPT DE CHECKS CCTV -->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchChecktorre').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila1torre').show();
+                    $('#fila2torre').show();
+                    $('#fila3torre').show();
+                } else {
+                    $('#fila1torre').hide();
+                    $('#fila2torre').hide();
+                    $('#fila3torre').hide();
+                }
+            });
+
+            $('input[name="descripciontorre"]').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila2torre').show();
+                } else {
+                    $('#fila2torre').hide();
+                }
+            });
+
+            $('#fila2torre button').on('click', function() {
+                $('#fila3torre').show();
             });
         });
     </script>
@@ -896,7 +1353,6 @@ if (isset($_SESSION['usuario'])) {
             });
         }
     </script>
-
     <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN CELULAR-->
     <script>
         $(document).ready(function() {
@@ -917,17 +1373,19 @@ if (isset($_SESSION['usuario'])) {
         });
 
         function actualizarFila3celular() {
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
             $.ajax({
                 url: 'fichatecnica/actualizarfichacelular.php', // Archivo PHP que realizará la consulta
                 method: 'GET',
+                data: {
+                    cedula: cedula
+                }, // Pasar la cédula como parámetro
                 success: function(response) {
                     $('#fila3celular').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
                 }
             });
         }
     </script>
-
-
     <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN EDCOMUNICACION-->
     <script>
         $(document).ready(function() {
@@ -948,16 +1406,19 @@ if (isset($_SESSION['usuario'])) {
         });
 
         function actualizarFila3edcomunicacion() {
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
             $.ajax({
                 url: 'fichatecnica/actualizarfichaedcomunicacion.php', // Archivo PHP que realizará la consulta
                 method: 'GET',
+                data: {
+                    cedula: cedula
+                }, // Pasar la cédula como parámetro
                 success: function(response) {
                     $('#fila3edcomunicacion').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
                 }
             });
         }
     </script>
-
     <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN PERIFERICOS-->
     <script>
         $(document).ready(function() {
@@ -978,16 +1439,19 @@ if (isset($_SESSION['usuario'])) {
         });
 
         function actualizarFila3perifericos() {
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
             $.ajax({
                 url: 'fichatecnica/actualizarfichaperifericos.php', // Archivo PHP que realizará la consulta
                 method: 'GET',
+                data: {
+                    cedula: cedula
+                }, // Pasar la cédula como parámetro
                 success: function(response) {
                     $('#fila3perifericos').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
                 }
             });
         }
     </script>
-
     <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN ALMACENAMIENTO-->
     <script>
         $(document).ready(function() {
@@ -1008,15 +1472,152 @@ if (isset($_SESSION['usuario'])) {
         });
 
         function actualizarFila3almacenamiento() {
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
             $.ajax({
                 url: 'fichatecnica/actualizarfichaalmacenamiento.php', // Archivo PHP que realizará la consulta
                 method: 'GET',
+                data: {
+                    cedula: cedula
+                }, // Pasar la cédula como parámetro
                 success: function(response) {
                     $('#fila3almacenamiento').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
                 }
             });
         }
     </script>
+    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN SIMCARD-->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchChecksimcard').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila3simcard').show();
+                    // Realizar la llamada AJAX para actualizar #fila3
+                    actualizarFila3simcard();
+                } else {
+                    $('#fila3simcard').hide();
+                }
+            });
+            $('#fila2simcard button').on('click', function() {
+                $('#fila3simcard').show();
+                // Realizar la llamada AJAX para actualizar #fila3
+                actualizarFila3simcard();
+            });
+        });
+
+        function actualizarFila3simcard() {
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
+            $.ajax({
+                url: 'fichatecnica/actualizarfichasimcard.php', // Archivo PHP que realizará la consulta
+                method: 'GET',
+                data: {
+                    cedula: cedula
+                }, // Pasar la cédula como parámetro
+                success: function(response) {
+                    $('#fila3simcard').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
+                }
+            });
+        }
+    </script>
+    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN DVR-->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckdvr').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila3dvr').show();
+                    // Realizar la llamada AJAX para actualizar #fila3
+                    actualizarFila3dvr();
+                } else {
+                    $('#fila3dvr').hide();
+                }
+            });
+            $('#fila2dvr button').on('click', function() {
+                $('#fila3dvr').show();
+                // Realizar la llamada AJAX para actualizar #fila3
+                actualizarFila3dvr();
+            });
+        });
+
+        function actualizarFila3dvr() {
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
+            $.ajax({
+                url: 'fichatecnica/actualizarfichadvr.php', // Archivo PHP que realizará la consulta
+                method: 'GET',
+                data: {
+                    cedula: cedula
+                }, // Pasar la cédula como parámetro
+                success: function(response) {
+                    $('#fila3dvr').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
+                }
+            });
+        }
+    </script>
+    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN CCTV-->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckcctv').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila3cctv').show();
+                    // Realizar la llamada AJAX para actualizar #fila3
+                    actualizarFila3cctv();
+                } else {
+                    $('#fila3cctv').hide();
+                }
+            });
+            $('#fila2cctv button').on('click', function() {
+                $('#fila3cctv').show();
+                // Realizar la llamada AJAX para actualizar #fila3
+                actualizarFila3cctv();
+            });
+        });
+
+        function actualizarFila3cctv() {
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
+            $.ajax({
+                url: 'fichatecnica/actualizarfichacctv.php', // Archivo PHP que realizará la consulta
+                method: 'GET',
+                data: {
+                    cedula: cedula
+                }, // Pasar la cédula como parámetro
+                success: function(response) {
+                    $('#fila3cctv').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
+                }
+            });
+        }
+    </script>
+    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN TORRE-->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchChecktorre').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila3torre').show();
+                    // Realizar la llamada AJAX para actualizar #fila3
+                    actualizarFila3torre();
+                } else {
+                    $('#fila3torre').hide();
+                }
+            });
+            $('#fila2torre button').on('click', function() {
+                $('#fila3torre').show();
+                // Realizar la llamada AJAX para actualizar #fila3
+                actualizarFila3torre();
+            });
+        });
+
+        function actualizarFila3torre() {
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
+            $.ajax({
+                url: 'fichatecnica/actualizarfichatorre.php', // Archivo PHP que realizará la consulta
+                method: 'GET',
+                data: {
+                    cedula: cedula
+                }, // Pasar la cédula como parámetro
+                success: function(response) {
+                    $('#fila3torre').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
+                }
+            });
+        }
+    </script>
+
 
 
 
@@ -1050,13 +1651,73 @@ if (isset($_SESSION['usuario'])) {
                         $('#modalcomputador .modal-body').html(response); // Agrega los resultados al cuerpo del modal
                     }
                 });
+            });
+        });
 
+        $(document).ready(function() {
+            $('#fila4 button').on('click', function() {
+                var tipocomputador = $('#tipocomputador').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                $.ajax({
+                    url: 'informacion/consultacomputadorinformacion.php',
+                    type: 'POST',
+                    data: {
+                        tipocomputador: tipocomputador,
+                        empresaOption: empresaOption,
+
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modalcomputadorinformacion .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                    }
+                });
             });
         });
     </script>
-
     <!-- AJAX PARA CONSULTA DE CELULARES -->
     <script>
+        $(document).ready(function() {
+            $('#fila4celular button').on('click', function() {
+                var tipocomputador = $('#tipocomputador').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                $.ajax({
+                    url: 'informacion/consultacelularinformacion.php',
+                    type: 'POST',
+                    data: {
+                        tipocomputador: tipocomputador,
+                        empresa: empresaOption,
+
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modalcelularinformacion .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                    }
+                });
+            });
+        });
+
         var empresaOptionValue = "<?php echo $empresaOption; ?>";
         $.ajax({
 
@@ -1071,15 +1732,12 @@ if (isset($_SESSION['usuario'])) {
                 cedula: "<?php echo htmlspecialchars($cedula); ?>",
                 cargo: "<?php echo htmlspecialchars($cargo); ?>",
 
-
-
             },
             success: function(response) {
                 $('#modalcelular .modal-body').html(response); // Agrega los resultados al cuerpo del modal
             }
         });
     </script>
-
     <!-- AJAX PARA CONSULTA DE EDCOMUNICACION -->
     <script>
         var empresaOptionValue = "<?php echo $empresaOption; ?>";
@@ -1115,8 +1773,40 @@ if (isset($_SESSION['usuario'])) {
 
             });
         });
-    </script>
 
+        $(document).ready(function() {
+            $('#fila4edcomunicacion button').on('click', function() {
+                var tipo_edcomunicacion = $('#tipo_edcomunicacion').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                $.ajax({
+                    url: 'informacion/consultaedcomunicacioninformacion.php',
+                    type: 'POST',
+                    data: {
+                        empresa: empresaOptionValue,
+                        tipo_edcomunicacion: tipo_edcomunicacion,
+
+
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modaledcomunicacioninformacion .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                    }
+                });
+
+            });
+        });
+    </script>
     <!-- AJAX PARA CONSULTA DE PERIFERICOS -->
     <script>
         var empresaOptionValue = "<?php echo $empresaOption; ?>";
@@ -1152,8 +1842,40 @@ if (isset($_SESSION['usuario'])) {
 
             });
         });
-    </script>
 
+        $(document).ready(function() {
+            $('#fila4perifericos button').on('click', function() {
+                var tipo_edcomunicacion = $('#tipo_edcomunicacion').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                $.ajax({
+                    url: 'informacion/consultaperifericosinformacion.php',
+                    type: 'POST',
+                    data: {
+                        empresa: empresaOptionValue,
+                        tipo_edcomunicacion: tipo_edcomunicacion,
+
+
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modalperifericosinformacion .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                    }
+                });
+
+            });
+        });
+    </script>
     <!-- AJAX PARA CONSULTA DE ALMACENAMIENTO -->
     <script>
         var empresaOptionValue = "<?php echo $empresaOption; ?>";
@@ -1189,7 +1911,247 @@ if (isset($_SESSION['usuario'])) {
 
             });
         });
+
+        $(document).ready(function() {
+            $('#fila4almacenamiento button').on('click', function() {
+                var tipo_almacenamiento = $('#tipo_almacenamiento').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                $.ajax({
+                    url: 'informacion/consultaalmacenamientoinformacion.php',
+                    type: 'POST',
+                    data: {
+                        empresa: empresaOptionValue,
+                        tipo_almacenamiento: tipo_almacenamiento,
+
+
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modalalmacenamientoinformacion .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                    }
+                });
+
+            });
+        });
     </script>
+    <!-- AJAX PARA CONSULTA DE SIMCARD -->
+    <script>
+        var empresaOptionValue = "<?php echo $empresaOption; ?>";
+        $(document).ready(function() {
+            $('#fila2simcard button').on('click', function() {
+                var tipo_simcard = $('#tipo_simcard').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                $.ajax({
+                    url: 'consultas/consultasimcard.php',
+                    type: 'POST',
+                    data: {
+                        empresa: empresaOptionValue,
+                        tipo_simcard: tipo_simcard,
+
+
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modalsimcard .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                    }
+                });
+
+            });
+        });
+
+        $(document).ready(function() {
+            $('#fila4simcard button').on('click', function() {
+                var tipo_simcard = $('#tipo_simcard').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                $.ajax({
+                    url: 'informacion/consultasimcardinformacion.php',
+                    type: 'POST',
+                    data: {
+                        empresa: empresaOptionValue,
+                        tipo_simcard: tipo_simcard,
+
+
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modalsimcardinformacion .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                    }
+                });
+
+            });
+        });
+    </script>
+    <!-- AJAX PARA CONSULTA DE DVR -->
+    <script>
+        var empresaOptionValue = "<?php echo $empresaOption; ?>";
+        $(document).ready(function() {
+            $('#fila2dvr button').on('click', function() {
+                var tipo_dvr = $('#tipo_dvr').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                $.ajax({
+                    url: 'consultas/consultadvr.php',
+                    type: 'POST',
+                    data: {
+                        empresa: empresaOptionValue,
+                        tipo_dvr: tipo_dvr,
+
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modaldvr .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                    }
+                });
+
+            });
+        });
+
+        $(document).ready(function() {
+            $('#fila4dvr button').on('click', function() {
+                var tipo_dvr = $('#tipo_dvr').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                $.ajax({
+                    url: 'informacion/consultadvrinformacion.php',
+                    type: 'POST',
+                    data: {
+                        empresa: empresaOptionValue,
+                        tipo_dvr: tipo_dvr,
+
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modaldvrinformacion .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                    }
+                });
+
+            });
+        });
+    </script>
+    <!-- AJAX PARA CONSULTA DE CCTV -->
+    <script>
+        var empresaOptionValue = "<?php echo $empresaOption; ?>";
+        $(document).ready(function() {
+            $('#fila2cctv button').on('click', function() {
+                var tipo_cctv = $('#tipo_cctv').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                $.ajax({
+                    url: 'consultas/consultacctv.php',
+                    type: 'POST',
+                    data: {
+                        empresa: empresaOptionValue,
+                        tipo_cctv: tipo_cctv,
+
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modalcctv .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                    }
+                });
+
+            });
+        });
+    </script>
+    <!-- AJAX PARA CONSULTA DE CCTV -->
+    <script>
+        var empresaOptionValue = "<?php echo $empresaOption; ?>";
+        $(document).ready(function() {
+            $('#fila2torre button').on('click', function() {
+                var tipo_torre = $('#tipo_torre').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                $.ajax({
+                    url: 'consultas/consultatorre.php',
+                    type: 'POST',
+                    data: {
+                        empresa: empresaOptionValue,
+                        tipo_torre: tipo_torre,
+
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modaltorre .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                    }
+                });
+
+            });
+        });
+    </script>
+
 
 
 
@@ -1204,6 +2166,7 @@ if (isset($_SESSION['usuario'])) {
             }
         });
     </script>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

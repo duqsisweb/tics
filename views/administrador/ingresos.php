@@ -31,7 +31,7 @@ if (isset($_SESSION['usuario'])) {
         <section style="margin-top: 100px;">
 
             <!-- NAVINGRESOS -->
-            <?php require '../../views/navingresos.php'; ?>
+            <?php require '../../views/navinventario.php'; ?>
 
 
 
@@ -291,10 +291,10 @@ if (isset($_SESSION['usuario'])) {
                 $usuario = $_SESSION['usuario'];
 
 
-                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_simcard]
-                //  (tipo_maquina,numero_linea,nombre_plan,fecha_apertura,valor_plan,operador,cod_cliente,observaciones_sim,fecha_fin_plan,estado,Fecha_crea,usua_crea) 
-                //                                 VALUES ('$tipo_maquina','$numero_linea','$nombre_plan','$fecha_apertura','$valor_plan','$operador',
-                //                                 '$cod_cliente','$observaciones_sim','$fecha_fin_plan','$estado',Getdate(),'$usuario')";
+                echo "INSERT INTO [ControlTIC].[dbo].[maquina_simcard]
+                 (tipo_maquina,numero_linea,nombre_plan,fecha_apertura,valor_plan,operador,cod_cliente,observaciones_sim,fecha_fin_plan,estado,Fecha_crea,usua_crea) 
+                                                VALUES ('$tipo_maquina','$numero_linea','$nombre_plan','$fecha_apertura','$valor_plan','$operador',
+                                                '$cod_cliente','$observaciones_sim','$fecha_fin_plan','$estado',Getdate(),'$usuario')";
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_simcard]
@@ -307,7 +307,7 @@ if (isset($_SESSION['usuario'])) {
             ?>
 
 
-            <!-- inicio de POST enviarsimcard -->
+            <!-- inicio de POST DVR -->
             <?php
             if (isset($_POST['enviarDvr'])) {
 
@@ -317,8 +317,8 @@ if (isset($_SESSION['usuario'])) {
                 $descripcion_dvr = $_POST['descripcion_dvr'];
                 $capacidad_dvr = $_POST['capacidad_dvr'];
                 $tipo_dvr = $_POST['tipo_dvr'];
-                $sede = $_POST['sede'];
-                $ubicacion = $_POST['ubicacion'];
+                $sede_dvr = $_POST['sede_dvr'];
+                $ubicacion_dvr = $_POST['ubicacion_dvr'];
                 $software = $_POST['software'];
                 $fecha_ingreso = $_POST['fecha_ingreso'];
                 $num_canales = $_POST['num_canales'];
@@ -330,27 +330,27 @@ if (isset($_SESSION['usuario'])) {
                 $usuario = $_SESSION['usuario'];
 
 
-                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_dvr]
-                //  (tipo_maquina,marca_dvr,modelo_dvr,descripcion_dvr,capacidad_dvr,tipo_dvr,sede,ubicacion,software,fecha_ingreso,num_canales,num_discos,
-                //  dias_grabacion,ip_dvr,estado,fecha_garantia,Fecha_crea,usua_crea) 
-                //                                 VALUES ('$tipo_maquina','$marca_dvr','$modelo_dvr','$descripcion_dvr','$capacidad_dvr',
-                //                                 '$tipo_dvr','$sede','$ubicacion','$software','$fecha_ingreso',
-                //                                 '$num_canales','$num_discos','$dias_grabacion','$ip_dvr','$estado','$fecha_garantia',Getdate(),'$usuario')";
+                echo "INSERT INTO [ControlTIC].[dbo].[maquina_dvr]
+                 (tipo_maquina,marca_dvr,modelo_dvr,descripcion_dvr,capacidad_dvr,tipo_dvr,sede_dvr,ubicacion_dvr,software,fecha_ingreso,num_canales,num_discos,
+                 dias_grabacion,ip_dvr,estado,fecha_garantia,Fecha_crea,usua_crea) 
+                                                VALUES ('$tipo_maquina','$marca_dvr','$modelo_dvr','$descripcion_dvr','$capacidad_dvr',
+                                                '$tipo_dvr','$sede_dvr','$ubicacion_dvr','$software','$fecha_ingreso',
+                                                '$num_canales','$num_discos','$dias_grabacion','$ip_dvr','$estado','$fecha_garantia',Getdate(),'$usuario')";
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_dvr]
-                 (tipo_maquina,marca_dvr,modelo_dvr,descripcion_dvr,capacidad_dvr,tipo_dvr,sede,ubicacion,software,fecha_ingreso,num_canales,num_discos,
+                 (tipo_maquina,marca_dvr,modelo_dvr,descripcion_dvr,capacidad_dvr,tipo_dvr,sede_dvr,ubicacion_dvr,software,fecha_ingreso,num_canales,num_discos,
                  dias_grabacion,ip_dvr,estado,fecha_garantia,Fecha_crea,usua_crea) 
                                                   VALUES
                                                   ('$tipo_maquina','$marca_dvr','$modelo_dvr','$descripcion_dvr','$capacidad_dvr',
-                                                '$tipo_dvr','$sede','$ubicacion','$software','$fecha_ingreso',
+                                                '$tipo_dvr','$sede_dvr','$ubicacion_dvr','$software','$fecha_ingreso',
                                                 '$num_canales','$num_discos','$dias_grabacion','$ip_dvr','$estado','$fecha_garantia',Getdate(),'$usuario')");
             }
 
             ?>
 
 
-            <!-- inicio de POST enviarsimcard -->
+            <!-- inicio de POST CCTV -->
             <?php
             if (isset($_POST['enviarCctv'])) {
 
@@ -358,7 +358,7 @@ if (isset($_SESSION['usuario'])) {
                 $marca_cctv = $_POST['marca_cctv'];
                 $modelo_cctv = $_POST['modelo_cctv'];
                 $descripcion_cctv = $_POST['descripcion_cctv'];
-                $sede = $_POST['sede'];
+                $sede_cctv = $_POST['sede_cctv'];
                 $ubicacion_cctv = $_POST['ubicacion_cctv'];
                 $fecha_ingreso = $_POST['fecha_ingreso'];
                 $ip_cctv = $_POST['ip_cctv'];
@@ -370,19 +370,19 @@ if (isset($_SESSION['usuario'])) {
                 $usuario = $_SESSION['usuario'];
 
 
-                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_cctv]
-                //  (tipo_maquina,marca_cctv,modelo_cctv,descripcion_cctv,sede,ubicacion_cctv,fecha_ingreso,ip_cctv,
-                //  vision_enfoque,serial_dvr,canal,estado,fecha_garantia,Fecha_crea,usua_crea) 
-                //                                 VALUES ('$tipo_maquina','$marca_cctv','$modelo_cctv','$descripcion_cctv','$sede',
-                //                                 '$ubicacion_cctv','$fecha_ingreso','$ip_cctv','$vision_enfoque','$serial_drv',
-                //                                 '$canal','$estado','$fecha_garantia',Getdate(),'$usuario')";
+                echo "INSERT INTO [ControlTIC].[dbo].[maquina_cctv]
+                 (tipo_maquina,marca_cctv,modelo_cctv,descripcion_cctv,sede_cctv,ubicacion_cctv,fecha_ingreso,ip_cctv,
+                 vision_enfoque,serial_dvr,canal,estado,fecha_garantia,Fecha_crea,usua_crea) 
+                                                VALUES ('$tipo_maquina','$marca_cctv','$modelo_cctv','$descripcion_cctv','$sede_cctv',
+                                                '$ubicacion_cctv','$fecha_ingreso','$ip_cctv','$vision_enfoque','$serial_drv',
+                                                '$canal','$estado','$fecha_garantia',Getdate(),'$usuario')";
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_cctv]
-                 (tipo_maquina,marca_cctv,modelo_cctv,descripcion_cctv,sede,ubicacion_cctv,fecha_ingreso,ip_cctv,
+                 (tipo_maquina,marca_cctv,modelo_cctv,descripcion_cctv,sede_cctv,ubicacion_cctv,fecha_ingreso,ip_cctv,
                  vision_enfoque,serial_dvr,canal,estado,fecha_garantia,Fecha_crea,usua_crea) 
                                                   VALUES
-                                                  ('$tipo_maquina','$marca_cctv','$modelo_cctv','$descripcion_cctv','$sede',
+                                                  ('$tipo_maquina','$marca_cctv','$modelo_cctv','$descripcion_cctv','$sede_cctv',
                                                 '$ubicacion_cctv','$fecha_ingreso','$ip_cctv','$vision_enfoque','$serial_drv',
                                                 '$canal','$estado','$fecha_garantia',Getdate(),'$usuario')");
             }
@@ -390,34 +390,35 @@ if (isset($_SESSION['usuario'])) {
             ?>
 
 
-            <!-- inicio de POST enviarTorre-->
+            <!-- inicio de POST TORRE-->
             <?php
             if (isset($_POST['enviarTorre'])) {
 
                 $tipo_maquina = $_POST['tipo_maquina'];
-                $placa_activo = $_POST['placa_activo'];
+                $placa_activo_torre = $_POST['placa_activo_torre'];
                 $descripcion_torre = $_POST['descripcion_torre'];
-                $sede = $_POST['sede'];
+                $sede_torre = $_POST['sede'];
                 $tipo_torre = $_POST['tipo_torre'];
                 $altura_metros = $_POST['altura_metros'];
                 $fecha_ingreso = $_POST['fecha_ingreso'];
                 $fecha_ult_mantenimiento = $_POST['fecha_ult_mantenimiento'];
                 $usuario = $_SESSION['usuario'];
+                $estado = $_POST['estado'];
 
 
-                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_torre]
-                //  (tipo_maquina,placa_activo,descripcion_torre,sede,tipo_torre,altura_metros,fecha_ingreso,fecha_ult_mantenimiento,Fecha_crea,usua_crea) 
-                //                                 VALUES ('$tipo_maquina','$placa_activo','$descripcion_torre','$sede','$tipo_torre','$altura_metros',
-                //                                 '$fecha_ingreso','$fecha_ult_mantenimiento',
-                //                                 Getdate(),'$usuario')";
+                echo "INSERT INTO [ControlTIC].[dbo].[maquina_torre]
+                 (tipo_maquina,placa_activo_torre,descripcion_torre,sede_torre,tipo_torre,altura_metros,fecha_ingreso,fecha_ult_mantenimiento,Fecha_crea,usua_crea,estado) 
+                                                VALUES ('$tipo_maquina','$placa_activo_torre','$descripcion_torre','$sede_torre','$tipo_torre','$altura_metros',
+                                                '$fecha_ingreso','$fecha_ult_mantenimiento',
+                                                Getdate(),'$usuario','$estado')";
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_torre]
-                 (tipo_maquina,placa_activo,descripcion_torre,sede,tipo_torre,altura_metros,fecha_ingreso,fecha_ult_mantenimiento,Fecha_crea,usua_crea) 
+                 (tipo_maquina,placa_activo_torre,descripcion_torre,sede_torre,tipo_torre,altura_metros,fecha_ingreso,fecha_ult_mantenimiento,Fecha_crea,usua_crea,estado) 
                                                   VALUES
-                                                  ('$tipo_maquina','$placa_activo','$descripcion_torre','$sede','$tipo_torre','$altura_metros',
+                                                  ('$tipo_maquina','$placa_activo_torre','$descripcion_torre','$sede_torre','$tipo_torre','$altura_metros',
                                                 '$fecha_ingreso','$fecha_ult_mantenimiento',
-                                                Getdate(),'$usuario')");
+                                                Getdate(),'$usuario','$estado')");
             }
 
             ?>
@@ -432,6 +433,14 @@ if (isset($_SESSION['usuario'])) {
 
 
 
+
+            <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
+                <div class="container" >
+                    <div>
+                        <h3>Subir Maquinas Al stock</h3>
+                    </div>
+                </div>
+            </div> 
 
             <form method="POST" class="row g-3 needs-validation" novalidate>
 
@@ -476,14 +485,12 @@ if (isset($_SESSION['usuario'])) {
                     </div>
                 </div>
 
-
-                <div class="container-fluid" style="margin-top: 30px;">
+                <div class="container-fluid" style="margin-top: 30px;padding-left: 150px;padding-right: 150px;">
                     <div class="row">
 
 
                         <!-- FORMULARIO COMPUTADOR -->
                         <div action="" id="formulario1" style="display: none;">
-
                             <!-- PRIMER BLOQUE DE FORMULARIO -->
                             <div class="row">
                                 <div class="col-md-4">
@@ -828,7 +835,7 @@ if (isset($_SESSION['usuario'])) {
                                     SE DEJA OCULTO -->
                             <div>
                                 <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
-                                <input type="hidden" class="form-control" id="" placeholder="" value="6" name="Estado">
+                                <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
                             </div>
 
 
@@ -916,7 +923,7 @@ if (isset($_SESSION['usuario'])) {
 
                             <!-- CAMPOS OCULTOS -->
                             <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
-                            <input type="hidden" class="form-control" id="" placeholder="" value="6" name="Estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
 
                         </div>
 
@@ -1135,7 +1142,7 @@ if (isset($_SESSION['usuario'])) {
 
                             <!-- CAMPOS OCULTOS -->
                             <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
-                            <input type="hidden" class="form-control" id="" placeholder="" value="6" name="Estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
 
                         </div>
 
@@ -1307,7 +1314,7 @@ if (isset($_SESSION['usuario'])) {
 
                             <!-- CAMPOS OCULTOS -->
                             <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
-                            <input type="hidden" class="form-control" id="" placeholder="" value="6" name="Estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
 
                         </div>
 
@@ -1438,7 +1445,7 @@ if (isset($_SESSION['usuario'])) {
 
 
                             </div>
-                            
+
                             <!-- CUARTO BLOQUE DE FORMULARIO -->
                             <div class="row">
                                 <div class="col-md-4">
@@ -1464,7 +1471,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
-                            <input type="hidden" class="form-control" id="" placeholder="" value="6" name="estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="estado">
 
                         </div>
 
@@ -1544,7 +1551,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
-                            <input type="hidden" class="form-control" id="" placeholder="" value="6" name="estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="estado">
 
                         </div>
 
@@ -1590,7 +1597,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Sede</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede">
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_dvr">
                                             <option selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
@@ -1623,7 +1630,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ubicación</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion">
+                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_dvr">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1723,7 +1730,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Sede</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede">
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_cctv">
                                             <option selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
@@ -1821,7 +1828,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Placa Activo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="placa_activo">
+                                        <input type="text" class="form-control" id="" placeholder="" name="placa_activo_torre">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1833,7 +1840,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Sede</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede">
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_torre">
                                             <option selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
@@ -1907,14 +1914,15 @@ if (isset($_SESSION['usuario'])) {
                                 <button type="submit" class="btn btn-warning" name="enviarTorre" id="enviarTorre">GUARDAR</button>
                             </div>
 
+                            <!-- CAMPOS OCULTOS -->
+                            <input type="hidden" class="form-control" id="" placeholder="" value="6" name="estado">
+
                         </div>
 
                     </div>
                 </div>
 
             </form>
-
-
 
 
 

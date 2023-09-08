@@ -1,151 +1,154 @@
-    <?php
-    header('Content-Type: text/html; charset=UTF-8');
-    session_start();
-    error_reporting(0);
+<?php
+header('Content-Type: text/html; charset=UTF-8');
+session_start();
+error_reporting(0);
 
-    include '../../conexionbd.php';
-    if (isset($_SESSION['usuario'])) {
-        require '../../function/funciones.php';
+include '../../conexionbd.php';
+if (isset($_SESSION['usuario'])) {
+    require '../../function/funciones.php';
+?>
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <!-- HEAD -->
+    <?php
+    require '../../views/head.php';
     ?>
 
-        <!DOCTYPE html>
-        <html lang="en">
+    <body>
 
-        <!-- HEAD -->
+        <!-- NAV -->
         <?php
-        require '../../views/head.php';
+        require '../../views/nav.php';
         ?>
 
+        <section style="margin-top: 100px;">
 
 
-        <style>
-            #suggestions-container {
-                display: none;
-                margin-top: 10px;
-            }
-
-            #suggestions {
-                width: 100%;
-            }
-        </style>
-
-        <body>
-
-            <style>
-                #app {
-                    max-width: 400px;
-                    margin: 0 auto;
-                }
-            </style>
-
-
-            <!-- NAV -->
-            <?php
-            require '../../views/nav.php';
-            ?>
 
             <section style="margin-top: 100px;">
+            </section>
 
 
-                <div class="container-fluid">
+
+
+
+            <!-- SELECT CAPOS EMPRESA / CEDULA Y FICHA TECNICA -->
+            <form method="POST">
+                <div class="container">
                     <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="container-fluid">
-                            <div class="row">
 
-                                <div class="col-md-2"></div>
-
-                                <div class="col-md-6" style="margin: 50px 0px 0px 0px;">
-                                    <label for="" class="form-label">NOMBRE</label>
-                                    <input type="text" class="form-control" id="identificacion" placeholder="" name="" required>
-                                    <div id="suggestions-container">
-                                        <select id="suggestions" class="form-control"></select>
-                                    </div>
-                                </div>
+                        <div class="col-md-3" style="margin: 50px 0px 0px 0px;">
+                            <label class="form-label">Empresa</label>
+                            <select id="empresaSelect" name="empresa" class="form-select" aria-label="Default select example" required>
+                                <option selected disabled>SELECCIONE EMPRESA</option>
+                                <option value="1">Duquesa S.A. BIC</option>
+                                <option value="2">Palmeras del Llano S.A. BIC</option>
+                                <option value="3">J25</option>
+                            </select>
+                        </div>
 
 
-                                <div class="col-md-2">
-                                    <label for="" class="form-label">Cédula</label>
-                                    <input type="text" id="CEDULA" value="<?php echo $CEDULA ?>">
-                                    <span id="cedulaSpan"></span>
 
-                                </div>
+                        <div class="col-md-2" style="margin: 50px 0px 0px 0px;">
+                            <div class="form-group">
+                                <label class="form-label">Nombre</label>
+                                <input list="asiste" class="form-control" type="text" id="nombreInput" name="asiste" required>
+                                <datalist id="asiste">
+                                    <?php
+                                    include '../../../conexionbd.php';
+                                    $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM DUQUESA..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 ORDER BY NOMBRE ASC;";
+                                    $result = odbc_exec($conexion, $query);
+
+                                    while ($admon = odbc_fetch_array($result)) {
+                                        $nombreCompleto = trim(utf8_decode($admon['NOMBRE'])) . ' ' . trim(utf8_decode($admon['NOMBRE2'])) . ' ' . trim(utf8_decode($admon['APELLIDO'])) . ' ' . trim(utf8_decode($admon['APELLIDO2']));
+                                        echo '<option value="' . trim($admon['CEDULA']) . '">' . $nombreCompleto . ' - ' . trim($admon['CEDULA']) . '</option>';
+                                    }
+                                    ?>
+                                </datalist>
                             </div>
                         </div>
+
+                        <div class="col-md-2" style="margin: 50px 0px 0px 0px;">
+                            <label for="" class="form-label">Identificación</label>
+                            <input type="text" class="form-control" id="identificacionInput" placeholder="" name="CEDULA" pattern="[0-9]+" required>
+                        </div>
+
                     </div>
+                </div>
+
+            </form>
+
+        </section>
 
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const asisteInput = document.getElementById('nombreInput');
+                const identificacionInput = document.getElementById('identificacionInput');
+                const asisteDatalist = document.getElementById('asiste');
+
+                asisteInput.addEventListener('change', function() {
+                    const selectedOption = asisteDatalist.querySelector(`option[value="${asisteInput.value}"]`);
+                    if (selectedOption) {
+                        const cedula = selectedOption.textContent.split(' - ')[1];
+                        identificacionInput.value = cedula;
+                    } else {
+                        identificacionInput.value = '';
+                    }
+                });
 
 
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            const identificacionInput = document.getElementById("identificacion");
-                            const suggestionsSelect = document.getElementById("suggestions");
-                            const suggestionsContainer = document.getElementById("suggestions-container");
-                            const cedulaInput = document.getElementById("CEDULA"); // Asegúrate de que el ID sea "CEDULA" y no "cedula"
+                empresaSelect.addEventListener('change', function() {
+                    const selectedOptionValue = empresaSelect.value;
+                    asisteDatalist.innerHTML = ''; // Limpiar las opciones actuales
 
-                            identificacionInput.addEventListener("input", function() {
-                                const inputValue = identificacionInput.value;
+                    if (selectedOptionValue === '1') {
+                        // Consulta para Duquesa S.A. BIC
+                        <?php
+                        $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM DUQUESA..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 ORDER BY NOMBRE ASC;";
+                        $result = odbc_exec($conexion, $query);
 
-                                if (inputValue.length >= 3) {
-                                    console.log("Haciendo petición AJAX...");
-                                    const xhr = new XMLHttpRequest();
-                                    xhr.open("GET", `autocomplete.php?inputValue=${inputValue}`, true);
+                        while ($admon = odbc_fetch_array($result)) {
+                            $nombreCompleto = trim(utf8_decode($admon['NOMBRE'])) . ' ' . trim(utf8_decode($admon['NOMBRE2'])) . ' ' . trim(utf8_decode($admon['APELLIDO'])) . ' ' . trim(utf8_decode($admon['APELLIDO2']));
+                            echo "asisteDatalist.innerHTML += '<option value=\"" . trim($admon['CEDULA']) . "\">" . $nombreCompleto . ' - ' . trim($admon['CEDULA']) . "</option>';\n";
+                        }
+                        ?>
+                    } else if (selectedOptionValue === '2') {
+                        // Consulta para Palmeras del Llano S.A. BIC
+                        <?php
+                        $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM PALMERAS2013..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 ORDER BY NOMBRE ASC;";
+                        $result = odbc_exec($conexion2, $query);
 
-                                    xhr.onreadystatechange = function() {
-                                        if (xhr.readyState === XMLHttpRequest.DONE) {
-                                            if (xhr.status === 200) {
-                                                console.log("Respuesta AJAX recibida");
-                                                const response = JSON.parse(xhr.responseText);
+                        while ($admon = odbc_fetch_array($result)) {
+                            $nombreCompleto = trim(utf8_decode($admon['NOMBRE'])) . ' ' . trim(utf8_decode($admon['NOMBRE2'])) . ' ' . trim(utf8_decode($admon['APELLIDO'])) . ' ' . trim(utf8_decode($admon['APELLIDO2']));
+                            echo "asisteDatalist.innerHTML += '<option value=\"" . trim($admon['CEDULA']) . "\">" . $nombreCompleto . ' - ' . trim($admon['CEDULA']) . "</option>';\n";
+                        }
+                        ?>
+                    } else if (selectedOptionValue === '3') {
+                        // Consulta para Palmeras del Llano S.A. BIC
+                        <?php
+                        $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM J25..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 ORDER BY NOMBRE ASC;";
+                        $result = odbc_exec($conexion2, $query);
 
-                                                suggestionsSelect.innerHTML = ""; // Limpiar opciones anteriores
+                        while ($admon = odbc_fetch_array($result)) {
+                            $nombreCompleto = trim(utf8_decode($admon['NOMBRE'])) . ' ' . trim(utf8_decode($admon['NOMBRE2'])) . ' ' . trim(utf8_decode($admon['APELLIDO'])) . ' ' . trim(utf8_decode($admon['APELLIDO2']));
+                            echo "asisteDatalist.innerHTML += '<option value=\"" . trim($admon['CEDULA']) . "\">" . $nombreCompleto . ' - ' . trim($admon['CEDULA']) . "</option>';\n";
+                        }
+                        ?>
+                    }
 
-                                                response.forEach(item => {
-                                                    const option = document.createElement("option");
-                                                    option.value = item.NOMBRE;
-                                                    option.setAttribute("data-cedula", item.CEDULA);
-                                                    option.textContent = `${item.NOMBRE} ${item.NOMBRE2} ${item.APELLIDO} ${item.APELLIDO2} - Cédula: ${item.CEDULA} - Cargo: ${item.CARGO} - Código: ${item.CODIGO}`;
-                                                    suggestionsSelect.appendChild(option);
-                                                });
+                });
+            });
+        </script>
 
-                                                suggestionsContainer.style.display = "block";
-                                            } else {
-                                                console.error("Error en la petición AJAX");
-                                            }
-                                        }
-                                    };
 
-                                    suggestionsSelect.addEventListener("change", function() {
-                                        const selectedOption = suggestionsSelect.options[suggestionsSelect.selectedIndex];
-                                        if (selectedOption) {
-                                            const cedula = selectedOption.getAttribute("data-cedula");
-                                            console.log("Cédula seleccionada:", cedula);
-                                            cedulaInput.value = cedula;
-                                        }
-                                    });
-                                    // Agrega esto después del bloque de código anterior
-                                    if (suggestionsSelect.options.length === 1) {
-                                        const cedula = suggestionsSelect.options[0].getAttribute("data-cedula");
-                                        console.log("Cédula seleccionada:", cedula);
-                                        cedulaInput.value = cedula;
-                                    }
+    </html>
 
-                                    xhr.send();
-                                } else {
-                                    suggestionsContainer.style.display = "none";
-                                }
-                            });
-                        });
-                    </script>
-
-            </section>
-        </body>
-
-        </html>
-
-    <?php } else { ?>
-        <script languaje "JavaScript">
-            alert("Acceso Incorrecto");
-            window.location.href = "../login.php";
-        </script><?php
-                } ?>
+<?php } else { ?>
+    <script languaje "JavaScript">
+        alert("Acceso Incorrecto");
+        window.location.href = "../login.php";
+    </script><?php
+            } ?>
