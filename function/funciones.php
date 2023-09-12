@@ -1,5 +1,5 @@
 <?php
-function obtenerDatosEquipos($conexion) {
+function obtenerDatosEquiposcomputadorasignados($conexion) {
     $datosEquipos = array();
 
     $sql = "SELECT  
@@ -25,6 +25,26 @@ function obtenerDatosEquipos($conexion) {
     JOIN [ControlTIC].[dbo].[propietario] AS p ON mc.[Propietario] = p.[id]
     JOIN [ControlTIC].[dbo].[sistema_operativo] AS so ON mc.[Sistema_Operativo] = so.[id]
     JOIN [ControlTIC].[dbo].[estado] AS e2 ON mc.[Estado] = e2.[id]";
+
+    $result = odbc_exec($conexion, $sql);
+
+    if ($result !== false) {
+        while ($row = odbc_fetch_array($result)) {
+            $datosEquipos[] = $row;
+        }
+        odbc_free_result($result);
+    }
+
+    return $datosEquipos;
+}
+
+
+
+
+function obtenerDatosEquiposcelularesasignados($conexion) {
+    $datosEquipos = array();
+
+    $sql = "SELECT mc.[id] ,[imei] ,[serial_equipo_celular] ,[marca] ,[modelo] ,[fecha_ingreso] ,[capacidad] ,[ram_celular] ,estad.[nombre_estado] AS [Estado] ,gestio.[estado_gestion] as gestion FROM [ControlTIC].[dbo].[maquina_celular] AS mc JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] JOIN [ControlTIC].[dbo].[estado] AS estad ON mc.[Estado] = estad.[id] JOIN [ControlTIC].[dbo].[gestion] AS gestio ON mc.gestion = gestio.[id]";
 
     $result = odbc_exec($conexion, $sql);
 

@@ -17,5 +17,4 @@ if (!$conexion2 = odbc_connect('DRIVER={SQL Server};SERVER=192.168.1.245;DATABAS
     die('Error al conectarse a la segunda base de datos');
 }
 
-
 ?>
