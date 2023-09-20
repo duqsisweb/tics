@@ -70,7 +70,7 @@ if (isset($_SESSION['usuario'])) {
         <section style="margin-top: 100px;">
 
 
-            <!-- NAVINGRESOS -->
+            <!--  -->
             <?php require '../../views/navasignaciones.php'; ?>
 
 
@@ -358,7 +358,7 @@ if (isset($_SESSION['usuario'])) {
                 <div class="container" style="margin-top: 50px;">
                     <div class="row">
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckAccesorios" value="1" name="selecciondelaccesorio">
                                 <label class="form-check-label" for="flexSwitchCheckAccesorios">Accesorios</label>
@@ -367,30 +367,7 @@ if (isset($_SESSION['usuario'])) {
 
 
                         <div class="col-md-2" id="fila1accesorios" style="display: none;">
-                            <!-- CONSULTA POR MEDIO DE CHECKS -->
-                            <?php
-                            include '../../conexionbd.php';
-                            $consulta = "SELECT id, nombre_descripcion FROM [ControlTIC].[dbo].[descripcion_accesorios]";
-                            $resultado = odbc_exec($conexion, $consulta);
-                            ?>
 
-                            <form>
-                                <?php
-                                while ($fila = odbc_fetch_array($resultado)) {
-                                    $id = $fila['id'];
-                                    $nombre = $fila['nombre_descripcion'];
-                                ?>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="tipo_accesorio[]" id="tipo_accesorio_<?php echo $id; ?>" value="<?php echo $id; ?>">
-                                        <label class="form-check-label" for="tipo_accesorio_<?php echo $id; ?>">
-                                            <?php echo $nombre; ?>
-                                        </label>
-                                    </div>
-                                <?php
-                                }
-                                ?>
-                                <input type="hidden" name="tipoaccesorio" id="tipoaccesorio" value="">
-                            </form>
                         </div>
 
                         <div class="col-md-2" id="fila2accesorios" style="display: none;">
@@ -399,33 +376,15 @@ if (isset($_SESSION['usuario'])) {
                             </button>
                         </div>
 
-                        <div class="col-md-5" id="fila3accesorios" style="display: none;text-align: center;">
+                        <div class="col-md-4" id="fila3accesorios" style="display: none; font-family: 'Courier New', monospace;"></div>
 
-                            <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#verinfoaccesorios" aria-expanded="false" aria-controls="verinfoaccesorios">
-                                VER INFORMACIÓN
-                            </button>
-                            </p>
-
-                            <div class="collapse" id="verinfoaccesorios">
-                                <div class="card card-body">
-                                    <table class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr class="table-dark">
-                                                <th scope="col">Tipo Caracteristica</th>
-                                                <th scope="col">Valor</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="nombreEquipoDisplay">
-                                            <!-- Aquí se insertarán las filas de la tabla con los datos -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
+                        <div class="col-md-2" id="fila4accesorios" style="display: none;text-align: center;">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalcelularinformacion">Ver información</button>
                         </div>
 
                     </div>
                 </div>
+
 
                 <!-- AQUI MUESTRA LAS SECCION  EDCOMUNICACION -->
                 <div class="container" style="margin-top: 50px;">
@@ -799,7 +758,26 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
 
-        <!-- MODAL DE ACCESORIOS-->
+                <!-- MODAL DE ACCESORIOS-->
+        <div class="modal fade" id="modalaccesorios" tabindex="-1" aria-labelledby="modalaccesoriosLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalaccesoriosLabel">
+                            <h6>Accesorios para el Cargo: <?php echo $cargo ?></h6>
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        1
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- MODAL DE EDCOMUNICACION -->
         <div class="modal fade" id="modaledcomunicacion" tabindex="-1" aria-labelledby="modaledcomunicacionLabel" aria-hidden="true">
@@ -1013,6 +991,13 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
 
+        <!-- enviar el nombre como parametro para asignacion -->
+        <strong id="Usua_asigna" style="display: none;!important"><?php echo utf8_encode($_SESSION['usuario']); ?></strong>
+        <!-- enviar el nombre como parametro para remover asignacion  -->
+        <strong id="Usua_retira" style="display: none;!important"><?php echo utf8_encode($_SESSION['usuario']); ?></strong>
+
+
+
     </body>
 
 
@@ -1097,6 +1082,26 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
+
+        <!-- SCRIPT DE CHECKS ACCESORIOS -->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckAccesorios').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila1accesorios').show();
+                    $('#fila2accesorios').show();
+                    $('#fila3accesorios').show();
+                    $('#fila4accesorios').show();
+                } else {
+                    $('#fila1accesorios').hide();
+                    $('#fila2accesorios').hide();
+                    $('#fila3accesorios').hide();
+                    $('#fila4accesorios').hide();
+                }
+            });
+        });
+    </script>
+
     <!-- SCRIPT DE CHECKS ACCESORIOS -->
     <script>
         $(document).ready(function() {
@@ -1386,6 +1391,41 @@ if (isset($_SESSION['usuario'])) {
             });
         }
     </script>
+
+    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN ACCESORIOS-->
+    <!-- <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckAccesorios').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila3accesorios').show();
+                    // Realizar la llamada AJAX para actualizar #fila3
+                    actualizarFila3accesorios();
+                } else {
+                    $('#fila3accesorios').hide();
+                }
+            });
+            $('#fila2accesorios button').on('click', function() {
+                $('#fila3accesorios').show();
+                // Realizar la llamada AJAX para actualizar #fila3
+                actualizarFila3accesorios();
+            });
+        });
+
+        function actualizarFila3accesorios() {
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
+            $.ajax({
+                url: '', // Archivo PHP que realizará la consulta
+                method: 'GET',
+                data: {
+                    cedula: cedula
+                }, // Pasar la cédula como parámetro
+                success: function(response) {
+                    $('#fila3accesorios').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
+                }
+            });
+        }
+    </script> -->
+
     <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN EDCOMUNICACION-->
     <script>
         $(document).ready(function() {
@@ -1632,12 +1672,17 @@ if (isset($_SESSION['usuario'])) {
                 var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
                 var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
 
+                // Obtén el contenido de la etiqueta <strong> con el id "nombreStrong"
+                var nombre1 = $('#Usua_asigna').text();
+                var nombre2 = $('#Usua_retira').text();
+
                 $.ajax({
                     url: 'consultas/consultacomputador.php',
                     type: 'POST',
                     data: {
                         tipocomputador: tipocomputador,
                         empresaOption: empresaOption,
+                        Usua_asigna: nombre1, // Incluye el contenido de la etiqueta <strong> como parámetro
 
                         primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
                         segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
@@ -1659,6 +1704,9 @@ if (isset($_SESSION['usuario'])) {
                 var tipocomputador = $('#tipocomputador').val();
                 var empresaOption = $('#empresaOption').val();
 
+                // Obtén el contenido de la etiqueta <strong> con el id "nombreStrong"
+                var nombre2 = $('#Usua_retira').text();
+
                 var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
                 var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
                 var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
@@ -1669,6 +1717,7 @@ if (isset($_SESSION['usuario'])) {
                     data: {
                         tipocomputador: tipocomputador,
                         empresaOption: empresaOption,
+                        Usua_retira: nombre2, // Incluye el contenido de la etiqueta <strong> como parámetro
 
                         primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
                         segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
@@ -1738,6 +1787,61 @@ if (isset($_SESSION['usuario'])) {
             }
         });
     </script>
+
+        <!-- AJAX PARA CONSULTA DE ACCESORIOS -->
+    <script>
+        $(document).ready(function() {
+            $('#fila4accesorios button').on('click', function() {
+                var tipocomputador = $('#tipocomputador').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                // $.ajax({
+                //     url: 'informacion/consultaaccesoriosinformacion.php',
+                //     type: 'POST',
+                //     data: {
+                //         tipocomputador: tipocomputador,
+                //         empresa: empresaOption,
+
+                //         primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                //         segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                //         primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                //         segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                //         cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                //         cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                //     },
+                //     success: function(response) {
+                //         $('#modalaccesoriosinformacion .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                //     }
+                // });
+            });
+        });
+
+        var empresaOptionValue = "<?php echo $empresaOption; ?>";
+        $.ajax({
+
+            url: 'consultas/consultaaccesorios.php',
+            type: 'POST',
+            data: {
+                empresa: empresaOptionValue,
+                primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+                cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                cargo: "<?php echo htmlspecialchars($cargo); ?>",
+
+            },
+            success: function(response) {
+                $('#modalaccesorios .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+            }
+        });
+    </script>
+
     <!-- AJAX PARA CONSULTA DE EDCOMUNICACION -->
     <script>
         var empresaOptionValue = "<?php echo $empresaOption; ?>";
@@ -2151,9 +2255,6 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
-
-
-
 
 
 

@@ -16,6 +16,47 @@ if (isset($_SESSION['usuario'])) {
     require '../../views/head.php';
     ?>
 
+
+    <!-- Estilos para cambiar borde de color -->
+    <style>
+        .empresa-1 {
+            border-color: rgb(247, 4, 4) !important;
+            /* Otros estilos... */
+        }
+
+        .empresa-2 {
+            border-color: rgb(5, 87, 28);
+            /* Otros estilos... */
+        }
+
+        .empresa-3 {
+            border-color: rgb(138, 137, 147);
+            /* Otros estilos... */
+        }
+
+        .background-container {
+            position: relative;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+            padding-top: 50px;
+            padding-left: 190px;
+            /* Ajusta la opacidad y el padding según tus necesidades */
+        }
+
+        .card-body {
+            background-color: white !important;
+            opacity: 0.9 !important;
+        }
+    </style>
+
+
     <body>
 
         <!-- NAV -->
@@ -23,52 +64,12 @@ if (isset($_SESSION['usuario'])) {
         require '../../views/nav.php';
         ?>
 
-        <!-- Estilos para cambiar borde de color -->
-        <style>
-            .empresa-1 {
-                border-color: rgb(247, 4, 4) !important;
-                /* Otros estilos... */
-            }
-
-            .empresa-2 {
-                border-color: rgb(5, 87, 28);
-                /* Otros estilos... */
-            }
-
-            .empresa-3 {
-                border-color: rgb(138, 137, 147);
-                /* Otros estilos... */
-            }
-
-            .background-container {
-                position: relative;
-            }
-
-            .background-image {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                opacity: 0.8;
-                padding-top: 50px;
-                padding-left: 190px;
-                /* Ajusta la opacidad y el padding según tus necesidades */
-            }
-
-            .card-body {
-                background-color: white !important;
-                opacity: 0.9 !important;
-            }
-        </style>
-
-
-
         <section style="margin-top: 100px;">
 
-
-            <!-- NAVINGRESOS -->
-            <?php require '../../views/navasignaciones.php'; ?>
+            <!-- NAV -->
+            <?php
+            require '../../views/navasignaciones.php';
+            ?>
 
 
             <?php
@@ -154,11 +155,10 @@ if (isset($_SESSION['usuario'])) {
             ?>
 
 
-
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container" style="text-align: center;">
                     <div>
-                        <h3>Asignar Maquinas a usuarios</h3>
+                        <h3>REMOVER ASIGNACIÓN</h3>
                     </div>
                 </div>
             </div>
@@ -210,7 +210,6 @@ if (isset($_SESSION['usuario'])) {
                                 <button type="submit" class="btn btn-success" name="consultar" id="consultar">CONSULTAR</button>
                             </div>
                         </div>
-
 
                         <!-- SECCION TARGETA DE PERFIL -->
                         <div class="col-md-5">
@@ -268,232 +267,70 @@ if (isset($_SESSION['usuario'])) {
             if (isset($showSections)) {
             ?>
 
-                <!-- AQUI MUESTRA LAS SECCION  COMPUTADOR -->
-                <div class="container " style="margin-top: 50px;">
-                    <div class="row">
-                        <!-- PRIMER BLOQUE CHECK -->
-                        <div class="col-md-2">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="1" name="selecciondelcomputador">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">Computador</label>
+
+                <?php
+                if (isset($showSections) && $showSections) {
+                ?>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4" id="fila1" style="display: none; text-align: center; "></div>
+                            <div class="col-md-4" id="fila2" style="display: none; text-align: center; "></div>
+                            <div class="col-md-4" id="fila3" style="display: none; text-align: center; "></div>
+                        </div>
+                    </div>
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4" id="fila4" style="display: none; text-align: center; "></div>
+                            <div class="col-md-4" id="fila5" style="display: none; text-align: center; "></div>
+                            <div class="col-md-4" id="fila6" style="display: none; text-align: center; "></div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4" id="fila7" style="display: none; text-align: center; "></div>
+                            <div class="col-md-4" id="fila8" style="display: none; text-align: center; "></div>
+                            <div class="col-md-4" id="fila9" style="display: none; text-align: center; "></div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4" id="fila10" style="display: none; text-align: center; "></div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="" id="" style="text-align: center;">
+                                <button type="button" class="btn btn-warning">Generar Acta</button>
                             </div>
                         </div>
-                        <!-- SEGUNDO BLOQUE  SELECCION DEL TIPO DE COMPUTADOR-->
-                        <div class="col-md-2" id="fila1" style="display: none;">
-                            <!-- CONSULTA POR MEDIO DE CHECKS -->
-                            <?php
-                            include '../../conexionbd.php';
-                            $consulta = "SELECT id, nombre_tipo_comp FROM [ControlTIC].[dbo].[tipo_comp]";
-                            $resultado = odbc_exec($conexion, $consulta);
-                            ?>
-
-                            <form>
-                                <?php
-                                while ($fila = odbc_fetch_array($resultado)) {
-                                    $id = $fila['id'];
-                                    $nombre = $fila['nombre_tipo_comp'];
-                                ?>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="tipo_comp" id="tipo_comp_<?php echo $id; ?>" value="<?php echo $id; ?>" onchange="updateTipoComputador(this)">
-                                        <label class="form-check-label" for="tipo_comp_<?php echo $id; ?>">
-                                            <?php echo $nombre; ?>
-                                        </label>
-                                    </div>
-                                <?php
-                                }
-                                ?>
-                                <input type="hidden" name="tipocomputador" id="tipocomputador" value="">
-
-                            </form>
-                        </div>
-                        <!-- TERCER BLOQUE LUEGO DE LA CONSULTA CON EL TIPO DE COMPUTADOR LISTAR -->
-                        <div class="col-md-2" id="fila2" style="display: none;">
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalcomputador">
-                                Ver listado
-                            </button>
-                        </div>
-                        <!-- CUARTO BLOQUE VERIFICAR SI HAY COMPUTADORES ASIGNADOS -->
-                        <div class="col-md-4" id="fila3" style="display: none; font-family: 'Courier New', monospace;"></div>
-
-                        <div class="col-md-2" id="fila4" style="display: none;">
-                            <button type="button" class="btn btn-danger">Desasignar</button>
-                        </div>
-
                     </div>
-                </div>
+
+
+
+
+                <?php
+                }
+                ?>
+
 
             <?php
             }
             ?>
         </section>
 
-        <!-- MODAL DE COMPUTADORES-->
-        <div class="modal fade" id="modalcomputador" tabindex="-1" aria-labelledby="modalcomputadorLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modalcomputadorLabel">
-                            <h6>Equipo de Computo para el Cargo: <?php echo $cargo ?></h6>
-                        </h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Aquí se llenará el contenido de la consulta  -->
-                    </div>
-                    <div class="modal-footer">
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton">Cerrar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
 
 
     </body>
 
 
-    <script>
-        function updateTipoComputador(radio) {
-            document.getElementById('tipocomputador').value = radio.value;
-        }
-
-        function updateDescripcionedcomunicacion(radio) {
-            document.getElementById('tipo_edcomunicacion').value = radio.value;
-        }
-
-        function updateDescripcionperifericos(radio) {
-            document.getElementById('tipo_perifericos').value = radio.value;
-        }
-
-        function updateDescripcionalmacenamiento(radio) {
-            document.getElementById('tipo_almacenamiento').value = radio.value;
-        }
-
-        function updateDescripcionsimcard(radio) {
-            document.getElementById('tipo_simcard').value = radio.value;
-        }
-
-        function updateDescripciondvr(radio) {
-            document.getElementById('tipo_dvr').value = radio.value;
-        }
-
-        function updateDescripcioncctv(radio) {
-            document.getElementById('tipo_cctv').value = radio.value;
-        }
-
-        function updateDescripciontorre(radio) {
-            document.getElementById('tipo_torre').value = radio.value;
-        }
-    </script>
-
-    <!-- SCRIPT DE CHECKS COMPUTADOR -->
-    <script>
-        $(document).ready(function() {
-            $('#flexSwitchCheckDefault').on('change', function() {
-                if ($(this).is(':checked')) {
-                    $('#fila1').show();
-                    $('#fila2').show();
-                    $('#fila4').show();
-                } else {
-                    $('#fila1').hide();
-                    $('#fila2').hide();
-                    $('#fila3').hide();
-                    $('#fila4').hide();
-                }
-            });
-
-            $('input[name="tipo_comp"]').on('change', function() {
-                if ($(this).is(':checked')) {
-                    $('#fila2').show();
-                } else {
-                    $('#fila2').hide();
-                }
-            });
-
-            $('#fila2 button').on('click', function() {
-                $('#fila3').show();
-            });
-        });
-    </script>
-
-
-
-    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN COMPUTADOR-->
-    <script>
-        $(document).ready(function() {
-            $('#flexSwitchCheckDefault').on('change', function() {
-                if ($(this).is(':checked')) {
-                    $('#fila3').show();
-                    // Realizar la llamada AJAX para actualizar #fila3
-                    actualizarFila3();
-                } else {
-                    $('#fila3').hide();
-                }
-            });
-            $('#fila2 button').on('click', function() {
-                $('#fila3').show();
-                // Realizar la llamada AJAX para actualizar #fila3
-                actualizarFila3();
-            });
-        });
-
-        function actualizarFila3() {
-            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
-            $.ajax({
-                url: 'fichatecnica/actualizarfichacomputador.php',
-                method: 'GET',
-                data: {
-                    cedula: cedula
-                }, // Pasar la cédula como parámetro
-                success: function(response) {
-                    $('#fila3').html(response);
-                }
-            });
-        }
-    </script>
-
-
-
-
-    <!-- AJAX DE CHECK LISTADO COMPUTADORES PARA CONSULTAR Y LLEVAR INFORMACIÓN -->
-    <script>
-        $(document).ready(function() {
-            $('#fila2 button').on('click', function() {
-                var tipocomputador = $('#tipocomputador').val();
-                var empresaOption = $('#empresaOption').val();
-
-                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
-                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
-                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
-
-                $.ajax({
-                    url: 'consultas/consultacomputador.php',
-                    type: 'POST',
-                    data: {
-                        tipocomputador: tipocomputador,
-                        empresaOption: empresaOption,
-
-                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
-                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
-                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
-                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
-
-                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
-                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
-                    },
-                    success: function(response) {
-                        $('#modalcomputador .modal-body').html(response); // Agrega los resultados al cuerpo del modal
-                    }
-                });
-
-            });
-        });
-    </script>
 
 
 
@@ -567,6 +404,224 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
+
+
+
+
+
+    <!-- Script y AJAX asignación de COMPUTADOR -->
+    <script>
+        $(document).ready(function() {
+            $('#fila1').show(); // Mostrar #fila3 al cargar la página
+            actualizarFila3();
+
+            function actualizarFila3() {
+                var cedula = '<?php echo $cedula; ?>';
+                $.ajax({
+                    url: 'fichatecnicaasignaciones/actualizarfichacomputador.php',
+                    method: 'GET',
+                    data: {
+                        cedula: cedula
+                    },
+                    success: function(response) {
+                        $('#fila1').html(response);
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- Script y AJAX asignación de CELULAR -->
+    <script>
+        $(document).ready(function() {
+            $('#fila2').show(); // Mostrar #fila2 al cargar la página
+            actualizarFila2();
+
+            function actualizarFila2() {
+                var cedula = '<?php echo $cedula; ?>';
+                $.ajax({
+                    url: 'fichatecnicaasignaciones/actualizarfichacelular.php',
+                    method: 'GET',
+                    data: {
+                        cedula: cedula
+                    },
+                    success: function(response) {
+                        $('#fila2').html(response);
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- Script y AJAX asignación de  ACCESORIOS -->
+    <script>
+        $(document).ready(function() {
+            $('#fila3').show(); // Mostrar #fila3 al cargar la página
+            actualizarFila3();
+
+            function actualizarFila3() {
+                var cedula = '<?php echo $cedula; ?>';
+                $.ajax({
+                    url: 'fichatecnica/.php',
+                    method: 'GET',
+                    data: {
+                        cedula: cedula
+                    },
+                    success: function(response) {
+                        $('#fila3').html(response);
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- Script y AJAX asignación de PERIFERICOS -->
+    <script>
+        $(document).ready(function() {
+            $('#fila4').show(); // Mostrar #fila4 al cargar la página
+            actualizarFila4();
+
+            function actualizarFila4() {
+                var cedula = '<?php echo $cedula; ?>';
+                $.ajax({
+                    url: 'fichatecnicaasignaciones/actualizarfichaedcomunicacion.php',
+                    method: 'GET',
+                    data: {
+                        cedula: cedula
+                    },
+                    success: function(response) {
+                        $('#fila4').html(response);
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- Script y AJAX asignación de PERIFERICOS -->
+    <script>
+        $(document).ready(function() {
+            $('#fila5').show(); // Mostrar #fila4 al cargar la página
+            actualizarFila5();
+
+            function actualizarFila5() {
+                var cedula = '<?php echo $cedula; ?>';
+                $.ajax({
+                    url: 'fichatecnicaasignaciones/actualizarfichaperifericos.php',
+                    method: 'GET',
+                    data: {
+                        cedula: cedula
+                    },
+                    success: function(response) {
+                        $('#fila5').html(response);
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- Script y AJAX asignación de ALMACENAMIENTO -->
+    <script>
+        $(document).ready(function() {
+            $('#fila6').show(); // Mostrar #fila4 al cargar la página
+            actualizarFila6();
+
+            function actualizarFila6() {
+                var cedula = '<?php echo $cedula; ?>';
+                $.ajax({
+                    url: 'fichatecnicaasignaciones/actualizarfichaalmacenamiento.php',
+                    method: 'GET',
+                    data: {
+                        cedula: cedula
+                    },
+                    success: function(response) {
+                        $('#fila6').html(response);
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- Script y AJAX asignación de ALMACENAMIENTO -->
+    <script>
+        $(document).ready(function() {
+            $('#fila7').show(); // Mostrar #fila4 al cargar la página
+            actualizarFila7();
+
+            function actualizarFila7() {
+                var cedula = '<?php echo $cedula; ?>';
+                $.ajax({
+                    url: 'fichatecnicaasignaciones/actualizarfichasimcard.php',
+                    method: 'GET',
+                    data: {
+                        cedula: cedula
+                    },
+                    success: function(response) {
+                        $('#fila7').html(response);
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- Script y AJAX asignación de DVR -->
+    <script>
+        $(document).ready(function() {
+            $('#fila8').show(); // Mostrar #fila4 al cargar la página
+            actualizarFila8();
+
+            function actualizarFila8() {
+                var cedula = '<?php echo $cedula; ?>';
+                $.ajax({
+                    url: 'fichatecnicaasignaciones/actualizarfichadvr.php',
+                    method: 'GET',
+                    data: {
+                        cedula: cedula
+                    },
+                    success: function(response) {
+                        $('#fila8').html(response);
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- Script y AJAX asignación de DVR -->
+    <script>
+        $(document).ready(function() {
+            $('#fila9').show(); // Mostrar #fila4 al cargar la página
+            actualizarFila9();
+
+            function actualizarFila9() {
+                var cedula = '<?php echo $cedula; ?>';
+                $.ajax({
+                    url: 'fichatecnica/actualizarfichacctv.php',
+                    method: 'GET',
+                    data: {
+                        cedula: cedula
+                    },
+                    success: function(response) {
+                        $('#fila9').html(response);
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- Script y AJAX asignación de DVR -->
+    <script>
+        $(document).ready(function() {
+            $('#fila10').show(); // Mostrar #fila4 al cargar la página
+            actualizarFila10();
+
+            function actualizarFila10() {
+                var cedula = '<?php echo $cedula; ?>';
+                $.ajax({
+                    url: 'fichatecnica/actualizarfichatorre.php',
+                    method: 'GET',
+                    data: {
+                        cedula: cedula
+                    },
+                    success: function(response) {
+                        $('#fila10').html(response);
+                    }
+                });
+            }
+        });
+    </script>
+
+
+
 
 
     </html>

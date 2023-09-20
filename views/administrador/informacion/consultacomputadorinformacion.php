@@ -1,10 +1,12 @@
 <?php
 include '../../../conexionbd.php';
 
-if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption']) && isset($_POST['cedula'])
+if (
+    isset($_POST['tipocomputador']) && isset($_POST['empresaOption']) && isset($_POST['cedula'])
 ) {
     $tipocomputador = $_POST['tipocomputador'];
     $empresaOption = $_POST['empresaOption'];
+    $Usua_retira = $_POST['Usua_retira'];
 
     // Obtener los valores pasados desde el formulario principal
     $primernombre = isset($_POST['primernombre']) ? $_POST['primernombre'] : '';
@@ -15,7 +17,7 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption']) && isset($
     $cedula = isset($_POST['cedula']) ? $_POST['cedula'] : '';
     $cargo = isset($_POST['cargo']) ? $_POST['cargo'] : '';
 
-    $data = odbc_exec($conexion, "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[Service_tag] ,[Serial_equipo] ,[Nombre_equipo] ,[Sede] ,[Empresa] ,[Marca_computador] ,[Modelo_computador] ,[Tipo_comp] ,[Tipo_ram] ,[Memoria_ram] ,[Tipo_discoduro] ,[Capacidad_discoduro] ,[Procesador] ,[Propietario] ,[Proveedor] ,[Sistema_Operativo] ,[Serial_cargador] ,[Dominio] ,[Tipo_usuario] ,[Serial_activo_fijo] ,[Fecha_ingreso] ,[Targeta_Video] ,[Estado] ,[Gestion] ,[Fecha_garantia] ,[Fecha_crea] ,[Usua_crea] ,[Fecha_modifica] ,[Usua_modifica] ,[Usua_asigna] ,[Fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_computador] where cedula = '$cedula'");
+    $data = odbc_exec($conexion, "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[Service_tag] ,[Serial_equipo] ,[Nombre_equipo] ,[Sede] ,[Empresa] ,[Marca_computador] ,[Modelo_computador] ,[Tipo_comp] ,[Tipo_ram] ,[Memoria_ram] ,[Tipo_discoduro] ,[Capacidad_discoduro] ,[Procesador] ,[Propietario] ,[Proveedor] ,[Sistema_Operativo] ,[Serial_cargador] ,[Dominio] ,[Tipo_usuario] ,[Serial_activo_fijo] ,[Fecha_ingreso] ,[Targeta_Video] ,[Estado] ,[Gestion] ,[Fecha_garantia] ,[Fecha_crea] ,[Usua_crea] ,[Fecha_modifica] ,[Usua_modifica] ,[Usua_asigna] ,[Fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[estado_asignacion] ,[observaciones] FROM [ControlTIC].[dbo].[asignacion_computador] where cedula = '$cedula'");
     $arr = array();
     while ($Element = odbc_fetch_array($data)) {
         $arr[] = $Element;
@@ -64,6 +66,7 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption']) && isset($
                             <th scope="col">Serial de Activo Fijo</th>
                             <th scope="col">Tarjeta de Video</th>
                             <th scope="col">Observaciones</th>
+                            <th scope="col" class="">Usua_retiraa</th>
 
 
                             <th scope="col">Deshacer la asignación</th>
@@ -78,6 +81,7 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption']) && isset($
                                 <td class="hidden-cell"><?php echo $segundoapellido; ?></td>
                                 <td class="hidden-cell"><?php echo $cedula; ?></td>
                                 <td class="hidden-cell"><?php echo $cargo; ?></td>
+                                <td class=""><?php echo $Usua_retira; ?></td>
                                 <td><?= $fila['Service_tag'] ?></td>
                                 <td><?= $fila['Serial_equipo'] ?></td>
                                 <td><?= $fila['Nombre_equipo'] ?></td>
@@ -91,9 +95,12 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption']) && isset($
                                 <td><?= $fila['Tipo_usuario'] ?></td>
                                 <td><?= $fila['Serial_activo_fijo'] ?></td>
                                 <td><?= $fila['Targeta_Video'] ?></td>
-                                <td><input type="text" id="observaciones_desasigna_<?= $fila['id'] ?>" value="<?= $fila['observaciones_desasigna'] ?>"></td>
                                 <td>
-                                    <button id="enviarcomputador" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-service-tag="<?= $fila['Service_tag'] ?>" data-serial-equipo="<?= $fila['Serial_equipo'] ?>" data-nombre-equipo="<?= $fila['Nombre_equipo'] ?>" data-sede="<?= $fila['Sede'] ?>" data-empresa="<?= $fila['Empresa'] ?>" data-marca-computador="<?= $fila['Marca_computador'] ?>" data-modelo-computador="<?= $fila['Modelo_computador'] ?>" data-tipo-comp="<?= $fila['Tipo_comp'] ?>" data-tipo-ram="<?= $fila['Tipo_ram'] ?>" data-memoria-ram="<?= $fila['Memoria_ram'] ?>" data-tipo-discoduro="<?= $fila['Tipo_discoduro'] ?>" data-capacidad-discoduro="<?= $fila['Capacidad_discoduro'] ?>" data-procesador="<?= $fila['Procesador'] ?>" data-propietario="<?= $fila['Propietario'] ?>" data-proveedor="<?= $fila['Proveedor'] ?>" data-sistema-operativo="<?= $fila['Sistema_Operativo'] ?>" data-serial-cargador="<?= $fila['Serial_cargador'] ?>" data-dominio="<?= $fila['Dominio'] ?>" data-tipo-usuario="<?= $fila['Tipo_usuario'] ?>" data-serial-activo-fijo="<?= $fila['Serial_activo_fijo'] ?>" data-fecha-ingreso="<?= $fila['Fecha_ingreso'] ?>" data-tarjeta-video="<?= $fila['Targeta_Video'] ?>" data-estado="<?= $fila['Estado'] ?>" data-gestion="<?= $fila['Gestion'] ?>" data-fecha-garantia="<?= $fila['Fecha_garantia'] ?>" data-fecha-crea="<?= $fila['Fecha_crea'] ?>" data-usua-crea="<?= $fila['Usua_crea'] ?>" data-fecha-modifica="<?= $fila['Fecha_modifica'] ?>" data-usua-modifica="<?= $fila['Usua_modifica'] ?>" data-primernombre="<?php echo $primernombre; ?>" data-segundonombre="<?php echo $segundonombre; ?>" data-primerapellido="<?php echo $primerapellido; ?>" data-segundoapellido="<?php echo $segundoapellido; ?>" data-cedula="<?php echo $cedula; ?>" data-cargo="<?php echo $cargo; ?>" data-observaciones-desasigna="<?= $fila['observaciones_desasigna'] ?>"></button>
+                                    <textarea placeholder="AGREGE UNA OBSERVACIÓN" id="observaciones<?= $fila['id'] ?>" name="observaciones" style="width: 300px; height: 160px;"></textarea>
+                                </td>
+
+                                <td>
+                                    <button id="enviarcomputador" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-service-tag="<?= $fila['Service_tag'] ?>" data-serial-equipo="<?= $fila['Serial_equipo'] ?>" data-nombre-equipo="<?= $fila['Nombre_equipo'] ?>" data-sede="<?= $fila['Sede'] ?>" data-empresa="<?= $fila['Empresa'] ?>" data-marca-computador="<?= $fila['Marca_computador'] ?>" data-modelo-computador="<?= $fila['Modelo_computador'] ?>" data-tipo-comp="<?= $fila['Tipo_comp'] ?>" data-tipo-ram="<?= $fila['Tipo_ram'] ?>" data-memoria-ram="<?= $fila['Memoria_ram'] ?>" data-tipo-discoduro="<?= $fila['Tipo_discoduro'] ?>" data-capacidad-discoduro="<?= $fila['Capacidad_discoduro'] ?>" data-procesador="<?= $fila['Procesador'] ?>" data-propietario="<?= $fila['Propietario'] ?>" data-proveedor="<?= $fila['Proveedor'] ?>" data-sistema-operativo="<?= $fila['Sistema_Operativo'] ?>" data-serial-cargador="<?= $fila['Serial_cargador'] ?>" data-dominio="<?= $fila['Dominio'] ?>" data-tipo-usuario="<?= $fila['Tipo_usuario'] ?>" data-serial-activo-fijo="<?= $fila['Serial_activo_fijo'] ?>" data-fecha-ingreso="<?= $fila['Fecha_ingreso'] ?>" data-tarjeta-video="<?= $fila['Targeta_Video'] ?>" data-estado="<?= $fila['Estado'] ?>" data-gestion="<?= $fila['Gestion'] ?>" data-fecha-garantia="<?= $fila['Fecha_garantia'] ?>" data-fecha-crea="<?= $fila['Fecha_crea'] ?>" data-usua-crea="<?= $fila['Usua_crea'] ?>" data-fecha-modifica="<?= $fila['Fecha_modifica'] ?>" data-usua-modifica="<?= $fila['Usua_modifica'] ?>" data-primernombre="<?php echo $primernombre; ?>" data-segundonombre="<?php echo $segundonombre; ?>" data-primerapellido="<?php echo $primerapellido; ?>" data-segundoapellido="<?php echo $segundoapellido; ?>" data-cedula="<?php echo $cedula; ?>" data-cargo="<?php echo $cargo; ?>" data-observaciones="<?= $fila['observaciones'] ?>" data-usua-retira="<?php echo $Usua_retira ?>"></button>
                                     <!-- btn escondido para la alerta -->
                                     <button id="" type="button" class="btn btn-outline-danger showAlertButton">Desasignar</button>
                                 </td>
@@ -117,6 +124,7 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption']) && isset($
                 var segundonombre = $(this).data('segundonombre');
                 var primerapellido = $(this).data('primerapellido');
                 var segundoapellido = $(this).data('segundoapellido');
+                var Usua_retira = $(this).data('usua-retira');
 
                 var cedula = $(this).data('cedula');
                 var cargo = $(this).data('cargo');
@@ -152,13 +160,14 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption']) && isset($
                 var usua_crea = $(this).data('usua-crea');
                 var fecha_modifica = $(this).data('fecha-modifica');
                 var usua_modifica = $(this).data('usua-modifica');
-                var observaciones_desasigna = $('#observaciones_desasigna_' + id).val();
+                var observaciones = $('#observaciones' + id).val();
 
 
                 console.log("Primer Nombre:", primernombre);
                 console.log("Segundo Nombre:", segundonombre);
                 console.log("Primer Apellido:", primerapellido);
                 console.log("Segundo Apellido:", segundoapellido);
+                console.log("Usuario Retira:", Usua_retira);
 
                 console.log("Cédula:", cedula);
                 console.log("Cargo:", cargo);
@@ -195,7 +204,7 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption']) && isset($
                 console.log("Usuario de Creación:", usua_crea);
                 console.log("Fecha de Modificación:", fecha_modifica);
                 console.log("Usuario de Modificación:", usua_modifica);
-                console.log("Observaciones de Desasignacion", observaciones_desasigna);
+                console.log("Observaciones", observaciones);
 
                 $.ajax({
                     url: 'delete/deletecomputadorhistorial.php',
@@ -205,6 +214,7 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption']) && isset($
                         segundonombre: segundonombre,
                         primerapellido: primerapellido,
                         segundoapellido: segundoapellido,
+                        Usua_retira: Usua_retira,
 
                         cedula: cedula,
                         cargo: cargo,
@@ -240,7 +250,7 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption']) && isset($
                         usua_crea: usua_crea,
                         fecha_modifica: fecha_modifica,
                         usua_modifica: usua_modifica,
-                        observaciones_desasigna: observaciones_desasigna
+                        observaciones: observaciones
 
                     },
                     success: function(response) {

@@ -4,6 +4,7 @@ include '../../../conexionbd.php';
 if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
     $tipocomputador = $_POST['tipocomputador'];
     $empresaOption = $_POST['empresaOption'];
+    $Usua_asigna = $_POST['Usua_asigna'];
 
     // Obtener los valores pasados desde el formulario principal
     $primernombre = isset($_POST['primernombre']) ? $_POST['primernombre'] : '';
@@ -42,12 +43,12 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                 <!-- tbl info de productos -->
                 <table class="table table-bordered dt-responsive table-hover display nowrap" id="infodetallefactura" cellspacing="0" style="text-align: center;">
                     <thead>
-
                         <tr class="encabezado table-dark">
                             <th scope="col" class="hidden-cell">Primer Nombre</th>
                             <th scope="col" class="hidden-cell">Segundo Nombre</th>
                             <th scope="col" class="hidden-cell">Primer Apellido</th>
                             <th scope="col" class="hidden-cell">Segundo Apellido</th>
+                            <th scope="col" class="">Usua_asigna</th>
 
                             <th scope="col" class="hidden-cell">Cedula</th>
                             <th scope="col" class="hidden-cell">Cargo</th>
@@ -93,6 +94,7 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                                 <td class="hidden-cell"><?php echo $segundonombre; ?></td>
                                 <td class="hidden-cell"><?php echo $primerapellido; ?></td>
                                 <td class="hidden-cell"><?php echo $segundoapellido; ?></td>
+                                <td class=""><?php echo $Usua_asigna; ?></td>
 
                                 <td class="hidden-cell"><?php echo $cedula; ?></td>
                                 <td class="hidden-cell"><?php echo $cargo; ?></td>
@@ -130,7 +132,7 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                                 <td><?= $fila['Usua_modifica'] ?></td>
 
                                 <td>
-                                    <button id="enviarcomputador" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-service-tag="<?= $fila['Service_tag'] ?>" data-serial-equipo="<?= $fila['Serial_equipo'] ?>" data-nombre-equipo="<?= $fila['Nombre_equipo'] ?>" data-sede="<?= $fila['Sede'] ?>" data-empresa="<?= $fila['Empresa'] ?>" data-marca-computador="<?= $fila['Marca_computador'] ?>" data-modelo-computador="<?= $fila['Modelo_computador'] ?>" data-tipo-comp="<?= $fila['Tipo_comp'] ?>" data-tipo-ram="<?= $fila['Tipo_ram'] ?>" data-memoria-ram="<?= $fila['Memoria_ram'] ?>" data-tipo-discoduro="<?= $fila['Tipo_discoduro'] ?>" data-capacidad-discoduro="<?= $fila['Capacidad_discoduro'] ?>" data-procesador="<?= $fila['Procesador'] ?>" data-propietario="<?= $fila['Propietario'] ?>" data-proveedor="<?= $fila['Proveedor'] ?>" data-sistema-operativo="<?= $fila['Sistema_Operativo'] ?>" data-serial-cargador="<?= $fila['Serial_cargador'] ?>" data-dominio="<?= $fila['Dominio'] ?>" data-tipo-usuario="<?= $fila['Tipo_usuario'] ?>" data-serial-activo-fijo="<?= $fila['Serial_activo_fijo'] ?>" data-fecha-ingreso="<?= $fila['Fecha_ingreso'] ?>" data-tarjeta-video="<?= $fila['Targeta_Video'] ?>" data-estado="<?= $fila['Estado'] ?>" data-gestion="<?= $fila['Gestion'] ?>" data-fecha-garantia="<?= $fila['Fecha_garantia'] ?>" data-fecha-crea="<?= $fila['Fecha_crea'] ?>" data-usua-crea="<?= $fila['Usua_crea'] ?>" data-fecha-modifica="<?= $fila['Fecha_modifica'] ?>" data-usua-modifica="<?= $fila['Usua_modifica'] ?>" data-primernombre="<?php echo $primernombre; ?>" data-segundonombre="<?php echo $segundonombre; ?>" data-primerapellido="<?php echo $primerapellido; ?>" data-segundoapellido="<?php echo $segundoapellido; ?>" data-cedula="<?php echo $cedula; ?>" data-cargo="<?php echo $cargo; ?>"></button>
+                                    <button id="enviarcomputador" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-service-tag="<?= $fila['Service_tag'] ?>" data-serial-equipo="<?= $fila['Serial_equipo'] ?>" data-nombre-equipo="<?= $fila['Nombre_equipo'] ?>" data-sede="<?= $fila['Sede'] ?>" data-empresa="<?= $fila['Empresa'] ?>" data-marca-computador="<?= $fila['Marca_computador'] ?>" data-modelo-computador="<?= $fila['Modelo_computador'] ?>" data-tipo-comp="<?= $fila['Tipo_comp'] ?>" data-tipo-ram="<?= $fila['Tipo_ram'] ?>" data-memoria-ram="<?= $fila['Memoria_ram'] ?>" data-tipo-discoduro="<?= $fila['Tipo_discoduro'] ?>" data-capacidad-discoduro="<?= $fila['Capacidad_discoduro'] ?>" data-procesador="<?= $fila['Procesador'] ?>" data-propietario="<?= $fila['Propietario'] ?>" data-proveedor="<?= $fila['Proveedor'] ?>" data-sistema-operativo="<?= $fila['Sistema_Operativo'] ?>" data-serial-cargador="<?= $fila['Serial_cargador'] ?>" data-dominio="<?= $fila['Dominio'] ?>" data-tipo-usuario="<?= $fila['Tipo_usuario'] ?>" data-serial-activo-fijo="<?= $fila['Serial_activo_fijo'] ?>" data-fecha-ingreso="<?= $fila['Fecha_ingreso'] ?>" data-tarjeta-video="<?= $fila['Targeta_Video'] ?>" data-estado="<?= $fila['Estado'] ?>" data-gestion="<?= $fila['Gestion'] ?>" data-fecha-garantia="<?= $fila['Fecha_garantia'] ?>" data-fecha-crea="<?= $fila['Fecha_crea'] ?>" data-usua-crea="<?= $fila['Usua_crea'] ?>" data-fecha-modifica="<?= $fila['Fecha_modifica'] ?>" data-usua-modifica="<?= $fila['Usua_modifica'] ?>" data-primernombre="<?php echo $primernombre; ?>" data-segundonombre="<?php echo $segundonombre; ?>" data-primerapellido="<?php echo $primerapellido; ?>" data-segundoapellido="<?php echo $segundoapellido; ?>" data-cedula="<?php echo $cedula; ?>" data-cargo="<?php echo $cargo; ?>" data-usua-asigna="<?php echo $Usua_asigna; ?>"></button>
                                     <!-- btn escondido para la alerta -->
                                     <button id="" type="button" class="btn btn-outline-warning showAlertButton">ASIGNAR</button>
                                 </td>
@@ -154,6 +156,7 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                 var segundonombre = $(this).data('segundonombre');
                 var primerapellido = $(this).data('primerapellido');
                 var segundoapellido = $(this).data('segundoapellido');
+                var Usua_asigna = $(this).data('usua-asigna');
 
                 var cedula = $(this).data('cedula');
                 var cargo = $(this).data('cargo');
@@ -195,6 +198,7 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                 console.log("Segundo Nombre:", segundonombre);
                 console.log("Primer Apellido:", primerapellido);
                 console.log("Segundo Apellido:", segundoapellido);
+                console.log("Usuario Asigna:", Usua_asigna);
 
                 console.log("Cédula:", cedula);
                 console.log("Cargo:", cargo);
@@ -240,6 +244,7 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                         segundonombre: segundonombre,
                         primerapellido: primerapellido,
                         segundoapellido: segundoapellido,
+                        Usua_asigna: Usua_asigna,
 
                         cedula: cedula,
                         cargo: cargo,

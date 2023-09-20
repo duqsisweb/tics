@@ -147,7 +147,7 @@
 
                         $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : '';
 
-                        $consulta = "SELECT [id_asignacion], [id], [tipo_maquina], [Service_tag], [Serial_equipo], [Nombre_equipo], [Sede], [Empresa], [Marca_computador], [Modelo_computador], [Tipo_comp], [Tipo_ram], [Memoria_ram], [Tipo_discoduro], [Capacidad_discoduro], [Procesador], [Propietario], [Proveedor], [Sistema_Operativo], [Serial_cargador], [Dominio], [Tipo_usuario], [Serial_activo_fijo], [Fecha_ingreso], [Targeta_Video], [Estado], [Gestion], [Fecha_garantia], [Fecha_crea], [Usua_crea], [Fecha_modifica], [Usua_modifica], [Usua_asigna], [Fecha_asigna], [cedula], [cargo], [primernombre], [segundonombre], [primerapellido], [segundoapellido], [estado_asignacion], [observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_computador] WHERE cedula = '$cedula'";
+                        $consulta = "SELECT [id_asignacion], [id], [tipo_maquina], [Service_tag], [Serial_equipo], [Nombre_equipo], [Sede], [Empresa], [Marca_computador], [Modelo_computador], [Tipo_comp], [Tipo_ram], [Memoria_ram], [Tipo_discoduro], [Capacidad_discoduro], [Procesador], [Propietario], [Proveedor], [Sistema_Operativo], [Serial_cargador], [Dominio], [Tipo_usuario], [Serial_activo_fijo], [Fecha_ingreso], [Targeta_Video], [Estado], [Gestion], [Fecha_garantia], [Fecha_crea], [Usua_crea], [Fecha_modifica], [Usua_modifica], [Usua_asigna], [Fecha_asigna], [cedula], [cargo], [primernombre], [segundonombre], [primerapellido], [segundoapellido], [estado_asignacion], [observaciones] FROM [ControlTIC].[dbo].[asignacion_computador] WHERE cedula = '$cedula'";
                         $resultadoConsulta = odbc_exec($conexion, $consulta);
 
                         if (odbc_num_rows($resultadoConsulta) > 0) {
@@ -214,41 +214,3 @@
         </div>
     </div>
 </div>
-
-
-    <!-- Inicio DataTable -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var lenguaje = $('#mtable').DataTable({
-                info: false,
-                select: true,
-                destroy: true,
-                jQueryUI: true,
-                paginate: true,
-                iDisplayLength: 30,
-                searching: true,
-                dom: 'Bfrtip',
-                buttons: [
-                    'excel'
-                    // 'copy', 'csv', 'excel'
-                ],
-                language: {
-                    lengthMenu: 'Mostrar _MENU_ registros por página.',
-                    zeroRecords: 'Lo sentimos. No se encontraron registros.',
-                    info: 'Mostrando: _START_ de _END_ - Total registros: _TOTAL_',
-                    infoEmpty: 'No hay registros aún.',
-                    infoFiltered: '(filtrados de un total de _MAX_ registros)',
-                    search: 'Búsqueda',
-                    LoadingRecords: 'Cargando ...',
-                    Processing: 'Procesando...',
-                    SearchPlaceholder: 'Comience a teclear...',
-                    paginate: {
-                        previous: 'Anterior',
-                        next: 'Siguiente',
-                    }
-                }
-            });
-        });
-    </script>
-    <!-- Fin DataTable -->
-

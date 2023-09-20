@@ -1,8 +1,7 @@
 <?php
 include '../../../conexionbd.php';;
 
-if (isset($_POST['cedula'])
-) {
+if (isset($_POST['cedula'])) {
 
 
     // Obtener los valores pasados desde el formulario principal
@@ -79,7 +78,9 @@ if (isset($_POST['cedula'])
                             <td><?= $fila['caracteristica_almacenamiento'] ?></td>
                             <td><?= $fila['sede_almacenamiento'] ?></td>
                             <td><?= $fila['ubicacion_almacenamiento'] ?></td>
-                            <td><input type="text" id="observaciones_desasigna_<?= $fila['id'] ?>" value="<?= $fila['observaciones_desasigna'] ?>"></td>
+                            <td>
+                                <textarea placeholder="AGREGE UNA OBSERVACIÓN" id="observaciones_desasigna_<?= $fila['id'] ?>" name="observaciones_desasigna" style="width: 300px; height: 160px;"></textarea>
+                            </td>
                             <td>
                                 <button id="enviaralmacenamiento" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-primernombre="<?= $primernombre ?>" data-segundonombre="<?= $segundonombre ?>" data-primerapellido="<?= $primerapellido ?>" data-segundoapellido="<?= $segundoapellido ?>" data-cedula="<?= $cedula ?>" data-cargo="<?= $cargo ?>" data-empresa="<?= $empresa ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-marca-almacenamiento="<?= $fila['marca_almacenamiento'] ?>" data-modelo-almacenamiento="<?= $fila['modelo_almacenamiento'] ?>" data-descripcion-almacenamiento="<?= $fila['descripcion_almacenamiento'] ?>" data-capacidad-almacenamiento="<?= $fila['capacidad_almacenamiento'] ?>" data-tipo-almacenamiento="<?= $fila['tipo_almacenamiento'] ?>" data-caracteristica-almacenamiento="<?= $fila['caracteristica_almacenamiento'] ?>" data-sede-almacenamiento="<?= $fila['sede_almacenamiento'] ?>" data-ubicacion-almacenamiento="<?= $fila['ubicacion_almacenamiento'] ?>" data-fecha-de-ingreso="<?= $fila['fecha_de_ingreso'] ?>" data-estado="<?= $fila['estado'] ?>" data-fecha-de-garantia="<?= $fila['fecha_de_garantia'] ?>" data-fecha-crea="<?= $fila['fecha_crea'] ?>" data-usua-crea="<?= $fila['usua_crea'] ?>" data-fecha-modifica="<?= $fila['fecha_modifica'] ?>" data-usua-modifica="<?= $fila['usua_modifica'] ?>"></button>
                                 <!-- btn escondido para la alerta -->

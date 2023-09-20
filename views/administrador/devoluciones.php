@@ -70,7 +70,7 @@ if (isset($_SESSION['usuario'])) {
         <section style="margin-top: 100px;">
 
 
-            <!-- NAVINGRESOS -->
+            <!--  -->
             <?php require '../../views/navasignaciones.php'; ?>
 
 
@@ -161,7 +161,7 @@ if (isset($_SESSION['usuario'])) {
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container" style="text-align: center;">
                     <div>
-                        <h3>Asignar Maquinas a usuarios</h3>
+                        <h3>DEVOLUCIONES</h3>
                     </div>
                 </div>
             </div>
@@ -637,7 +637,9 @@ if (isset($_SESSION['usuario'])) {
                         </div>
 
 
-                        <div class="col-md-2" id="fila1dvr" style="display: none;"></div>
+                        <div class="col-md-2" id="fila1dvr" style="display: none;">
+
+                        </div>
 
                         <div class="col-md-2" id="fila2dvr" style="display: none;">
                             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaldvr">
@@ -650,6 +652,8 @@ if (isset($_SESSION['usuario'])) {
                         <div class="col-md-2" id="fila4dvr" style="display: none;text-align: center;">
                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modaldvrinformacion">Ver información</button>
                         </div>
+
+
                     </div>
                 </div>
 
@@ -710,6 +714,7 @@ if (isset($_SESSION['usuario'])) {
 
                     </div>
                 </div> -->
+
 
             <?php
             }
@@ -971,6 +976,7 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
 
+
         <!-- MODAL DE CCTV -->
         <div class="modal fade" id="modalcctv" tabindex="-1" aria-labelledby="modalcctvLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
@@ -1006,6 +1012,13 @@ if (isset($_SESSION['usuario'])) {
                 </div>
             </div>
         </div>
+
+        <!-- enviar el nombre como parametro para asignacion -->
+        <strong id="Usua_asigna" style="display: none;!important"><?php echo utf8_encode($_SESSION['usuario']); ?></strong>
+        <!-- enviar el nombre como parametro para remover asignacion  -->
+        <strong id="Usua_retira" style="display: none;!important"><?php echo utf8_encode($_SESSION['usuario']); ?></strong>
+
+
 
     </body>
 
@@ -1614,6 +1627,7 @@ if (isset($_SESSION['usuario'])) {
 
 
 
+
     <!-- AJAX DE CHECK LISTADO COMPUTADORES PARA CONSULTAR Y LLEVAR INFORMACIÓN -->
     <script>
         $(document).ready(function() {
@@ -1625,12 +1639,17 @@ if (isset($_SESSION['usuario'])) {
                 var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
                 var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
 
+                // Obtén el contenido de la etiqueta <strong> con el id "nombreStrong"
+                var nombre1 = $('#Usua_asigna').text();
+                var nombre2 = $('#Usua_retira').text();
+
                 $.ajax({
                     url: 'consultas/consultacomputador.php',
                     type: 'POST',
                     data: {
                         tipocomputador: tipocomputador,
                         empresaOption: empresaOption,
+                        Usua_asigna: nombre1, // Incluye el contenido de la etiqueta <strong> como parámetro
 
                         primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
                         segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
@@ -1652,6 +1671,9 @@ if (isset($_SESSION['usuario'])) {
                 var tipocomputador = $('#tipocomputador').val();
                 var empresaOption = $('#empresaOption').val();
 
+                // Obtén el contenido de la etiqueta <strong> con el id "nombreStrong"
+                var nombre2 = $('#Usua_retira').text();
+
                 var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
                 var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
                 var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
@@ -1662,6 +1684,7 @@ if (isset($_SESSION['usuario'])) {
                     data: {
                         tipocomputador: tipocomputador,
                         empresaOption: empresaOption,
+                        Usua_retira: nombre2, // Incluye el contenido de la etiqueta <strong> como parámetro
 
                         primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
                         segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
@@ -2147,9 +2170,6 @@ if (isset($_SESSION['usuario'])) {
 
 
 
-
-
-
     <script>
         document.getElementById('asisteInput').addEventListener('input', function() {
             var selectedValue = this.value;
@@ -2159,6 +2179,7 @@ if (isset($_SESSION['usuario'])) {
             }
         });
     </script>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

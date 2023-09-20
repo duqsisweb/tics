@@ -1,5 +1,6 @@
 <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- stats.js lib -->
-<script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+
+
 
 
 
@@ -36,14 +37,14 @@
         font-size: 1.1em;
     }
 
-    #stats,
+    #Stats,
     .count-particles {
         -webkit-user-select: none;
         margin-top: 5px;
         margin-left: 5px;
     }
 
-    #stats {
+    #Stats {
         border-radius: 3px 3px 0 0;
         overflow: hidden;
     }
@@ -210,21 +211,23 @@
         },
         "retina_detect": true
     });
-    var count_particles, stats, update;
-    stats = new Stats;
-    stats.setMode(0);
-    stats.domElement.style.position = 'absolute';
-    stats.domElement.style.left = '0px';
-    stats.domElement.style.top = '0px';
-    document.body.appendChild(stats.domElement);
-    count_particles = document.querySelector('.js-count-particles');
-    update = function() {
-        stats.begin();
-        stats.end();
-        if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
-            count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
-        }
-        requestAnimationFrame(update);
-    };
-    requestAnimationFrame(update);;
+    // var count_particles, Stats, update;
+    // Stats = new Stats;
+    // Stats.setMode(0);
+    // Stats.domElement.style.position = 'absolute';
+    // Stats.domElement.style.left = '0px';
+    // Stats.domElement.style.top = '0px';
+    // document.body.appendChild(Stats.domElement);
+    // count_particles = document.querySelector('.js-count-particles');
+    // update = function() {
+    //     Stats.begin();
+    //     Stats.end();
+    //     if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+    //         count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+    //     }
+    //     requestAnimationFrame(update);
+    // };
+    // requestAnimationFrame(update);;
 </script>
+
+

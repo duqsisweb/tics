@@ -34,10 +34,6 @@ if (isset($_SESSION['usuario'])) {
             <?php require '../../views/navinventario.php'; ?>
 
 
-
-
-
-
             <!-- inicio de POST enviarComputador -->
             <?php
             if (isset($_POST['enviarComputador'])) {
@@ -65,7 +61,6 @@ if (isset($_SESSION['usuario'])) {
                 $fecha_ingreso = $_POST['Fecha_ingreso'];
                 $targeta_video = $_POST['Targeta_Video'];
                 $estado = $_POST['Estado'];
-                $gestion = $_POST['Gestion'];
                 $Fecha_garantia = $_POST['Fecha_garantia'];
 
                 $usuario = $_SESSION['usuario'];
@@ -86,16 +81,14 @@ if (isset($_SESSION['usuario'])) {
                                                   (tipo_maquina,Service_tag,Serial_equipo,Nombre_equipo,Sede,Empresa,Marca_computador,
                 Modelo_computador,Tipo_comp,Tipo_ram,Memoria_ram,Tipo_discoduro,Capacidad_discoduro,
                 Procesador,Propietario,Proveedor,Sistema_Operativo,Serial_cargador,Dominio,Tipo_usuario,
-                Serial_activo_fijo,Fecha_ingreso,Targeta_Video,Estado,Gestion,Fecha_garantia,Fecha_crea,usua_crea) 
+                Serial_activo_fijo,Fecha_ingreso,Targeta_Video,Estado,Fecha_garantia,Fecha_crea,usua_crea) 
                                                   VALUES
                                                   ('$tipomaquina','$service_tag','$serial','$nombre_equipo','$sede','$Empresa','$marca_computador',
                         '$modelo_computador','$tipo_comp','$tipo_ram','$cant_memoria_ram','$tipo_discoduro','$capacidad_discoduro',
                         '$procesador','$propietario','$proveedor','$sistema_operativo','$serial_cargador','$dominio','$tipo_usuario',
-                        '$serial_activo_fijo','$fecha_ingreso','$targeta_video','$estado','$gestion','$Fecha_garantia',Getdate(),'$usuario')");
+                        '$serial_activo_fijo','$fecha_ingreso','$targeta_video','$estado','$Fecha_garantia',Getdate(),'$usuario')");
             }
-
             ?>
-
 
             <!-- inicio de POST enviarCelular -->
             <?php
@@ -127,9 +120,7 @@ if (isset($_SESSION['usuario'])) {
                                                   ('$tipomaquina','$imei','$serial_equipo_celular','$marca','$modelo','$fecha_ingreso','$capacidad',
                                                     '$ram_celular','$estado','$gestion','$Fecha_garantia',Getdate(),'$usuario')");
             }
-
             ?>
-
 
             <!-- inicio de POST enviarAccesorios -->
             <?php
@@ -157,10 +148,7 @@ if (isset($_SESSION['usuario'])) {
                                                   ('$tipomaquina','$marca','$modelo','$descripcion','$tipo',
                                                     '$cantidad','$fecha_de_ingreso',Getdate(),'$usuario')");
             }
-
             ?>
-
-
 
             <!-- inicio de POST EdComunicacion -->
             <?php
@@ -193,10 +181,7 @@ if (isset($_SESSION['usuario'])) {
                                                   ('$tipomaquina','$marca_edcomunicacion','$modelo_edcomunicacion','$descripcion_edcomunicacion','$serial_edcomunicacion',
                                                     '$fecha_de_ingreso','$estado','$placa_activo_edcomunicacion','$sede_edcomunicacion','$ubicacion_edcomunicacion','$observaciones_edcomunicacion','$fecha_garantia',Getdate(),'$usuario')");
             }
-
             ?>
-
-
 
             <!-- inicio de POST perifericos -->
             <?php
@@ -230,9 +215,7 @@ if (isset($_SESSION['usuario'])) {
                                                   ('$tipomaquina','$serial_perifericos','$descripcion_perifericos','$marca_perifericos','$modelo_perifericos','$placa_activo_perifericos','$sede_perifericos','$ubicacion_perifericos','$tipo',
                                                 '$tipo_toner','$empresa','$fecha_de_garantia',Getdate(),'$usuario','$estado')");
             }
-
             ?>
-
 
             <!-- inicio de POST Almacenamiento -->
             <?php
@@ -270,9 +253,7 @@ if (isset($_SESSION['usuario'])) {
                                                '$capacidad_almacenamiento','$tipo_almacenamiento','$caracteristica_almacenamiento','$sede_almacenamiento','$ubicacion_almacenamiento',
                                                '$fecha_de_ingreso','$estado','$fecha_de_garantia',Getdate(),'$usuario')");
             }
-
             ?>
-
 
             <!-- inicio de POST enviarsimcard -->
             <?php
@@ -303,9 +284,7 @@ if (isset($_SESSION['usuario'])) {
                                                   ('$tipo_maquina','$numero_linea','$nombre_plan','$fecha_apertura','$valor_plan','$operador',
                                                 '$cod_cliente','$observaciones_sim','$fecha_fin_plan','$estado',Getdate(),'$usuario')");
             }
-
             ?>
-
 
             <!-- inicio de POST DVR -->
             <?php
@@ -346,9 +325,7 @@ if (isset($_SESSION['usuario'])) {
                                                 '$tipo_dvr','$sede_dvr','$ubicacion_dvr','$software','$fecha_ingreso',
                                                 '$num_canales','$num_discos','$dias_grabacion','$ip_dvr','$estado','$fecha_garantia',Getdate(),'$usuario')");
             }
-
             ?>
-
 
             <!-- inicio de POST CCTV -->
             <?php
@@ -386,9 +363,7 @@ if (isset($_SESSION['usuario'])) {
                                                 '$ubicacion_cctv','$fecha_ingreso','$ip_cctv','$vision_enfoque','$serial_drv',
                                                 '$canal','$estado','$fecha_garantia',Getdate(),'$usuario')");
             }
-
             ?>
-
 
             <!-- inicio de POST TORRE-->
             <?php
@@ -420,10 +395,7 @@ if (isset($_SESSION['usuario'])) {
                                                 '$fecha_ingreso','$fecha_ult_mantenimiento',
                                                 Getdate(),'$usuario','$estado')");
             }
-
             ?>
-
-
 
             <style>
                 .campo-incompleto {
@@ -435,12 +407,12 @@ if (isset($_SESSION['usuario'])) {
 
 
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
-                <div class="container" >
+                <div class="container">
                     <div>
                         <h3>Subir Maquinas Al stock</h3>
                     </div>
                 </div>
-            </div> 
+            </div>
 
             <form method="POST" class="row g-3 needs-validation" novalidate>
 
@@ -835,7 +807,7 @@ if (isset($_SESSION['usuario'])) {
                                     SE DEJA OCULTO -->
                             <div>
                                 <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
-                                <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
+                                <input type="hidden" class="form-control" id="" placeholder="" value="1" name="Estado">
                             </div>
 
 
@@ -923,7 +895,7 @@ if (isset($_SESSION['usuario'])) {
 
                             <!-- CAMPOS OCULTOS -->
                             <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
-                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="Estado">
 
                         </div>
 
@@ -1142,7 +1114,7 @@ if (isset($_SESSION['usuario'])) {
 
                             <!-- CAMPOS OCULTOS -->
                             <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
-                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="Estado">
 
                         </div>
 
@@ -1314,7 +1286,7 @@ if (isset($_SESSION['usuario'])) {
 
                             <!-- CAMPOS OCULTOS -->
                             <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
-                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="Estado">
 
                         </div>
 
@@ -1471,7 +1443,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
-                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="estado">
 
                         </div>
 
@@ -1551,7 +1523,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
-                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="estado">
 
                         </div>
 
@@ -1695,7 +1667,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
-                            <input type="hidden" class="form-control" id="" placeholder="" value="6" name="estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="estado">
 
 
                         </div>
@@ -1817,7 +1789,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
-                            <input type="hidden" class="form-control" id="" placeholder="" value="6" name="estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="estado">
                         </div>
 
                         <!-- FORMULARIO TORRE -->
@@ -1915,7 +1887,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
-                            <input type="hidden" class="form-control" id="" placeholder="" value="6" name="estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="estado">
 
                         </div>
 

@@ -9,7 +9,9 @@ if (isset($_POST['id']) && isset($_POST['tipo_maquina']) && isset($_POST['servic
     && isset($_POST['tipo_usuario']) && isset($_POST['serial_activo_fijo']) && isset($_POST['fecha_ingreso']) && isset($_POST['tarjeta_video'])
     && isset($_POST['estado']) && isset($_POST['gestion']) && isset($_POST['fecha_garantia']) && isset($_POST['fecha_crea'])
     && isset($_POST['usua_crea']) && isset($_POST['fecha_modifica']) && isset($_POST['usua_modifica']) && isset($_POST['primernombre'])  
-    && isset($_POST['segundonombre']) && isset($_POST['primerapellido']) && isset($_POST['segundoapellido']) && isset($_POST['cedula']) && isset($_POST['cargo']) )   {
+    && isset($_POST['segundonombre']) && isset($_POST['primerapellido']) && isset($_POST['segundoapellido'])
+    && isset($_POST['cedula']) && isset($_POST['cargo']) 
+     )   {
     
     $primernombre = $_POST['primernombre'];
     $segundonombre = $_POST['segundonombre'];

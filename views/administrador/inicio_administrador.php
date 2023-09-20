@@ -85,29 +85,29 @@ if (isset($_SESSION['usuario'])) {
                     <div class="col-md-4">
                         <div class="card text-center">
                             <div class="card-header">
-                                Mantenimiento
+                                Historial de Equipos
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Mantenimiento a Equipos</h5>
+                                <h5 class="card-title">HV de Equipos</h5>
                                 <p class="card-text">...</p>
-                                <a href="" class="btn btn-success">Ingresar</a>
+                                <a href="hojadevida.php" class="btn btn-success">Ingresar</a>
                             </div>
 
                         </div>
                     </div>
 
                     <div class="col-md-4">
-                        <!-- <div class="card text-center">
+                        <div class="card text-center">
                             <div class="card-header">
-                                ...
+                                Mantenimiento
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <p class="card-text">Aquí puede verificar que Dispositivos o Máquinas están asociadas a los usuarios</p>
-                                <a href="asignacionesusuario.php" class="btn btn-success">Ingresar</a>
+                                <h5 class="card-title">Mantenimiento a Equipos</h5>
+                                <p class="card-text">...</p>
+                                <a href="mantenimiento.php" class="btn btn-success">Ingresar</a>
                             </div>
 
-                        </div> -->
+                        </div>
                     </div>
 
                     <div class="col-md-4">
@@ -161,14 +161,13 @@ if (isset($_SESSION['usuario'])) {
                     <div class="col-md-4">
                         <div class="card text-center">
                             <div class="card-header">
-                                Des asignar
+                                Devoluciones
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Remover Asignación</h5>
-                                <p class="card-text">Aquí puede liberar o des asignar equipos de los usuarios</p>
-                                <a href="inventario.php" class="btn btn-success">Ingresar</a>
+                                <p class="card-text">Aquí puede liberar o remover equipos de los usuarios</p>
+                                <a href="devoluciones.php" class="btn btn-success">Ingresar</a>
                             </div>
-
                         </div>
                     </div>
                 </div>

@@ -16,6 +16,9 @@ if (isset($_SESSION['usuario'])) {
     require '../../views/head.php';
     ?>
 
+    <!-- Asegúrate de cargar jQuery primero -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <body>
 
         <!-- NAV -->
@@ -23,75 +26,53 @@ if (isset($_SESSION['usuario'])) {
         require '../../views/nav.php';
         ?>
 
+        <!-- Estilos para cambiar borde de color -->
+        <style>
+            .empresa-1 {
+                border-color: rgb(247, 4, 4) !important;
+                /* Otros estilos... */
+            }
+
+            .empresa-2 {
+                border-color: rgb(5, 87, 28);
+                /* Otros estilos... */
+            }
+
+            .empresa-3 {
+                border-color: rgb(138, 137, 147);
+                /* Otros estilos... */
+            }
+
+            .background-container {
+                position: relative;
+            }
+
+            .background-image {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0.8;
+                padding-top: 50px;
+                padding-left: 190px;
+                /* Ajusta la opacidad y el padding según tus necesidades */
+            }
+
+            .card-body {
+                background-color: white !important;
+                opacity: 0.9 !important;
+            }
+        </style>
+
+
+
         <section style="margin-top: 100px;">
 
-            <!-- Estilos para cambiar borde de color -->
-            <style>
-                .empresa-1 {
-                    border-color: rgb(247, 4, 4) !important;
-                    /* Otros estilos... */
-                }
 
-                .empresa-2 {
-                    border-color: rgb(5, 87, 28);
-                    /* Otros estilos... */
-                }
+            <!--  -->
+            <?php require '../../views/navasignaciones.php'; ?>
 
-                .empresa-3 {
-                    border-color: rgb(138, 137, 147);
-                    /* Otros estilos... */
-                }
-
-                .background-container {
-                    position: relative;
-                }
-
-                .background-image {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    opacity: 0.8;
-                    padding-top: 50px;
-                    padding-left: 190px;
-                    /* Ajusta la opacidad y el padding según tus necesidades */
-                }
-
-                .card-body {
-                    background-color: white !important;
-                    opacity: 0.9 !important;
-                }
-            </style>
-
-            <section style="margin-top: 100px;">
-                <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#"></a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="../administrador/inicio_administrador.php">Inicio</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Usuarios
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Asignaciones</a></li>
-                                    </ul>
-                                </li>
-
-                            </ul>
-
-                        </div>
-                    </div>
-                </nav>
-
-            </section>
 
             <?php
             // SELECT PARA HACER LA CONSULTA
@@ -141,10 +122,10 @@ if (isset($_SESSION['usuario'])) {
 
                     //  MENSAJES SI LA CONSULTA ES EXITOSA O NO HAY INFORMACIÓN
                     echo '<div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
+                            <div class="toast-header">
                     <strong class="me-auto">Éxito</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
-                </div>
+                             </div>
                 <div class="toast-body">
                     Consulta satisfactoria.
                 </div>
@@ -176,7 +157,6 @@ if (isset($_SESSION['usuario'])) {
             ?>
 
 
-
             <!-- SELECT CAPOS EMPRESA / CEDULA Y FICHA TECNICA -->
             <form method="POST">
                 <div class="container">
@@ -193,7 +173,7 @@ if (isset($_SESSION['usuario'])) {
                         </div>
 
                         <div class="col-md-2" style="margin: 50px 0px 0px 0px;display: none;">
-                            <label  class="form-label">Identificación</label>
+                            <label class="form-label">Identificación</label>
                             <input type="text" class="form-control" id="identificacionInput" placeholder="" name="CEDULA" pattern="[0-9]+" required>
                         </div>
 
@@ -280,58 +260,65 @@ if (isset($_SESSION['usuario'])) {
             if (isset($showSections)) {
             ?>
 
-                <!-- AQUI MUESTRA LAS SECCION  COMPUTADOR -->
-                <div class="container " style="margin-top: 50px;">
+                <!-- AQUI MUESTRA LAS SECCION  CELULAR -->
+                <div class="container" style="margin-top: 50px;">
                     <div class="row">
-                        <!-- PRIMER BLOQUE CHECK -->
-                        <div class="col-md-3 ">
+
+                        <div class="col-md-2">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="1" name="selecciondelcomputador">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">Computador</label>
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCelular" value="2" name="selecciondelcelular">
+                                <label class="form-check-label" for="flexSwitchCheckCelular">Celulares</label>
                             </div>
                         </div>
-                        <!-- SEGUNDO BLOQUE  SELECCION DEL TIPO DE COMPUTADOR-->
-                        <div class="col-md-2" id="fila1" style="display: none;">
-                            <!-- CONSULTA POR MEDIO DE CHECKS -->
-                            <?php
-                            include '../../conexionbd.php';
-                            $consulta = "SELECT id, nombre_tipo_comp FROM [ControlTIC].[dbo].[tipo_comp]";
-                            $resultado = odbc_exec($conexion, $consulta);
-                            ?>
 
-                            <form>
-                                <?php
-                                while ($fila = odbc_fetch_array($resultado)) {
-                                    $id = $fila['id'];
-                                    $nombre = $fila['nombre_tipo_comp'];
-                                ?>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="tipo_comp" id="tipo_comp_<?php echo $id; ?>" value="<?php echo $id; ?>" onchange="updateTipoComputador(this)">
-                                        <label class="form-check-label" for="tipo_comp_<?php echo $id; ?>">
-                                            <?php echo $nombre; ?>
-                                        </label>
-                                    </div>
-                                <?php
-                                }
-                                ?>
-                                <input type="text" name="tipocomputador" id="tipocomputador" value="">
+                        <div class="col-md-2" id="fila1celular" style="display: none;">
 
-                            </form>
                         </div>
-                        <!-- TERCER BLOQUE LUEGO DE LA CONSULTA CON EL TIPO DE COMPUTADOR LISTAR -->
-                        <div class="col-md-2" id="fila2" style="display: none;">
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalcomputador">
+
+                        <div class="col-md-2" id="fila2celular" style="display: none;">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalcelular">
                                 Ver listado
                             </button>
                         </div>
-                        <!-- CUARTO BLOQUE VERIFICAR SI HAY COMPUTADORES ASIGNADOS -->
-                        <div class="col-md-5" id="fila3" style="display: none; text-align: center; font-family: 'Courier New', monospace;">
 
+                        <div class="col-md-4" id="fila3celular" style="display: none; font-family: 'Courier New', monospace;"></div>
+
+                        <div class="col-md-2" id="fila4celular" style="display: none;text-align: center;">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalcelularinformacion">Ver información</button>
                         </div>
                     </div>
                 </div>
 
+                <!-- AQUI MUESTRA LAS SECCION  ACCESORIOS -->
+                <div class="container" style="margin-top: 50px;">
+                    <div class="row">
 
+                        <div class="col-md-2">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckAccesorios" value="1" name="selecciondelaccesorio">
+                                <label class="form-check-label" for="flexSwitchCheckAccesorios">Accesorios</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2" id="fila1accesorios" style="display: none;">
+
+                        </div>
+
+                        <div class="col-md-2" id="fila2accesorios" style="display: none;">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalaccesorios">
+                                Ver listado
+                            </button>
+                        </div>
+
+                        <div class="col-md-4" id="fila3accesorios" style="display: none; font-family: 'Courier New', monospace;"></div>
+
+                        <div class="col-md-2" id="fila4accesorios" style="display: none;text-align: center;">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalcelularinformacion">Ver información</button>
+                        </div>
+
+                    </div>
+                </div>
 
             <?php
             }
@@ -339,13 +326,14 @@ if (isset($_SESSION['usuario'])) {
         </section>
 
 
-        <!-- MODAL DE COMPUTADORES-->
-        <div class="modal fade" id="modalcomputador" tabindex="-1" aria-labelledby="modalcomputadorLabel" aria-hidden="true">
+
+        <!-- MODAL DE CELULARES -->
+        <div class="modal fade" id="modalcelular" tabindex="-1" aria-labelledby="modalcelularLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modalcomputadorLabel">
-                            <h6>Equipo de Computo para el Cargo: <?php echo $cargo ?></h6>
+                        <h1 class="modal-title fs-5" id="modalcelularLabel">
+                            <h6>Equipo Celular para el Cargo: <?php echo $cargo ?></h6>
                         </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -353,16 +341,57 @@ if (isset($_SESSION['usuario'])) {
                         <!-- Aquí se llenará el contenido de la consulta  -->
                     </div>
                     <div class="modal-footer">
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton">Cerrar</button>
-                        </div>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL DE CELULARES VER INFORMACION -->
+        <div class="modal fade" id="modalcelularinformacion" tabindex="-1" aria-labelledby="modalcelularinformacionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalcelularinformacionLabel"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- MODAL DE ACCESORIOS-->
+        <div class="modal fade" id="modalaccesorios" tabindex="-1" aria-labelledby="modalaccesoriosLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalaccesoriosLabel">
+                            <h6>Accesorios para el Cargo: <?php echo $cargo ?></h6>
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        1
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
 
 
+        <!-- enviar el nombre como parametro para asignacion -->
+        <strong id="Usua_asigna" style="display: none;!important"><?php echo utf8_encode($_SESSION['usuario']); ?></strong>
+        <!-- enviar el nombre como parametro para remover asignacion  -->
+        <strong id="Usua_retira" style="display: none;!important"><?php echo utf8_encode($_SESSION['usuario']); ?></strong>
 
     </body>
 
@@ -379,74 +408,71 @@ if (isset($_SESSION['usuario'])) {
         function updateDescripcionperifericos(radio) {
             document.getElementById('tipo_perifericos').value = radio.value;
         }
-    </script>
 
-    <!-- SCRIPT DE CHECKS COMPUTADOR -->
-    <script>
-        $(document).ready(function() {
-            $('#flexSwitchCheckDefault').on('change', function() {
-                if ($(this).is(':checked')) {
-                    $('#fila1').show();
-                    $('#fila2').show();
-                    $('#fila3').show();
-                } else {
-                    $('#fila1').hide();
-                    $('#fila2').hide();
-                    $('#fila3').hide();
-                }
-            });
+        function updateDescripcionalmacenamiento(radio) {
+            document.getElementById('tipo_almacenamiento').value = radio.value;
+        }
 
-            $('input[name="tipo_comp"]').on('change', function() {
-                if ($(this).is(':checked')) {
-                    $('#fila2').show();
-                } else {
-                    $('#fila2').hide();
-                }
-            });
+        function updateDescripcionsimcard(radio) {
+            document.getElementById('tipo_simcard').value = radio.value;
+        }
 
-            $('#fila2 button').on('click', function() {
-                $('#fila3').show();
-            });
-        });
-    </script>
-   
+        function updateDescripciondvr(radio) {
+            document.getElementById('tipo_dvr').value = radio.value;
+        }
 
+        function updateDescripcioncctv(radio) {
+            document.getElementById('tipo_cctv').value = radio.value;
+        }
 
-    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN COMPUTADOR-->
-    <script>
-        $(document).ready(function() {
-            $('#flexSwitchCheckDefault').on('change', function() {
-                if ($(this).is(':checked')) {
-                    $('#fila3').show();
-                    // Realizar la llamada AJAX para actualizar #fila3
-                    actualizarFila3();
-                } else {
-                    $('#fila3').hide();
-                }
-            });
-            $('#fila2 button').on('click', function() {
-                $('#fila3').show();
-                // Realizar la llamada AJAX para actualizar #fila3
-                actualizarFila3();
-            });
-        });
-
-        function actualizarFila3() {
-            $.ajax({
-                url: 'fichatecnica/actualizarfichacomputador.php', // Archivo PHP que realizará la consulta
-                method: 'GET',
-                success: function(response) {
-                    $('#fila3').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
-                }
-            });
+        function updateDescripciontorre(radio) {
+            document.getElementById('tipo_torre').value = radio.value;
         }
     </script>
 
-
-    <!-- AJAX DE CHECK LISTADO COMPUTADORES PARA CONSULTAR Y LLEVAR INFORMACIÓN -->
+    <!-- SCRIPT DE CHECKS CELULARES -->
     <script>
         $(document).ready(function() {
-            $('#fila2 button').on('click', function() {
+            $('#flexSwitchCheckCelular').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila1celular').show();
+                    $('#fila2celular').show();
+                    $('#fila3celular').show();
+                    $('#fila4celular').show();
+                } else {
+                    $('#fila1celular').hide();
+                    $('#fila2celular').hide();
+                    $('#fila3celular').hide();
+                    $('#fila4celular').hide();
+                }
+            });
+        });
+    </script>
+    <!-- SCRIPT DE CHECKS ACCESORIOS -->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckAccesorios').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila1accesorios').show();
+                    $('#fila2accesorios').show();
+                    $('#fila3accesorios').show();
+                    $('#fila4accesorios').show();
+                } else {
+                    $('#fila1accesorios').hide();
+                    $('#fila2accesorios').hide();
+                    $('#fila3accesorios').hide();
+                    $('#fila4accesorios').hide();
+                }
+            });
+        });
+    </script>
+
+
+
+    <!-- AJAX PARA CONSULTA DE CELULARES -->
+    <script>
+        $(document).ready(function() {
+            $('#fila4celular button').on('click', function() {
                 var tipocomputador = $('#tipocomputador').val();
                 var empresaOption = $('#empresaOption').val();
 
@@ -455,11 +481,11 @@ if (isset($_SESSION['usuario'])) {
                 var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
 
                 $.ajax({
-                    url: 'consultas/consultacomputador.php',
+                    url: 'informacion/consultacelularinformacion.php',
                     type: 'POST',
                     data: {
                         tipocomputador: tipocomputador,
-                        empresaOption: empresaOption,
+                        empresa: empresaOption,
 
                         primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
                         segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
@@ -470,15 +496,158 @@ if (isset($_SESSION['usuario'])) {
                         cargo: "<?php echo htmlspecialchars($cargo); ?>"
                     },
                     success: function(response) {
-                        $('#modalcomputador .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                        $('#modalcelularinformacion .modal-body').html(response); // Agrega los resultados al cuerpo del modal
                     }
                 });
-
             });
+        });
+
+        var empresaOptionValue = "<?php echo $empresaOption; ?>";
+        $.ajax({
+
+            url: 'consultas/consultacelular.php',
+            type: 'POST',
+            data: {
+                empresa: empresaOptionValue,
+                primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+                cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                cargo: "<?php echo htmlspecialchars($cargo); ?>",
+
+            },
+            success: function(response) {
+                $('#modalcelular .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+            }
         });
     </script>
 
- 
+    <!-- AJAX PARA CONSULTA DE ACCESORIOS -->
+    <script>
+        $(document).ready(function() {
+            $('#fila4accesorios button').on('click', function() {
+                var tipocomputador = $('#tipocomputador').val();
+                var empresaOption = $('#empresaOption').val();
+
+                var nombreCompleto = $('input[name="nombreCompleto"]').val(); // Obtén el valor del campo oculto
+                var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
+                var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
+
+                // $.ajax({
+                //     url: 'informacion/consultaaccesoriosinformacion.php',
+                //     type: 'POST',
+                //     data: {
+                //         tipocomputador: tipocomputador,
+                //         empresa: empresaOption,
+
+                //         primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                //         segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                //         primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                //         segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+
+                //         cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                //         cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                //     },
+                //     success: function(response) {
+                //         $('#modalaccesoriosinformacion .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                //     }
+                // });
+            });
+        });
+
+        var empresaOptionValue = "<?php echo $empresaOption; ?>";
+        $.ajax({
+
+            url: 'consultas/consultaaccesorios.php',
+            type: 'POST',
+            data: {
+                empresa: empresaOptionValue,
+                primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+                cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                cargo: "<?php echo htmlspecialchars($cargo); ?>",
+
+            },
+            success: function(response) {
+                $('#modalaccesorios .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+            }
+        });
+    </script>
+
+
+
+
+    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN CELULAR-->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckCelular').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila3celular').show();
+                    // Realizar la llamada AJAX para actualizar #fila3
+                    actualizarFila3celular();
+                } else {
+                    $('#fila3celular').hide();
+                }
+            });
+            $('#fila2celular button').on('click', function() {
+                $('#fila3celular').show();
+                // Realizar la llamada AJAX para actualizar #fila3
+                actualizarFila3celular();
+            });
+        });
+
+        function actualizarFila3celular() {
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
+            $.ajax({
+                url: 'fichatecnica/actualizarfichacelular.php', // Archivo PHP que realizará la consulta
+                method: 'GET',
+                data: {
+                    cedula: cedula
+                }, // Pasar la cédula como parámetro
+                success: function(response) {
+                    $('#fila3celular').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
+                }
+            });
+        }
+    </script>
+
+    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN ACCESORIOS-->
+    <!-- <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckAccesorios').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila3accesorios').show();
+                    // Realizar la llamada AJAX para actualizar #fila3
+                    actualizarFila3accesorios();
+                } else {
+                    $('#fila3accesorios').hide();
+                }
+            });
+            $('#fila2accesorios button').on('click', function() {
+                $('#fila3accesorios').show();
+                // Realizar la llamada AJAX para actualizar #fila3
+                actualizarFila3accesorios();
+            });
+        });
+
+        function actualizarFila3accesorios() {
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
+            $.ajax({
+                url: '', // Archivo PHP que realizará la consulta
+                method: 'GET',
+                data: {
+                    cedula: cedula
+                }, // Pasar la cédula como parámetro
+                success: function(response) {
+                    $('#fila3accesorios').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
+                }
+            });
+        }
+    </script> -->
+
 
 
 
@@ -552,7 +721,6 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
-
 
     </html>
 
