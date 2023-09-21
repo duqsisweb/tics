@@ -290,29 +290,8 @@ function obtenerDatosEquiposcomputadormantenimiento($conexion)
 
 
 
-//HOJA DE VIDA DEL EQUIPO
+//HOJA DE VIDA DEL EQUIPO COMPUTADOR
 
-// class funciones
-// {
-//     public static function hvcomputador($Nombre_equipo)
-//     {
-//         include '../conexionbd.php';
-
-//          $data = odbc_exec($conexion, "SELECT [id_historial] ,mc.[id] ,tipomaquin.[nombre_maquina] as Tipo_maquina ,[Service_tag] ,[Serial_equipo] ,[Nombre_equipo] ,sed.[nombre_sede] as Sede ,empres.[nombre_empresa] as Empresa ,[Marca_computador] ,[Modelo_computador] ,tipocomp.[nombre_tipo_comp] as Tipo_comp ,[Tipo_ram] ,[Memoria_ram] ,tipodisco.[nombre_tipo_discoduro] as Tipo_disco ,capacidaddisco.[capacidad_discoduro] as Capacidad_dico ,[Procesador] ,propietari.[descripcion] as Propietario ,[Proveedor] ,sistemao.[nombre_sistema_operativo] as Sistema_O ,[Serial_cargador] ,[Dominio] ,[Tipo_usuario] ,[Serial_activo_fijo] ,[Fecha_ingreso] ,[Targeta_Video] ,estad.[nombre_estado] Estado ,gestio.[estado_gestion] as Estado_Gestion ,[Fecha_garantia] ,[Fecha_crea] ,[Usua_crea] ,[Fecha_modifica] ,[Usua_modifica] ,[Usua_asigna] ,[Fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,estadoasigna.[nombre_estado] as Estado_asignacion ,[observaciones_asigna] ,link_computador_asigna ,[observaciones_desasigna] ,link_computador_desasigna FROM [ControlTIC].[dbo].[historial_computador] as mc JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] JOIN [ControlTIC].[dbo].sede as sed ON mc.Sede = sed.id JOIN [ControlTIC].[dbo].empresa as empres ON mc.Empresa = empres.id JOIN [ControlTIC].[dbo].tipo_comp as tipocomp ON mc.Tipo_comp = tipocomp.id JOIN [ControlTIC].[dbo].tipo_discoduro as tipodisco ON mc.Tipo_discoduro = tipodisco.id JOIN [ControlTIC].[dbo].propietario as propietari ON mc.Propietario = propietari.id JOIN [ControlTIC].[dbo].capacidad_discoduro as capacidaddisco ON mc.Capacidad_discoduro = capacidaddisco.id JOIN [ControlTIC].[dbo].sistema_operativo as sistemao ON mc.Sistema_Operativo = sistemao.id JOIN [ControlTIC].[dbo].estado as estad ON mc.Estado = estad.id JOIN [ControlTIC].[dbo].gestion as gestio ON mc.Gestion = gestio.id JOIN [ControlTIC].[dbo].estado_asignacion as estadoasigna ON mc.estado_asignacion = estadoasigna.id where Nombre_equipo = '$Nombre_equipo'");
-
-//         if (!$data) {
-//             die("Error en la consulta SQL: " . odbc_errormsg());
-//         }
-//         while ($Element = odbc_fetch_array($data)) {
-//             $arr[] = $Element;
-//         }
-//         return $arr;
-//     }
-// }
-
-
-
-// HVcomputador
 function hvcomputador($conexion, $nombreEquipo)
 {
     $datosEquipos = array();
@@ -327,6 +306,11 @@ function hvcomputador($conexion, $nombreEquipo)
             $datosEquipos[] = $row;
         }
         odbc_free_result($result);
+    }
+
+    // Si no se encontraron resultados, agregar un mensaje especial
+    if (empty($datosEquipos)) {
+        $datosEquipos[] = array('Mensaje' => 'SIN REGISTRO');
     }
 
     return $datosEquipos;
