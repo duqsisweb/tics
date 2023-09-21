@@ -16,21 +16,60 @@ if (isset($_SESSION['usuario'])) {
     $cargo = isset($_GET['cargo']) ? $_GET['cargo'] : ''; // Obtener la cédula pasada por AJAX
     $nombreCompleto = isset($_GET['nombreCompleto']) ? $_GET['nombreCompleto'] : '';
 
-    $data = odbc_exec($conexion, "SELECT  [id_asignacion] ,mc.[id] ,tipomaquin.[nombre_maquina] as Tipo_maquina ,[Service_tag] ,[Serial_equipo],[Nombre_equipo] ,sed.[nombre_sede] as Sede ,empres.[nombre_empresa] as Empresa ,[Marca_computador] ,[Modelo_computador] ,tipocomp.[nombre_tipo_comp] as Tipo_comp ,[Tipo_ram] ,[Memoria_ram] ,tipodisco.[nombre_tipo_discoduro] as Tipo_disco ,capacidaddisco.[capacidad_discoduro] as Capacidad_dico ,[Procesador] ,propietari.[descripcion] as Propietario ,[Proveedor] ,sistemao.[nombre_sistema_operativo] as Sistema_O ,[Serial_cargador] ,[Dominio] ,[Tipo_usuario] ,[Serial_activo_fijo] ,[Fecha_ingreso] ,[Targeta_Video] ,estad.[nombre_estado] Estado ,gestio.[estado_gestion] as Estado_Gestion ,[Fecha_garantia] ,[Fecha_crea] ,[Usua_crea] ,[Fecha_modifica] ,[Usua_modifica] ,[Usua_asigna] ,[Fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,
-    estadoasigna.[nombre_estado] as Estado_asignacion
-    ,[observaciones]
+    $data = odbc_exec($conexion, "SELECT  
+    [id_asignacion]
+    ,mc.[id] ,tipomaquin.[nombre_maquina] as Tipo_maquina 
+    ,[Service_tag] 
+    ,[Serial_equipo]
+    ,[Nombre_equipo] 
+    ,sed.[nombre_sede] as Sede 
+    ,empres.[nombre_empresa] as Empresa 
+    ,[Marca_computador] 
+    ,[Modelo_computador] 
+    ,tipocomp.[nombre_tipo_comp] as Tipo_comp 
+    ,[Tipo_ram] ,[Memoria_ram] 
+    ,tipodisco.[nombre_tipo_discoduro] as Tipo_disco 
+    ,capacidaddisco.[capacidad_discoduro] as Capacidad_dico 
+    ,[Procesador] 
+    ,propietari.[descripcion] as Propietario 
+    ,[Proveedor] 
+    ,sistemao.[nombre_sistema_operativo] as Sistema_O 
+    ,[Serial_cargador] 
+    ,[Dominio] 
+    ,[Tipo_usuario] 
+    ,[Serial_activo_fijo] 
+    ,[Fecha_ingreso] 
+    ,[Targeta_Video] 
+    ,estad.[nombre_estado] Estado 
+    ,gestio.[estado_gestion] as Estado_Gestion 
+    ,[Fecha_garantia] 
+    ,[Fecha_crea] 
+    ,[Usua_crea] 
+    ,[Fecha_modifica] 
+    ,[Usua_modifica] 
+    ,[Usua_asigna] 
+    ,[Fecha_asigna] 
+    ,[cedula] 
+    ,[cargo] 
+    ,[primernombre] 
+    ,[segundonombre] 
+    ,[primerapellido] 
+    ,[segundoapellido] 
+    ,estadoasigna.[nombre_estado] as Estado_asignacion
+    ,[observaciones_asigna]
+    ,link_computador_asigna
     FROM [ControlTIC].[dbo].[asignacion_computador] as mc 
-    LEFT JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] 
-    LEFT JOIN [ControlTIC].[dbo].sede as sed ON mc.Sede = sed.id 
-    LEFT JOIN [ControlTIC].[dbo].empresa as empres ON mc.Empresa = empres.id 
-    LEFT JOIN [ControlTIC].[dbo].tipo_comp as tipocomp ON mc.Tipo_comp = tipocomp.id 
-    LEFT JOIN [ControlTIC].[dbo].tipo_discoduro as tipodisco ON mc.Tipo_discoduro = tipodisco.id 
-    LEFT JOIN [ControlTIC].[dbo].propietario as propietari ON mc.Propietario = propietari.id 
-    LEFT JOIN [ControlTIC].[dbo].capacidad_discoduro as capacidaddisco ON mc.Capacidad_discoduro = capacidaddisco.id 
-    LEFT JOIN [ControlTIC].[dbo].sistema_operativo as sistemao ON mc.Sistema_Operativo = sistemao.id 
-    LEFT JOIN [ControlTIC].[dbo].estado as estad ON mc.Estado = estad.id 
-    LEFT JOIN [ControlTIC].[dbo].gestion as gestio ON mc.Gestion = gestio.id 
-    LEFT JOIN [ControlTIC].[dbo].estado_asignacion as estadoasigna ON mc.estado_asignacion = estadoasigna.id
+    JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] 
+    JOIN [ControlTIC].[dbo].sede as sed ON mc.Sede = sed.id 
+    JOIN [ControlTIC].[dbo].empresa as empres ON mc.Empresa = empres.id 
+    JOIN [ControlTIC].[dbo].tipo_comp as tipocomp ON mc.Tipo_comp = tipocomp.id 
+    JOIN [ControlTIC].[dbo].tipo_discoduro as tipodisco ON mc.Tipo_discoduro = tipodisco.id 
+    JOIN [ControlTIC].[dbo].propietario as propietari ON mc.Propietario = propietari.id 
+    JOIN [ControlTIC].[dbo].capacidad_discoduro as capacidaddisco ON mc.Capacidad_discoduro = capacidaddisco.id 
+    JOIN [ControlTIC].[dbo].sistema_operativo as sistemao ON mc.Sistema_Operativo = sistemao.id 
+    JOIN [ControlTIC].[dbo].estado as estad ON mc.Estado = estad.id 
+    JOIN [ControlTIC].[dbo].gestion as gestio ON mc.Gestion = gestio.id 
+    JOIN [ControlTIC].[dbo].estado_asignacion as estadoasigna ON mc.estado_asignacion = estadoasigna.id
     where cedula='$cedula'");
     $arr = array();
     while ($Element = odbc_fetch_array($data)) {
@@ -91,25 +130,6 @@ if (isset($_SESSION['usuario'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Información de Máquinas</title>
-        <!-- <link rel="stylesheet" href="../../js/jsPDF-master/docs/jspdf.js"> -->
-
-        <script>
-            // Agrega un controlador de eventos para el botón "Generar PDF"
-            document.getElementById("generarPDF").addEventListener("click", function() {
-                // Obtén el contenido de la página
-                var contenidoHTML = document.documentElement.outerHTML;
-
-                // Crea un nuevo documento PDF
-                var doc = new jsPDF();
-
-                // Agrega el contenido HTML al documento PDF
-                doc.fromHTML(contenidoHTML, 15, 15);
-
-                // Descarga el archivo PDF con el nombre "documento.pdf"
-                doc.save('documento.pdf');
-            });
-        </script>
-
     </head>
 
     <!-- HEAD -->
@@ -117,37 +137,9 @@ if (isset($_SESSION['usuario'])) {
     require '../../views/head.php';
     ?>
 
-    <body style="font-size: 12px;">
+    <body>
 
-
-        <style>
-            /* Estilos para pantallas grandes */
-            @media screen and (min-width: 768px) {
-                /* Agrega aquí tus estilos para pantallas grandes */
-            }
-
-            /* Estilos para pantallas medianas */
-            @media screen and (max-width: 767px) {
-                /* Agrega aquí tus estilos para pantallas medianas */
-            }
-
-            /* Estilos para pantallas pequeñas (móviles) */
-            @media screen and (max-width: 576px) {
-                /* Agrega aquí tus estilos para pantallas pequeñas */
-            }
-
-            /* Estilos para la factura */
-            .factura {
-                font-family: Arial, sans-serif;
-                font-size: 10px;
-                /* Tamaño de fuente más pequeño */
-                /* Otros estilos de factura como color de fondo, bordes, márgenes, etc. */
-            }
-        </style>
-
-
-
-        <section id="previewHtmlContent">
+        <section id="previewHtmlContent" style="font-size: 14px;">
             <div class="container">
                 <div class="row">
                     <div class="col-md-2 col-xs-12 col-sm-2" style="border: 1px solid black;"><img src="../../assets/image/duquesa_logo - copia.png" alt=""></div>
@@ -168,28 +160,27 @@ if (isset($_SESSION['usuario'])) {
                     </div>
                 </div>
                 <div class="row" style="border-left: 1px solid black;border-right:1px solid black ;">
-                    <div class="col-md-6 col-xs-12 col-sm-6">
+                    <div class="col-md-4 col-xs-12 col-sm-4">
                         <p>NOMBRE DEL TRABAJADOR QUE RECIBE <br> <strong><?php echo $nombreCompleto; ?></strong></p>
                     </div>
-                    <div class="col-md-6 col-xs-12 col-sm-6">
+                    <div class="col-md-4 col-xs-12 col-sm-4">
                         <p>CC: <strong><?php echo $cedula; ?></strong></p>
                     </div>
-                </div>
-                <div class="row" style="border-left: 1px solid black;border-right:1px solid black ;">
-                    <div class="col-md-6 col-xs-12 col-sm-6">
+                    <div class="col-md-4 col-xs-12 col-sm-4">
                         <p>CARGO QUE DESEMPEÑA:<br> <strong><?php echo $cargo; ?></strong></p>
-                    </div>
-                    <div class="col-md-6 col-xs-12 col-sm-6">
-                        <p>CORREO ASIGNADO:</p>
                     </div>
                 </div>
 
+
                 <div class="row" style="border-left: 1px solid black;border-right:1px solid black ;">
-                    <div class="col-md-6 col-xs-12 col-sm-6">
+                    <div class="col-md-4 col-xs-12 col-sm-4">
                         <p>NOMBRE DEL TRABAJADOR QUE ENTREGA: <br> <strong><?php echo utf8_encode($_SESSION['NOMBRE']); ?></strong></p>
                     </div>
-                    <div class="col-md-6 col-xs-12 col-sm-6">
-                        <p>CARGO QUE DESEMPEÑA: <br> <strong><?php echo utf8_encode($_SESSION['CARGO']); ?></strong></p>
+                    <div class="col-md-4 col-xs-12 col-sm-4">
+                        <p>CC: <br> <strong><?php echo utf8_encode($_SESSION['']); ?></strong></p>
+                    </div>
+                    <div class="col-md-4 col-xs-12 col-sm-4">
+                        <p>CARGO QUE DESEMPEÑA:<br> <strong><?php echo utf8_encode($_SESSION['']); ?></strong></p>
                     </div>
                 </div>
 
@@ -199,7 +190,7 @@ if (isset($_SESSION['usuario'])) {
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" style="text-align: center;">
                     <?php
                     $columnasMostrarcomp = array(
                         'Tipo_maquina' => 'ELEMENTO',
@@ -252,7 +243,6 @@ if (isset($_SESSION['usuario'])) {
 
                 <div class="row" style="border: 1px solid black;text-align: left;">
                     <div class="col-md-12">
-                        <!-- Aquí puedes mostrar el resultado de la consulta SQL en formato de texto simple -->
                         <?php
                         // Verificar si hay datos en el arreglo $arr
                         if (!empty($arr) || !empty($arr_celular)) {
@@ -264,8 +254,8 @@ if (isset($_SESSION['usuario'])) {
 
                             // Mostrar los resultados de las computadoras
                             foreach ($arr as $fila) {
-                                echo '<td style="margin-right: 10px; padding: 30px; ">'; // Agrega espacio y bordes
-                                echo '<p>';
+                                echo '<td >'; // Agrega espacio y bordes
+                                echo '<p style="font-size: 14px;">'; //  tamaño de la fuente 
                                 echo 'Tipo de Máquina: <strong>' . $fila['Tipo_maquina'] . '</strong><br>';
                                 echo 'Marca: <strong>' . $fila['Marca_computador'] . '</strong><br>';
                                 echo 'Modelo: <strong>' . $fila['Modelo_computador'] . '</strong><br>';
@@ -274,6 +264,7 @@ if (isset($_SESSION['usuario'])) {
                                 echo 'Memoria Ram: <strong>' . $fila['Memoria_ram'] . '</strong><br>';
                                 echo 'Tipo Disco: <strong>' . $fila['Tipo_disco'] . '</strong><br>';
                                 echo 'Capacidad Disco: <strong>'  . $fila['Capacidad_dico'] . '</strong><br>';
+                                echo 'OBSERVACIONES DE COMPUTADOR:<br> <strong>'  . $fila['observaciones_asigna'] . '</strong><br>';
                                 // Agrega aquí más campos y sus valores si es necesario
                                 echo '</p>';
                                 echo '</td>';
@@ -281,7 +272,7 @@ if (isset($_SESSION['usuario'])) {
 
                             // Mostrar los resultados de los teléfonos celulares
                             foreach ($arr_celular as $fila) {
-                                echo '<td style="margin-right: 10px; padding: 30px;">'; // Agrega espacio y bordes
+                                echo '<td style="">'; // Agrega espacio y bordes
                                 echo '<p>';
                                 echo 'Tipo de Máquina: <strong>' . $fila['tipo_maquina'] . '</strong><br>';
                                 echo 'Marca: <strong>' . $fila['marca'] . '</strong><br>';
@@ -305,20 +296,9 @@ if (isset($_SESSION['usuario'])) {
 
                 </div>
 
-                <div class="row" style="border: 1px solid black;padding: 10px;">
-                    <div class="col-md-2">
-                        <p>OBSERVACIONES:</p>
-                    </div>
-                    <div class="col-md-10">
-                        <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                            <label for="floatingTextarea2"></label>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="row">
-                    <div class="col-md-12" style="border: 1px solid black;text-align: justify;padding: 30px;">
+                    <div class="col-md-12" style="border: 1px solid black;text-align: justify;">
                         <p>EL FUNCIONARIO QUE RECIBE, ABAJO FIRMANTE, SE HACE RESPONSABLE DEL USO DEL SOFTWARE INSTALADO
                             EN ESTE EQUIPO Y APROBADO POR DUQUESA S.A. Y ASUME LA RESPONSABILIDAD,
                             ADMINISTRATIVA Y LEGAL POR EL USO DEL SOFTWARE NO AUTORIZADO. </p>

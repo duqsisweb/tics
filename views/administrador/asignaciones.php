@@ -675,6 +675,17 @@ if (isset($_SESSION['usuario'])) {
                 </div> -->
 
 
+
+                <div style="text-align: center;">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Generar Acta
+                    </button>
+
+
+                </div>
+
+
             <?php
             }
             ?>
@@ -758,7 +769,7 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
 
-                <!-- MODAL DE ACCESORIOS-->
+        <!-- MODAL DE ACCESORIOS-->
         <div class="modal fade" id="modalaccesorios" tabindex="-1" aria-labelledby="modalaccesoriosLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
@@ -991,6 +1002,26 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
 
+        <!-- MODAL ACTA -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Acta</h1>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <!-- .... -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-danger" id="descargarPDF">DESCARGAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- enviar el nombre como parametro para asignacion -->
         <strong id="Usua_asigna" style="display: none;!important"><?php echo utf8_encode($_SESSION['usuario']); ?></strong>
         <!-- enviar el nombre como parametro para remover asignacion  -->
@@ -999,6 +1030,39 @@ if (isset($_SESSION['usuario'])) {
 
 
     </body>
+
+
+
+    <!-- SCRIPT MODAL ACTA -->
+
+    <script>
+        $('#exampleModal').on('show.bs.modal', function(event) {
+            // Obtén la cédula y el cargo del PHP
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
+            var cargo = '<?php echo $cargo; ?>'; // Obtener el cargo del PHP
+            var nombreCompleto = '<?php echo $nombreCompleto; ?>'; // Obtener el nombre completo del PHP
+
+            // Realiza la solicitud AJAX aquí
+            $.ajax({
+                url: 'acta2.php',
+                method: 'GET',
+                data: {
+                    cedula: cedula,
+                    cargo: cargo,
+                    nombreCompleto: nombreCompleto
+                }, // Envía la cédula, el cargo y el nombre completo como parámetros
+                // dataType: 'html',
+                success: function(response) {
+                    $('#exampleModal .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error en la solicitud AJAX');
+                    console.error('Estado:', status);
+                    console.error('Error:', error);
+                }
+            });
+        });
+    </script>
 
 
     <script>
@@ -1082,8 +1146,7 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
-
-        <!-- SCRIPT DE CHECKS ACCESORIOS -->
+    <!-- SCRIPT DE CHECKS ACCESORIOS -->
     <script>
         $(document).ready(function() {
             $('#flexSwitchCheckAccesorios').on('change', function() {
@@ -1101,7 +1164,6 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
-
     <!-- SCRIPT DE CHECKS ACCESORIOS -->
     <script>
         $(document).ready(function() {
@@ -1788,7 +1850,7 @@ if (isset($_SESSION['usuario'])) {
         });
     </script>
 
-        <!-- AJAX PARA CONSULTA DE ACCESORIOS -->
+    <!-- AJAX PARA CONSULTA DE ACCESORIOS -->
     <script>
         $(document).ready(function() {
             $('#fila4accesorios button').on('click', function() {

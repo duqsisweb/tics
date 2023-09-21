@@ -66,6 +66,7 @@ if (
                             <th scope="col">Serial de Activo Fijo</th>
                             <th scope="col">Tarjeta de Video</th>
                             <th scope="col">Observaciones</th>
+                            <th scope="col">Link Drive</th>
                             <th scope="col" class="">Usua_retiraa</th>
 
 
@@ -96,11 +97,14 @@ if (
                                 <td><?= $fila['Serial_activo_fijo'] ?></td>
                                 <td><?= $fila['Targeta_Video'] ?></td>
                                 <td>
-                                    <textarea placeholder="AGREGE UNA OBSERVACIÓN" id="observaciones<?= $fila['id'] ?>" name="observaciones" style="width: 300px; height: 160px;"></textarea>
+                                    <textarea placeholder="AGREGE UNA OBSERVACIÓN" id="observaciones_desasigna<?= $fila['id'] ?>" name="observaciones_desasigna" style="width: 300px; height: 160px;"></textarea>
+                                </td>
+                                <td>
+                                    <input id="link_computador_desasigna<?= $fila['id'] ?>" name="link_computador_desasigna"></input>
                                 </td>
 
                                 <td>
-                                    <button id="enviarcomputador" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-service-tag="<?= $fila['Service_tag'] ?>" data-serial-equipo="<?= $fila['Serial_equipo'] ?>" data-nombre-equipo="<?= $fila['Nombre_equipo'] ?>" data-sede="<?= $fila['Sede'] ?>" data-empresa="<?= $fila['Empresa'] ?>" data-marca-computador="<?= $fila['Marca_computador'] ?>" data-modelo-computador="<?= $fila['Modelo_computador'] ?>" data-tipo-comp="<?= $fila['Tipo_comp'] ?>" data-tipo-ram="<?= $fila['Tipo_ram'] ?>" data-memoria-ram="<?= $fila['Memoria_ram'] ?>" data-tipo-discoduro="<?= $fila['Tipo_discoduro'] ?>" data-capacidad-discoduro="<?= $fila['Capacidad_discoduro'] ?>" data-procesador="<?= $fila['Procesador'] ?>" data-propietario="<?= $fila['Propietario'] ?>" data-proveedor="<?= $fila['Proveedor'] ?>" data-sistema-operativo="<?= $fila['Sistema_Operativo'] ?>" data-serial-cargador="<?= $fila['Serial_cargador'] ?>" data-dominio="<?= $fila['Dominio'] ?>" data-tipo-usuario="<?= $fila['Tipo_usuario'] ?>" data-serial-activo-fijo="<?= $fila['Serial_activo_fijo'] ?>" data-fecha-ingreso="<?= $fila['Fecha_ingreso'] ?>" data-tarjeta-video="<?= $fila['Targeta_Video'] ?>" data-estado="<?= $fila['Estado'] ?>" data-gestion="<?= $fila['Gestion'] ?>" data-fecha-garantia="<?= $fila['Fecha_garantia'] ?>" data-fecha-crea="<?= $fila['Fecha_crea'] ?>" data-usua-crea="<?= $fila['Usua_crea'] ?>" data-fecha-modifica="<?= $fila['Fecha_modifica'] ?>" data-usua-modifica="<?= $fila['Usua_modifica'] ?>" data-primernombre="<?php echo $primernombre; ?>" data-segundonombre="<?php echo $segundonombre; ?>" data-primerapellido="<?php echo $primerapellido; ?>" data-segundoapellido="<?php echo $segundoapellido; ?>" data-cedula="<?php echo $cedula; ?>" data-cargo="<?php echo $cargo; ?>" data-observaciones="<?= $fila['observaciones'] ?>" data-usua-retira="<?php echo $Usua_retira ?>"></button>
+                                    <button id="enviarcomputador" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-service-tag="<?= $fila['Service_tag'] ?>" data-serial-equipo="<?= $fila['Serial_equipo'] ?>" data-nombre-equipo="<?= $fila['Nombre_equipo'] ?>" data-sede="<?= $fila['Sede'] ?>" data-empresa="<?= $fila['Empresa'] ?>" data-marca-computador="<?= $fila['Marca_computador'] ?>" data-modelo-computador="<?= $fila['Modelo_computador'] ?>" data-tipo-comp="<?= $fila['Tipo_comp'] ?>" data-tipo-ram="<?= $fila['Tipo_ram'] ?>" data-memoria-ram="<?= $fila['Memoria_ram'] ?>" data-tipo-discoduro="<?= $fila['Tipo_discoduro'] ?>" data-capacidad-discoduro="<?= $fila['Capacidad_discoduro'] ?>" data-procesador="<?= $fila['Procesador'] ?>" data-propietario="<?= $fila['Propietario'] ?>" data-proveedor="<?= $fila['Proveedor'] ?>" data-sistema-operativo="<?= $fila['Sistema_Operativo'] ?>" data-serial-cargador="<?= $fila['Serial_cargador'] ?>" data-dominio="<?= $fila['Dominio'] ?>" data-tipo-usuario="<?= $fila['Tipo_usuario'] ?>" data-serial-activo-fijo="<?= $fila['Serial_activo_fijo'] ?>" data-fecha-ingreso="<?= $fila['Fecha_ingreso'] ?>" data-tarjeta-video="<?= $fila['Targeta_Video'] ?>" data-estado="<?= $fila['Estado'] ?>" data-gestion="<?= $fila['Gestion'] ?>" data-fecha-garantia="<?= $fila['Fecha_garantia'] ?>" data-fecha-crea="<?= $fila['Fecha_crea'] ?>" data-usua-crea="<?= $fila['Usua_crea'] ?>" data-fecha-modifica="<?= $fila['Fecha_modifica'] ?>" data-usua-modifica="<?= $fila['Usua_modifica'] ?>" data-primernombre="<?php echo $primernombre; ?>" data-segundonombre="<?php echo $segundonombre; ?>" data-primerapellido="<?php echo $primerapellido; ?>" data-segundoapellido="<?php echo $segundoapellido; ?>" data-cedula="<?php echo $cedula; ?>" data-cargo="<?php echo $cargo; ?>" data-usua-retira="<?php echo $Usua_retira ?>" data-observaciones-desasigna="<?= $fila['observaciones_desasigna'] ?>" data-link-computador-desasigna="<?= $fila['link_computador_desasigna'] ?>"></button>
                                     <!-- btn escondido para la alerta -->
                                     <button id="" type="button" class="btn btn-outline-danger showAlertButton">Desasignar</button>
                                 </td>
@@ -160,7 +164,8 @@ if (
                 var usua_crea = $(this).data('usua-crea');
                 var fecha_modifica = $(this).data('fecha-modifica');
                 var usua_modifica = $(this).data('usua-modifica');
-                var observaciones = $('#observaciones' + id).val();
+                var observaciones_desasigna = $('#observaciones_desasigna' + id).val();
+                var link_computador_desasigna = $('#link_computador_desasigna' + id).val();
 
 
                 console.log("Primer Nombre:", primernombre);
@@ -204,7 +209,8 @@ if (
                 console.log("Usuario de Creación:", usua_crea);
                 console.log("Fecha de Modificación:", fecha_modifica);
                 console.log("Usuario de Modificación:", usua_modifica);
-                console.log("Observaciones", observaciones);
+                console.log("Observaciones de desasignacion", observaciones_desasigna);
+                console.log("link Drive", link_computador_desasigna);
 
                 $.ajax({
                     url: 'delete/deletecomputadorhistorial.php',
@@ -250,7 +256,8 @@ if (
                         usua_crea: usua_crea,
                         fecha_modifica: fecha_modifica,
                         usua_modifica: usua_modifica,
-                        observaciones: observaciones
+                        observaciones_desasigna: observaciones_desasigna,
+                        link_computador_desasigna: link_computador_desasigna
 
                     },
                     success: function(response) {
