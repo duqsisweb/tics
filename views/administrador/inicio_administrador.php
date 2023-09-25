@@ -99,29 +99,29 @@ if (isset($_SESSION['usuario'])) {
                     <div class="col-md-4">
                         <div class="card text-center">
                             <div class="card-header">
-                                Mantenimiento
+                                Actualización de equipos
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Mantenimiento a Equipos</h5>
+                                <h5 class="card-title">Mantenimiento Correctivo</h5>
                                 <p class="card-text">...</p>
-                                <a href="mantenimiento.php" class="btn btn-success">Ingresar</a>
+                                <a href="actualizaciondeequipos.php" class="btn btn-success">Ingresar</a>
                             </div>
 
                         </div>
                     </div>
 
                     <div class="col-md-4">
-                        <!-- <div class="card text-center">
+                        <div class="card text-center">
                             <div class="card-header">
-                                ...
+                               MANTENIMIENTO DE EQUIPOS
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <p class="card-text">Aquí puede liberar o des asignar equipos de los usuarios</p>
-                                <a href="inventario.php" class="btn btn-success">Ingresar</a>
+                                <h5 class="card-title">Mantenimiento Preventivo</h5>
+                                <p class="card-text">...</p>
+                                <a href="mantenimientos.php" class="btn btn-success">Ingresar</a>
                             </div>
 
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>

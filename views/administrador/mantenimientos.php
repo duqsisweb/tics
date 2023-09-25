@@ -30,7 +30,7 @@ if (isset($_SESSION['usuario'])) {
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container">
                     <div>
-                        <h3>Información de maquinas o equipos</h3>
+                        <h3>MANTENIMIENTOS</h3>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Computadores</h5>
                                 <p class="card-text"></p>
-                                <a href="hv/hvcomputadores.php" class="btn btn-success">Seleccionar</a>
+                                <a href="mantenimientos/mantenimientocomputador.php" class="btn btn-success">Seleccionar</a>
                             </div>
                         </div>
                     </div>

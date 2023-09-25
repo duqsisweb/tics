@@ -8,10 +8,9 @@
     <meta name="description" content="TIC" />
     <meta name="author" content="Yon Gonzalez" />
     <title>TIC</title>
-    <link rel="icon" type="image/x-icon" href="../../assets/image/faviconplanta.png" />
     <link rel="icon" type="image/x-icon" href="../../../assets/image/faviconplanta.png" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../../css/bootstrap.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 
 

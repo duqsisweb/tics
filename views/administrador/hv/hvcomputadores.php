@@ -3,10 +3,9 @@ header('Content-Type: text/html; charset=UTF-8');
 session_start();
 error_reporting(0);
 
-include '../../conexionbd.php';
-
+include '../../../conexionbd.php';
 if (isset($_SESSION['usuario'])) {
-    require '../../function/funciones.php';
+    require '../../../function/funciones.php';
 
     // Inicializar la variable de bandera
     $mostrarTabla = false;
@@ -32,14 +31,17 @@ if (isset($_SESSION['usuario'])) {
     <html lang="en">
 
     <!-- HEAD -->
-    <?php require '../../views/head.php'; ?>
+    <?php require '../estilosadmin/head.php'; ?>
 
     <body>
-        <!-- NAV -->
-        <?php require '../../views/nav.php'; ?>
+        
+         <!-- NAV -->
+        <?php require '../estilosadmin/nav.php'; ?>
 
         <section style="margin-top: 100px;">
-            <?php require '../../views/navinventario.php'; ?>
+                       <!--  -->
+                       <?php require '../estilosadmin/navinventario.php'; ?>
+
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container">
                     <div>
@@ -80,51 +82,45 @@ if (isset($_SESSION['usuario'])) {
             <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                 <thead>
                     <tr class="encabezado table-dark">
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>ID</th>
+                        <th>SERVICE TAG</th>
+                        <th>SERIAL EQUIPO</th>
+                        <th>NOMBRE EQUIPO</th>
+                        <th>SEDE</th>
+                        <th>EMPRESA</th>
+                        <th>MARCA</th>
+                        <th>MODELO</th>
+                        <th>TIPO</th>
+                        <th>TIPO RAM</th>
+                        <th>CANTIDAD RAM</th>
+                        <th>TIPO DISCO</th>
+                        <th>CAPACIDAD DISCO</th>
+                        <th>PROCESADOR</th>
+                        <th>PROPIETARIO</th>
+                        <th>PROVEEDOR</th>
+                        <th>SISTEMA OPERATIVO</th>
+                        <th>SERIAL CARGADOR</th>
+                        <th>DOMINIO</th>
+                        <th>TIPO USUARIO</th>
+                        <th>SERIAL ACTIVO FIJO</th>
+                        <th>TARGETA VIDEO</th>
+                        <th>ESTADO</th>
+                        <th>ESTADO GESTION</th>
+                        <th>FECHA DE MODIFICACION</th>
+                        <th>USUARIO QUE MODIFICO</th>
+                        <th>USUARIO QUE ASIGNO</th>
+                        <th>FECHA QUE ASIGNO</th>
+                        <th>CEDULA DEL EMPLEADO</th>
+                        <th>CARDO DEL EMPLEADO</th>
+                        <th>PRIMER NOMBRE EMPELADO</th>
+                        <th>SEGUNDO NOMBRE EMPLEADO</th>
+                        <th>PRIMER APELLIDO EMPLEADO</th>
+                        <th>SEFUNDO APELLIDO EMPLEADO</th>
+                        <th>ESTADO DE ASIGNACIÓN</th>
+                        <th>OBSERVACIONES DE ASIGNACION</th>
+                        <th>LINK DE ASIGNACIÓNES</th>
+                        <th>OBSERVACIONES DE DEVOLUCIÓN</th>
+                        <th>LINK DE DEVOLUCIÓN</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -164,8 +160,8 @@ if (isset($_SESSION['usuario'])) {
 
 
 
-       <!-- Inicio DataTable -->
-       <script type="text/javascript">
+    <!-- Inicio DataTable -->
+    <script type="text/javascript">
         $(document).ready(function() {
             var lenguaje = $('#mtable').DataTable({
                 info: false,
@@ -199,6 +195,7 @@ if (isset($_SESSION['usuario'])) {
         });
     </script>
     <!-- Fin DataTable -->
+
 
 
 

@@ -35,7 +35,7 @@ if (isset($_SESSION['usuario'])) {
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container" style="text-align: center;">
                     <div>
-                        <h3>Mantenimiento de equipos</h3>
+                        <h3>Actualización de Equipos</h3>
                     </div>
                 </div>
             </div>

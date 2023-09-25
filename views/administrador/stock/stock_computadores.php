@@ -3,25 +3,26 @@ header('Content-Type: text/html; charset=UTF-8');
 session_start();
 error_reporting(0);
 
-include '../../conexionbd.php';
+include '../../../conexionbd.php';
 if (isset($_SESSION['usuario'])) {
-    require '../../function/funciones.php';
+    require '../../../function/funciones.php';
 ?>
 
     <!DOCTYPE html>
     <html lang="en">
 
     <!-- HEAD -->
-    <?php require '../../views/head.php'; ?>
+    <?php require '../estilosadmin/head.php'; ?>
 
     <body>
         <!-- NAV -->
-        <?php require '../../views/nav.php'; ?>
+        <?php require '../estilosadmin/nav.php'; ?>
 
 
         <section style="margin-top: 100px;">
             <!-- NAVINGRESOS -->
-            <?php require '../../views/navinventario.php'; ?>
+            <?php require '../estilosadmin/navinventario.php'; ?>
+            
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container">
                     <div>

@@ -3,30 +3,30 @@ header('Content-Type: text/html; charset=UTF-8');
 session_start();
 error_reporting(0);
 
-include '../../conexionbd.php';
+include '../../../conexionbd.php';
 if (isset($_SESSION['usuario'])) {
-    require '../../function/funciones.php';
+    require '../../../function/funciones.php';
 ?>
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
     <html lang="en">
 
     <!-- HEAD -->
-    <?php require '../../views/head.php'; ?>
+    <?php require '../estilosadmin/head.php'; ?>
 
     <body>
 
         <!-- NAV -->
-        <?php require '../../views/nav.php'; ?>
+        <?php require '../estilosadmin/nav.php'; ?>
 
 
         <section style="margin-top: 100px;">
             <!-- NAVINGRESOS -->
-            <?php require '../../views/navinventario.php'; ?>
+            <?php require '../estilosadmin/navinventario.php'; ?>
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container">
                     <div>
-                        <h3>Inventario de Sim Card</h3>
+                        <h3>Inventario de Elementos De Comunicación</h3>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@ if (isset($_SESSION['usuario'])) {
                             <thead>
                                 <tr class="encabezado table-dark">
                                     <?php
-                                    $sql = "SELECT TOP 1 * FROM [ControlTIC].[dbo].[maquina_simcard]";
+                                    $sql = "SELECT TOP 1 * FROM [ControlTIC].[dbo].[maquina_edcomunicacion]";
                                     $result = odbc_exec($conexion, $sql);
 
                                     if ($result !== false) {
@@ -53,7 +53,7 @@ if (isset($_SESSION['usuario'])) {
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM [ControlTIC].[dbo].[maquina_simcard]";
+                                $sql = "SELECT * FROM [ControlTIC].[dbo].[maquina_edcomunicacion]";
                                 $result = odbc_exec($conexion, $sql);
 
                                 if ($result !== false) {
@@ -76,7 +76,6 @@ if (isset($_SESSION['usuario'])) {
     </body>
 
     </html>
-
 
         <!-- Inicio DataTable -->
         <script type="text/javascript">
