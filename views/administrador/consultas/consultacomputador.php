@@ -16,7 +16,6 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
     $cargo = isset($_POST['cargo']) ? $_POST['cargo'] : '';
 
     $data = odbc_exec($conexion, "SELECT  [id]
-
     
     ,[tipo_maquina]
     ,[Service_tag]

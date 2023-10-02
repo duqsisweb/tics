@@ -113,7 +113,7 @@ if (isset($_SESSION['usuario'])) {
                     <div class="col-md-4">
                         <div class="card text-center">
                             <div class="card-header">
-                               MANTENIMIENTO DE EQUIPOS
+                                MANTENIMIENTO DE EQUIPOS
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Mantenimiento Preventivo</h5>
@@ -127,6 +127,7 @@ if (isset($_SESSION['usuario'])) {
             </div>
 
             <br>
+
             <!-- TERCER BLOQUE -->
             <div class="container">
                 <div class="row">
@@ -166,10 +167,58 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Remover Asignación</h5>
                                 <p class="card-text">Aquí puede liberar o remover equipos de los usuarios</p>
-                                <a href="devoluciones.php" class="btn btn-success">Ingresar</a>
+                                <a href="complementos.php" class="btn btn-success">Ingresar</a>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+
+            <br>
+            <!-- CUARTO BLOQUE -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                AGREGAR COMPLEMENTOS
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"> AGREGAR COMPLEMENTOS</h5>
+                                <p class="card-text"></p>
+                                <a href="complementos.php" class="btn btn-success">Ingresar</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Usuarios con Equipos Asignados</h5>
+                                <p class="card-text">Aquí puede verificar que Dispositivos o Máquinas están asociadas a los usuarios</p>
+                                <a href="asignacionesusuario.php" class="btn btn-success">Ingresar</a>
+                            </div>
+
+                        </div>
+                    </div> -->
+
+                    <!-- <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Remover Asignación</h5>
+                                <p class="card-text">Aquí puede liberar o remover equipos de los usuarios</p>
+                                <a href="devoluciones.php" class="btn btn-success">Ingresar</a>
+                            </div>
+                        </div>
+                    </div> -->
                 </div>
             </div>
 

@@ -287,7 +287,12 @@ function obtenerDatosEquiposcomputadormantenimiento($conexion)
     return $datosEquipos;
 }
 
-// MANTENIMIENTO PREVENTIVO
+
+
+
+
+// MANTENIMIENTOS PREVENTIVO
+// MANTENIMIENTO COMPUTADOR
 function mantenimientopreventivocomputador($conexion)
 {
     $datosEquipos = array();
@@ -316,6 +321,10 @@ function mantenimientopreventivocomputador($conexion)
     ,[Serial_activo_fijo]
     ,[Targeta_Video]
     ,estad.[nombre_estado] Estado
+    ,[Usua_mantenimiento]
+    ,[Fecha_mantenimiento_inicio]
+    ,[Fecha_mantenimiento_fin]
+    ,[observaciones_mantenimiento]
     FROM [ControlTIC].[dbo].[maquina_computador] as mc
     LEFT JOIN [ControlTIC].[dbo].sede as sed ON mc.Sede = sed.id
     LEFT JOIN [ControlTIC].[dbo].empresa as empres ON mc.Empresa = empres.id
@@ -338,6 +347,106 @@ function mantenimientopreventivocomputador($conexion)
 
     return $datosEquipos;
 }
+
+
+
+// AGREGAR COMPLEMENTOS ESCALABLES
+
+// TIPO DE MEMORIA RAM
+function agregartipomemoriaram($conexion)
+{
+    $datosEquipos = array();
+
+    $sql = "SELECT  [id] ,[nombre_tipo_ram] FROM [ControlTIC].[dbo].[tipo_memoria_ram]";
+
+    $result = odbc_exec($conexion, $sql);
+
+    if ($result !== false) {
+        while ($row = odbc_fetch_array($result)) {
+            $datosEquipos[] = $row;
+        }
+        odbc_free_result($result);
+    }
+
+    return $datosEquipos;
+}
+
+// CANTIDAD DE MEMORIA RAM
+function agregarcantidadmemoriaram($conexion)
+{
+    $datosEquipos = array();
+
+    $sql = "SELECT [id] ,[capacidad_ram] FROM [ControlTIC].[dbo].[capacidad_ram]";
+
+    $result = odbc_exec($conexion, $sql);
+
+    if ($result !== false) {
+        while ($row = odbc_fetch_array($result)) {
+            $datosEquipos[] = $row;
+        }
+        odbc_free_result($result);
+    }
+
+    return $datosEquipos;
+}
+
+// TIPO DISCO DURO
+function agregartipodiscoduro($conexion)
+{
+    $datosEquipos = array();
+
+    $sql = "SELECT  [id] ,[nombre_tipo_discoduro] FROM [ControlTIC].[dbo].[tipo_discoduro]";
+
+    $result = odbc_exec($conexion, $sql);
+
+    if ($result !== false) {
+        while ($row = odbc_fetch_array($result)) {
+            $datosEquipos[] = $row;
+        }
+        odbc_free_result($result);
+    }
+
+    return $datosEquipos;
+}
+
+// CAPACIDAD DISCO DURO
+function agregarcapacidaddiscoduro($conexion)
+{
+    $datosEquipos = array();
+
+    $sql = "SELECT  [id] ,[capacidad_discoduro] FROM [ControlTIC].[dbo].[capacidad_discoduro]";
+
+    $result = odbc_exec($conexion, $sql);
+
+    if ($result !== false) {
+        while ($row = odbc_fetch_array($result)) {
+            $datosEquipos[] = $row;
+        }
+        odbc_free_result($result);
+    }
+
+    return $datosEquipos;
+}
+
+// SISTEMA OPERATIVO
+function agregarsistemaoperativo($conexion)
+{
+    $datosEquipos = array();
+
+    $sql = "SELECT  [id] ,[nombre_sistema_operativo] FROM [ControlTIC].[dbo].[sistema_operativo]";
+
+    $result = odbc_exec($conexion, $sql);
+
+    if ($result !== false) {
+        while ($row = odbc_fetch_array($result)) {
+            $datosEquipos[] = $row;
+        }
+        odbc_free_result($result);
+    }
+
+    return $datosEquipos;
+}
+
 
 
 
@@ -367,8 +476,3 @@ function hvcomputador($conexion, $nombreEquipo)
 
     return $datosEquipos;
 }
-
-
-
-
-

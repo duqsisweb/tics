@@ -560,7 +560,7 @@ if (isset($_SESSION['usuario'])) {
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <label for="" class="form-label">Tipo Comp.</label>
+                                        <label for="" class="form-label">Tipo Computador</label>
                                         <select class="form-select" aria-label="Default select example" id="Tipo_comp" onchange="mostrarFormulario()" name="Tipo_comp" required>
                                             <option selected>SELECCIONE</option>
 
@@ -590,12 +590,28 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Tipo de Ram</label>
-                                        <select class="form-select" aria-label="Default select example" name="Tipo_ram" required>
+                                        <select class="form-select" aria-label="Default select example" id="Tipo_ram" onchange="mostrarFormulario()" name="Tipo_ram" required>
                                             <option selected>SELECCIONE</option>
-                                            <option value="DDR">DDR</option>
-                                            <option value="DDR2">DDR2</option>
-                                            <option value="DDR3">DDR3</option>
-                                            <option value="DDR4">DDR4</option>
+
+                                            <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de computadores -->
+                                            <?php
+                                            include '../../conexionbd.php';
+
+                                            // Realizar la consulta a la base de datos para obtener los computadores
+                                            $consulta = "SELECT id, nombre_tipo_ram FROM [ControlTIC].[dbo].[tipo_memoria_ram]";
+                                            $resultado = odbc_exec($conexion, $consulta);
+
+                                            // Iterar sobre los resultados y generar las opciones del select
+                                            while ($fila = odbc_fetch_array($resultado)) {
+                                                $id = $fila['id'];
+                                                $nombre = $fila['nombre_tipo_ram'];
+                                                echo "<option value='$id'>$nombre</option>";
+                                            }
+
+                                            // Liberar recursos
+                                            odbc_free_result($resultado);
+                                            ?>
+
                                         </select>
                                     </div>
                                 </div>
@@ -607,7 +623,29 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Cant Memoria RAM</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Memoria_ram" required>
+                                        <select class="form-select" aria-label="Default select example" id="Memoria_ram" onchange="mostrarFormulario()" name="Memoria_ram" required>
+                                            <option selected>SELECCIONE</option>
+
+                                            <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de computadores -->
+                                            <?php
+                                            include '../../conexionbd.php';
+
+                                            // Realizar la consulta a la base de datos para obtener los computadores
+                                            $consulta = "SELECT id, capacidad_ram FROM [ControlTIC].[dbo].[capacidad_ram]";
+                                            $resultado = odbc_exec($conexion, $consulta);
+
+                                            // Iterar sobre los resultados y generar las opciones del select
+                                            while ($fila = odbc_fetch_array($resultado)) {
+                                                $id = $fila['id'];
+                                                $nombre = $fila['capacidad_ram'];
+                                                echo "<option value='$id'>$nombre</option>";
+                                            }
+
+                                            // Liberar recursos
+                                            odbc_free_result($resultado);
+                                            ?>
+
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4">

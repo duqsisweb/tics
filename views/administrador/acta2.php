@@ -123,6 +123,8 @@ if (isset($_SESSION['usuario'])) {
 
     ?>
 
+
+
     <!DOCTYPE html>
     <html lang="en">
 
@@ -137,9 +139,11 @@ if (isset($_SESSION['usuario'])) {
     require '../../views/head.php';
     ?>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
     <body>
 
-        <section id="previewHtmlContent" style="font-size: 14px;">
+        <section id="descargaresto" style="font-size: 14px;">
             <div class="container">
                 <div class="row">
                     <div class="col-md-2 col-xs-12 col-sm-2" style="border: 1px solid black;"><img src="../../assets/image/duquesa_logo - copia.png" alt=""></div>
@@ -241,60 +245,94 @@ if (isset($_SESSION['usuario'])) {
                     ?>
                 </div>
 
-                <div class="row" style="border: 1px solid black;text-align: left;">
-                    <div class="col-md-12">
-                        <?php
-                        // Verificar si hay datos en el arreglo $arr
-                        if (!empty($arr) || !empty($arr_celular)) {
-                            echo '<strong></strong><br>';
 
-                            // Mostrar los resultados en una tabla
-                            echo '<table>';
-                            echo '<tr>';
+<!-- empieza aqui -->
 
-                            // Mostrar los resultados de las computadoras
-                            foreach ($arr as $fila) {
-                                echo '<td >'; // Agrega espacio y bordes
-                                echo '<p style="font-size: 14px;">'; //  tamaño de la fuente 
-                                echo 'Tipo de Máquina: <strong>' . $fila['Tipo_maquina'] . '</strong><br>';
-                                echo 'Marca: <strong>' . $fila['Marca_computador'] . '</strong><br>';
-                                echo 'Modelo: <strong>' . $fila['Modelo_computador'] . '</strong><br>';
-                                echo 'Serial: <strong>' . $fila['Serial_equipo'] . '</strong><br>';
-                                echo 'Procesador: <strong>' . $fila['Procesador'] . '</strong><br>';
-                                echo 'Memoria Ram: <strong>' . $fila['Memoria_ram'] . '</strong><br>';
-                                echo 'Tipo Disco: <strong>' . $fila['Tipo_disco'] . '</strong><br>';
-                                echo 'Capacidad Disco: <strong>'  . $fila['Capacidad_dico'] . '</strong><br>';
-                                echo 'OBSERVACIONES DE COMPUTADOR:<br> <strong>'  . $fila['observaciones_asigna'] . '</strong><br>';
-                                // Agrega aquí más campos y sus valores si es necesario
-                                echo '</p>';
-                                echo '</td>';
-                            }
 
-                            // Mostrar los resultados de los teléfonos celulares
-                            foreach ($arr_celular as $fila) {
-                                echo '<td style="">'; // Agrega espacio y bordes
-                                echo '<p>';
-                                echo 'Tipo de Máquina: <strong>' . $fila['tipo_maquina'] . '</strong><br>';
-                                echo 'Marca: <strong>' . $fila['marca'] . '</strong><br>';
-                                echo 'Modelo: <strong>' . $fila['modelo'] . '</strong><br>';
-                                echo 'Serial: <strong>' . $fila['serial_equipo_celular'] . '</strong><br>';
-                                echo 'IMEI: <strong>' . $fila['imei'] . '</strong><br>';
-                                echo 'Capacidad: <strong>' . $fila['capacidad'] . '</strong><br>';
-                                echo 'Ram: <strong>' . $fila['ram_celular'] . '</strong><br>';
-                                // Agrega aquí más campos y sus valores si es necesario
-                                echo '</p>';
-                                echo '</td>';
-                            }
+                <div class="row" style="border: 1px solid black;">
+    <div class="col-md-12">
+        <?php
+        // Check if there are computer assignment records
+        if (!empty($arr)) {
+            echo '<p>Computadoras</p>';
+            echo '<table border="1">';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th>Tipo de Máquina</th>';
+            echo '<th>Marca</th>';
+            echo '<th>Modelo</th>';
+            echo '<th>Serial</th>';
+            echo '<th>Procesador</th>';
+            echo '<th>Memoria Ram</th>';
+            echo '<th>Tipo Disco</th>';
+            echo '<th>Capacidad Disco</th>';
+            echo '<th>OBSERVACIONES DE COMPUTADOR</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
 
-                            echo '</tr>';
-                            echo '</table>';
-                        } else {
-                            echo 'No se encontraron datos para mostrar.';
-                        }
-                        ?>
-                    </div>
+            // Display the results of computer assignments
+            foreach ($arr as $fila) {
+                echo '<tr>';
+                echo '<td>' . $fila['Tipo_maquina'] . '</td>';
+                echo '<td>' . $fila['Marca_computador'] . '</td>';
+                echo '<td>' . $fila['Modelo_computador'] . '</td>';
+                echo '<td>' . $fila['Serial_equipo'] . '</td>';
+                echo '<td>' . $fila['Procesador'] . '</td>';
+                echo '<td>' . $fila['Memoria_ram'] . '</td>';
+                echo '<td>' . $fila['Tipo_disco'] . '</td>';
+                echo '<td>' . $fila['Capacidad_dico'] . '</td>';
+                echo '<td>' . $fila['observaciones_asigna'] . '</td>';
+                echo '</tr>';
+            }
 
-                </div>
+            echo '</tbody>';
+            echo '</table>';
+        }
+        ?>
+    </div>
+
+<!-- termina -->
+
+    <div class="col-md-6">
+        <?php
+        // Check if there are mobile phone assignment records
+        if (!empty($arr_celular)) {
+            echo '<p>Teléfonos Celulares</p>';
+            echo '<table border="1">';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th>Tipo de Máquina</th>';
+            echo '<th>Marca</th>';
+            echo '<th>Modelo</th>';
+            echo '<th>Serial</th>';
+            echo '<th>IMEI</th>';
+            echo '<th>Capacidad</th>';
+            echo '<th>Ram</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
+
+            // Display the results of mobile phone assignments
+            foreach ($arr_celular as $fila) {
+                echo '<tr>';
+                echo '<td>' . $fila['tipo_maquina'] . '</td>';
+                echo '<td>' . $fila['marca'] . '</td>';
+                echo '<td>' . $fila['modelo'] . '</td>';
+                echo '<td>' . $fila['serial_equipo_celular'] . '</td>';
+                echo '<td>' . $fila['imei'] . '</td>';
+                echo '<td>' . $fila['capacidad'] . '</td>';
+                echo '<td>' . $fila['ram_celular'] . '</td>';
+                echo '</tr>';
+            }
+
+            echo '</tbody>';
+            echo '</table>';
+        }
+        ?>
+    </div>
+</div>
+
 
 
                 <div class="row">
@@ -329,7 +367,7 @@ if (isset($_SESSION['usuario'])) {
 
 
 
-        <section id="acuerdo" style="margin-top: 50px;">
+        <section id="" style="margin-top: 50px;">
             <div class="container" style="border: 1px solid black;padding: 100px;">
 
                 <div class="row" style="">
@@ -375,12 +413,64 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </section>
 
-        <button id="generarPDF">Generar PDF</button>
+        <div class="row columnas">
+            <div class="col-md-12">
+                <button id="descargarPdf" type="button" class="btn btn-outline-danger pdf-button">Descargar en PDF</button>
+            </div>
+        </div>
+
 
     </body>
 
     </html>
 
+
+    <!-- script para descargar en pdf -->
+    <script>
+        // Función para convertir la sección en PDF y descargarlo
+        function descargarPDF() {
+            // Oculta los botones antes de generar el PDF
+            var pdfButtons = document.querySelectorAll('.pdf-button');
+            pdfButtons.forEach(function(button) {
+                button.style.display = 'none';
+            });
+
+            const elemento = document.getElementById('descargaresto'); // ID de la sección que deseas convertir a PDF
+
+            // Configuración de opciones para html2pdf
+            const opciones = {
+                margin: 10,
+                filename: 'documento.pdf', // Nombre del archivo PDF
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'portrait'
+                },
+            };
+
+            // Comienza la conversión y descarga
+            html2pdf()
+                .from(elemento)
+                .set(opciones)
+                .save()
+                .then(function() {
+                    // Restaura la visibilidad de los botones después de generar el PDF
+                    pdfButtons.forEach(function(button) {
+                        button.style.display = 'block';
+                    });
+                });
+        }
+
+        // Asocia la función de descarga al botón
+        document.getElementById('descargarPdf').addEventListener('click', descargarPDF);
+    </script>
 
 
     <script>
