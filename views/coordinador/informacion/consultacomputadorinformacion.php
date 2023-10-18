@@ -52,6 +52,7 @@ if (
                             <th scope="col" class="hidden-cell">Segundo Apellido</th>
                             <th scope="col" class="hidden-cell">Cedula</th>
                             <th scope="col" class="hidden-cell">Cargo</th>
+                            <th scope="col" class="hidden-cell"></th>
                             <th scope="col">Service Tag</th>
                             <th scope="col">Serial de Equipo</th>
                             <th scope="col">Nombre de Equipo</th>
@@ -66,11 +67,8 @@ if (
                             <th scope="col">Serial de Activo Fijo</th>
                             <th scope="col">Tarjeta de Video</th>
                             <th scope="col">Observaciones</th>
-                            <th scope="col">Link Drive</th>
-                            <th scope="col" class="">Usua_retiraa</th>
-
-
-                            <th scope="col">Deshacer la asignación</th>
+                            <th scope="col">Link Divre</th>
+                            <th scope="col">Remover Asignación</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -82,7 +80,7 @@ if (
                                 <td class="hidden-cell"><?php echo $segundoapellido; ?></td>
                                 <td class="hidden-cell"><?php echo $cedula; ?></td>
                                 <td class="hidden-cell"><?php echo $cargo; ?></td>
-                                <td class=""><?php echo $Usua_retira; ?></td>
+                                <td class="hidden-cell"><?php echo $Usua_retira; ?></td>
                                 <td><?= $fila['Service_tag'] ?></td>
                                 <td><?= $fila['Serial_equipo'] ?></td>
                                 <td><?= $fila['Nombre_equipo'] ?></td>

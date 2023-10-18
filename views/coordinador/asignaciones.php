@@ -355,7 +355,7 @@ if (isset($_SESSION['usuario'])) {
                 </div>
 
                 <!-- AQUI MUESTRA LAS SECCION  ACCESORIOS -->
-                <div class="container" style="margin-top: 50px;">
+                <!-- <div class="container" style="margin-top: 50px;">
                     <div class="row">
 
                         <div class="col-md-2">
@@ -383,7 +383,7 @@ if (isset($_SESSION['usuario'])) {
                         </div>
 
                     </div>
-                </div>
+                </div> -->
 
 
                 <!-- AQUI MUESTRA LAS SECCION  EDCOMUNICACION -->
@@ -673,7 +673,6 @@ if (isset($_SESSION['usuario'])) {
 
                     </div>
                 </div> -->
-
 
 
                 <div style="text-align: center;">
@@ -1063,6 +1062,7 @@ if (isset($_SESSION['usuario'])) {
         function updateTipoComputador(radio) {
             document.getElementById('tipocomputador').value = radio.value;
         }
+        
 
         function updateDescripcionedcomunicacion(radio) {
             document.getElementById('tipo_edcomunicacion').value = radio.value;
@@ -1143,7 +1143,7 @@ if (isset($_SESSION['usuario'])) {
     </script>
 
     <!-- SCRIPT DE CHECKS ACCESORIOS -->
-    <script>
+    <!-- <script>
         $(document).ready(function() {
             $('#flexSwitchCheckAccesorios').on('change', function() {
                 if ($(this).is(':checked')) {
@@ -1159,7 +1159,7 @@ if (isset($_SESSION['usuario'])) {
                 }
             });
         });
-    </script>
+    </script> -->
 
     <!-- SCRIPT DE CHECKS EDCOMUNICACION -->
     <script>
@@ -1440,7 +1440,7 @@ if (isset($_SESSION['usuario'])) {
     </script>
 
     <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN ACCESORIOS-->
-    <!-- <script>
+    <script>
         $(document).ready(function() {
             $('#flexSwitchCheckAccesorios').on('change', function() {
                 if ($(this).is(':checked')) {
@@ -1471,7 +1471,7 @@ if (isset($_SESSION['usuario'])) {
                 }
             });
         }
-    </script> -->
+    </script>
 
     <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN EDCOMUNICACION-->
     <script>
@@ -1835,7 +1835,7 @@ if (isset($_SESSION['usuario'])) {
     </script>
 
     <!-- AJAX PARA CONSULTA DE ACCESORIOS -->
-    <script>
+    <!-- <script>
         $(document).ready(function() {
             $('#fila4accesorios button').on('click', function() {
                 var tipocomputador = $('#tipocomputador').val();
@@ -1886,7 +1886,7 @@ if (isset($_SESSION['usuario'])) {
                 $('#modalaccesorios .modal-body').html(response); // Agrega los resultados al cuerpo del modal
             }
         });
-    </script>
+    </script> -->
 
     <!-- AJAX PARA CONSULTA DE EDCOMUNICACION -->
     <script>

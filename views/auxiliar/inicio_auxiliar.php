@@ -28,7 +28,7 @@ if (isset($_SESSION['usuario'])) {
         <section style="margin-top: 100px;">
 
             <div class="alert alert-success" role="alert">
-                <p><?php echo utf8_encode($_SESSION['NOMBRE']); ?> Auxiliar</p>
+                <p><?php echo utf8_encode($_SESSION['NOMBRE']); ?> Administrador</p>
             </div>
 
             <!-- PRIMER BLOQUE -->
