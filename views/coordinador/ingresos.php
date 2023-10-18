@@ -34,10 +34,6 @@ if (isset($_SESSION['usuario'])) {
             <?php require '../../views/navinventario.php'; ?>
 
 
-
-
-
-
             <!-- inicio de POST enviarComputador -->
             <?php
             if (isset($_POST['enviarComputador'])) {
@@ -65,7 +61,6 @@ if (isset($_SESSION['usuario'])) {
                 $fecha_ingreso = $_POST['Fecha_ingreso'];
                 $targeta_video = $_POST['Targeta_Video'];
                 $estado = $_POST['Estado'];
-                $gestion = $_POST['Gestion'];
                 $Fecha_garantia = $_POST['Fecha_garantia'];
 
                 $usuario = $_SESSION['usuario'];
@@ -86,16 +81,14 @@ if (isset($_SESSION['usuario'])) {
                                                   (tipo_maquina,Service_tag,Serial_equipo,Nombre_equipo,Sede,Empresa,Marca_computador,
                 Modelo_computador,Tipo_comp,Tipo_ram,Memoria_ram,Tipo_discoduro,Capacidad_discoduro,
                 Procesador,Propietario,Proveedor,Sistema_Operativo,Serial_cargador,Dominio,Tipo_usuario,
-                Serial_activo_fijo,Fecha_ingreso,Targeta_Video,Estado,Gestion,Fecha_garantia,Fecha_crea,usua_crea) 
+                Serial_activo_fijo,Fecha_ingreso,Targeta_Video,Estado,Fecha_garantia,Fecha_crea,usua_crea) 
                                                   VALUES
                                                   ('$tipomaquina','$service_tag','$serial','$nombre_equipo','$sede','$Empresa','$marca_computador',
                         '$modelo_computador','$tipo_comp','$tipo_ram','$cant_memoria_ram','$tipo_discoduro','$capacidad_discoduro',
                         '$procesador','$propietario','$proveedor','$sistema_operativo','$serial_cargador','$dominio','$tipo_usuario',
-                        '$serial_activo_fijo','$fecha_ingreso','$targeta_video','$estado','$gestion','$Fecha_garantia',Getdate(),'$usuario')");
+                        '$serial_activo_fijo','$fecha_ingreso','$targeta_video','$estado','$Fecha_garantia',Getdate(),'$usuario')");
             }
-
             ?>
-
 
             <!-- inicio de POST enviarCelular -->
             <?php
@@ -127,9 +120,7 @@ if (isset($_SESSION['usuario'])) {
                                                   ('$tipomaquina','$imei','$serial_equipo_celular','$marca','$modelo','$fecha_ingreso','$capacidad',
                                                     '$ram_celular','$estado','$gestion','$Fecha_garantia',Getdate(),'$usuario')");
             }
-
             ?>
-
 
             <!-- inicio de POST enviarAccesorios -->
             <?php
@@ -157,10 +148,7 @@ if (isset($_SESSION['usuario'])) {
                                                   ('$tipomaquina','$marca','$modelo','$descripcion','$tipo',
                                                     '$cantidad','$fecha_de_ingreso',Getdate(),'$usuario')");
             }
-
             ?>
-
-
 
             <!-- inicio de POST EdComunicacion -->
             <?php
@@ -193,10 +181,7 @@ if (isset($_SESSION['usuario'])) {
                                                   ('$tipomaquina','$marca_edcomunicacion','$modelo_edcomunicacion','$descripcion_edcomunicacion','$serial_edcomunicacion',
                                                     '$fecha_de_ingreso','$estado','$placa_activo_edcomunicacion','$sede_edcomunicacion','$ubicacion_edcomunicacion','$observaciones_edcomunicacion','$fecha_garantia',Getdate(),'$usuario')");
             }
-
             ?>
-
-
 
             <!-- inicio de POST perifericos -->
             <?php
@@ -230,9 +215,7 @@ if (isset($_SESSION['usuario'])) {
                                                   ('$tipomaquina','$serial_perifericos','$descripcion_perifericos','$marca_perifericos','$modelo_perifericos','$placa_activo_perifericos','$sede_perifericos','$ubicacion_perifericos','$tipo',
                                                 '$tipo_toner','$empresa','$fecha_de_garantia',Getdate(),'$usuario','$estado')");
             }
-
             ?>
-
 
             <!-- inicio de POST Almacenamiento -->
             <?php
@@ -270,9 +253,7 @@ if (isset($_SESSION['usuario'])) {
                                                '$capacidad_almacenamiento','$tipo_almacenamiento','$caracteristica_almacenamiento','$sede_almacenamiento','$ubicacion_almacenamiento',
                                                '$fecha_de_ingreso','$estado','$fecha_de_garantia',Getdate(),'$usuario')");
             }
-
             ?>
-
 
             <!-- inicio de POST enviarsimcard -->
             <?php
@@ -303,9 +284,7 @@ if (isset($_SESSION['usuario'])) {
                                                   ('$tipo_maquina','$numero_linea','$nombre_plan','$fecha_apertura','$valor_plan','$operador',
                                                 '$cod_cliente','$observaciones_sim','$fecha_fin_plan','$estado',Getdate(),'$usuario')");
             }
-
             ?>
-
 
             <!-- inicio de POST DVR -->
             <?php
@@ -346,9 +325,7 @@ if (isset($_SESSION['usuario'])) {
                                                 '$tipo_dvr','$sede_dvr','$ubicacion_dvr','$software','$fecha_ingreso',
                                                 '$num_canales','$num_discos','$dias_grabacion','$ip_dvr','$estado','$fecha_garantia',Getdate(),'$usuario')");
             }
-
             ?>
-
 
             <!-- inicio de POST CCTV -->
             <?php
@@ -386,9 +363,7 @@ if (isset($_SESSION['usuario'])) {
                                                 '$ubicacion_cctv','$fecha_ingreso','$ip_cctv','$vision_enfoque','$serial_drv',
                                                 '$canal','$estado','$fecha_garantia',Getdate(),'$usuario')");
             }
-
             ?>
-
 
             <!-- inicio de POST TORRE-->
             <?php
@@ -420,10 +395,7 @@ if (isset($_SESSION['usuario'])) {
                                                 '$fecha_ingreso','$fecha_ult_mantenimiento',
                                                 Getdate(),'$usuario','$estado')");
             }
-
             ?>
-
-
 
             <style>
                 .campo-incompleto {
@@ -435,12 +407,12 @@ if (isset($_SESSION['usuario'])) {
 
 
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
-                <div class="container" >
+                <div class="container">
                     <div>
                         <h3>Subir Maquinas Al stock</h3>
                     </div>
                 </div>
-            </div> 
+            </div>
 
             <form method="POST" class="row g-3 needs-validation" novalidate>
 
@@ -491,12 +463,13 @@ if (isset($_SESSION['usuario'])) {
 
                         <!-- FORMULARIO COMPUTADOR -->
                         <div action="" id="formulario1" style="display: none;">
+
                             <!-- PRIMER BLOQUE DE FORMULARIO -->
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="" class="form-label">Sede</label>
                                     <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="Sede" required>
-                                        <option selected>SELECCIONE</option>
+                                        <option value="" selected>SELECCIONE</option>
 
                                         <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                         <?php
@@ -523,7 +496,7 @@ if (isset($_SESSION['usuario'])) {
                                     <div class="mb-3">
                                         <label for="" class="form-label">Empresa</label>
                                         <select class="form-select" aria-label="Default select example" id="" onchange="mostrarFormulario()" name="Empresa_computador" required>
-                                            <option selected>SELECCIONE</option>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de empresa -->
                                             <?php
@@ -551,7 +524,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Marca_computador" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Marca_computador" oninput="convertirAMayusculas(this)" required>
                                     </div>
                                 </div>
                             </div>
@@ -561,19 +534,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Service Tag</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Service_tag" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Service_tag" required oninput="convertirAMayusculas(this)">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Serial</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_equipo" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_equipo" required oninput="convertirAMayusculas(this)">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Nombre Equipo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Nombre_equipo" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Nombre_equipo" required oninput="convertirAMayusculas(this)">
                                     </div>
                                 </div>
                             </div>
@@ -583,14 +556,14 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Modelo_computador" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Modelo_computador" required oninput="convertirAMayusculas(this)" >
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <label for="" class="form-label">Tipo Comp.</label>
+                                        <label for="" class="form-label">Tipo Computador</label>
                                         <select class="form-select" aria-label="Default select example" id="Tipo_comp" onchange="mostrarFormulario()" name="Tipo_comp" required>
-                                            <option selected>SELECCIONE</option>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de computadores -->
                                             <?php
@@ -618,12 +591,28 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Tipo de Ram</label>
-                                        <select class="form-select" aria-label="Default select example" name="Tipo_ram" required>
-                                            <option selected>SELECCIONE</option>
-                                            <option value="DDR">DDR</option>
-                                            <option value="DDR2">DDR2</option>
-                                            <option value="DDR3">DDR3</option>
-                                            <option value="DDR4">DDR4</option>
+                                        <select class="form-select" aria-label="Default select example" id="Tipo_ram" onchange="mostrarFormulario()" name="Tipo_ram" required>
+                                            <option value="" selected>SELECCIONE</option>
+
+                                            <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de computadores -->
+                                            <?php
+                                            include '../../conexionbd.php';
+
+                                            // Realizar la consulta a la base de datos para obtener los computadores
+                                            $consulta = "SELECT id, nombre_tipo_ram FROM [ControlTIC].[dbo].[tipo_memoria_ram]";
+                                            $resultado = odbc_exec($conexion, $consulta);
+
+                                            // Iterar sobre los resultados y generar las opciones del select
+                                            while ($fila = odbc_fetch_array($resultado)) {
+                                                $id = $fila['id'];
+                                                $nombre = $fila['nombre_tipo_ram'];
+                                                echo "<option value='$id'>$nombre</option>";
+                                            }
+
+                                            // Liberar recursos
+                                            odbc_free_result($resultado);
+                                            ?>
+
                                         </select>
                                     </div>
                                 </div>
@@ -635,14 +624,36 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Cant Memoria RAM</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Memoria_ram" required>
+                                        <select class="form-select" aria-label="Default select example" id="Memoria_ram" onchange="mostrarFormulario()" name="Memoria_ram" required>
+                                            <option value="" selected>SELECCIONE</option>
+
+                                            <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de computadores -->
+                                            <?php
+                                            include '../../conexionbd.php';
+
+                                            // Realizar la consulta a la base de datos para obtener los computadores
+                                            $consulta = "SELECT id, capacidad_ram FROM [ControlTIC].[dbo].[capacidad_ram]";
+                                            $resultado = odbc_exec($conexion, $consulta);
+
+                                            // Iterar sobre los resultados y generar las opciones del select
+                                            while ($fila = odbc_fetch_array($resultado)) {
+                                                $id = $fila['id'];
+                                                $nombre = $fila['capacidad_ram'];
+                                                echo "<option value='$id'>$nombre</option>";
+                                            }
+
+                                            // Liberar recursos
+                                            odbc_free_result($resultado);
+                                            ?>
+
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Tipo Disco duro</label>
                                         <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="Tipo_discoduro" required>
-                                            <option selected>SELECCIONE</option>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                             <?php
@@ -670,7 +681,7 @@ if (isset($_SESSION['usuario'])) {
                                     <div class="mb-3">
                                         <label for="" class="form-label">Capacidad Disco Duro</label>
                                         <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="Capacidad_discoduro" required>
-                                            <option selected>SELECCIONE</option>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                             <?php
@@ -701,14 +712,14 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Procesador</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Procesador" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Procesador" required oninput="convertirAMayusculas(this)" > 
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Propietario</label>
                                         <select class="form-select" aria-label="Default select example" id="Propietario" onchange="mostrarFormulario()" name="Propietario" required>
-                                            <option selected>SELECCIONE</option>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                             <?php
@@ -734,7 +745,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Proveedor</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Proveedor" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Proveedor" required oninput="convertirAMayusculas(this)">
                                     </div>
                                 </div>
                             </div>
@@ -745,7 +756,7 @@ if (isset($_SESSION['usuario'])) {
                                     <div class="mb-3">
                                         <label for="" class="form-label">Sistema Operativo</label>
                                         <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="Sistema_Operativo" required>
-                                            <option selected>SELECCIONE</option>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                             <?php
@@ -771,14 +782,14 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Serial del Cargador</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_cargador" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_cargador" required oninput="convertirAMayusculas(this)" >
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Dominio</label>
                                         <select class="form-select" aria-label="Default select example" name="Dominio" required>
-                                            <option selected>SELECCIONE</option>
+                                            <option value="" selected>SELECCIONE</option>
                                             <option value="SI">SI</option>
                                             <option value="NO">NO</option>
                                         </select>
@@ -792,7 +803,7 @@ if (isset($_SESSION['usuario'])) {
                                     <div class="mb-3">
                                         <label for="" class="form-label">Usuario</label>
                                         <select class="form-select" aria-label="Default select example" name="Tipo_usuario" required>
-                                            <option selected>SELECCIONE</option>
+                                            <option value="" selected>SELECCIONE</option>
                                             <option value="Administrador">Administrador</option>
                                             <option value="Estandar">Estandar</option>
                                         </select>
@@ -801,7 +812,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Serial de Activo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_activo_fijo" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_activo_fijo" required oninput="convertirAMayusculas(this)" >
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -817,7 +828,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo T. Video</label>
-                                        <input type="text" class="form-control" id="" placeholder="N/A" name="Targeta_Video" required>
+                                        <input type="text" class="form-control" id="" placeholder="N/A" name="Targeta_Video" required oninput="convertirAMayusculas(this)">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -835,7 +846,7 @@ if (isset($_SESSION['usuario'])) {
                                     SE DEJA OCULTO -->
                             <div>
                                 <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
-                                <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
+                                <input type="hidden" class="form-control" id="" placeholder="" value="1" name="Estado">
                             </div>
 
 
@@ -923,7 +934,7 @@ if (isset($_SESSION['usuario'])) {
 
                             <!-- CAMPOS OCULTOS -->
                             <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
-                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="Estado">
 
                         </div>
 
@@ -1142,7 +1153,7 @@ if (isset($_SESSION['usuario'])) {
 
                             <!-- CAMPOS OCULTOS -->
                             <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
-                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="Estado">
 
                         </div>
 
@@ -1314,7 +1325,7 @@ if (isset($_SESSION['usuario'])) {
 
                             <!-- CAMPOS OCULTOS -->
                             <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
-                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="Estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="Estado">
 
                         </div>
 
@@ -1471,7 +1482,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
-                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="estado">
 
                         </div>
 
@@ -1551,7 +1562,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
-                            <input type="hidden" class="form-control" id="" placeholder="" value="4" name="estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="estado">
 
                         </div>
 
@@ -1695,7 +1706,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
-                            <input type="hidden" class="form-control" id="" placeholder="" value="6" name="estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="estado">
 
 
                         </div>
@@ -1817,7 +1828,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
-                            <input type="hidden" class="form-control" id="" placeholder="" value="6" name="estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="estado">
                         </div>
 
                         <!-- FORMULARIO TORRE -->
@@ -1915,7 +1926,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
-                            <input type="hidden" class="form-control" id="" placeholder="" value="6" name="estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="1" name="estado">
 
                         </div>
 
@@ -2043,6 +2054,13 @@ if (isset($_SESSION['usuario'])) {
                 }
             });
         });
+    </script>
+
+    <!-- MAYUSCULAS -->
+    <script>
+        function convertirAMayusculas(input) {
+            input.value = input.value.toUpperCase();
+        }
     </script>
 
 

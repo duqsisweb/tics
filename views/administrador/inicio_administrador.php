@@ -55,7 +55,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Equipos En El Inventario</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <p class="card-text">...</p>
                                 <a href="inventario.php" class="btn btn-success">Ingresar</a>
                             </div>
 
@@ -118,7 +118,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Mantenimiento Preventivo</h5>
                                 <p class="card-text">...</p>
-                                <a href="mantenimientos.php" class="btn btn-success">Ingresar</a>
+                                <a href="mantenimientos/mantenimientocomputador.php" class="btn btn-success">Ingresar</a>
                             </div>
 
                         </div>
@@ -160,16 +160,16 @@ if (isset($_SESSION['usuario'])) {
                     </div>
 
                     <div class="col-md-4">
-                        <div class="card text-center">
+                        <!-- <div class="card text-center">
                             <div class="card-header">
                                 Devoluciones
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Remover Asignación</h5>
                                 <p class="card-text">Aquí puede liberar o remover equipos de los usuarios</p>
-                                <a href="complementos.php" class="btn btn-success">Ingresar</a>
+                                <a href="devoluciones.php" class="btn btn-success">Ingresar</a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

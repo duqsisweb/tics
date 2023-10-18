@@ -10,13 +10,14 @@ if (
     && isset($_POST['tipo_usuario']) && isset($_POST['serial_activo_fijo']) && isset($_POST['fecha_ingreso']) && isset($_POST['tarjeta_video'])
     && isset($_POST['estado']) && isset($_POST['gestion']) && isset($_POST['fecha_garantia']) && isset($_POST['fecha_crea'])
     && isset($_POST['usua_crea']) && isset($_POST['fecha_modifica']) && isset($_POST['usua_modifica']) && isset($_POST['primernombre'])
-    && isset($_POST['segundonombre']) && isset($_POST['primerapellido']) && isset($_POST['segundoapellido']) && isset($_POST['cedula']) && isset($_POST['cargo']) && isset($_POST['observaciones_desasigna'])
+    && isset($_POST['segundonombre']) && isset($_POST['primerapellido']) && isset($_POST['segundoapellido']) && isset($_POST['cedula']) && isset($_POST['cargo']) && isset($_POST['observaciones_desasigna']) && isset($_POST['link_computador_desasigna'])
 ) {
 
     $primernombre = $_POST['primernombre'];
     $segundonombre = $_POST['segundonombre'];
     $primerapellido = $_POST['primerapellido'];
     $segundoapellido = $_POST['segundoapellido'];
+    $Usua_retira = $_POST['Usua_retira'];
 
     $cedula = $_POST['cedula'];
     $cargo = $_POST['cargo'];
@@ -53,6 +54,7 @@ if (
     $fecha_modifica = $_POST['fecha_modifica'];
     $usua_modifica = $_POST['usua_modifica'];
     $observaciones_desasigna = $_POST['observaciones_desasigna'];
+    $link_computador_desasigna = $_POST['link_computador_desasigna'];
 
 
     // INSERTAR DATOS A LA TABLA HISTORIAL COMPUTADOR
@@ -61,15 +63,15 @@ if (
                 Marca_computador, Modelo_computador, Tipo_comp, Tipo_ram, Memoria_ram,
                 Tipo_discoduro, Capacidad_discoduro, Procesador, Propietario, Proveedor,
                 Sistema_Operativo, Serial_cargador, Dominio, Tipo_usuario, Serial_activo_fijo,
-                Fecha_ingreso, Targeta_Video, Estado, Gestion, Fecha_garantia, Fecha_crea,
-                Usua_crea, Fecha_modifica, Usua_modifica, primernombre, segundonombre, primerapellido, segundoapellido, cedula, cargo, observaciones_desasigna 
+                Fecha_ingreso, Targeta_Video, Estado, Gestion, Fecha_garantia,
+                primernombre, segundonombre, primerapellido, segundoapellido, cedula, cargo, Fecha_retira, Usua_retira, estado_asignacion, observaciones_desasigna, link_computador_desasigna
             ) VALUES (
                 '$id', '$tipo_maquina', '$service_tag', '$serial_equipo', '$nombre_equipo', '$sede', '$empresa',
                 '$marca_computador', '$modelo_computador', '$tipo_comp', '$tipo_ram', '$memoria_ram',
                 '$tipo_discoduro', '$capacidad_discoduro', '$procesador', '$propietario', '$proveedor',
                 '$sistema_operativo', '$serial_cargador', '$dominio', '$tipo_usuario', '$serial_activo_fijo',
-                '$fecha_ingreso', '$tarjeta_video', '$estado', '$gestion', '$fecha_garantia', '$fecha_crea',
-                '$usua_crea', '$fecha_modifica', '$usua_modifica', '$primernombre', '$segundonombre', '$primerapellido', '$segundoapellido','$cedula', '$cargo', '$observaciones_desasigna'
+                '$fecha_ingreso', '$tarjeta_video', '$estado', '$gestion', '$fecha_garantia', 
+                '$primernombre', '$segundonombre', '$primerapellido', '$segundoapellido','$cedula', '$cargo', getdate(), '$Usua_retira', '2', '$observaciones_desasigna', '$link_computador_desasigna'
             )";
 
 

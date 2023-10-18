@@ -9,7 +9,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="../administrador/inicio_administrador.php">Inicio</a>
                 </li>
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Listar Inventario
                     </a>
@@ -25,7 +25,7 @@
                         <li><a class="dropdown-item" href="../views/coordinador/stock_cctv.php">CCTV</a></li>
                         <li><a class="dropdown-item" href="../views/coordinador/stock_torre.php">TORRE</a></li>
                     </ul>
-                </li>
+                </li> -->
 
             </ul>
 

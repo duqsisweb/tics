@@ -14,7 +14,7 @@ if (isset($_POST['tipo_perifericos'])) {
     $cargo = isset($_POST['cargo']) ? $_POST['cargo'] : '';
     $empresa = isset($_POST['empresa']) ? $_POST['empresa'] : '';
 
-    $data = odbc_exec($conexion, "SELECT [id] ,[tipo_maquina] ,[serial_perifericos] ,[descripcion_perifericos] ,[marca_perifericos] ,[modelo_perifericos] ,[placa_activo_perifericos] ,[sede_perifericos] ,[ubicacion_perifericos] ,[tipo] ,[tipo_toner] ,[gestion] ,[empresa] ,[fecha_de_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[estado] FROM [ControlTIC].[dbo].[maquina_perifericos] where estado = '6' and gestion = '0' and descripcion_perifericos = '$tipo_perifericos' ");
+    $data = odbc_exec($conexion, "SELECT [id] ,[tipo_maquina] ,[serial_perifericos] ,[descripcion_perifericos] ,[marca_perifericos] ,[modelo_perifericos] ,[placa_activo_perifericos] ,[sede_perifericos] ,[ubicacion_perifericos] ,[tipo] ,[tipo_toner] ,[gestion] ,[empresa] ,[fecha_de_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[estado] FROM [ControlTIC].[dbo].[maquina_perifericos] where estado = '6' and gestion = '3' and descripcion_perifericos = '$tipo_perifericos' ");
 
     $arr = array();
     while ($Element = odbc_fetch_array($data)) {

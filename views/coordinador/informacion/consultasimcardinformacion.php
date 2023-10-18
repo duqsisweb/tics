@@ -77,11 +77,13 @@ if (isset($_POST['cedula'])) {
                             <td><?= $fila['cod_cliente'] ?></td>
                             <td><?= $fila['observaciones_sim'] ?></td>
                             <td><?= $fila['fecha_fin_plan'] ?></td>
-                            <td><input type="text" id="observaciones_desasigna_<?= $fila['id'] ?>" value="<?= $fila['observaciones_desasigna'] ?>"></td>
+                            <td>
+                                <textarea placeholder="AGREGE UNA OBSERVACIÓN" id="observaciones_desasigna_<?= $fila['id'] ?>" name="observaciones_desasigna" style="width: 300px; height: 160px;"></textarea>
+                            </td>
                             <td>
                                 <button id="enviarsimcard" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-primernombre="<?= $primernombre ?>" data-segundonombre="<?= $segundonombre ?>" data-primerapellido="<?= $primerapellido ?>" data-segundoapellido="<?= $segundoapellido ?>" data-cedula="<?= $cedula ?>" data-cargo="<?= $cargo ?>" data-empresa="<?= $empresa ?>" data-numero-linea="<?= $fila['numero_linea'] ?>" data-nombre-plan="<?= $fila['nombre_plan'] ?>" data-fecha-apertura="<?= $fila['fecha_apertura'] ?>" data-valor-plan="<?= $fila['valor_plan'] ?>" data-operador="<?= $fila['operador'] ?>" data-cod-cliente="<?= $fila['cod_cliente'] ?>" data-observaciones-sim="<?= $fila['observaciones_sim'] ?>" data-fecha-fin-plan="<?= $fila['fecha_fin_plan'] ?>" data-estado="<?= $fila['estado'] ?>" data-gestion="<?= $fila['gestion'] ?>" data-fecha-crea="<?= $fila['fecha_crea'] ?>" data-usua-crea="<?= $fila['usua_crea'] ?>" data-fecha-modifica="<?= $fila['fecha_modifica'] ?>" data-usua-modifica="<?= $fila['usua_modifica'] ?>"></button>
                                 <!-- btn escondido para la alerta -->
-                                <button id="" type="button" class="btn btn-outline-warning showAlertButton">ASIGNAR</button>
+                                <button id="" type="button" class="btn btn-outline-danger showAlertButton">Desasignar</button>
                             </td>
                         </tr>
                     <?php } ?>

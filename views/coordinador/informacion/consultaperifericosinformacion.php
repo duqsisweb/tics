@@ -84,7 +84,9 @@ if ( isset($_POST['cedula'])) {
                             <td><?= $fila['tipo'] ?></td>
                             <td><?= $fila['tipo_toner'] ?></td>
                             <td><?= $fila['empresa'] ?></td>
-                            <td><input type="text" id="observaciones_desasigna_<?= $fila['id'] ?>" value="<?= $fila['observaciones_desasigna'] ?>"></td>
+                            <td>
+                                <textarea placeholder="AGREGE UNA OBSERVACIÓN" id="observaciones_desasigna_<?= $fila['id'] ?>" name="observaciones_desasigna" style="width: 300px; height: 160px;"></textarea>
+                            </td>
                             <td>
                                 <button id="enviarperifericos" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-primernombre="<?= $primernombre ?>" data-segundonombre="<?= $segundonombre ?>" data-primerapellido="<?= $primerapellido ?>" data-segundoapellido="<?= $segundoapellido ?>" data-cedula="<?= $cedula ?>" data-cargo="<?= $cargo ?>" data-empresa="<?= $empresa ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-serial-perifericos="<?= $fila['serial_perifericos'] ?>" data-descripcion-perifericos="<?= $fila['descripcion_perifericos'] ?>" data-marca-perifericos="<?= $fila['marca_perifericos'] ?>" data-modelo-perifericos="<?= $fila['modelo_perifericos'] ?>" data-placa-activo-perifericos="<?= $fila['placa_activo_perifericos'] ?>" data-sede-perifericos="<?= $fila['sede_perifericos'] ?>" data-ubicacion-perifericos="<?= $fila['ubicacion_perifericos'] ?>" data-tipo="<?= $fila['tipo'] ?>" data-tipo-toner="<?= $fila['tipo_toner'] ?>" data-gestion="<?= $fila['gestion'] ?>" data-empresa-perifericos="<?= $fila['empresa'] ?>" data-fecha-garantia="<?= $fila['fecha_de_garantia'] ?>" data-fecha-crea="<?= $fila['fecha_crea'] ?>" data-usua-crea="<?= $fila['usua_crea'] ?>" data-fecha-modifica="<?= $fila['fecha_modifica'] ?>" data-usua-modifica="<?= $fila['usua_modifica'] ?>" data-estado="<?= $fila['estado'] ?>"></button>
                                 <!-- btn escondido para la alerta -->

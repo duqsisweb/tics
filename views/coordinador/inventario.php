@@ -44,7 +44,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Computadores</h5>
                                 <p class="card-text"></p>
-                                <a href="stock_computadores.php" class="btn btn-success">Seleccionar</a>
+                                <a href="stock/stock_computadores.php" class="btn btn-success">Seleccionar</a>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Celulares</h5>
                                 <p class="card-text"></p>
-                                <a href="stock_celulares.php" class="btn btn-success">Seleccionar</a>
+                                <a href="stock/stock_celulares.php" class="btn btn-success">Seleccionar</a>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Accesorios</h5>
                                 <p class="card-text"></p>
-                                <a href="stock_accesorios.php" class="btn btn-success">Seleccionar</a>
+                                <a href="stock/stock_accesorios.php" class="btn btn-success">Seleccionar</a>
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">E. Comunicación</h5>
                                 <p class="card-text"></p>
-                                <a href="stock_edcomunicacion.php" class="btn btn-success">Seleccionar</a>
+                                <a href="stock/stock_edcomunicacion.php" class="btn btn-success">Seleccionar</a>
                             </div>
                         </div>
                     </div>
@@ -91,7 +91,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Perifericos</h5>
                                 <p class="card-text"></p>
-                                <a href="stock_perifericos.php" class="btn btn-success">Seleccionar</a>
+                                <a href="stock/stock_perifericos.php" class="btn btn-success">Seleccionar</a>
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Almacenamiento</h5>
                                 <p class="card-text"></p>
-                                <a href="stock_almacenamiento.php" class="btn btn-success">Seleccionar</a>
+                                <a href="stock/stock_almacenamiento.php" class="btn btn-success">Seleccionar</a>
                             </div>
                         </div>
                     </div>
@@ -111,7 +111,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Sim Card</h5>
                                 <p class="card-text"></p>
-                                <a href="stock_simcard.php" class="btn btn-success">Seleccionar</a>
+                                <a href="stock/stock_simcard.php" class="btn btn-success">Seleccionar</a>
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">DVR</h5>
                                 <p class="card-text"></p>
-                                <a href="stock_dvr.php" class="btn btn-success">Seleccionar</a>
+                                <a href="stock/stock_dvr.php" class="btn btn-success">Seleccionar</a>
                             </div>
                         </div>
                     </div>
@@ -137,7 +137,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">CCTV</h5>
                                 <p class="card-text"></p>
-                                <a href="stock_cctv.php" class="btn btn-success">Seleccionar</a>
+                                <a href="stock/stock_cctv.php" class="btn btn-success">Seleccionar</a>
                             </div>
                         </div>
                     </div>
@@ -147,7 +147,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Torre</h5>
                                 <p class="card-text"></p>
-                                <a href="stock_torre.php" class="btn btn-success">Seleccionar</a>
+                                <a href="stock/stock_torre.php" class="btn btn-success">Seleccionar</a>
                             </div>
                         </div>
                     </div>

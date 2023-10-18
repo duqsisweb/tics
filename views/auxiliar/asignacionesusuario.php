@@ -271,7 +271,7 @@ if (isset($_SESSION['usuario'])) {
                 <?php
                 if (isset($showSections) && $showSections) {
                 ?>
-                    <div class="container" style="">
+                    <div class="container">
                         <div class="row">
                             <div class="col-md-4" id="fila1" style="display: none; text-align: center; "></div>
                             <div class="col-md-4" id="fila2" style="display: none; text-align: center; "></div>
@@ -280,7 +280,7 @@ if (isset($_SESSION['usuario'])) {
                     </div>
 
 
-                    <div class="container" style="">
+                    <div class="container">
                         <div class="row">
                             <div class="col-md-4" id="fila4" style="display: none; text-align: center; "></div>
                             <div class="col-md-4" id="fila5" style="display: none; text-align: center; "></div>
@@ -288,7 +288,7 @@ if (isset($_SESSION['usuario'])) {
                         </div>
                     </div>
 
-                    <div class="container" style="">
+                    <div class="container">
                         <div class="row">
                             <div class="col-md-4" id="fila7" style="display: none; text-align: center; "></div>
                             <div class="col-md-4" id="fila8" style="display: none; text-align: center; "></div>
@@ -296,12 +296,24 @@ if (isset($_SESSION['usuario'])) {
                         </div>
                     </div>
 
-                    <div class="container" style="">
+                    <div class="container">
                         <div class="row">
                             <div class="col-md-4" id="fila10" style="display: none; text-align: center; "></div>
 
                         </div>
                     </div>
+
+
+
+                    <div style="text-align: center;">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Generar Acta
+                        </button>
+
+
+                    </div>
+
 
                 <?php
                 }
@@ -313,6 +325,26 @@ if (isset($_SESSION['usuario'])) {
             ?>
         </section>
 
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Acta</h1>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <!-- .... -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-danger" id="descargarPDF">DESCARGAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </body>
 
@@ -321,12 +353,57 @@ if (isset($_SESSION['usuario'])) {
 
 
     <script>
-        document.getElementById('asisteInput').addEventListener('input', function() {
-            var selectedValue = this.value;
-            var cedulaIndex = selectedValue.lastIndexOf('-'); // Índice del último guión
-            if (cedulaIndex !== -1) {
-                this.value = selectedValue.substring(cedulaIndex + 1).trim(); // Eliminar espacio adicional antes de la cédula
-            }
+        $('#exampleModal').on('show.bs.modal', function(event) {
+            // Obtén la cédula y el cargo del PHP
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
+            var cargo = '<?php echo $cargo; ?>'; // Obtener el cargo del PHP
+            var nombreCompleto = '<?php echo $nombreCompleto; ?>'; // Obtener el nombre completo del PHP
+
+            // Realiza la solicitud AJAX aquí
+            $.ajax({
+                url: 'acta2.php',
+                method: 'GET',
+                data: {
+                    cedula: cedula,
+                    cargo: cargo,
+                    nombreCompleto: nombreCompleto
+                }, // Envía la cédula, el cargo y el nombre completo como parámetros
+                // dataType: 'html',
+                success: function(response) {
+                    $('#exampleModal .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error en la solicitud AJAX');
+                    console.error('Estado:', status);
+                    console.error('Error:', error);
+                }
+            });
+        });
+    </script>
+
+
+
+    <script>
+        // Asegúrate de que jsPDF se haya cargado antes de ejecutar este código
+        $(document).ready(function() {
+            $('#exampleModal').on('show.bs.modal', function(event) {
+                // ... (código previo)
+
+                // Manejador para el botón de descarga en el modal
+                $('#descargarPDF').click(function() {
+                    // Obtén el contenido del modal
+                    var modalContent = $('#ajax-result').html();
+
+                    // Crea un nuevo documento PDF
+                    var doc = new jsPDF();
+
+                    // Agrega el contenido del modal al documento PDF
+                    doc.fromHTML(modalContent, 15, 15);
+
+                    // Descarga el archivo PDF
+                    doc.save('acta.pdf');
+                });
+            });
         });
     </script>
 
@@ -438,7 +515,7 @@ if (isset($_SESSION['usuario'])) {
         });
     </script>
     <!-- Script y AJAX asignación de  ACCESORIOS -->
-    <script>
+    <!-- <script>
         $(document).ready(function() {
             $('#fila3').show(); // Mostrar #fila3 al cargar la página
             actualizarFila3();
@@ -457,7 +534,7 @@ if (isset($_SESSION['usuario'])) {
                 });
             }
         });
-    </script>
+    </script> -->
     <!-- Script y AJAX asignación de PERIFERICOS -->
     <script>
         $(document).ready(function() {

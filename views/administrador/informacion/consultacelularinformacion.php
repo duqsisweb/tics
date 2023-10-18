@@ -2,7 +2,7 @@
 include '../../../conexionbd.php';
 
 if (
-    isset($_POST['cedula'])
+    isset($_POST['cedula']) 
 ) {
 
 
@@ -76,9 +76,7 @@ if (
                             <td><?= $fila['modelo'] ?></td>
                             <td><?= $fila['capacidad'] ?></td>
                             <td><?= $fila['ram_celular'] ?></td>
-                            <td>
-                                <textarea placeholder="AGREGE UNA OBSERVACIÓN" id="observaciones_desasigna_<?= $fila['id'] ?>" name="observaciones_desasigna" style="width: 300px; height: 160px;"></textarea>
-                            </td>
+                            <td><input type="text" id="observaciones_desasigna_<?= $fila['id'] ?>" value="<?= $fila['observaciones_desasigna'] ?>"></td>
                             <td>
                                 <button id="enviarcelular" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-primernombre="<?= $primernombre ?>" data-segundonombre="<?= $segundonombre ?>" data-primerapellido="<?= $primerapellido ?>" data-segundoapellido="<?= $segundoapellido ?>" data-cedula="<?= $cedula ?>" data-cargo="<?= $cargo ?>" data-empresa="<?= $empresa ?>" data-imei="<?= $fila['imei'] ?>" data-serial-equipo-celular="<?= $fila['serial_equipo_celular'] ?>" data-marca="<?= $fila['marca'] ?>" data-modelo="<?= $fila['modelo'] ?>" data-fecha-ingreso="<?= $fila['fecha_ingreso'] ?>" data-capacidad="<?= $fila['capacidad'] ?>" data-ram-celular="<?= $fila['ram_celular'] ?>" data-estado="<?= $fila['estado'] ?>" data-gestion="<?= $fila['gestion'] ?>" data-fecha-garantia="<?= $fila['fecha_garantia'] ?>" data-fecha-crea="<?= $fila['fecha_crea'] ?>" data-usua-crea="<?= $fila['usua_crea'] ?>" data-fecha-modifica="<?= $fila['fecha_modifica'] ?>" data-usua-modifica="<?= $fila['usua_modifica'] ?>"></button>
                                 <!-- btn escondido para la alerta -->
@@ -184,7 +182,6 @@ if (
             });
         });
     </script>
-
 
 
     <script>

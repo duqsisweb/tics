@@ -9,9 +9,10 @@ if (isset($_POST['id']) && isset($_POST['tipo_maquina']) && isset($_POST['servic
     && isset($_POST['tipo_usuario']) && isset($_POST['serial_activo_fijo']) && isset($_POST['fecha_ingreso']) && isset($_POST['tarjeta_video'])
     && isset($_POST['estado']) && isset($_POST['gestion']) && isset($_POST['fecha_garantia']) && isset($_POST['fecha_crea'])
     && isset($_POST['usua_crea']) && isset($_POST['fecha_modifica']) && isset($_POST['usua_modifica']) && isset($_POST['primernombre'])  
-    && isset($_POST['segundonombre']) && isset($_POST['primerapellido']) && isset($_POST['segundoapellido'])
-    && isset($_POST['cedula']) && isset($_POST['cargo']) 
-     )   {
+    && isset($_POST['segundonombre']) && isset($_POST['primerapellido']) && isset($_POST['segundoapellido']) 
+    && isset($_POST['cedula']) && isset($_POST['cargo']) && isset($_POST['Usua_asigna']) && isset($_POST['observaciones_asigna']) && isset($_POST['link_computador_asigna'])
+    
+    )   {
     
     $primernombre = $_POST['primernombre'];
     $segundonombre = $_POST['segundonombre'];
@@ -52,7 +53,10 @@ if (isset($_POST['id']) && isset($_POST['tipo_maquina']) && isset($_POST['servic
     $usua_crea = $_POST['usua_crea'];
     $fecha_modifica = $_POST['fecha_modifica'];
     $usua_modifica = $_POST['usua_modifica'];
-
+    $Usua_asigna = $_POST['Usua_asigna'];
+    $observaciones_asigna = $_POST['observaciones_asigna'];
+    $link_computador_asigna = $_POST['link_computador_asigna'];
+    
       // INSERTAR DATOS A LA TABLA ASIGNACION
       $queryAsignacion = "INSERT INTO ControlTIC..asignacion_computador (
         id, tipo_maquina, Service_tag, Serial_equipo, Nombre_equipo, Sede, Empresa,
@@ -60,14 +64,14 @@ if (isset($_POST['id']) && isset($_POST['tipo_maquina']) && isset($_POST['servic
         Tipo_discoduro, Capacidad_discoduro, Procesador, Propietario, Proveedor,
         Sistema_Operativo, Serial_cargador, Dominio, Tipo_usuario, Serial_activo_fijo,
         Fecha_ingreso, Targeta_Video, Estado, Gestion, Fecha_garantia, Fecha_crea,
-        Usua_crea, Fecha_modifica, Usua_modifica, primernombre, segundonombre, primerapellido, segundoapellido, cedula, cargo 
+        Usua_crea, Usua_modifica, primernombre, segundonombre, primerapellido, segundoapellido, cedula, cargo, Usua_asigna, Fecha_asigna, estado_asignacion, observaciones_asigna, link_computador_asigna
     ) VALUES (
         '$id', '$tipo_maquina', '$service_tag', '$serial_equipo', '$nombre_equipo', '$sede', '$empresa',
         '$marca_computador', '$modelo_computador', '$tipo_comp', '$tipo_ram', '$memoria_ram',
         '$tipo_discoduro', '$capacidad_discoduro', '$procesador', '$propietario', '$proveedor',
         '$sistema_operativo', '$serial_cargador', '$dominio', '$tipo_usuario', '$serial_activo_fijo',
         '$fecha_ingreso', '$tarjeta_video', '$estado', '$gestion', '$fecha_garantia', '$fecha_crea',
-        '$usua_crea', '$fecha_modifica', '$usua_modifica', '$primernombre', '$segundonombre', '$primerapellido', '$segundoapellido','$cedula', '$cargo'
+        '$usua_crea', '$usua_modifica', '$primernombre', '$segundonombre', '$primerapellido', '$segundoapellido','$cedula', '$cargo', '$Usua_asigna',  getdate(), '1', '$observaciones_asigna', '$link_computador_asigna'
     )";
 
     // INSERTAR DATOS A LA TABLA HISTORIAL COMPUTADOR
@@ -77,17 +81,15 @@ if (isset($_POST['id']) && isset($_POST['tipo_maquina']) && isset($_POST['servic
                 Tipo_discoduro, Capacidad_discoduro, Procesador, Propietario, Proveedor,
                 Sistema_Operativo, Serial_cargador, Dominio, Tipo_usuario, Serial_activo_fijo,
                 Fecha_ingreso, Targeta_Video, Estado, Gestion, Fecha_garantia, Fecha_crea,
-                Usua_crea, Fecha_modifica, Usua_modifica, primernombre, segundonombre, primerapellido, segundoapellido, cedula, cargo 
+                Usua_crea, Usua_modifica, primernombre, segundonombre, primerapellido, segundoapellido, cedula, cargo, Usua_asigna, Fecha_asigna, estado_asignacion, observaciones_asigna, link_computador_asigna
             ) VALUES (
                 '$id', '$tipo_maquina', '$service_tag', '$serial_equipo', '$nombre_equipo', '$sede', '$empresa',
                 '$marca_computador', '$modelo_computador', '$tipo_comp', '$tipo_ram', '$memoria_ram',
                 '$tipo_discoduro', '$capacidad_discoduro', '$procesador', '$propietario', '$proveedor',
                 '$sistema_operativo', '$serial_cargador', '$dominio', '$tipo_usuario', '$serial_activo_fijo',
                 '$fecha_ingreso', '$tarjeta_video', '$estado', '$gestion', '$fecha_garantia', '$fecha_crea',
-                '$usua_crea', '$fecha_modifica', '$usua_modifica', '$primernombre', '$segundonombre', '$primerapellido', '$segundoapellido','$cedula', '$cargo'
+                '$usua_crea', '$usua_modifica', '$primernombre', '$segundonombre', '$primerapellido', '$segundoapellido','$cedula', '$cargo', '$Usua_asigna',  getdate(), '1', '$observaciones_asigna', '$link_computador_asigna'
             )";
-
-  
 
         // Ejecuta la consulta en la tabla 'asignacion_computador'
         $resultAsignacion = odbc_exec($conexion, $queryAsignacion);

@@ -178,14 +178,14 @@ if (isset($_SESSION['usuario'])) {
                                 </h2>
                                 <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                        <!-- <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow. -->
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                       ELEMENTOS DE COMUNICACIÓN
+                                        ELEMENTOS DE COMUNICACIÓN
                                     </button>
                                 </h2>
                                 <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -763,7 +763,7 @@ if (isset($_SESSION['usuario'])) {
 
 
 
-    <!-- Inicio DataTable -->
+    <!-- inicio DataTable Computador -->
     <script type="text/javascript">
         $(document).ready(function() {
             var lenguaje = $('#mtable').DataTable({
@@ -772,7 +772,7 @@ if (isset($_SESSION['usuario'])) {
                 destroy: true,
                 jQueryUI: true,
                 paginate: true,
-                iDisplayLength: 30,
+                iDisplayLength: 10,
                 searching: true,
                 dom: 'Bfrtip',
                 buttons: [
@@ -793,11 +793,14 @@ if (isset($_SESSION['usuario'])) {
                         previous: 'Anterior',
                         next: 'Siguiente',
                     }
-                }
+                },
+                lengthMenu: [10, 25, 50, -1], // Aquí defines las opciones de la paginación
+                pageLength: 10 // Esto establece la cantidad de registros por página inicial
             });
         });
     </script>
     <!-- Fin DataTable -->
+
 
     <!-- Inicio DataTable CELULAR-->
     <script type="text/javascript">

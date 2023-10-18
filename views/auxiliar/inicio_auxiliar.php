@@ -28,7 +28,7 @@ if (isset($_SESSION['usuario'])) {
         <section style="margin-top: 100px;">
 
             <div class="alert alert-success" role="alert">
-                <p><?php echo utf8_encode($_SESSION['NOMBRE']); ?> Administrador</p>
+                <p><?php echo utf8_encode($_SESSION['NOMBRE']); ?> Auxiliar</p>
             </div>
 
             <!-- PRIMER BLOQUE -->
@@ -55,7 +55,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Equipos En El Inventario</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <p class="card-text">...</p>
                                 <a href="inventario.php" class="btn btn-success">Ingresar</a>
                             </div>
 
@@ -85,48 +85,49 @@ if (isset($_SESSION['usuario'])) {
                     <div class="col-md-4">
                         <div class="card text-center">
                             <div class="card-header">
-                                Mantenimiento
+                                Historial de Equipos
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Mantenimiento a Equipos</h5>
+                                <h5 class="card-title">HV de Equipos</h5>
                                 <p class="card-text">...</p>
-                                <a href="" class="btn btn-success">Ingresar</a>
+                                <a href="hojadevida.php" class="btn btn-success">Ingresar</a>
                             </div>
 
                         </div>
                     </div>
 
                     <div class="col-md-4">
-                        <!-- <div class="card text-center">
+                        <div class="card text-center">
                             <div class="card-header">
-                                ...
+                                Actualización de equipos
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <p class="card-text">Aquí puede verificar que Dispositivos o Máquinas están asociadas a los usuarios</p>
-                                <a href="asignacionesusuario.php" class="btn btn-success">Ingresar</a>
+                                <h5 class="card-title">Mantenimiento Correctivo</h5>
+                                <p class="card-text">...</p>
+                                <a href="actualizaciondeequipos.php" class="btn btn-success">Ingresar</a>
                             </div>
 
-                        </div> -->
+                        </div>
                     </div>
 
                     <div class="col-md-4">
-                        <!-- <div class="card text-center">
+                        <div class="card text-center">
                             <div class="card-header">
-                                ...
+                                MANTENIMIENTO DE EQUIPOS
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <p class="card-text">Aquí puede liberar o des asignar equipos de los usuarios</p>
-                                <a href="inventario.php" class="btn btn-success">Ingresar</a>
+                                <h5 class="card-title">Mantenimiento Preventivo</h5>
+                                <p class="card-text">...</p>
+                                <a href="mantenimientos/mantenimientocomputador.php" class="btn btn-success">Ingresar</a>
                             </div>
 
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
 
             <br>
+
             <!-- TERCER BLOQUE -->
             <div class="container">
                 <div class="row">
@@ -159,18 +160,65 @@ if (isset($_SESSION['usuario'])) {
                     </div>
 
                     <div class="col-md-4">
-                        <div class="card text-center">
+                        <!-- <div class="card text-center">
                             <div class="card-header">
-                                Des asignar
+                                Devoluciones
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Remover Asignación</h5>
-                                <p class="card-text">Aquí puede liberar o des asignar equipos de los usuarios</p>
-                                <a href="inventario.php" class="btn btn-success">Ingresar</a>
+                                <p class="card-text">Aquí puede liberar o remover equipos de los usuarios</p>
+                                <a href="devoluciones.php" class="btn btn-success">Ingresar</a>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+
+            <br>
+            <!-- CUARTO BLOQUE -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                AGREGAR COMPLEMENTOS
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"> AGREGAR COMPLEMENTOS</h5>
+                                <p class="card-text"></p>
+                                <a href="complementos.php" class="btn btn-success">Ingresar</a>
                             </div>
 
                         </div>
                     </div>
+
+                    <!-- <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Usuarios con Equipos Asignados</h5>
+                                <p class="card-text">Aquí puede verificar que Dispositivos o Máquinas están asociadas a los usuarios</p>
+                                <a href="asignacionesusuario.php" class="btn btn-success">Ingresar</a>
+                            </div>
+
+                        </div>
+                    </div> -->
+
+                    <!-- <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Remover Asignación</h5>
+                                <p class="card-text">Aquí puede liberar o remover equipos de los usuarios</p>
+                                <a href="devoluciones.php" class="btn btn-success">Ingresar</a>
+                            </div>
+                        </div>
+                    </div> -->
                 </div>
             </div>
 

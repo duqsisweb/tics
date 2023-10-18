@@ -184,7 +184,6 @@ if (
     </script>
 
 
-
     <script>
         $(document).ready(function() {
             $('.showAlertButton').click(function() {

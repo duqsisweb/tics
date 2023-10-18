@@ -72,11 +72,12 @@ if (
         $resultHistorial = odbc_exec($conexion, $queryHistorial);
 
         if ($resultHistorial) {
-            echo "Inserción exitosa en la tabla historial_celular";
+            echo "Inserción exitosa en la tabla historial_celularRRR";
         } else {
-            echo "Error en la inserción en la tabla historial_celular: " . odbc_errormsg();
+            echo "Error en la inserción en la tabla historial_celularRRR: " . odbc_errormsg();
         }
     } else {
-        echo "Error en la inserción en la tabla asignacion_celular: " . odbc_errormsg();
+        echo "Error en la inserción en la tabla asignacion_celularRRR: " . odbc_errormsg();
     }
 }
+

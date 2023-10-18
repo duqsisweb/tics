@@ -37,7 +37,6 @@
 </style>
 
 <section class="dvr-section">
-
     <?php
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
@@ -169,6 +168,3 @@
         </div>
     </div>
 </div>
-
-
-

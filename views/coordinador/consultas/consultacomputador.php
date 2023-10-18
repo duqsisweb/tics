@@ -4,6 +4,7 @@ include '../../../conexionbd.php';
 if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
     $tipocomputador = $_POST['tipocomputador'];
     $empresaOption = $_POST['empresaOption'];
+    $Usua_asigna = $_POST['Usua_asigna'];
 
     // Obtener los valores pasados desde el formulario principal
     $primernombre = isset($_POST['primernombre']) ? $_POST['primernombre'] : '';
@@ -14,7 +15,39 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
     $cedula = isset($_POST['cedula']) ? $_POST['cedula'] : '';
     $cargo = isset($_POST['cargo']) ? $_POST['cargo'] : '';
 
-    $data = odbc_exec($conexion, "SELECT [id] ,[tipo_maquina] ,[Service_tag] ,[Serial_equipo] ,[Nombre_equipo] ,[Sede] ,[Empresa] ,[Marca_computador] ,[Modelo_computador] ,[Tipo_comp] ,[Tipo_ram] ,[Memoria_ram] ,[Tipo_discoduro] ,[Capacidad_discoduro] ,[Procesador] ,[Propietario] ,[Proveedor] ,[Sistema_Operativo] ,[Serial_cargador] ,[Dominio] ,[Tipo_usuario] ,[Serial_activo_fijo] ,[Fecha_ingreso] ,[Targeta_Video] ,[Estado] ,[Gestion] ,[Fecha_garantia] ,[Fecha_crea] ,[Usua_crea] ,[Fecha_modifica] ,[Usua_modifica] FROM [ControlTIC].[dbo].[maquina_computador] where  [Estado] = '6' AND Tipo_comp = '$tipocomputador' and empresa = '$empresaOption'");
+    $data = odbc_exec($conexion, "SELECT  [id]
+    
+    ,[tipo_maquina]
+    ,[Service_tag]
+    ,[Serial_equipo]
+    ,[Nombre_equipo]
+    ,[Sede]
+    ,[Empresa]
+    ,[Marca_computador]
+    ,[Modelo_computador]
+    ,[Tipo_comp]
+    ,[Tipo_ram]
+    ,[Memoria_ram]
+    ,[Tipo_discoduro]
+    ,[Capacidad_discoduro]
+    ,[Procesador]
+    ,[Propietario]
+    ,[Proveedor]
+    ,[Sistema_Operativo]
+    ,[Serial_cargador]
+    ,[Dominio]
+    ,[Tipo_usuario]
+    ,[Serial_activo_fijo]
+    ,[Fecha_ingreso]
+    ,[Targeta_Video]
+    ,[Estado]
+    ,[Gestion]
+    ,[Fecha_garantia]
+    ,[Fecha_crea]
+    ,[Usua_crea]
+    ,[Fecha_modifica]
+    ,[Usua_modifica]
+FROM [ControlTIC].[dbo].[maquina_computador] where  [Estado] = '6' AND Tipo_comp = '$tipocomputador' and empresa = '$empresaOption'");
     $arr = array();
     while ($Element = odbc_fetch_array($data)) {
         $arr[] = $Element;
@@ -42,18 +75,18 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                 <!-- tbl info de productos -->
                 <table class="table table-bordered dt-responsive table-hover display nowrap" id="infodetallefactura" cellspacing="0" style="text-align: center;">
                     <thead>
-
                         <tr class="encabezado table-dark">
                             <th scope="col" class="hidden-cell">Primer Nombre</th>
                             <th scope="col" class="hidden-cell">Segundo Nombre</th>
                             <th scope="col" class="hidden-cell">Primer Apellido</th>
                             <th scope="col" class="hidden-cell">Segundo Apellido</th>
+                            <th scope="col" class="hidden-cell">Usua_asigna</th>
 
                             <th scope="col" class="hidden-cell">Cedula</th>
                             <th scope="col" class="hidden-cell">Cargo</th>
 
                             <th scope="col">ID</th>
-                            <th scope="col">Tipo de Máquina</th>
+                            <th scope="col" class="hidden-cell">Tipo de Máquina</th>
                             <th scope="col">Service Tag</th>
                             <th scope="col">Serial de Equipo</th>
                             <th scope="col">Nombre de Equipo</th>
@@ -74,15 +107,17 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                             <th scope="col">Dominio</th>
                             <th scope="col">Tipo de Usuario</th>
                             <th scope="col">Serial de Activo Fijo</th>
-                            <th scope="col">Fecha de Ingreso</th>
+                            <th scope="col" class="hidden-cell">Fecha de Ingreso</th>
                             <th scope="col">Tarjeta de Video</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Gestión</th>
-                            <th scope="col">Fecha de Garantía</th>
-                            <th scope="col">Fecha de Creación</th>
-                            <th scope="col">Usuario de Creación</th>
-                            <th scope="col">Fecha de Modificación</th>
-                            <th scope="col">Usuario de Modificación</th>
+                            <th scope="col" class="hidden-cell">Fecha de Garantía</th>
+                            <th scope="col" class="hidden-cell">Fecha de Creación</th>
+                            <th scope="col" class="hidden-cell">Usuario de Creación</th>
+                            <th scope="col" class="hidden-cell">Fecha de Modificación</th>
+                            <th scope="col" class="hidden-cell">Usuario de Modificación</th>
+                            <th scope="col">Observaciones</th>
+                            <th scope="col">Link Drive</th>
                             <th scope="col">Seleccionar</th>
                         </tr>
                     </thead>
@@ -93,12 +128,13 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                                 <td class="hidden-cell"><?php echo $segundonombre; ?></td>
                                 <td class="hidden-cell"><?php echo $primerapellido; ?></td>
                                 <td class="hidden-cell"><?php echo $segundoapellido; ?></td>
+                                <td class="hidden-cell"><?php echo $Usua_asigna; ?></td>
 
                                 <td class="hidden-cell"><?php echo $cedula; ?></td>
                                 <td class="hidden-cell"><?php echo $cargo; ?></td>
 
                                 <td><?= $fila['id'] ?></td>
-                                <td><?= $fila['tipo_maquina'] ?></td>
+                                <td class="hidden-cell"><?= $fila['tipo_maquina'] ?></td>
                                 <td><?= $fila['Service_tag'] ?></td>
                                 <td><?= $fila['Serial_equipo'] ?></td>
                                 <td><?= $fila['Nombre_equipo'] ?></td>
@@ -119,18 +155,25 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                                 <td><?= $fila['Dominio'] ?></td>
                                 <td><?= $fila['Tipo_usuario'] ?></td>
                                 <td><?= $fila['Serial_activo_fijo'] ?></td>
-                                <td><?= $fila['Fecha_ingreso'] ?></td>
+                                <td class="hidden-cell"><?= $fila['Fecha_ingreso'] ?></td>
                                 <td><?= $fila['Targeta_Video'] ?></td>
                                 <td><?= $fila['Estado'] ?></td>
                                 <td><?= $fila['Gestion'] ?></td>
-                                <td><?= $fila['Fecha_garantia'] ?></td>
-                                <td><?= $fila['Fecha_crea'] ?></td>
-                                <td><?= $fila['Usua_crea'] ?></td>
-                                <td><?= $fila['Fecha_modifica'] ?></td>
-                                <td><?= $fila['Usua_modifica'] ?></td>
+                                <td class="hidden-cell"><?= $fila['Fecha_garantia'] ?></td>
+                                <td class="hidden-cell"><?= $fila['Fecha_crea'] ?></td>
+                                <td class="hidden-cell"><?= $fila['Usua_crea'] ?></td>
+                                <td class="hidden-cell"><?= $fila['Fecha_modifica'] ?></td>
+                                <td class="hidden-cell"><?= $fila['Usua_modifica'] ?></td>
+                                <td>
+                                    <textarea placeholder="AGREGE UNA OBSERVACIÓN" id="observaciones_asigna<?= $fila['id'] ?>" name="observaciones_asigna" style="width: 300px; height: 160px;"></textarea>
+                                </td>
 
                                 <td>
-                                    <button id="enviarcomputador" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-service-tag="<?= $fila['Service_tag'] ?>" data-serial-equipo="<?= $fila['Serial_equipo'] ?>" data-nombre-equipo="<?= $fila['Nombre_equipo'] ?>" data-sede="<?= $fila['Sede'] ?>" data-empresa="<?= $fila['Empresa'] ?>" data-marca-computador="<?= $fila['Marca_computador'] ?>" data-modelo-computador="<?= $fila['Modelo_computador'] ?>" data-tipo-comp="<?= $fila['Tipo_comp'] ?>" data-tipo-ram="<?= $fila['Tipo_ram'] ?>" data-memoria-ram="<?= $fila['Memoria_ram'] ?>" data-tipo-discoduro="<?= $fila['Tipo_discoduro'] ?>" data-capacidad-discoduro="<?= $fila['Capacidad_discoduro'] ?>" data-procesador="<?= $fila['Procesador'] ?>" data-propietario="<?= $fila['Propietario'] ?>" data-proveedor="<?= $fila['Proveedor'] ?>" data-sistema-operativo="<?= $fila['Sistema_Operativo'] ?>" data-serial-cargador="<?= $fila['Serial_cargador'] ?>" data-dominio="<?= $fila['Dominio'] ?>" data-tipo-usuario="<?= $fila['Tipo_usuario'] ?>" data-serial-activo-fijo="<?= $fila['Serial_activo_fijo'] ?>" data-fecha-ingreso="<?= $fila['Fecha_ingreso'] ?>" data-tarjeta-video="<?= $fila['Targeta_Video'] ?>" data-estado="<?= $fila['Estado'] ?>" data-gestion="<?= $fila['Gestion'] ?>" data-fecha-garantia="<?= $fila['Fecha_garantia'] ?>" data-fecha-crea="<?= $fila['Fecha_crea'] ?>" data-usua-crea="<?= $fila['Usua_crea'] ?>" data-fecha-modifica="<?= $fila['Fecha_modifica'] ?>" data-usua-modifica="<?= $fila['Usua_modifica'] ?>" data-primernombre="<?php echo $primernombre; ?>" data-segundonombre="<?php echo $segundonombre; ?>" data-primerapellido="<?php echo $primerapellido; ?>" data-segundoapellido="<?php echo $segundoapellido; ?>" data-cedula="<?php echo $cedula; ?>" data-cargo="<?php echo $cargo; ?>"></button>
+                                    <input id="link_computador_asigna<?= $fila['id'] ?>" name="link_computador_asigna"></input>
+                                </td>
+
+                                <td>
+                                    <button id="enviarcomputador" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-service-tag="<?= $fila['Service_tag'] ?>" data-serial-equipo="<?= $fila['Serial_equipo'] ?>" data-nombre-equipo="<?= $fila['Nombre_equipo'] ?>" data-sede="<?= $fila['Sede'] ?>" data-empresa="<?= $fila['Empresa'] ?>" data-marca-computador="<?= $fila['Marca_computador'] ?>" data-modelo-computador="<?= $fila['Modelo_computador'] ?>" data-tipo-comp="<?= $fila['Tipo_comp'] ?>" data-tipo-ram="<?= $fila['Tipo_ram'] ?>" data-memoria-ram="<?= $fila['Memoria_ram'] ?>" data-tipo-discoduro="<?= $fila['Tipo_discoduro'] ?>" data-capacidad-discoduro="<?= $fila['Capacidad_discoduro'] ?>" data-procesador="<?= $fila['Procesador'] ?>" data-propietario="<?= $fila['Propietario'] ?>" data-proveedor="<?= $fila['Proveedor'] ?>" data-sistema-operativo="<?= $fila['Sistema_Operativo'] ?>" data-serial-cargador="<?= $fila['Serial_cargador'] ?>" data-dominio="<?= $fila['Dominio'] ?>" data-tipo-usuario="<?= $fila['Tipo_usuario'] ?>" data-serial-activo-fijo="<?= $fila['Serial_activo_fijo'] ?>" data-fecha-ingreso="<?= $fila['Fecha_ingreso'] ?>" data-tarjeta-video="<?= $fila['Targeta_Video'] ?>" data-estado="<?= $fila['Estado'] ?>" data-gestion="<?= $fila['Gestion'] ?>" data-fecha-garantia="<?= $fila['Fecha_garantia'] ?>" data-fecha-crea="<?= $fila['Fecha_crea'] ?>" data-usua-crea="<?= $fila['Usua_crea'] ?>" data-fecha-modifica="<?= $fila['Fecha_modifica'] ?>" data-usua-modifica="<?= $fila['Usua_modifica'] ?>" data-primernombre="<?php echo $primernombre; ?>" data-segundonombre="<?php echo $segundonombre; ?>" data-primerapellido="<?php echo $primerapellido; ?>" data-segundoapellido="<?php echo $segundoapellido; ?>" data-cedula="<?php echo $cedula; ?>" data-cargo="<?php echo $cargo; ?>" data-usua-asigna="<?php echo $Usua_asigna; ?>" data-observaciones-asigna="<?= $fila['observaciones_asigna'] ?>" data-link-computador="<?= $fila['link_computador_asigna'] ?>"></button>
                                     <!-- btn escondido para la alerta -->
                                     <button id="" type="button" class="btn btn-outline-warning showAlertButton">ASIGNAR</button>
                                 </td>
@@ -154,6 +197,7 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                 var segundonombre = $(this).data('segundonombre');
                 var primerapellido = $(this).data('primerapellido');
                 var segundoapellido = $(this).data('segundoapellido');
+                var Usua_asigna = $(this).data('usua-asigna');
 
                 var cedula = $(this).data('cedula');
                 var cargo = $(this).data('cargo');
@@ -189,12 +233,15 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                 var usua_crea = $(this).data('usua-crea');
                 var fecha_modifica = $(this).data('fecha-modifica');
                 var usua_modifica = $(this).data('usua-modifica');
+                var observaciones_asigna = $('#observaciones_asigna' + id).val();
+                var link_computador_asigna = $('#link_computador_asigna' + id).val();
 
 
                 console.log("Primer Nombre:", primernombre);
                 console.log("Segundo Nombre:", segundonombre);
                 console.log("Primer Apellido:", primerapellido);
                 console.log("Segundo Apellido:", segundoapellido);
+                console.log("Usuario Asigna:", Usua_asigna);
 
                 console.log("Cédula:", cedula);
                 console.log("Cargo:", cargo);
@@ -231,6 +278,8 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                 console.log("Usuario de Creación:", usua_crea);
                 console.log("Fecha de Modificación:", fecha_modifica);
                 console.log("Usuario de Modificación:", usua_modifica);
+                console.log("observaciones de Asignacion", observaciones_asigna);
+                console.log("link Drive", link_computador_asigna);
 
                 $.ajax({
                     url: 'create/insertarcomputador.php',
@@ -240,6 +289,7 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                         segundonombre: segundonombre,
                         primerapellido: primerapellido,
                         segundoapellido: segundoapellido,
+                        Usua_asigna: Usua_asigna,
 
                         cedula: cedula,
                         cargo: cargo,
@@ -274,7 +324,9 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                         fecha_crea: fecha_crea,
                         usua_crea: usua_crea,
                         fecha_modifica: fecha_modifica,
-                        usua_modifica: usua_modifica
+                        usua_modifica: usua_modifica,
+                        observaciones_asigna: observaciones_asigna,
+                        link_computador_asigna: link_computador_asigna
 
                     },
                     success: function(response) {

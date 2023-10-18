@@ -319,7 +319,7 @@ if (isset($_SESSION['usuario'])) {
                         <div class="col-md-4" id="fila3" style="display: none; font-family: 'Courier New', monospace;"></div>
 
                         <div class="col-md-2" id="fila4" style="display: none;text-align: center;">
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalcomputadorinformacion">Ver información</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalcomputadorinformacion">Remover Asignación</button>
                         </div>
 
                     </div>
@@ -349,7 +349,7 @@ if (isset($_SESSION['usuario'])) {
                         <div class="col-md-4" id="fila3celular" style="display: none; font-family: 'Courier New', monospace;"></div>
 
                         <div class="col-md-2" id="fila4celular" style="display: none;text-align: center;">
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalcelularinformacion">Ver información</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalcelularinformacion">Remover Asignación</button>
                         </div>
                     </div>
                 </div>
@@ -379,7 +379,7 @@ if (isset($_SESSION['usuario'])) {
                         <div class="col-md-4" id="fila3accesorios" style="display: none; font-family: 'Courier New', monospace;"></div>
 
                         <div class="col-md-2" id="fila4accesorios" style="display: none;text-align: center;">
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalcelularinformacion">Ver información</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalaccesoriosinformacion">Remover Asignación</button>
                         </div>
 
                     </div>
@@ -436,7 +436,7 @@ if (isset($_SESSION['usuario'])) {
                         <div class="col-md-4" id="fila3edcomunicacion" style="display: none;"></div>
 
                         <div class="col-md-2" id="fila4edcomunicacion" style="display: none;text-align: center;">
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modaledcomunicacioninformacion">Ver información</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modaledcomunicacioninformacion">Remover Asignación</button>
                         </div>
 
                     </div>
@@ -491,7 +491,7 @@ if (isset($_SESSION['usuario'])) {
                         <div class="col-md-4" id="fila3perifericos" style="display: none;"></div>
 
                         <div class="col-md-2" id="fila4perifericos" style="display: none;">
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalperifericosinformacion">Ver información</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalperifericosinformacion">Remover Asignación</button>
                         </div>
 
                     </div>
@@ -547,7 +547,7 @@ if (isset($_SESSION['usuario'])) {
                         <div class="col-md-4" id="fila3almacenamiento" style="display: none;"></div>
 
                         <div class="col-md-2" id="fila4almacenamiento" style="display: none;">
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalalmacenamientoinformacion">Ver información</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalalmacenamientoinformacion">Remover Asignación</button>
                         </div>
 
                     </div>
@@ -578,7 +578,7 @@ if (isset($_SESSION['usuario'])) {
                         <div class="col-md-4" id="fila3simcard" style="display: none;"></div>
 
                         <div class="col-md-2" id="fila4simcard" style="display: none;text-align: center;">
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalsimcardinformacion">Ver información</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalsimcardinformacion">Remover Asignación</button>
                         </div>
 
                     </div>
@@ -609,7 +609,7 @@ if (isset($_SESSION['usuario'])) {
                         <div class="col-md-4" id="fila3dvr" style="display: none;"></div>
 
                         <div class="col-md-2" id="fila4dvr" style="display: none;text-align: center;">
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modaldvrinformacion">Ver información</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modaldvrinformacion">Remover Asignación</button>
                         </div>
 
 
@@ -681,8 +681,6 @@ if (isset($_SESSION['usuario'])) {
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Generar Acta
                     </button>
-
-
                 </div>
 
 
@@ -770,7 +768,7 @@ if (isset($_SESSION['usuario'])) {
         </div>
 
         <!-- MODAL DE ACCESORIOS-->
-        <div class="modal fade" id="modalaccesorios" tabindex="-1" aria-labelledby="modalaccesoriosLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="modalaccesorios" tabindex="-1" aria-labelledby="modalaccesoriosLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -780,15 +778,14 @@ if (isset($_SESSION['usuario'])) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        1
-                        <!-- Aquí se llenará el contenido de la consulta  -->
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- MODAL DE EDCOMUNICACION -->
         <div class="modal fade" id="modaledcomunicacion" tabindex="-1" aria-labelledby="modaledcomunicacionLabel" aria-hidden="true">
@@ -965,7 +962,6 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
 
-
         <!-- MODAL DE CCTV -->
         <div class="modal fade" id="modalcctv" tabindex="-1" aria-labelledby="modalcctvLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
@@ -1016,7 +1012,7 @@ if (isset($_SESSION['usuario'])) {
                     <!-- .... -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-danger" id="descargarPDF">DESCARGAR</button>
+                        <!-- <button type="button" class="btn btn-danger" id="descargarPDF">DESCARGAR</button> -->
                     </div>
                 </div>
             </div>
@@ -1034,7 +1030,6 @@ if (isset($_SESSION['usuario'])) {
 
 
     <!-- SCRIPT MODAL ACTA -->
-
     <script>
         $('#exampleModal').on('show.bs.modal', function(event) {
             // Obtén la cédula y el cargo del PHP
@@ -1063,7 +1058,6 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
-
 
     <script>
         function updateTipoComputador(radio) {
@@ -1128,6 +1122,7 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
+
     <!-- SCRIPT DE CHECKS CELULARES -->
     <script>
         $(document).ready(function() {
@@ -1146,6 +1141,7 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
+
     <!-- SCRIPT DE CHECKS ACCESORIOS -->
     <script>
         $(document).ready(function() {
@@ -1164,20 +1160,7 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
-    <!-- SCRIPT DE CHECKS ACCESORIOS -->
-    <script>
-        $(document).ready(function() {
-            $('#flexSwitchCheckAccesorios').on('change', function() {
-                if ($(this).is(':checked')) {
-                    $('#fila1accesorios').show();
-                } else {
-                    $('#fila1accesorios').hide();
-                    $('#fila2accesorios').hide();
-                    $('#fila3accesorios').hide();
-                }
-            });
-        });
-    </script>
+
     <!-- SCRIPT DE CHECKS EDCOMUNICACION -->
     <script>
         $(document).ready(function() {
@@ -1387,6 +1370,7 @@ if (isset($_SESSION['usuario'])) {
 
 
 
+
     <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN COMPUTADOR-->
     <script>
         $(document).ready(function() {
@@ -1420,6 +1404,7 @@ if (isset($_SESSION['usuario'])) {
             });
         }
     </script>
+
     <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN CELULAR-->
     <script>
         $(document).ready(function() {
@@ -1721,8 +1706,6 @@ if (isset($_SESSION['usuario'])) {
     </script>
 
 
-
-
     <!-- AJAX DE CHECK LISTADO COMPUTADORES PARA CONSULTAR Y LLEVAR INFORMACIÓN -->
     <script>
         $(document).ready(function() {
@@ -1796,6 +1779,7 @@ if (isset($_SESSION['usuario'])) {
             });
         });
     </script>
+
     <!-- AJAX PARA CONSULTA DE CELULARES -->
     <script>
         $(document).ready(function() {
@@ -1861,25 +1845,25 @@ if (isset($_SESSION['usuario'])) {
                 var cedula = $('input[name="cedula"]').val(); // Obtén el valor del campo oculto
                 var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
 
-                // $.ajax({
-                //     url: 'informacion/consultaaccesoriosinformacion.php',
-                //     type: 'POST',
-                //     data: {
-                //         tipocomputador: tipocomputador,
-                //         empresa: empresaOption,
+                $.ajax({
+                    url: 'informacion/consultaaccesoriosinformacion.php',
+                    type: 'POST',
+                    data: {
+                        tipocomputador: tipocomputador,
+                        empresa: empresaOption,
 
-                //         primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
-                //         segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
-                //         primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
-                //         segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
 
-                //         cedula: "<?php echo htmlspecialchars($cedula); ?>",
-                //         cargo: "<?php echo htmlspecialchars($cargo); ?>"
-                //     },
-                //     success: function(response) {
-                //         $('#modalaccesoriosinformacion .modal-body').html(response); // Agrega los resultados al cuerpo del modal
-                //     }
-                // });
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modalaccesoriosinformacion .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                    }
+                });
             });
         });
 
@@ -2319,6 +2303,8 @@ if (isset($_SESSION['usuario'])) {
     </script>
 
 
+
+  
 
     <script>
         document.getElementById('asisteInput').addEventListener('input', function() {

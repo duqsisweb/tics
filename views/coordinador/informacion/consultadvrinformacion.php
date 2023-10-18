@@ -86,7 +86,9 @@ if (
                             <td><?= $fila['num_discos'] ?></td>
                             <td><?= $fila['dias_grabacion'] ?></td>
                             <td><?= $fila['ip_dvr'] ?></td>
-                            <td><input type="text" id="observaciones_desasigna_<?= $fila['id'] ?>" value="<?= $fila['observaciones_desasigna'] ?>"></td>
+                            <td>
+                                <textarea placeholder="AGREGE UNA OBSERVACIÓN" id="observaciones_desasigna_<?= $fila['id'] ?>" name="observaciones_desasigna" style="width: 300px; height: 160px;"></textarea>
+                            </td>
                             <td>
                                 <button id="enviardvr" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-marca-dvr="<?= $fila['marca_dvr'] ?>" data-modelo-dvr="<?= $fila['modelo_dvr'] ?>" data-descripcion-dvr="<?= $fila['descripcion_dvr'] ?>" data-capacidad-dvr="<?= $fila['capacidad_dvr'] ?>" data-tipo-dvr="<?= $fila['tipo_dvr'] ?>" data-sede-dvr="<?= $fila['sede_dvr'] ?>" data-ubicacion-dvr="<?= $fila['ubicacion_dvr'] ?>" data-software-dvr="<?= $fila['software'] ?>" data-fecha-ingreso="<?= $fila['fecha_ingreso'] ?>" data-num-canales="<?= $fila['num_canales'] ?>" data-num-discos="<?= $fila['num_discos'] ?>" data-dias-grabacion="<?= $fila['dias_grabacion'] ?>" data-ip-dvr="<?= $fila['ip_dvr'] ?>" data-estado="<?= $fila['estado'] ?>" data-fecha-garantia="<?= $fila['fecha_garantia'] ?>" data-fecha-crea="<?= $fila['fecha_crea'] ?>" data-usua-crea="<?= $fila['usua_crea'] ?>" data-fecha-modifica="<?= $fila['fecha_modifica'] ?>" data-usua-modifica="<?= $fila['usua_modifica'] ?>" data-primernombre="<?= $primernombre ?>" data-segundonombre="<?= $segundonombre ?>" data-primerapellido="<?= $primerapellido ?>" data-segundoapellido="<?= $segundoapellido ?>" data-cedula="<?= $cedula ?>" data-cargo="<?= $cargo ?>" data-empresa="<?= $empresa ?>"></button>
                                 <!-- btn escondido para la alerta -->
