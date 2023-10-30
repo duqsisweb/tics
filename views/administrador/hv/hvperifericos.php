@@ -82,35 +82,43 @@ if (isset($_SESSION['usuario'])) {
             <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                 <thead>
                     <tr class="encabezado table-dark">
-                        <th>ID</th>
-                        <th>TIPO MAQUINA</th>
-                        <th>SERIAL</th>
-                        <th>DESCRIPCION</th>
-                        <th>MARCA</th>
-                        <th>MODELO</th>
-                        <th>PLACA</th>
-                        <th>SEDE</th>
-                        <th>UBICACION</th>
-                        <th>TIPO</th>
-                        <th>TIPO TONER</th>
-                        <th>GESTION</th>
-                        <th>EMPRESA</th>
-                        <th>FECHA GARANTIA</th>
-                        <th>FECHA CREA</th>
-                        <th>USUA CREA</th>
-                        <th>FECHA MODIFICA</th>
-                        <th>USUA MODIFICA</th>
-                        <th>USUA ASIGNA</th>
-                        <th>FECHA ASIGNA</th>
-                        <th>CEDULA</th>
-                        <th>CARGO</th>
-                        <th>PRIMER NOMBRE</th>
-                        <th>SEGUNDO NOMBRE</th>
-                        <th>PRIMER APELLIDO</th>
-                        <th>SEGUNDO APELLIDO</th>
-                        <th>ESTADO</th>
-                        <th>ESTADO ASIGNACION</th>
-                        <th>OBSERVACIONES</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>    
  
                     </tr>
                 </thead>

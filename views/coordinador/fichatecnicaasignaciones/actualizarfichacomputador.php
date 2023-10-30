@@ -47,7 +47,7 @@
 
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
 
-    $consulta = "SELECT [id] ,[tipo_maquina] ,[Service_tag] ,[Serial_equipo] ,[Nombre_equipo] ,[Sede] ,[Empresa] ,[Marca_computador] ,[Modelo_computador] ,[Tipo_comp] ,[Tipo_ram] ,[Memoria_ram] ,[Tipo_discoduro] ,[Capacidad_discoduro] ,[Procesador] ,[Propietario] ,[Proveedor] ,[Sistema_Operativo] ,[Serial_cargador] ,[Dominio] ,[Tipo_usuario] ,[Serial_activo_fijo] ,[Fecha_ingreso] ,[Targeta_Video] ,[Estado] ,[Gestion] ,[Fecha_garantia] ,[Fecha_crea] ,[Usua_crea] ,[Fecha_modifica] ,[Usua_modifica] ,[Usua_asigna] ,[Fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] FROM [ControlTIC].[dbo].[asignacion_computador] WHERE cedula = '$cedula'";
+    $consulta = "SELECT [id] ,[tipo_maquina] ,[Service_tag] ,[Serial_equipo] ,[Nombre_equipo] ,[Sede] ,[Empresa] ,[Marca_computador] ,[Modelo_computador] ,[Tipo_comp] ,[Tipo_ram] ,[Memoria_ram] ,[Tipo_discoduro] ,[Capacidad_discoduro] ,[Procesador] ,[Propietario] ,[Proveedor] ,[Sistema_Operativo] ,[Serial_cargador] ,[Dominio] ,[Tipo_usuario] ,[Serial_activo_fijo] ,[Fecha_ingreso_c] ,[Targeta_Video] ,[Estado] ,[Gestion] ,[Fecha_garantia_c] ,[Fecha_crea] ,[Usua_crea] ,[Fecha_modifica] ,[Usua_modifica] ,[Usua_asigna] ,[Fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] FROM [ControlTIC].[dbo].[asignacion_computador] WHERE cedula = '$cedula'";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>";
@@ -55,6 +55,7 @@
     if (odbc_num_rows($resultado) > 0) {
         while ($fila = odbc_fetch_array($resultado)) {
             $output .= "-------------------------------------\n";
+            $output .= "Elemento: " . $fila['tipo_maquina'] . "\n";
             $output .= "Nombre del equipo: " . $fila['Nombre_equipo'] . "\n";
             $output .= "Marca del computador: " . $fila['Marca_computador'] . "\n";
             $output .= "Memoria RAM: " . $fila['Memoria_ram'] . "\n";
@@ -147,7 +148,7 @@
 
                         $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : '';
 
-                        $consulta = "SELECT [id_asignacion], [id], [tipo_maquina], [Service_tag], [Serial_equipo], [Nombre_equipo], [Sede], [Empresa], [Marca_computador], [Modelo_computador], [Tipo_comp], [Tipo_ram], [Memoria_ram], [Tipo_discoduro], [Capacidad_discoduro], [Procesador], [Propietario], [Proveedor], [Sistema_Operativo], [Serial_cargador], [Dominio], [Tipo_usuario], [Serial_activo_fijo], [Fecha_ingreso], [Targeta_Video], [Estado], [Gestion], [Fecha_garantia], [Fecha_crea], [Usua_crea], [Fecha_modifica], [Usua_modifica], [Usua_asigna], [Fecha_asigna], [cedula], [cargo], [primernombre], [segundonombre], [primerapellido], [segundoapellido], [estado_asignacion], [observaciones] FROM [ControlTIC].[dbo].[asignacion_computador] WHERE cedula = '$cedula'";
+                        $consulta = "SELECT [id_asignacion], [id], [tipo_maquina], [Service_tag], [Serial_equipo], [Nombre_equipo], [Sede], [Empresa], [Marca_computador], [Modelo_computador], [Tipo_comp], [Tipo_ram], [Memoria_ram], [Tipo_discoduro], [Capacidad_discoduro], [Procesador], [Propietario], [Proveedor], [Sistema_Operativo], [Serial_cargador], [Dominio], [Tipo_usuario], [Serial_activo_fijo], [Fecha_ingreso_c], [Targeta_Video], [Estado], [Gestion], [Fecha_garantia_c], [Fecha_crea], [Usua_crea], [Fecha_modifica], [Usua_modifica], [Usua_asigna], [Fecha_asigna], [cedula], [cargo], [primernombre], [segundonombre], [primerapellido], [segundoapellido], [estado_asignacion], [observaciones] FROM [ControlTIC].[dbo].[asignacion_computador] WHERE cedula = '$cedula'";
                         $resultadoConsulta = odbc_exec($conexion, $consulta);
 
                         if (odbc_num_rows($resultadoConsulta) > 0) {
@@ -175,7 +176,7 @@
                                 echo '<td>' . $fila['Dominio'] . '</td>';
                                 echo '<td>' . $fila['Tipo_usuario'] . '</td>';
                                 echo '<td>' . $fila['Serial_activo_fijo'] . '</td>';
-                                echo '<td>' . $fila['Fecha_ingreso'] . '</td>';
+                                echo '<td>' . $fila['Fecha_ingreso_c'] . '</td>';
                                 echo '<td>' . $fila['Targeta_Video'] . '</td>';
                                 echo '<td>' . $fila['Estado'] . '</td>';
                                 echo '<td>' . $fila['Gestion'] . '</td>';

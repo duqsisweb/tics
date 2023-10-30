@@ -42,7 +42,7 @@
     <?php
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
-    $consulta = "SELECT marca_perifericos, descripcion_perifericos, ubicacion_perifericos, tipo, tipo_toner  FROM ControlTIC..asignacion_perifericos WHERE cedula = '$cedula'";
+    $consulta = "SELECT[id_asignacion] ,[id] ,[tipo_maquina] ,[serial_perifericos] ,[descripcion_perifericos] ,[marca_perifericos] ,[modelo_perifericos] ,[placa_activo_perifericos] ,[sede_perifericos] ,[ubicacion_perifericos] ,[tipo] ,[tipo_toner] ,[estado] ,[gestion] ,[empresa] ,[fecha_de_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_perifericos] WHERE cedula = '$cedula'";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>"; // Mantener el formato monoespaciado
@@ -50,6 +50,7 @@
     if (odbc_num_rows($resultado) > 0) {
         while ($fila = odbc_fetch_array($resultado)) {
             $output .= "-------------------------------------\n";
+            $output .= "Elemento: " . $fila['tipo_maquina'] . "\n";
             $output .= "Marca del Equipo: " . $fila['marca_perifericos'] . "\n";
             $output .= "Descripción:" . $fila['descripcion_perifericos'] . "\n";
             $output .= "Ubicación:" . $fila['ubicacion_perifericos'] . "\n";
@@ -91,6 +92,7 @@
             </div>
             <!-- Dentro del modal-body -->
             <div class="modal-body">
+
                 <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                     <thead>
                         <tr class="encabezado table-dark">
@@ -108,11 +110,6 @@
                             <th scope="col">Tipo de Toner</th>
                             <th scope="col">Gestion</th>
                             <th scope="col">Empresa</th>
-                            <th scope="col">Fecha Garantia</th>
-                            <th scope="col">Fecha Crea</th>
-                            <th scope="col">Usua Crea</th>
-                            <th scope="col">Usua Modifica</th>
-                            <th scope="col">Fecha Modifica</th>
                             <th scope="col">Estado</th>
 
                         </tr>
@@ -143,10 +140,6 @@
                                 echo '<td>' . $fila['gestion'] . '</td>';
                                 echo '<td>' . $fila['empresa'] . '</td>';
                                 echo '<td>' . $fila['fecha_de_garantia'] . '</td>';
-                                echo '<td>' . $fila['fecha_crea'] . '</td>';
-                                echo '<td>' . $fila['usua_crea'] . '</td>';
-                                echo '<td>' . $fila['fecha_modifica'] . '</td>';
-                                echo '<td>' . $fila['usua_modifica'] . '</td>';
                                 echo '<td>' . $fila['estado'] . '</td>';
 
                                 echo '</tr>';
@@ -159,6 +152,7 @@
                         ?>
                     </tbody>
                 </table>
+
             </div>
             <div class="modal-footer">
                 <div class="modal-footer">

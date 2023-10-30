@@ -16,6 +16,9 @@ if (isset($_SESSION['usuario'])) {
     require '../../views/head.php';
     ?>
 
+    <!-- Asegúrate de cargar jQuery primero -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <body>
 
         <!-- NAV -->
@@ -23,14 +26,143 @@ if (isset($_SESSION['usuario'])) {
         require '../../views/nav.php';
         ?>
 
+        <!-- Estilos para cambiar borde de color -->
+        <style>
+            .empresa-1 {
+                border-color: rgb(247, 4, 4) !important;
+                /* Otros estilos... */
+            }
+
+            .empresa-2 {
+                border-color: rgb(5, 87, 28);
+                /* Otros estilos... */
+            }
+
+            .empresa-3 {
+                border-color: rgb(138, 137, 147);
+                /* Otros estilos... */
+            }
+
+            .background-container {
+                position: relative;
+            }
+
+            .background-image {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0.8;
+                padding-top: 50px;
+                padding-left: 190px;
+                /* Ajusta la opacidad y el padding según tus necesidades */
+            }
+
+            .card-body {
+                background-color: white !important;
+                opacity: 0.9 !important;
+            }
+        </style>
+
         <section style="margin-top: 100px;">
 
 
+            <!--  -->
+            <?php require '../../views/navasignaciones.php'; ?>
 
-            <section style="margin-top: 100px;">
-            </section>
+
+            <?php
+            // SELECT PARA HACER LA CONSULTA
+            if (isset($_POST['consultar'])) {
+
+                $CEDULA = $_POST['CEDULA'];
+                $empresaOption = $_POST['empresa'];
+                $backgroundImage = '';
+
+                switch ($empresaOption) {
+                    case 1:
+                        $empresa = 'DUQUESA';
+                        $con = $conexion;
+                        $backgroundImage = "duquesa_logo.png";
+                        break;
+                    case 2:
+                        $empresa = 'Palmeras2013';
+                        $con = $conexion2;
+                        $backgroundImage = "logopalmeras.png";
+                        break;
+                    case 3:
+                        $empresa = 'J25';
+                        $con = $conexion2;
+                        $backgroundImage = "logoj25.png";
+                        break;
+                    default:
+                        // Opción inválida
+                        // Se puede mostrar un mensaje de error o tomar alguna otra acción
+                        break;
+                }
+
+                if (isset($con)) {
+                    $data = odbc_exec($con, "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM $empresa..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 and CEDULA = '$CEDULA'");
+                    $arr = array(); // Inicializar el arreglo para almacenar los resultados
+                    while ($Element = odbc_fetch_array($data)) {
+                        $arr[] = $Element;
+                    }
+                }
+
+                if (!empty($arr)) {
+                    // Mostrar la tarjeta con la información del usuario
+                    $nombreCompleto = $arr[0]['NOMBRE'] . ' ' . $arr[0]['NOMBRE2'] . ' ' . $arr[0]['APELLIDO'] . ' ' . $arr[0]['APELLIDO2'];
+                    $cedula = $arr[0]['CEDULA'];
+                    $cargo = $arr[0]['CARGO'];
+
+                    $showSections = true;
+
+                    //  MENSAJES SI LA CONSULTA ES EXITOSA O NO HAY INFORMACIÓN
+                    echo '<div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                                <div class="toast-header">
+                                        <strong class="me-auto">Éxito</strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+                                                </div>
+                                    <div class="toast-body">
+                                        Consulta satisfactoria.
+                                    </div>
+                                </div>';
+                    echo '<script>
+                                var toastEl = document.querySelector(".toast");
+                                var toast = new bootstrap.Toast(toastEl);
+                                toast.show();
+                            </script>';
+                } else {
+                    // Mostrar un mensaje de error
+                    echo '<div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                    <div class="toast-header">
+                                        <strong class="me-auto">Error</strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+                                    </div>
+                                    <div class="toast-body">
+                                        No se encontraron registros para la consulta.
+                                    </div>
+                                </div>';
+                    echo '<script>
+                                var toastEl = document.querySelector(".toast");
+                                var toast = new bootstrap.Toast(toastEl);
+                                toast.show();
+                            </script>';
+                }
+            }
+
+            ?>
 
 
+            <!-- TITULO -->
+            <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
+                <div class="container" style="text-align: center;">
+                    <div>
+                        <h3>ASIGNAR EQUIPOS A USUARIOS</h3>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -49,7 +181,10 @@ if (isset($_SESSION['usuario'])) {
                             </select>
                         </div>
 
-
+                        <div class="col-md-2" style="margin: 50px 0px 0px 0px;display: none;">
+                            <label class="form-label">Identificación</label>
+                            <input type="text" class="form-control" id="identificacionInput" placeholder="" name="CEDULA" pattern="[0-9]+" required>
+                        </div>
 
                         <div class="col-md-2" style="margin: 50px 0px 0px 0px;">
                             <div class="form-group">
@@ -70,9 +205,58 @@ if (isset($_SESSION['usuario'])) {
                             </div>
                         </div>
 
-                        <div class="col-md-2" style="margin: 50px 0px 0px 0px;">
-                            <label for="" class="form-label">Identificación</label>
-                            <input type="text" class="form-control" id="identificacionInput" placeholder="" name="CEDULA" pattern="[0-9]+" required>
+
+                        <div class="col-md-2">
+                            <div style="margin: 80px 0px 0px 0px;text-align: center;">
+                                <button type="submit" class="btn btn-success" name="consultar" id="consultar">CONSULTAR</button>
+                            </div>
+                        </div>
+
+
+                        <!-- SECCION TARGETA DE PERFIL -->
+                        <div class="col-md-5">
+                            <?php if (isset($showSections) && $showSections) : ?> <!-- Comprueba si se debe mostrar la sección -->
+                                <div class="card mb-3 <?php echo 'empresa' . $empresaOption; ?>">
+                                    <div class="row g-0 background-container">
+                                        <?php if (!empty($backgroundImage)) : ?> <!-- Comprueba si hay una imagen de fondo definida -->
+                                            <div class="background-image" style="background-image: url('../../assets/image/<?php echo $backgroundImage; ?>');"></div>
+                                        <?php endif; ?>
+                                        <div class="col-md-4">
+                                            <!-- <img src="../../assets/image/perfil.png" class="img-fluid rounded-start" alt="..."> -->
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <div class="card-body">
+                                                    <?php foreach ($arr as $row) {
+                                                        $nombreCompleto = $row['NOMBRE'] . ' ' . $row['NOMBRE2'] . ' ' . $row['APELLIDO'] . ' ' . $row['APELLIDO2'];
+                                                        $primernombre = $row['NOMBRE'];
+                                                        $segundonombre = $row['NOMBRE2'];
+                                                        $primerapellido = $row['APELLIDO'];
+                                                        $segundoapellido = $row['APELLIDO2'];
+                                                        $cedula = $row['CEDULA'];
+                                                        $cargo = $row['CARGO'];
+
+                                                        // Agrega los valores como valores de entrada ocultos
+                                                        echo '<input type="hidden" name="primernombre" value="' . htmlspecialchars($primernombre) . '">';
+                                                        echo '<input type="hidden" name="segundonombre" value="' . htmlspecialchars($segundonombre) . '">';
+                                                        echo '<input type="hidden" name="primerapellido" value="' . htmlspecialchars($primerapellido) . '">';
+                                                        echo '<input type="hidden" name="segundoapellido" value="' . htmlspecialchars($segundoapellido) . '">';
+                                                        echo '<input type="hidden" name="cedula" value=" id="cedula"' . htmlspecialchars($cedula) . '">';
+                                                        echo '<input type="hidden" name="cargo" value="' . htmlspecialchars($cargo) . '">';
+
+                                                        // Muestra los valores en el card-body si lo deseas
+                                                        echo '<h6 class="card-title"><strong>' . $nombreCompleto . '</strong></h6>';
+                                                        echo '<p class=""><strong>Cedula: ' . $cedula . '</strong></p>';
+                                                        echo '<p class=""><strong>Cargo: ' . $cargo . '</strong></p>';
+                                                    } ?>
+                                                    <input type="hidden" name="empresaOption" id="empresaOption" value="<?php echo $empresaOption ?>">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         </div>
 
                     </div>
@@ -80,68 +264,352 @@ if (isset($_SESSION['usuario'])) {
 
             </form>
 
+            <!-- DEPENDIENDO SI HAY INFORMACION DE USUARIO, EL SISTEMA MOSTRARA LOS DATOS SI NO PUES PERMANECERAN OCULTOS  -->
+            <?php
+            if (isset($showSections)) {
+            ?>
+
+
+
+                <!-- AQUI MUESTRA LAS SECCION  CELULAR -->
+                <div class="container" style="margin-top: 50px;">
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCelular" value="2" name="selecciondelcelular">
+                                <label class="form-check-label" for="flexSwitchCheckCelular">Celulares</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" id="fila1celular" style="display: none;">
+                            <input type="text" name="tipocelular" id="tipocelular" value="2">
+                        </div>
+
+                        <div class="col-md-2" id="fila2celular" style="display: none;">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalcelular" id="modalcelularVerListadoButton">
+                                Ver listado
+                            </button>
+                        </div>
+
+                        <div class="col-md-4" id="fila3celular" style="display: none; font-family: 'Courier New', monospace;"></div>
+
+                        <div class="col-md-2" id="fila4celular" style="display: none;text-align: center;">
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalcelularinformacion">Remover Asignación</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- BOTON DE GENERAR ACTA -->
+                <div style="text-align: center;">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Generar Acta
+                    </button>
+                </div>
+
+
+            <?php
+            }
+            ?>
         </section>
 
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const asisteInput = document.getElementById('nombreInput');
-                const identificacionInput = document.getElementById('identificacionInput');
-                const asisteDatalist = document.getElementById('asiste');
 
-                asisteInput.addEventListener('change', function() {
-                    const selectedOption = asisteDatalist.querySelector(`option[value="${asisteInput.value}"]`);
-                    if (selectedOption) {
-                        const cedula = selectedOption.textContent.split(' - ')[1];
-                        identificacionInput.value = cedula;
-                    } else {
-                        identificacionInput.value = '';
+
+        <!-- MODAL DE CELULARES -->
+        <div class="modal fade" id="modalcelular" tabindex="-1" aria-labelledby="modalcelularLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalcelularLabel">
+                            <h6>Equipoo Celular para el Cargo: <?php echo $cargo ?></h6>
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL DE CELULARES VER INFORMACION -->
+        <div class="modal fade" id="modalcelularinformacion" tabindex="-1" aria-labelledby="modalcelularinformacionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalcelularinformacionLabel"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se llenará el contenido de la consulta  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- MODAL ACTA -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Acta</h1>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <!-- .... -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <!-- <button type="button" class="btn btn-danger" id="descargarPDF">DESCARGAR</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- enviar el nombre como parametro para asignacion -->
+        <strong id="Usua_asigna" style="display: none;!important"><?php echo utf8_encode($_SESSION['usuario']); ?></strong>
+        <!-- enviar el nombre como parametro para remover asignacion  -->
+        <strong id="Usua_retira" style="display: none;!important"><?php echo utf8_encode($_SESSION['usuario']); ?></strong>
+
+
+
+    </body>
+
+
+
+    <!-- SCRIPT MODAL ACTA -->
+    <script>
+        $('#exampleModal').on('show.bs.modal', function(event) {
+            // Obtén la cédula y el cargo del PHP
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
+            var cargo = '<?php echo $cargo; ?>'; // Obtener el cargo del PHP
+            var nombreCompleto = '<?php echo $nombreCompleto; ?>'; // Obtener el nombre completo del PHP
+            // Realiza la solicitud AJAX aquí
+            $.ajax({
+                url: 'acta2.php',
+                method: 'GET',
+                data: {
+                    cedula: cedula,
+                    cargo: cargo,
+                    nombreCompleto: nombreCompleto,
+
+                }, // Envía la cédula, el cargo y el nombre completo como parámetros
+                // dataType: 'html',
+                success: function(response) {
+                    $('#exampleModal .modal-body').html(response); // Agrega los resultados al cuerpo del modal
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error en la solicitud AJAX');
+                    console.error('Estado:', status);
+                    console.error('Error:', error);
+                }
+            });
+        });
+    </script>
+
+
+
+
+    <!-- SCRIPT DE CHECKS CELULARES -->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckCelular').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila1celular').show();
+                    $('#fila2celular').show();
+                    $('#fila3celular').show();
+                    $('#fila4celular').show();
+                } else {
+                    $('#fila1celular').hide();
+                    $('#fila2celular').hide();
+                    $('#fila3celular').hide();
+                    $('#fila4celular').hide();
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+
+    <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN CELULAR-->
+    <script>
+        $(document).ready(function() {
+            $('#flexSwitchCheckCelular').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#fila3celular').show();
+                    // Realizar la llamada AJAX para actualizar #fila3
+                    actualizarFila3celular();
+                } else {
+                    $('#fila3celular').hide();
+                }
+            });
+            $('#fila2celular button').on('click', function() {
+                $('#fila3celular').show();
+                // Realizar la llamada AJAX para actualizar #fila3
+                actualizarFila3celular();
+            });
+        });
+
+        function actualizarFila3celular() {
+            var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
+            $.ajax({
+                url: 'fichatecnica/actualizarfichacelular.php', // Archivo PHP que realizará la consulta
+                method: 'GET',
+                data: {
+                    cedula: cedula
+                }, // Pasar la cédula como parámetro
+                success: function(response) {
+                    $('#fila3celular').html(response); // Actualizar el contenido de #fila3 con la respuesta del servidor
+                }
+            });
+        }
+    </script>
+
+
+
+
+
+    <!-- AJAX PARA CONSULTA DE CELULARES -->
+    <script>
+        $(document).ready(function() {
+            // Función para cargar información en el modal
+            function cargarInformacionEnModal() {
+                $.ajax({
+                    url: 'consulta_de_maquinas/consultacelular.php',
+                    type: 'POST',
+                    data: {
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modalcelular .modal-body').html(response); // Agrega los resultados al cuerpo del modal
                     }
                 });
+            }
+
+            // Asignar la función de carga al botón "Ver listado" de forma real
+            $('#modalcelularVerListadoButton').on('click', function() {
+                cargarInformacionEnModal();
+            });
+        });
 
 
-                empresaSelect.addEventListener('change', function() {
-                    const selectedOptionValue = empresaSelect.value;
-                    asisteDatalist.innerHTML = ''; // Limpiar las opciones actuales
+        // AJAX PARA DESCARTAR ASIGNACION
+        $(document).ready(function() {
+            $('#fila4celular button').on('click', function() {
 
-                    if (selectedOptionValue === '1') {
-                        // Consulta para Duquesa S.A. BIC
-                        <?php
-                        $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM DUQUESA..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 ORDER BY NOMBRE ASC;";
-                        $result = odbc_exec($conexion, $query);
+                $.ajax({
+                    url: 'consultar_informacion_maquinas/consultacelularinformacion.php',
+                    type: 'POST',
+                    data: {
 
-                        while ($admon = odbc_fetch_array($result)) {
-                            $nombreCompleto = trim(utf8_decode($admon['NOMBRE'])) . ' ' . trim(utf8_decode($admon['NOMBRE2'])) . ' ' . trim(utf8_decode($admon['APELLIDO'])) . ' ' . trim(utf8_decode($admon['APELLIDO2']));
-                            echo "asisteDatalist.innerHTML += '<option value=\"" . trim($admon['CEDULA']) . "\">" . $nombreCompleto . ' - ' . trim($admon['CEDULA']) . "</option>';\n";
-                        }
-                        ?>
-                    } else if (selectedOptionValue === '2') {
-                        // Consulta para Palmeras del Llano S.A. BIC
-                        <?php
-                        $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM PALMERAS2013..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 ORDER BY NOMBRE ASC;";
-                        $result = odbc_exec($conexion2, $query);
 
-                        while ($admon = odbc_fetch_array($result)) {
-                            $nombreCompleto = trim(utf8_decode($admon['NOMBRE'])) . ' ' . trim(utf8_decode($admon['NOMBRE2'])) . ' ' . trim(utf8_decode($admon['APELLIDO'])) . ' ' . trim(utf8_decode($admon['APELLIDO2']));
-                            echo "asisteDatalist.innerHTML += '<option value=\"" . trim($admon['CEDULA']) . "\">" . $nombreCompleto . ' - ' . trim($admon['CEDULA']) . "</option>';\n";
-                        }
-                        ?>
-                    } else if (selectedOptionValue === '3') {
-                        // Consulta para Palmeras del Llano S.A. BIC
-                        <?php
-                        $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM J25..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 ORDER BY NOMBRE ASC;";
-                        $result = odbc_exec($conexion2, $query);
+                        primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
+                        segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",
+                        primerapellido: "<?php echo htmlspecialchars($primerapellido); ?>",
+                        segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
 
-                        while ($admon = odbc_fetch_array($result)) {
-                            $nombreCompleto = trim(utf8_decode($admon['NOMBRE'])) . ' ' . trim(utf8_decode($admon['NOMBRE2'])) . ' ' . trim(utf8_decode($admon['APELLIDO'])) . ' ' . trim(utf8_decode($admon['APELLIDO2']));
-                            echo "asisteDatalist.innerHTML += '<option value=\"" . trim($admon['CEDULA']) . "\">" . $nombreCompleto . ' - ' . trim($admon['CEDULA']) . "</option>';\n";
-                        }
-                        ?>
+                        cedula: "<?php echo htmlspecialchars($cedula); ?>",
+                        cargo: "<?php echo htmlspecialchars($cargo); ?>"
+                    },
+                    success: function(response) {
+                        $('#modalcelularinformacion .modal-body').html(response); // Agrega los resultados al cuerpo del modal
                     }
-
                 });
             });
-        </script>
+        });
+    </script>
+
+
+    <script>
+        document.getElementById('asisteInput').addEventListener('input', function() {
+            var selectedValue = this.value;
+            var cedulaIndex = selectedValue.lastIndexOf('-'); // Índice del último guión
+            if (cedulaIndex !== -1) {
+                this.value = selectedValue.substring(cedulaIndex + 1).trim(); // Eliminar espacio adicional antes de la cédula
+            }
+        });
+    </script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const asisteInput = document.getElementById('nombreInput');
+            const identificacionInput = document.getElementById('identificacionInput');
+            const asisteDatalist = document.getElementById('asiste');
+
+            asisteInput.addEventListener('change', function() {
+                const selectedOption = asisteDatalist.querySelector(`option[value="${asisteInput.value}"]`);
+                if (selectedOption) {
+                    const cedula = selectedOption.textContent.split(' - ')[1];
+                    identificacionInput.value = cedula;
+                } else {
+                    identificacionInput.value = '';
+                }
+            });
+
+
+            empresaSelect.addEventListener('change', function() {
+                const selectedOptionValue = empresaSelect.value;
+                asisteDatalist.innerHTML = ''; // Limpiar las opciones actuales
+
+                if (selectedOptionValue === '1') {
+                    // Consulta para Duquesa S.A. BIC
+                    <?php
+                    $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM DUQUESA..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 ORDER BY NOMBRE ASC;";
+                    $result = odbc_exec($conexion, $query);
+
+                    while ($admon = odbc_fetch_array($result)) {
+                        $nombreCompleto = trim(utf8_decode($admon['NOMBRE'])) . ' ' . trim(utf8_decode($admon['NOMBRE2'])) . ' ' . trim(utf8_decode($admon['APELLIDO'])) . ' ' . trim(utf8_decode($admon['APELLIDO2']));
+                        echo "asisteDatalist.innerHTML += '<option value=\"" . trim($admon['CEDULA']) . "\">" . $nombreCompleto . ' - ' . trim($admon['CEDULA']) . "</option>';\n";
+                    }
+                    ?>
+                } else if (selectedOptionValue === '2') {
+                    // Consulta para Palmeras del Llano S.A. BIC
+                    <?php
+                    $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM PALMERAS2013..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 ORDER BY NOMBRE ASC;";
+                    $result = odbc_exec($conexion2, $query);
+
+                    while ($admon = odbc_fetch_array($result)) {
+                        $nombreCompleto = trim(utf8_decode($admon['NOMBRE'])) . ' ' . trim(utf8_decode($admon['NOMBRE2'])) . ' ' . trim(utf8_decode($admon['APELLIDO'])) . ' ' . trim(utf8_decode($admon['APELLIDO2']));
+                        echo "asisteDatalist.innerHTML += '<option value=\"" . trim($admon['CEDULA']) . "\">" . $nombreCompleto . ' - ' . trim($admon['CEDULA']) . "</option>';\n";
+                    }
+                    ?>
+                } else if (selectedOptionValue === '3') {
+                    // Consulta para Palmeras del Llano S.A. BIC
+                    <?php
+                    $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM J25..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 ORDER BY NOMBRE ASC;";
+                    $result = odbc_exec($conexion2, $query);
+
+                    while ($admon = odbc_fetch_array($result)) {
+                        $nombreCompleto = trim(utf8_decode($admon['NOMBRE'])) . ' ' . trim(utf8_decode($admon['NOMBRE2'])) . ' ' . trim(utf8_decode($admon['APELLIDO'])) . ' ' . trim(utf8_decode($admon['APELLIDO2']));
+                        echo "asisteDatalist.innerHTML += '<option value=\"" . trim($admon['CEDULA']) . "\">" . $nombreCompleto . ' - ' . trim($admon['CEDULA']) . "</option>';\n";
+                    }
+                    ?>
+                }
+
+            });
+        });
+    </script>
 
 
     </html>

@@ -34,13 +34,13 @@ if (isset($_SESSION['usuario'])) {
     <?php require '../estilosadmin/head.php'; ?>
 
     <body>
-        
-         <!-- NAV -->
+
+        <!-- NAV -->
         <?php require '../estilosadmin/nav.php'; ?>
 
         <section style="margin-top: 100px;">
-                       <!--  -->
-                       <?php require '../estilosadmin/navinventario.php'; ?>
+            <!--  -->
+            <?php require '../estilosadmin/navinventario.php'; ?>
 
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container">
@@ -111,6 +111,10 @@ if (isset($_SESSION['usuario'])) {
                         <th>EMPRESA</th>
                         <th>ESTADO DE ASIGNACION</th>
                         <th>OBSERVACIONES DESASIGNACION</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>

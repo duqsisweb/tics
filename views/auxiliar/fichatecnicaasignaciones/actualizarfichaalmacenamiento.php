@@ -41,7 +41,7 @@
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
 
-    $consulta = "SELECT marca_almacenamiento, modelo_almacenamiento FROM ControlTIC..asignacion_almacenamiento WHERE cedula = '$cedula'";
+    $consulta = "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[marca_almacenamiento] ,[modelo_almacenamiento] ,[descripcion_almacenamiento] ,[capacidad_almacenamiento] ,[tipo_almacenamiento] ,[caracteristica_almacenamiento] ,[sede_almacenamiento] ,[ubicacion_almacenamiento] ,[fecha_de_ingreso] ,[estado] ,[fecha_de_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_almacenamiento] WHERE cedula = '$cedula'";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>"; // Mantener el formato monoespaciado
@@ -49,8 +49,10 @@
     if (odbc_num_rows($resultado) > 0) {
         while ($fila = odbc_fetch_array($resultado)) {
             $output .= "-------------------------------------\n";
+            $output .= "Elemento: " . $fila['tipo_maquina'] . "\n";
             $output .= "Marca: " . $fila['marca_almacenamiento'] . "\n";
             $output .= "Modelo: " . $fila['modelo_almacenamiento'] . "\n";
+            $output .= "Descripcion: " . $fila['descripcion_almacenamiento'] . "\n";
             $output .= "-------------------------------------\n";
         }
     } else {
@@ -103,13 +105,11 @@
                             <th scope="col">Caracteristica</th>
                             <th scope="col">Sede</th>
                             <th scope="col">Ubicación</th>
-                            <th scope="col">Fecha Ingreso</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Fecha Garantia</th>
                             <th scope="col">Fecha Crea</th>
                             <th scope="col">Usua Crea</th>
-                            <th scope="col">Fecha Modifica</th>
-                            <th scope="col">Usua Modifica</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -118,7 +118,7 @@
 
                         $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : '';
 
-                        $consulta = "SELECT [id_asignacion] ,[id] ,[tipo_maquina] ,[marca_almacenamiento] ,[modelo_almacenamiento] ,[descripcion_almacenamiento] ,[capacidad_almacenamiento] ,[tipo_almacenamiento] ,[caracteristica_almacenamiento] ,[sede_almacenamiento] ,[ubicacion_almacenamiento] ,[fecha_de_ingreso] ,[estado] ,[fecha_de_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_almacenamiento] where cedula= '$cedula'";
+                        $consulta = "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[marca_almacenamiento] ,[modelo_almacenamiento] ,[descripcion_almacenamiento] ,[capacidad_almacenamiento] ,[tipo_almacenamiento] ,[caracteristica_almacenamiento] ,[sede_almacenamiento] ,[ubicacion_almacenamiento] ,[fecha_de_ingreso] ,[estado] ,[fecha_de_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_almacenamiento] where cedula= '$cedula'";
                         $resultadoConsulta = odbc_exec($conexion, $consulta);
 
                         if (odbc_num_rows($resultadoConsulta) > 0) {
@@ -135,13 +135,11 @@
                                 echo '<td>' . $fila['caracteristica_almacenamiento'] . '</td>';
                                 echo '<td>' . $fila['sede_almacenamiento'] . '</td>';
                                 echo '<td>' . $fila['ubicacion_almacenamiento'] . '</td>';
-                                echo '<td>' . $fila['fecha_de_ingreso'] . '</td>';
                                 echo '<td>' . $fila['estado'] . '</td>';
                                 echo '<td>' . $fila['fecha_de_garantia'] . '</td>';
                                 echo '<td>' . $fila['fecha_crea'] . '</td>';
                                 echo '<td>' . $fila['usua_crea'] . '</td>';
-                                echo '<td>' . $fila['fecha_modifica'] . '</td>';
-                                echo '<td>' . $fila['usua_modifica'] . '</td>';
+
 
                                 echo '</tr>';
                             }

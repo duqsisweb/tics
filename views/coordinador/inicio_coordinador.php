@@ -69,7 +69,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Estado De Equipos</h5>
                                 <p class="card-text">Aquí puede visualizar el estado de las máquinas o dispositivos</p>
-                                <a href="estadoequipos.php" class="btn btn-success">Ingresar</a>
+                                <a href="estados.php" class="btn btn-success">Ingresar</a>
                             </div>
 
                         </div>
@@ -104,7 +104,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Mantenimiento Correctivo</h5>
                                 <p class="card-text">...</p>
-                                <a href="actualizaciondeequipos.php" class="btn btn-success">Ingresar</a>
+                                <a href="mantenimiento_correctivo.php" class="btn btn-success">Ingresar</a>
                             </div>
 
                         </div>
@@ -118,7 +118,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Mantenimiento Preventivo</h5>
                                 <p class="card-text">...</p>
-                                <a href="mantenimientos/mantenimientocomputador.php" class="btn btn-success">Ingresar</a>
+                                <a href="mantenimiento_preventivo.php" class="btn btn-success">Ingresar</a>
                             </div>
 
                         </div>
@@ -221,10 +221,6 @@ if (isset($_SESSION['usuario'])) {
                     </div> -->
                 </div>
             </div>
-
-
-
-
 
 
 

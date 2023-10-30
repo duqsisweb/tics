@@ -42,7 +42,7 @@
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
 
-    $consulta = "SELECT marca_edcomunicacion, modelo_edcomunicacion, observaciones_edcomunicacion, ubicacion_edcomunicacion, serial_edcomunicacion FROM ControlTIC..asignacion_edcomunicacion WHERE cedula = '$cedula'";
+    $consulta = "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[marca_edcomunicacion] ,[modelo_edcomunicacion] ,[descripcion_edcomunicacion] ,[serial_edcomunicacion] ,[fecha_de_ingreso_edc] ,[estado] ,[placa_activo_edcomunicacion] ,[sede_edcomunicacion] ,[ubicacion_edcomunicacion] ,[observaciones_edcomunicacion] ,[gestion_edcomunicacion] ,[fecha_garantia_edc] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] WHERE cedula = '$cedula'";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>"; // Mantener el formato monoespaciado
@@ -50,6 +50,7 @@
     if (odbc_num_rows($resultado) > 0) {
         while ($fila = odbc_fetch_array($resultado)) {
             $output .= "-------------------------------------\n";
+            $output .= "Elemento: " . $fila['tipo_maquina'] . "\n";
             $output .= "Marca del Equipo: " . $fila['marca_edcomunicacion'] . "\n";
             $output .= "Modelo del Equipo:" . $fila['modelo_edcomunicacion'] . "\n";
             $output .= "Observaciones:" . $fila['observaciones_edcomunicacion'] . "\n";
@@ -102,18 +103,13 @@
                             <th scope="col">Modelo</th>
                             <th scope="col">Descripción</th>
                             <th scope="col">Serial</th>
-                            <th scope="col">Fecha I.</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Placa Activo</th>
                             <th scope="col">Sede</th>
                             <th scope="col">Ubicación</th>
                             <th scope="col">observaciones_edcomunicacion</th>
                             <th scope="col">Gestion</th>
-                            <th scope="col">Fecha Garantia</th>
-                            <th scope="col">Fecha Crea</th>
-                            <th scope="col">Usua Crea</th>
-                            <th scope="col">Fecha Mod</th>
-                            <th scope="col">Usua Mod</th>
+                      
                         </tr>
                     </thead>
                     <tbody>
@@ -122,7 +118,7 @@
 
                         $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : '';
 
-                        $consulta = "SELECT [id_asignacion] ,[id] ,[tipo_maquina] ,[marca_edcomunicacion] ,[modelo_edcomunicacion] ,[descripcion_edcomunicacion] ,[serial_edcomunicacion] ,[fecha_de_ingreso] ,[estado] ,[placa_activo_edcomunicacion] ,[sede_edcomunicacion] ,[ubicacion_edcomunicacion] ,[observaciones_edcomunicacion] ,[gestion_edcomunicacion] ,[fecha_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] where cedula= '$cedula'";
+                        $consulta = "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[marca_edcomunicacion] ,[modelo_edcomunicacion] ,[descripcion_edcomunicacion] ,[serial_edcomunicacion] ,[fecha_de_ingreso_edc] ,[estado] ,[placa_activo_edcomunicacion] ,[sede_edcomunicacion] ,[ubicacion_edcomunicacion] ,[observaciones_edcomunicacion] ,[gestion_edcomunicacion] ,[fecha_garantia_edc] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] where cedula= '$cedula'";
                         $resultadoConsulta = odbc_exec($conexion, $consulta);
 
                         if (odbc_num_rows($resultadoConsulta) > 0) {
@@ -135,18 +131,12 @@
                                 echo '<td>' . $fila['modelo_edcomunicacion'] . '</td>';
                                 echo '<td>' . $fila['descripcion_edcomunicacion'] . '</td>';
                                 echo '<td>' . $fila['serial_edcomunicacion'] . '</td>';
-                                echo '<td>' . $fila['fecha_de_ingreso'] . '</td>';
                                 echo '<td>' . $fila['estado'] . '</td>';
                                 echo '<td>' . $fila['placa_activo_edcomunicacion'] . '</td>';
                                 echo '<td>' . $fila['sede_edcomunicacion'] . '</td>';
                                 echo '<td>' . $fila['ubicacion_edcomunicacion'] . '</td>';
                                 echo '<td>' . $fila['observaciones_edcomunicacion'] . '</td>';
                                 echo '<td>' . $fila['gestion_edcomunicacion'] . '</td>';
-                                echo '<td>' . $fila['fecha_garantia'] . '</td>';
-                                echo '<td>' . $fila['fecha_crea'] . '</td>';
-                                echo '<td>' . $fila['usua_crea'] . '</td>';
-                                echo '<td>' . $fila['fecha_modifica'] . '</td>';
-                                echo '<td>' . $fila['usua_modifica'] . '</td>';
 
                                 echo '</tr>';
                             }

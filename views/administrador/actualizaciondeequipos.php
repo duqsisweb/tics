@@ -17,12 +17,15 @@ if (isset($_SESSION['usuario'])) {
     require '../../views/head.php';
     ?>
 
-    <!-- Asegúrate de cargar jQuery primero -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
         .hidden-cell {
             display: none;
+        }
+
+        .form-select-sm {
+            width: 200px;
+            /* Ajusta el ancho según tus necesidades. */
         }
     </style>
 
@@ -45,43 +48,47 @@ if (isset($_SESSION['usuario'])) {
                     </div>
                 </div>
             </div>
-            
+
             <br>
 
             <div class="container-fluid" style="text-align:center;">
                 <div class="row">
                     <div class="col-md-12">
+
                         <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                             <thead>
                                 <tr class="encabezado table-dark ">
                                     <th>ID</th>
                                     <th>TIPO MAQUINA</th>
-                                    <th>SERVICE-T</th>
-                                    <th>SERIAL</th>
-                                    <th>NOMBRE EQUIPO</th>
+                                    <th>SERVICE TAG</th>
+                                    <th>SERIAL EQUIPO</th>
+                                    <th>NOMBRE DEL EQUIPO</th>
                                     <th>SEDE</th>
                                     <th>EMPRESA</th>
                                     <th>MARCA</th>
                                     <th>MODELO</th>
-                                    <th>TIPO COMP</th>
+                                    <th>TIPO COMPUTADOR</th>
                                     <th>TIPO RAM</th>
-                                    <th>RAM</th>
+                                    <th>MEMORIA RAM</th>
                                     <th>TIPO DISCO</th>
-                                    <th>CAPACIDAD</th>
+                                    <th>CAPACIDAD DE DISCO</th>
                                     <th>PROCESADOR</th>
                                     <th>PROPIETARIO</th>
                                     <th>PROVEEDOR</th>
-                                    <th>SISTEMA OP.</th>
+                                    <th>SISTEMA OPERATIVO</th>
                                     <th>SERIAL CARGADOR</th>
                                     <th>DOMINIO</th>
                                     <th>TIPO USUARIO</th>
                                     <th>SERIAL ACTIVO</th>
-                                    <th>FECHA DE INGRESO</th>
-                                    <th>TARGETA VIDEO</th>
+                                    <th>FECHA INGRESO</th>
+                                    <th>TARGETA DE VIDEO</th>
                                     <th>ESTADO</th>
                                     <th>GESTION</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>FECHA DE GARANTIA</th>
+                                    <th>AJUSTES</th>
+
+
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -104,7 +111,7 @@ if (isset($_SESSION['usuario'])) {
 
                                     echo "</tr>";
 
-                                    // Agregar un formulario de edición oculto para cada fila
+                                    // Agregar un formulario de edición oculto para cada fila aqui comienza las ocultas
                                     echo "<tr style='display: none;' class='editar-form' id='editar-form-" . $row['id'] . "'>";
                                     foreach ($row as $key => $value) {
 
@@ -112,7 +119,6 @@ if (isset($_SESSION['usuario'])) {
                                             // Agregar un campo de selección para la sede
                                             echo "<td class='campo-editable' data-sede='$value'>";
                                             echo "<select class='form-select form-select-sm' name='Sede'>";
-
                                             // Obtén el valor original de la sede desde el atributo data-sede
                                             $sedeOriginal = $value;
 
@@ -125,7 +131,7 @@ if (isset($_SESSION['usuario'])) {
                                                 $idSede = $filaSede['id'];
                                                 $nombreSede = $filaSede['nombre_sede'];
                                                 // Verifica si esta opción es la original y márcala como seleccionada
-                                                $selected = ($idSede == $sedeOriginal) ? "selected" : "";
+                                                $selected = ($nombreSede == $sedeOriginal) ? "selected" : "";
                                                 echo "<option value='$idSede' $selected>$nombreSede</option>";
                                             }
 
@@ -134,9 +140,9 @@ if (isset($_SESSION['usuario'])) {
 
                                             echo "</select>";
                                             echo "</td>";
-                                        } else if ($key === 'Empresa_computador') {
+                                        } else if ($key === 'Empresa') {
                                             // Agregar un campo de selección para la empresa
-                                            echo "<td class='campo-editable' data-empresa='$value'>";
+                                            echo "<td class='campo-editable' data-Empresa='$value'>";
                                             echo "<select class='form-select form-select-sm' name='Empresa'>";
 
                                             // Obtén el valor original de la empresa desde el atributo data-empresa
@@ -151,7 +157,7 @@ if (isset($_SESSION['usuario'])) {
                                                 $idEmpresa = $filaEmpresa['id'];
                                                 $nombreEmpresa = $filaEmpresa['nombre_empresa'];
                                                 // Verifica si esta opción es la original y márcala como seleccionada
-                                                $selected = ($idEmpresa == $empresaOriginal) ? "selected" : "";
+                                                $selected = ($nombreEmpresa == $empresaOriginal) ? "selected" : "";
                                                 echo "<option value='$idEmpresa' $selected>$nombreEmpresa</option>";
                                             }
 
@@ -172,8 +178,8 @@ if (isset($_SESSION['usuario'])) {
                                                 $idMemoriaram = $filaMemoriaram['id'];
                                                 $nombreMemoriaram = $filaMemoriaram['capacidad_ram'];
                                                 // Verifica si esta opción es la original y márcala como seleccionada
-                                                $selected = ($idMemoriaram == $MemoriaramOriginal) ? "selected" : "";
-                                                echo "<option value='$nombreMemoriaram' $selected>$nombreMemoriaram</option>";
+                                                $selected = ($nombreMemoriaram == $MemoriaramOriginal) ? "selected" : "";
+                                                echo "<option value='$idMemoriaram' $selected>$nombreMemoriaram</option>";
                                             }
 
                                             // Libera recursos
@@ -181,7 +187,7 @@ if (isset($_SESSION['usuario'])) {
 
                                             echo "</select>";
                                             echo "</td>";
-                                        } else if ($key === 'Tipo_disco') {
+                                        } else if ($key === 'Tipo_discoduro') {
                                             // Agregar un campo de selección para el tipo de disco
                                             echo "<td class='campo-editable' data-tipo-disco='$value'>";
                                             echo "<select class='form-select form-select-sm' name='Tipo_discoduro'>";
@@ -198,7 +204,7 @@ if (isset($_SESSION['usuario'])) {
                                                 $idTipoDisco = $filaTipoDisco['id'];
                                                 $nombreTipoDisco = $filaTipoDisco['nombre_tipo_discoduro'];
                                                 // Verifica si esta opción es la original y márcala como seleccionada
-                                                $selected = ($idTipoDisco == $tipoDiscoOriginal) ? "selected" : "";
+                                                $selected = ($nombreTipoDisco == $tipoDiscoOriginal) ? "selected" : "";
                                                 echo "<option value='$idTipoDisco' $selected>$nombreTipoDisco</option>";
                                             }
 
@@ -207,7 +213,7 @@ if (isset($_SESSION['usuario'])) {
 
                                             echo "</select>";
                                             echo "</td>";
-                                        } else if ($key === 'Capacidad_dico') {
+                                        } else if ($key === 'Capacidad_discoduro') {
                                             // Agregar un campo de selección para la capacidad del disco
                                             echo "<td class='campo-editable' data-capacidad-disco='$value'>";
                                             echo "<select class='form-select form-select-sm' name='Capacidad_discoduro'>";
@@ -233,7 +239,7 @@ if (isset($_SESSION['usuario'])) {
 
                                             echo "</select>";
                                             echo "</td>";
-                                        } else if ($key === 'Sistema_O') {
+                                        } else if ($key === 'Sistema_Operativo') {
                                             // Agregar un campo de selección para el sistema operativo
                                             echo "<td class='campo-editable' data-sistema-operativo='$value'>";
                                             echo "<select class='form-select form-select-sm' name='Sistema_Operativo'>";
@@ -250,7 +256,7 @@ if (isset($_SESSION['usuario'])) {
                                                 $idSistemaOperativo = $filaSistemaOperativo['id'];
                                                 $nombreSistemaOperativo = $filaSistemaOperativo['nombre_sistema_operativo'];
                                                 // Verifica si esta opción es la original y márcala como seleccionada
-                                                $selected = ($idSistemaOperativo == $sistemaOperativoOriginal) ? "selected" : "";
+                                                $selected = ($nombreSistemaOperativo == $sistemaOperativoOriginal) ? "selected" : "";
                                                 echo "<option value='$idSistemaOperativo' $selected>$nombreSistemaOperativo</option>";
                                             }
 
@@ -278,38 +284,16 @@ if (isset($_SESSION['usuario'])) {
                                             echo "<option value='Estandar' " . ($value === 'Estandar' ? 'selected' : '') . ">Estandar</option>";
                                             echo "</select>";
                                             echo "</td>";
-                                        } else if ($key === 'Nombre_equipo') {
-                                            echo "<td class=''><input type='text' name='Nombre_equipo' value='$value' disabled ></td>";
                                         } else if ($key === 'Service_tag') {
                                             echo "<td class=''><input type='text' name='Service_tag' value='$value' disabled ></td>";
+                                        } else if ($key === 'Service_tag') {
+                                            echo "<td class=''><input type='text' name='Service_tag' value='$value' disabled ></td>";
+                                        } else if ($key === 'tipo_maquina') {
+                                            echo "<td class=''><input type='text' name='tipo_maquina' value='$value' disabled ></td>";
                                         } else if ($key === 'Serial_equipo') {
                                             echo "<td class=''><input type='text' name='Serial_equipo' value='$value' disabled ></td>";
-                                        } else if ($key === 'tipo_maquina') {
-                                            // Agregar un campo de selección para el tipo de disco
-                                            echo "<td class='campo-editable' data-tipo-maquina='$value' disabled>";
-                                            echo "<select class='form-select form-select-sm' name='tipo_maquina' disabled>";
-
-                                            // Obtén el valor original del tipo de disco desde el atributo data-tipo-disco
-                                            $tipoMaquinaOriginal = $value;
-
-                                            // Realiza la consulta a la base de datos para obtener los tipos de disco
-                                            $consultaTipomaquina = "SELECT [id] ,[nombre_maquina] FROM [ControlTIC].[dbo].[tipo_maquina]";
-                                            $resultadoTipomaquina = odbc_exec($conexion, $consultaTipomaquina);
-
-                                            // Itera sobre los resultados y genera las opciones del select
-                                            while ($filaTipoMaquina = odbc_fetch_array($resultadoTipomaquina)) {
-                                                $idTipoMaquina = $filaTipoMaquina['id'];
-                                                $nombreTipoMaquina = $filaTipoMaquina['nombre_maquina'];
-                                                // Verifica si esta opción es la original y márcala como seleccionada
-                                                $selected = ($idTipoMaquina == $tipoMaquinaOriginal) ? "selected" : "";
-                                                echo "<option value='$idTipoMaquina' $selected>$nombreTipoMaquina</option>";
-                                            }
-
-                                            // Libera recursos
-                                            odbc_free_result($resultadoTipomaquina);
-
-                                            echo "</select>";
-                                            echo "</td>";
+                                        } else if ($key === 'Nombre_equipo') {
+                                            echo "<td class=''><input type='text' name='Nombre_equipo' value='$value' disabled ></td>";
                                         } else if ($key === 'Marca_computador') {
                                             echo "<td class=''><input type='text' name='Marca_computador' value='$value' disabled ></td>";
                                         } else if ($key === 'Modelo_computador') {
@@ -317,7 +301,7 @@ if (isset($_SESSION['usuario'])) {
                                         } else if ($key === 'Tipo_comp') {
                                             echo "<td class=''><input type='text' name='Tipo_comp' value='$value' disabled ></td>";
                                         } else if ($key === 'Tipo_ram') {
-                                            echo "<td class=''><input type='text' name='Tipo_ram' value='$value' disabled ></td>";
+                                            echo "<td class=''><input type='text' name='tipo_memoria_ram' value='$value' disabled ></td>";
                                         } else if ($key === 'Procesador') {
                                             echo "<td class=''><input type='text' name='Procesador' value='$value' disabled ></td>";
                                         } else if ($key === 'Propietario') {
@@ -326,8 +310,8 @@ if (isset($_SESSION['usuario'])) {
                                             echo "<td class=''><input type='text' name='Proveedor' value='$value' disabled ></td>";
                                         } else if ($key === 'Serial_activo_fijo') {
                                             echo "<td class=''><input type='text' name='Serial_activo_fijo' value='$value' disabled ></td>";
-                                        } else if ($key === 'Fecha_ingreso') {
-                                            echo "<td class=''><input type='text' name='Fecha_ingreso' value='$value' disabled ></td>";
+                                        } else if ($key === 'Fecha_ingreso_c') {
+                                            echo "<td class=''><input type='text' name='Fecha_ingreso_c' value='$value' disabled ></td>";
                                         } else if ($key === 'Targeta_Video') {
                                             echo "<td class=''><input type='text' name='Targeta_Video' value='$value' disabled ></td>";
                                         } else if ($key === 'Estado') {
@@ -339,47 +323,18 @@ if (isset($_SESSION['usuario'])) {
                                         }
                                     }
 
-
-
-                                    // Agregar campos ocultos para los valores editados
-                                    echo '<input type="hidden" name="id" value="' . $row['id'] . '">';
-                                    echo '<input type="hidden" name="Sede" value="">';
-                                    echo '<input type="hidden" name="Empresa_computador" value="">';
-                                    echo '<input type="hidden" name="Memoria_ram" value="">';
-                                    echo '<input type="hidden" name="Tipo_disco" value="">';
-                                    echo '<input type="hidden" name="Capacidad_disco" value="">';
-                                    echo '<input type="hidden" name="Sistema_Operativo" value="">';
-                                    echo '<input type="hidden" name="Serial_cargador" value="">';
-                                    echo '<input type="hidden" name="Dominio" value="">';
-                                    echo '<input type="hidden" name="Tipo_usuario" value="">';
-
-                                    //    PARAMETROS PARA LA TABLA HISTORIAL
-
-                                    echo '<input type="hidden" name="Nombre_equipo" value="">';
-                                    echo '<input type="hidden" name="Service_tag" value="">';
-                                    echo '<input type="hidden" name="Serial_equipo" value="">';
-                                    echo '<input type="hidden" name="tipo_maquina" value="">';
-                                    echo '<input type="hidden" name="Marca_computador" value="">';
-                                    echo '<input type="hidden" name="Modelo_computador" value="">';
-                                    echo '<input type="hidden" name="Tipo_comp" value="">';
-                                    echo '<input type="hidden" name="Tipo_ram" value="">';
-                                    echo '<input type="hidden" name="Procesador" value="">';
-                                    echo '<input type="hidden" name="Propietario" value="">';
-                                    echo '<input type="hidden" name="Proveedor" value="">';
-                                    echo '<input type="hidden" name="Serial_activo_fijo" value="">';
-                                    echo '<input type="hidden" name="Fecha_ingreso" value="">';
-                                    echo '<input type="hidden" name="Targeta_Video" value="">';
-                                    echo '<input type="hidden" name="Estado" value="">';
-                                    echo '<input type="hidden" name="Gestion" value="">';
-
-
                                     echo '<td class="campo-editable"><button type="button" class="btn btn-success btn-guardar" data-id="' . $row['id'] . '">Guardar</button></td>';
                                     echo '<td class="campo-editable"><button type="button" class="btn btn-danger btn-cancelar" data-id="' . $row['id'] . '">Cancelar</button></td>';
                                     echo "</tr>";
+                                    // fin de campos
+
                                 }
+
+
                                 ?>
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
@@ -393,8 +348,9 @@ if (isset($_SESSION['usuario'])) {
 
     </html>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Inicio DataTable -->
+    <!-- Inicio DataTable  elimina los duplicados en el excel y recarga la web-->
     <script type="text/javascript">
         $(document).ready(function() {
             var lenguaje = $('#mtable').DataTable({
@@ -406,10 +362,44 @@ if (isset($_SESSION['usuario'])) {
                 iDisplayLength: 30,
                 searching: true,
                 dom: 'Bfrtip',
-                buttons: [
-                    'excel'
-                    // 'copy', 'csv', 'excel'
-                ],
+                buttons: [{
+                    extend: 'excel',
+                    text: 'Exportar Excel',
+                    action: function(e, dt, button, config) {
+                        // Filtrar los duplicados en la columna "ID"
+                        var data = dt.rows().data().toArray();
+                        var uniqueData = [];
+                        var seen = {};
+
+                        data.forEach(function(row) {
+                            var id = row[0]; // Cambia el índice 0 al que corresponde a la columna "ID"
+                            if (!seen[id]) {
+                                uniqueData.push(row);
+                                seen[id] = true;
+                            }
+                        });
+
+                        dt.clear();
+                        dt.rows.add(uniqueData);
+                        dt.draw();
+
+                        // Ocultar las filas de edición antes de exportar
+                        $('.editar-form').hide();
+                        $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, button, config);
+                        // Restaurar los datos originales
+                        dt.clear();
+                        dt.rows.add(data);
+                        dt.draw();
+
+                        // Mostrar las filas de edición nuevamente después de exportar
+                        $('.editar-form').show();
+
+                        // Recargar la página después de la exportación
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000); // La recarga se produce después de 1 segundo (1000 ms)
+                    }
+                }],
                 language: {
                     lengthMenu: 'Mostrar _MENU_ registros por página.',
                     zeroRecords: 'Lo sentimos. No se encontraron registros.',
@@ -486,8 +476,8 @@ if (isset($_SESSION['usuario'])) {
                 var camposActualizados = {};
 
                 // Obtener el contenido del elemento <strong> con el id "Usua_modifica"
-                var nombreUsuario = $('#Usua_modifica').text().trim(); // Trim para eliminar espacios en blanco
-                camposActualizados['Usua_modifica'] = nombreUsuario; // Agregarlo como un campo en camposActualizados
+                var nombreUsuario = $('#Usua_modifica').text().trim();
+                camposActualizados['Usua_modifica'] = nombreUsuario;
 
                 // Recopilar los valores de los campos editables
                 $('#editar-form-' + id + ' input[type="text"], #editar-form-' + id + ' select').each(function() {
@@ -499,32 +489,35 @@ if (isset($_SESSION['usuario'])) {
                 // Agregar el ID a los campos actualizados
                 camposActualizados['id'] = id;
 
-                // Enviar los datos al servidor utilizando AJAX
-                $.ajax({
-                    type: "POST",
-                    url: "mantenimiento/actualizar_equipo.php",
-                    data: camposActualizados,
-                    dataType: "json", // Asegúrate de especificar que esperas una respuesta JSON
-                    success: function(response) {
-                        // Agrega un console.log para verificar la respuesta del servidor
-                        console.log(response);
-
-                        if (response.success) {
-                            // Actualización exitosa, puedes realizar acciones adicionales si es necesario
-                            alert("Actualización exitosa: " + response.message);
-                            // Puedes ocultar el formulario de edición y mostrar los campos originales aquí
-                        } else {
-                            // Manejar errores si la actualización falló
-                            alert("Error al actualizar: " + response.message);
-                        }
-                    },
-                    // ...
+                // Mostrar SweetAlert2 para confirmación
+                Swal.fire({
+                    title: '¿Desea guardar los cambios?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar',
+                    denyButtonText: `No guardar`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Realizar la solicitud AJAX si se confirmó
+                        $.ajax({
+                            type: "POST",
+                            url: "ajax_mantenimiento_correctivo/actualizar_equipo.php",
+                            data: camposActualizados,
+                            success: function(response) {
+                                console.log("Respuesta del servidor:", response);
+                                Swal.fire('¡Guardado!', '', 'success');
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 3000);
+                            },
+                        });
+                    } else if (result.isDenied) {
+                        Swal.fire('Los cambios no se guardan', '', 'info');
+                    }
                 });
             });
         });
     </script>
-
-
 
 
 

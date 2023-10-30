@@ -16,60 +16,53 @@ if (isset($_SESSION['usuario'])) {
     $cargo = isset($_GET['cargo']) ? $_GET['cargo'] : ''; // Obtener la cédula pasada por AJAX
     $nombreCompleto = isset($_GET['nombreCompleto']) ? $_GET['nombreCompleto'] : '';
 
-    $data = odbc_exec($conexion, "SELECT  
-        [id_asignacion]
-        ,mc.[id] ,tipomaquin.[nombre_maquina] as Tipo_maquina 
-        ,[Service_tag] 
-        ,[Serial_equipo]
-        ,[Nombre_equipo] 
-        ,sed.[nombre_sede] as Sede 
-        ,empres.[nombre_empresa] as Empresa 
-        ,[Marca_computador] 
-        ,[Modelo_computador] 
-        ,tipocomp.[nombre_tipo_comp] as Tipo_comp 
-        ,[Tipo_ram] ,[Memoria_ram] 
-        ,tipodisco.[nombre_tipo_discoduro] as Tipo_disco 
-        ,capacidaddisco.[capacidad_discoduro] as Capacidad_dico 
-        ,[Procesador] 
-        ,propietari.[descripcion] as Propietario 
-        ,[Proveedor] 
-        ,sistemao.[nombre_sistema_operativo] as Sistema_O 
-        ,[Serial_cargador] 
-        ,[Dominio] 
-        ,[Tipo_usuario] 
-        ,[Serial_activo_fijo] 
-        ,[Fecha_ingreso] 
-        ,[Targeta_Video] 
-        ,estad.[nombre_estado] Estado 
-        ,gestio.[estado_gestion] as Estado_Gestion 
-        ,[Fecha_garantia] 
-        ,[Fecha_crea] 
-        ,[Usua_crea] 
-        ,[Fecha_modifica] 
-        ,[Usua_modifica] 
-        ,[Usua_asigna] 
-        ,[Fecha_asigna] 
-        ,[cedula] 
-        ,[cargo] 
-        ,[primernombre] 
-        ,[segundonombre] 
-        ,[primerapellido] 
-        ,[segundoapellido] 
-        ,estadoasigna.[nombre_estado] as Estado_asignacion
-        ,[observaciones_asigna]
-        ,link_computador_asigna
-        FROM [ControlTIC].[dbo].[asignacion_computador] as mc 
-        JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] 
-        JOIN [ControlTIC].[dbo].sede as sed ON mc.Sede = sed.id 
-        JOIN [ControlTIC].[dbo].empresa as empres ON mc.Empresa = empres.id 
-        JOIN [ControlTIC].[dbo].tipo_comp as tipocomp ON mc.Tipo_comp = tipocomp.id 
-        JOIN [ControlTIC].[dbo].tipo_discoduro as tipodisco ON mc.Tipo_discoduro = tipodisco.id 
-        JOIN [ControlTIC].[dbo].propietario as propietari ON mc.Propietario = propietari.id 
-        JOIN [ControlTIC].[dbo].capacidad_discoduro as capacidaddisco ON mc.Capacidad_discoduro = capacidaddisco.id 
-        JOIN [ControlTIC].[dbo].sistema_operativo as sistemao ON mc.Sistema_Operativo = sistemao.id 
-        JOIN [ControlTIC].[dbo].estado as estad ON mc.Estado = estad.id 
-        JOIN [ControlTIC].[dbo].gestion as gestio ON mc.Gestion = gestio.id 
-        JOIN [ControlTIC].[dbo].estado_asignacion as estadoasigna ON mc.estado_asignacion = estadoasigna.id
+
+    // COMPUTADOR CONSULTA
+    $data = odbc_exec($conexion, "SELECT  [id_asignacion]
+                    ,[id]
+                    ,[tipo_maquina]
+                    ,[Service_tag]
+                    ,[Serial_equipo]
+                    ,[Nombre_equipo]
+                    ,[Sede]
+                    ,[Empresa]
+                    ,[Marca_computador]
+                    ,[Modelo_computador]
+                    ,[Tipo_comp]
+                    ,[Tipo_ram]
+                    ,[Memoria_ram]
+                    ,[Tipo_discoduro]
+                    ,[Capacidad_discoduro]
+                    ,[Procesador]
+                    ,[Propietario]
+                    ,[Proveedor]
+                    ,[Sistema_Operativo]
+                    ,[Serial_cargador]
+                    ,[Dominio]
+                    ,[Tipo_usuario]
+                    ,[Serial_activo_fijo]
+                    ,[Fecha_ingreso_c]
+                    ,[Targeta_Video]
+                    ,[Estado]
+                    ,[Gestion]
+                    ,[Fecha_garantia_c]
+                    ,[Fecha_crea]
+                    ,[Usua_crea]
+                    ,[Fecha_modifica]
+                    ,[Usua_modifica]
+                    ,[Usua_asigna]
+                    ,[Fecha_asigna]
+                    ,[cedula]
+                    ,[cargo]
+                    ,[primernombre]
+                    ,[segundonombre]
+                    ,[primerapellido]
+                    ,[segundoapellido]
+                    ,[estado_asignacion]
+                    ,[observaciones]
+                    ,[observaciones_asigna]
+                    ,[link_computador_asigna]
+                FROM [ControlTIC].[dbo].[asignacion_computador]
         where cedula='$cedula'");
     $arr = array();
     while ($Element = odbc_fetch_array($data)) {
@@ -77,42 +70,36 @@ if (isset($_SESSION['usuario'])) {
     }
 
 
-    // CELULAR CONSULTA
-    $data_celular = odbc_exec($conexion, "SELECT
-                                                [id_asignacion],
-                                                mc.[id],
-                                                tipomaquin.[nombre_maquina] as tipo_maquina,
-                                                [imei],
-                                                [serial_equipo_celular],
-                                                [marca],
-                                                [modelo],
-                                                [fecha_ingreso],
-                                                [capacidad],
-                                                [ram_celular],
-                                                estad.[nombre_estado] AS [Estado],
-                                                gestio.[estado_gestion] as gestion,
-                                                [fecha_garantia],
-                                                [fecha_crea],
-                                                [usua_crea],
-                                                [fecha_modifica],
-                                                [usua_modifica],
-                                                [usua_asigna],
-                                                [fecha_asigna],
-                                                [cedula],
-                                                [cargo],
-                                                [primernombre],
-                                                [segundonombre],
-                                                [primerapellido],
-                                                [segundoapellido],
-                                                empres.[nombre_empresa] as empresa,
-                                                estadoasigna.[nombre_estado] as Estado_asignacion,
-                                                observaciones_desasigna
-                                                FROM [ControlTIC].[dbo].[asignacion_celular] AS mc 
-                                                LEFT JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] 
-                                                LEFT JOIN [ControlTIC].[dbo].[estado] AS estad ON mc.[Estado] = estad.[id] 
-                                                LEFT JOIN [ControlTIC].[dbo].[gestion] AS gestio ON mc.gestion = gestio.[id] 
-                                                LEFT JOIN [ControlTIC].[dbo].[empresa] AS empres ON mc.empresa = empres.id 
-                                                LEFT JOIN [ControlTIC].[dbo].[estado_asignacion] as estadoasigna ON mc.estado_asignacion = estadoasigna.id 
+    // ACCESORIOS CONSULTA
+    $data_celular = odbc_exec($conexion, "SELECT [id_asignacion]
+                            ,[id]
+                            ,[tipo_maquina]
+                            ,[imei]
+                            ,[serial_equipo_celular]
+                            ,[marca]
+                            ,[modelo]
+                            ,[fecha_ingreso_cel]
+                            ,[capacidad]
+                            ,[ram_celular]
+                            ,[estado]
+                            ,[gestion]
+                            ,[fecha_garantia_cel]
+                            ,[fecha_crea]
+                            ,[usua_crea]
+                            ,[fecha_modifica]
+                            ,[usua_modifica]
+                            ,[usua_asigna]
+                            ,[fecha_asigna]
+                            ,[cedula]
+                            ,[cargo]
+                            ,[primernombre]
+                            ,[segundonombre]
+                            ,[primerapellido]
+                            ,[segundoapellido]
+                            ,[empresa]
+                            ,[estado_asignacion]
+                            ,[observaciones_desasigna]
+                        FROM [ControlTIC].[dbo].[asignacion_celular]
                                                 where cedula='$cedula' 
                                                 
     ");
@@ -121,29 +108,18 @@ if (isset($_SESSION['usuario'])) {
         $arr_celular[] = $Element;
     }
 
-
-
-    // EDCOMUNICACION CONSULTA
-    $data_edcomunicacion = odbc_exec($conexion, "SELECT mc.[id]
-                ,tipomaquin.[nombre_maquina] as tipo_maquina 
-                ,[marca_edcomunicacion]
-                ,[modelo_edcomunicacion]
-                ,descripcion_edcomunicacion.[nombre_descripcion] as descripcion_edcomunicacion
-                ,[serial_edcomunicacion]
-                ,[fecha_de_ingreso]
-                ,estad.[nombre_estado] AS [Estado]
-                ,[placa_activo_edcomunicacion]
-                ,sed.[nombre_sede] as [Sede] 
-                ,[ubicacion_edcomunicacion]
-                ,[observaciones_edcomunicacion]
-                ,gestio.[estado_gestion] as [Gestion] 
-                ,[fecha_garantia]
+    // ACCESORIOS CONSULTA
+    $data_accesorios = odbc_exec($conexion, "SELECT  [id_asignacion]
+                ,[id]
+                ,[tipo_maquina]
+                ,[marca]
+                ,[modelo]
+                ,[descripcion]
+                ,[tipo_acc]
+                ,[cantidad]
+                ,[fecha_de_ingreso_acc]
                 ,[fecha_crea]
                 ,[usua_crea]
-                ,[fecha_modifica]
-                ,[usua_modifica]
-                ,[usua_asigna]
-                ,[fecha_asigna]
                 ,[cedula]
                 ,[cargo]
                 ,[primernombre]
@@ -151,40 +127,42 @@ if (isset($_SESSION['usuario'])) {
                 ,[primerapellido]
                 ,[segundoapellido]
                 ,[empresa]
-                ,[estado_asignacion]
-                ,[observaciones_desasigna]
-                FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] AS mc 
-                LEFT JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] 
-                LEFT JOIN [ControlTIC].[dbo].[estado] AS estad ON mc.estado = estad.id 
-                LEFT JOIN [ControlTIC].[dbo].[sede] as sed ON mc.sede_edcomunicacion = sed.id 
-                LEFT JOIN [ControlTIC].[dbo].[gestion] AS gestio ON gestion_edcomunicacion = gestio.id
-                LEFT JOIN [ControlTIC].[dbo].descripcion_edcomunicacion AS descripcion_edcomunicacion ON mc.descripcion_edcomunicacion = descripcion_edcomunicacion.id
-                        where cedula='$cedula' 
-        
-            ");
-    $arr_edcomunicacion = array();
-    while ($Element = odbc_fetch_array($data_edcomunicacion)) {
-        $arr_edcomunicacion[] = $Element;
+                ,[observaciones_asigna_acc]
+                ,[link_acc_asigna]
+                ,[observaciones_desasigna_acc]
+                ,[link_acc_desasigna]
+                ,[fechamov]
+                ,[descripcionmov]
+                ,[usuamov]
+            FROM [ControlTIC].[dbo].[asignacion_accesorios]
+                                                where cedula='$cedula' 
+                                        
+                    ");
+    $arr_accesorios = array();
+    while ($Element = odbc_fetch_array($data_accesorios)) {
+        $arr_accesorios[] = $Element;
     }
 
 
-    // PERIFERICOS CONSULTA
-
-    $data_perifericos = odbc_exec($conexion, "SELECT mc.[id]
-            ,tipomaquin.[nombre_maquina] as tipo_maquina 
-            ,[serial_perifericos]
-            ,desperifericos.[nombre_descripcion] as descripcion
-            ,[marca_perifericos]
-            ,[modelo_perifericos]
-            ,[placa_activo_perifericos]
-            ,sed.[nombre_sede] as sede
-            ,[ubicacion_perifericos]
-            ,[tipo] ,[tipo_toner]
-            ,gestio.[estado_gestion] as gestion
-            ,empres.[nombre_empresa] as empresa
-            ,[fecha_de_garantia] ,[fecha_crea]
-            ,[usua_crea] ,[fecha_modifica]
-            ,[usua_modifica]
+    // EDCOMUNICACION CONSULTA
+    $data_edcomunicacion = odbc_exec($conexion, "SELECT  [id_asignacion]
+            ,[id]
+            ,[tipo_maquina]
+            ,[marca_edcomunicacion]
+            ,[modelo_edcomunicacion]
+            ,[descripcion_edcomunicacion]
+            ,[serial_edcomunicacion]
+            ,[fecha_de_ingreso_edc]
+            ,[estado]
+            ,[placa_activo_edcomunicacion]
+            ,[sede_edcomunicacion]
+            ,[ubicacion_edcomunicacion]
+            ,[observaciones_edcomunicacion]
+            ,[gestion_edcomunicacion]
+            ,[fecha_garantia_edc]
+            ,[fecha_crea]
+            ,[usua_crea]
+            ,[fecha_modifica]
             ,[usua_modifica]
             ,[usua_asigna]
             ,[fecha_asigna]
@@ -194,17 +172,50 @@ if (isset($_SESSION['usuario'])) {
             ,[segundonombre]
             ,[primerapellido]
             ,[segundoapellido]
-            ,estad.[nombre_estado] as estado 
+            ,[empresa]
             ,[estado_asignacion]
             ,[observaciones_desasigna]
-            FROM [ControlTIC].[dbo].[historial_perifericos] as mc 
-            LEFT JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] 
-            LEFT JOIN [ControlTIC].[dbo].[descripcion_perifericos] as desperifericos ON mc.descripcion_perifericos = desperifericos.id 
-            LEFT JOIN [ControlTIC].[dbo].[sede] as sed ON mc.sede_perifericos =sed.id 
-            LEFT JOIN [ControlTIC].[dbo].[gestion] as gestio ON mc.gestion = gestio.id 
-            LEFT JOIN [ControlTIC].[dbo].[empresa] as empres ON mc.empresa = empres.id 
-            LEFT JOIN [ControlTIC].[dbo].[estado] AS estad ON mc.estado = estad.id
-                where cedula='$cedula' 
+        FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] where cedula='$cedula' 
+        
+            ");
+    $arr_edcomunicacion = array();
+    while ($Element = odbc_fetch_array($data_edcomunicacion)) {
+        $arr_edcomunicacion[] = $Element;
+    }
+
+    // PERIFERICOS CONSULTA
+    $data_perifericos = odbc_exec($conexion, "SELECT  [id_asignacion]
+            ,[id]
+            ,[tipo_maquina]
+            ,[serial_perifericos]
+            ,[descripcion_perifericos]
+            ,[marca_perifericos]
+            ,[modelo_perifericos]
+            ,[placa_activo_perifericos]
+            ,[sede_perifericos]
+            ,[ubicacion_perifericos]
+            ,[tipo]
+            ,[tipo_toner]
+            ,[estado]
+            ,[gestion]
+            ,[empresa]
+            ,[fecha_de_garantia]
+            ,[fecha_crea]
+            ,[usua_crea]
+            ,[fecha_modifica]
+            ,[usua_modifica]
+            ,[usua_asigna]
+            ,[fecha_asigna]
+            ,[cedula]
+            ,[cargo]
+            ,[primernombre]
+            ,[segundonombre]
+            ,[primerapellido]
+            ,[segundoapellido]
+            ,[estado_asignacion]
+            ,[observaciones_desasigna]
+        FROM [ControlTIC].[dbo].[asignacion_perifericos]
+                        where cedula='$cedula' 
 
     ");
     $arr_perifericos = array();
@@ -212,44 +223,37 @@ if (isset($_SESSION['usuario'])) {
         $arr_perifericos[] = $Element;
     }
 
-
     // ALMACENAMIENTO CONSULTA
-    $data_almacenamiento = odbc_exec($conexion, "SELECT mc.[id]
-                                ,tipomaquin.[nombre_maquina] as tipo_maquina 
-                                ,[marca_almacenamiento]
-                                ,[modelo_almacenamiento]
-                                ,desalmacenamiento.[nombre_descripcion] as almacenamiento
-                                ,[capacidad_almacenamiento]
-                                ,[tipo_almacenamiento]
-                                ,[caracteristica_almacenamiento]
-                                ,sed.[nombre_sede] as sede
-                                ,[ubicacion_almacenamiento]
-                                ,[fecha_de_ingreso]
-                                ,estad.[nombre_estado] as estado
-                                ,[fecha_de_garantia]
-                                ,[fecha_crea]
-                                ,[usua_crea]
-                                ,[fecha_modifica]
-                                ,[usua_modifica] 
-                                ,[usua_modifica]
-                                ,[usua_asigna]
-                                ,[fecha_asigna]
-                                ,[cedula]
-                                ,[cargo]
-                                ,[primernombre]
-                                ,[segundonombre]
-                                ,[primerapellido]
-                                ,[segundoapellido]
-                                ,empresa.[nombre_empresa] as empresa
-                                ,[estado_asignacion]
-                                ,[observaciones_desasigna]
-                                FROM [ControlTIC].[dbo].[asignacion_almacenamiento] as mc 
-                                LEFT JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] 
-                                LEFT JOIN [ControlTIC].[dbo].[descripcion_almacenamiento] as desalmacenamiento ON mc.descripcion_almacenamiento = desalmacenamiento.id 
-                                LEFT JOIN [ControlTIC].[dbo].[sede] as sed ON mc.sede_almacenamiento = sed.id 
-                                LEFT JOIN [ControlTIC].[dbo].[estado] as estad ON mc.estado = estad.id
-                                LEFT JOIN [ControlTIC].[dbo].[empresa] as empresa ON mc.empresa = empresa.id 
-                                                where cedula='$cedula' 
+    $data_almacenamiento = odbc_exec($conexion, "SELECT [id_asignacion]
+                    ,[id]
+                    ,[tipo_maquina]
+                    ,[marca_almacenamiento]
+                    ,[modelo_almacenamiento]
+                    ,[descripcion_almacenamiento]
+                    ,[capacidad_almacenamiento]
+                    ,[tipo_almacenamiento]
+                    ,[caracteristica_almacenamiento]
+                    ,[sede_almacenamiento]
+                    ,[ubicacion_almacenamiento]
+                    ,[fecha_de_ingreso]
+                    ,[estado]
+                    ,[fecha_de_garantia]
+                    ,[fecha_crea]
+                    ,[usua_crea]
+                    ,[fecha_modifica]
+                    ,[usua_modifica]
+                    ,[usua_asigna]
+                    ,[fecha_asigna]
+                    ,[cedula]
+                    ,[cargo]
+                    ,[primernombre]
+                    ,[segundonombre]
+                    ,[primerapellido]
+                    ,[segundoapellido]
+                    ,[empresa]
+                    ,[estado_asignacion]
+                    ,[observaciones_desasigna]
+                FROM [ControlTIC].[dbo].[asignacion_almacenamiento] where cedula='$cedula' 
                                                 
     ");
     $arr_almacenamiento = array();
@@ -258,48 +262,43 @@ if (isset($_SESSION['usuario'])) {
     }
 
 
-
     // SIMCARD CONSULTA
-    $data_simcard = odbc_exec($conexion, " SELECT mc.[id]
-                        ,tipomaquin.[nombre_maquina] as tipo_maquina  
-                        ,[numero_linea] 
-                        ,[nombre_plan] 
-                        ,[fecha_apertura] 
-                        ,[valor_plan] 
-                        ,[operador] 
-                        ,[cod_cliente] 
-                        ,[observaciones_sim] 
-                        ,[fecha_fin_plan] 
-                        ,estad.[nombre_estado] as Estado 
-                        ,gestio.[estado_gestion] as Gestion 
-                        ,[fecha_crea] 
-                        ,[usua_crea] 
-                        ,[fecha_modifica] 
-                        ,[usua_modifica]
-                        ,[fecha_asigna]
-                        ,[usua_asigna]
-                        ,[cedula]
-                        ,[cargo]
-                        ,[primernombre]
-                        ,[segundonombre]
-                        ,[primerapellido]
-                        ,[segundoapellido]
-                        ,empresa.[nombre_empresa] as empresa
-                        ,[estado_asignacion]
-                        ,[observaciones_desasigna]
-                        FROM [ControlTIC].[dbo].[asignacion_simcard] as mc 
-                        LEFT JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] 
-                        LEFT JOIN [ControlTIC].[dbo].[estado] estad ON mc.estado = estad.id 
-                        LEFT JOIN [ControlTIC].[dbo].[gestion] gestio ON mc.gestion = gestio.id
-                        LEFT JOIN [ControlTIC].[dbo].empresa AS empresa ON mc.empresa = empresa.id 
-                         where cedula='$cedula' 
+    $data_simcard = odbc_exec($conexion, " SELECT  [id_asignacion]
+                ,[id]
+                ,[tipo_maquina]
+                ,[numero_linea]
+                ,[nombre_plan]
+                ,[fecha_apertura]
+                ,[valor_plan]
+                ,[operador]
+                ,[cod_cliente]
+                ,[observaciones_sim]
+                ,[fecha_fin_plan]
+                ,[estado]
+                ,[gestion]
+                ,[fecha_crea]
+                ,[usua_crea]
+                ,[fecha_modifica]
+                ,[usua_modifica]
+                ,[fecha_asigna]
+                ,[usua_asigna]
+                ,[cedula]
+                ,[cargo]
+                ,[primernombre]
+                ,[segundonombre]
+                ,[primerapellido]
+                ,[segundoapellido]
+                ,[empresa]
+                ,[estado_asignacion]
+                ,[observaciones_desasigna]
+            FROM [ControlTIC].[dbo].[asignacion_simcard]
+                                    where cedula='$cedula' 
         
     ");
     $arr_simcard = array();
     while ($Element = odbc_fetch_array($data_simcard)) {
         $arr_simcard[] = $Element;
     }
-
 
 
     // CELULAR CONSULTA
@@ -370,13 +369,14 @@ if (isset($_SESSION['usuario'])) {
 
     <body>
 
-    <section id="descargaresto" style="font-size: 14px;">
+        <section id="descargaresto" style="font-size: 14px;">
             <div class="container">
+
                 <div class="row">
                     <div class="col-md-2 col-xs-12 col-sm-2" style="border: 1px solid black;"><img src="../../assets/image/duquesa_logo - copia.png" alt=""></div>
-                    <div class="col-md-6 col-xs-12 col-sm-6" style="border: 1px solid black;">
+                    <div class="col-md-6 col-xs-12 col-sm-6" style="border: 1px solid black;text-align: center;">
                         <h6>
-                            <p>ACTA DE ASIGNACION DE EQUIPOS</p>
+                            <p style="margin-top: 10px;">ACTA DE ASIGNACION DE EQUIPOS</p>
                         </h6>
                     </div>
                     <div class="col-md-4 col-xs-12 col-sm-4" style="border: 1px solid black;">
@@ -395,7 +395,7 @@ if (isset($_SESSION['usuario'])) {
                         <p>NOMBRE DEL TRABAJADOR QUE RECIBE:<br> <strong><?php echo $nombreCompleto; ?></strong></p>
                     </div>
                     <div class="col-md-4 col-xs-12 col-sm-4">
-                        <p>CC: <strong><?php echo $cedula; ?></strong></p>
+                        <p>CC/ IDENTIFICACIÓN DE TRABAJADOR:<br> <strong><?php echo $cedula; ?></strong></p>
                     </div>
                     <div class="col-md-4 col-xs-12 col-sm-4">
                         <p>CARGO QUE DESEMPEÑA:<br> <strong><?php echo $cargo; ?></strong></p>
@@ -403,16 +403,12 @@ if (isset($_SESSION['usuario'])) {
                 </div>
 
 
-                <div class="row" style="border-left: 1px solid black;border-right:1px solid black ;">
-                    <div class="col-md-4 col-xs-12 col-sm-4">
+                <div class="row" style="border-left: 1px solid black;border-right:1px solid black ;text-align: center;">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
                         <p>NOMBRE DEL TRABAJADOR QUE ENTREGA: <br> <strong><?php echo utf8_encode($_SESSION['NOMBRE']); ?></strong></p>
                     </div>
-                    <div class="col-md-4 col-xs-12 col-sm-4">
-                        <p>CC: <br> <strong><?php echo utf8_encode($_SESSION['']); ?></strong></p>
-                    </div>
-                    <div class="col-md-4 col-xs-12 col-sm-4">
-                        <p>CARGO QUE DESEMPEÑA:<br> <strong><?php echo utf8_encode($_SESSION['']); ?></strong></p>
-                    </div>
+                    <div class="col-md-2"></div>
                 </div>
 
                 <div class="row" style="text-align: center;">
@@ -423,12 +419,14 @@ if (isset($_SESSION['usuario'])) {
 
                 <!-- ETIQUETAS -->
                 <div class="row" style="text-align: center;">
+
                     <?php
+
                     $columnasMostrarcomp = array(
-                        'Tipo_maquina' => 'ELEMENTO',
+                        'tipo_maquina' => 'ELEMENTO',
                         'Marca_computador' => 'MARCA',
                         'Modelo_computador' => 'MODELO',
-                        'Serial_equipo' => 'SERIAL',
+                        'Serial_equipo' => 'SERIAL/PLAN/ACT',
                         // Agrega aquí las columnas que deseas mostrar y sus etiquetas
                     );
 
@@ -437,6 +435,14 @@ if (isset($_SESSION['usuario'])) {
                         'marca' => '',
                         'modelo' => '',
                         'serial_equipo_celular' => '',
+                        // Agrega aquí las columnas que deseas mostrar y sus etiquetas
+                    );
+
+                    $columnasMostraraccesorios = array(
+                        'tipo_maquina' => '',
+                        'descripcion' => '',
+                        'tipo_acc' => '',
+                        'marca' => '',
                         // Agrega aquí las columnas que deseas mostrar y sus etiquetas
                     );
 
@@ -449,7 +455,7 @@ if (isset($_SESSION['usuario'])) {
                     );
 
                     $columnasMostrarperifericos = array(
-                        'descripcion' => '',
+                        'tipo_maquina' => '',
                         'marca_perifericos' => '',
                         'modelo_perifericos' => '',
                         'serial_perifericos' => '',
@@ -457,7 +463,7 @@ if (isset($_SESSION['usuario'])) {
                     );
 
                     $columnasMostraralmacenamiento = array(
-                        'almacenamiento' => '',
+                        'tipo_maquina' => '',
                         'marca_almacenamiento' => '',
                         'modelo_almacenamiento' => '',
                         'capacidad_almacenamiento' => '',
@@ -471,7 +477,7 @@ if (isset($_SESSION['usuario'])) {
                         'nombre_plan' => '',
                         // Agrega aquí las columnas que deseas mostrar y sus etiquetas
                     );
-                    
+
 
                     // Crear la tabla HTML
                     echo '<table border="1">';
@@ -486,7 +492,7 @@ if (isset($_SESSION['usuario'])) {
 
 
 
-                    // Mostrar los datos de la primera consulta
+
                     foreach ($arr as $fila) {
                         echo '<tr>';
                         foreach ($columnasMostrarcomp as $columna => $etiqueta) {
@@ -495,7 +501,7 @@ if (isset($_SESSION['usuario'])) {
                         echo '</tr>';
                     }
 
-                    // Mostrar los datos de la segunda consulta
+
                     foreach ($arr_celular as $fila) {
                         echo '<tr>';
                         foreach ($columnasMostrarcel as $columna => $etiqueta) {
@@ -504,8 +510,16 @@ if (isset($_SESSION['usuario'])) {
                         echo '</tr>';
                     }
 
-                      // Mostrar los datos de la TERCERA  consulta
-                      foreach ($arr_edcomunicacion as $fila) {
+                    foreach ($arr_accesorios as $fila) {
+                        echo '<tr>';
+                        foreach ($columnasMostraraccesorios as $columna => $etiqueta) {
+                            echo '<td>' . $fila[$columna] . '</td>';
+                        }
+                        echo '</tr>';
+                    }
+
+
+                    foreach ($arr_edcomunicacion as $fila) {
                         echo '<tr>';
                         foreach ($columnasMostraredcomunicacion as $columna => $etiqueta) {
                             echo '<td>' . $fila[$columna] . '</td>';
@@ -513,7 +527,7 @@ if (isset($_SESSION['usuario'])) {
                         echo '</tr>';
                     }
 
-                    // Mostrar los datos de la CUARTA  consulta
+
                     foreach ($arr_perifericos as $fila) {
                         echo '<tr>';
                         foreach ($columnasMostrarperifericos as $columna => $etiqueta) {
@@ -522,7 +536,7 @@ if (isset($_SESSION['usuario'])) {
                         echo '</tr>';
                     }
 
-                    // Mostrar los datos de la CUARTA  consulta
+
                     foreach ($arr_almacenamiento as $fila) {
                         echo '<tr>';
                         foreach ($columnasMostraralmacenamiento as $columna => $etiqueta) {
@@ -554,18 +568,18 @@ if (isset($_SESSION['usuario'])) {
                         // Check if there are computer assignment records
                         if (!empty($arr)) {
                             // echo '<p>Computadoras</p>';
-                            echo '<table style="text-align: center">';
+                            echo '<table>';
                             echo '<thead>';
                             echo '<tr>';
-                            echo '<th>Elemento</th>';
-                            echo '<th>Marca</th>';
-                            echo '<th>Modelo</th>';
-                            echo '<th>Serial</th>';
-                            echo '<th>Procesador</th>';
-                            echo '<th>Memoria Ram</th>';
-                            echo '<th>Tipo Disco</th>';
-                            echo '<th>Capacidad Disco</th>';
-                            echo '<th>OBSERVACIONES DE COMPUTADOR</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">ELEMENTO </th>';
+                            echo '<th style="padding-right: 20px;text-align: center">MARCA</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">MODELO</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">SERIAL</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">PROCESADOR</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">MEMORIA RAM</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">TIPO DISCO</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">CAPACIDAD DISCO</th>';
+                            echo '<th style="padding-right: 20px;">OBSERVACIONES</th>';
                             echo '</tr>';
                             echo '</thead>';
                             echo '<tbody>';
@@ -573,15 +587,15 @@ if (isset($_SESSION['usuario'])) {
                             // Display the results of computer assignments
                             foreach ($arr as $fila) {
                                 echo '<tr>';
-                                echo '<td>' . $fila['Tipo_maquina'] . '</td>';
-                                echo '<td>' . $fila['Marca_computador'] . '</td>';
-                                echo '<td>' . $fila['Modelo_computador'] . '</td>';
-                                echo '<td>' . $fila['Serial_equipo'] . '</td>';
-                                echo '<td>' . $fila['Procesador'] . '</td>';
-                                echo '<td>' . $fila['Memoria_ram'] . '</td>';
-                                echo '<td>' . $fila['Tipo_disco'] . '</td>';
-                                echo '<td>' . $fila['Capacidad_dico'] . '</td>';
-                                echo '<td>' . $fila['observaciones_asigna'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['tipo_maquina'] . ' </td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['Marca_computador'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['Modelo_computador'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['Serial_equipo'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['Procesador'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['Memoria_ram'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['Tipo_discoduro'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['Capacidad_discoduro'] . '</td>';
+                                echo '<td style="padding-right: 20px;">' . $fila['observaciones_asigna'] . '</td>';
                                 echo '</tr>';
                             }
 
@@ -590,8 +604,8 @@ if (isset($_SESSION['usuario'])) {
                         }
                         ?>
                     </div>
-                    <!-- TERMINA COMPUTADOR -->
 
+                    <!-- TERMINA COMPUTADOR -->
 
                     <!-- empieza aqui  CELULAR -->
                     <div class="col-md-12" style="padding: 10px;">
@@ -601,13 +615,13 @@ if (isset($_SESSION['usuario'])) {
                             echo '<table style="text-align: center;">';
                             echo '<thead>';
                             echo '<tr>';
-                            echo '<th>Tipo de Máquina</th>';
-                            echo '<th>Marca</th>';
-                            echo '<th>Modelo</th>';
-                            echo '<th>Serial</th>';
-                            echo '<th>IMEI</th>';
-                            echo '<th>Capacidad</th>';
-                            echo '<th>Ram</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Elemento</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Marca</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Modelo</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Serial</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">IMEI</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Capacidad</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Ram</th>';
                             echo '</tr>';
                             echo '</thead>';
                             echo '<tbody>';
@@ -615,13 +629,13 @@ if (isset($_SESSION['usuario'])) {
                             // Display the results of mobile phone assignments
                             foreach ($arr_celular as $fila) {
                                 echo '<tr>';
-                                echo '<td>' . $fila['tipo_maquina'] . '</td>';
-                                echo '<td>' . $fila['marca'] . '</td>';
-                                echo '<td>' . $fila['modelo'] . '</td>';
-                                echo '<td>' . $fila['serial_equipo_celular'] . '</td>';
-                                echo '<td>' . $fila['imei'] . '</td>';
-                                echo '<td>' . $fila['capacidad'] . '</td>';
-                                echo '<td>' . $fila['ram_celular'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['tipo_maquina'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['marca'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['modelo'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['serial_equipo_celular'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['imei'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['capacidad'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['ram_celular'] . '</td>';
                                 echo '</tr>';
                             }
 
@@ -632,6 +646,43 @@ if (isset($_SESSION['usuario'])) {
                     </div>
                     <!-- TERMINA CELULAR -->
 
+                    <!-- empieza aqui  ACCESORIOS -->
+                    <div class="col-md-12" style="padding: 10px;">
+                        <?php
+                        // Check if there are mobile phone assignment records
+                        if (!empty($arr_accesorios)) {
+                            echo '<table style="text-align: center;">';
+                            echo '<thead>';
+                            echo '<tr>';
+                            echo '<th style="padding-right: 20px;text-align: center">Elemento</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Marca</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Modelo</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Descripcion</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Tipo</th>';
+                            echo '</tr>';
+                            echo '</thead>';
+                            echo '<tbody>';
+
+                            // Display the results of mobile phone assignments
+                            foreach ($arr_accesorios as $fila) {
+                                echo '<tr>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['tipo_maquina'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['marca'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['modelo'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['descripcion'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['tipo_acc'] . '</td>';
+
+
+                                echo '</tr>';
+                            }
+
+                            echo '</tbody>';
+                            echo '</table>';
+                        }
+                        ?>
+                    </div>
+                    <!-- TERMINA ACCESORIOS -->
+
                     <!-- empieza aqui  EDCOMUNICACION -->
                     <div class="col-md-12" style="padding: 10px;">
                         <?php
@@ -640,11 +691,11 @@ if (isset($_SESSION['usuario'])) {
                             echo '<table style="text-align: center;">';
                             echo '<thead>';
                             echo '<tr>';
-                            echo '<th>Tipo de Máquina</th>';
-                            echo '<th>Marca</th>';
-                            echo '<th>Modelo</th>';
-                            echo '<th>Descripcion</th>';
-                            echo '<th>Serial</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Elemento</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Marca</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Modelo</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Descripcion</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Serial</th>';
                             echo '</tr>';
                             echo '</thead>';
                             echo '<tbody>';
@@ -652,11 +703,11 @@ if (isset($_SESSION['usuario'])) {
                             // Display the results of mobile phone assignments
                             foreach ($arr_edcomunicacion as $fila) {
                                 echo '<tr>';
-                                echo '<td>' . $fila['tipo_maquina'] . '</td>';
-                                echo '<td>' . $fila['marca_edcomunicacion'] . '</td>';
-                                echo '<td>' . $fila['modelo_edcomunicacion'] . '</td>';
-                                echo '<td>' . $fila['descripcion_edcomunicacion'] . '</td>';
-                                echo '<td>' . $fila['serial_edcomunicacion'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['tipo_maquina'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['marca_edcomunicacion'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['modelo_edcomunicacion'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['descripcion_edcomunicacion'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['serial_edcomunicacion'] . '</td>';
                                 echo '</tr>';
                             }
 
@@ -675,11 +726,11 @@ if (isset($_SESSION['usuario'])) {
                             echo '<table style="text-align: center;">';
                             echo '<thead>';
                             echo '<tr>';
-                            echo '<th>Elemento</th>';
-                            echo '<th>Marca</th>';
-                            echo '<th>Modelo</th>';
-                            echo '<th>Serial</th>';
-                            echo '<th>Placa</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Elemento</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Marca</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Modelo</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Serial</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Placa</th>';
                             echo '</tr>';
                             echo '</thead>';
                             echo '<tbody>';
@@ -687,11 +738,11 @@ if (isset($_SESSION['usuario'])) {
                             // Display the results of mobile phone assignments
                             foreach ($arr_perifericos as $fila) {
                                 echo '<tr>';
-                                echo '<td>' . $fila['descripcion'] . '</td>';
-                                echo '<td>' . $fila['marca_perifericos'] . '</td>';
-                                echo '<td>' . $fila['modelo_perifericos'] . '</td>';
-                                echo '<td>' . $fila['serial_perifericos'] . '</td>';
-                                echo '<td>' . $fila['placa_activo_perifericos'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['tipo_maquina'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['marca_perifericos'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['modelo_perifericos'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['serial_perifericos'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['placa_activo_perifericos'] . '</td>';
                                 echo '</tr>';
                             }
 
@@ -702,7 +753,6 @@ if (isset($_SESSION['usuario'])) {
                     </div>
                     <!-- TERMINA PERIFERICOS -->
 
-
                     <!-- empieza aqui  ALMACENAMIENTO -->
                     <div class="col-md-12" style="padding: 10px;">
                         <?php
@@ -711,11 +761,11 @@ if (isset($_SESSION['usuario'])) {
                             echo '<table style="text-align: center;">';
                             echo '<thead>';
                             echo '<tr>';
-                            echo '<th>Elemento</th>';
-                            echo '<th>Marca</th>';
-                            echo '<th>Modelo</th>';
-                            echo '<th>Capacidad</th>';
-                            echo '<th>Caracteristica</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Elemento</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Marca</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Modelo</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Capacidad</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Caracteristica</th>';
 
                             echo '</tr>';
                             echo '</thead>';
@@ -724,11 +774,11 @@ if (isset($_SESSION['usuario'])) {
                             // Display the results of mobile phone assignments
                             foreach ($arr_almacenamiento as $fila) {
                                 echo '<tr>';
-                                echo '<td>' . $fila['almacenamiento'] . '</td>';
-                                echo '<td>' . $fila['marca_almacenamiento'] . '</td>';
-                                echo '<td>' . $fila['modelo_almacenamiento'] . '</td>';
-                                echo '<td>' . $fila['capacidad_almacenamiento'] . '</td>';
-                                echo '<td>' . $fila['caracteristica_almacenamiento'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['tipo_maquina'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['marca_almacenamiento'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['modelo_almacenamiento'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['capacidad_almacenamiento'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['caracteristica_almacenamiento'] . '</td>';
 
                                 echo '</tr>';
                             }
@@ -748,12 +798,12 @@ if (isset($_SESSION['usuario'])) {
                             echo '<table style="text-align: center;">';
                             echo '<thead>';
                             echo '<tr>';
-                            echo '<th>Elemento</th>';
-                            echo '<th>Numero</th>';
-                            echo '<th>Nombre Plan</th>';
-                            echo '<th>Valor Plan</th>';
-                            echo '<th>Operador</th>';
-                            echo '<th>Observaciones</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Elemento</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Numero</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Nombre Plan</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Valor Plan</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Operador</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Observaciones</th>';
                             echo '</tr>';
                             echo '</thead>';
                             echo '<tbody>';
@@ -761,12 +811,12 @@ if (isset($_SESSION['usuario'])) {
                             // Display the results of mobile phone assignments
                             foreach ($arr_simcard as $fila) {
                                 echo '<tr>';
-                                echo '<td>' . $fila['tipo_maquina'] . '</td>';
-                                echo '<td>' . $fila['numero_linea'] . '</td>';
-                                echo '<td>' . $fila['nombre_plan'] . '</td>';
-                                echo '<td>' . $fila['valor_plan'] . '</td>';
-                                echo '<td>' . $fila['operador'] . '</td>';
-                                echo '<td>' . $fila['observaciones_sim'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['tipo_maquina'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['numero_linea'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['nombre_plan'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['valor_plan'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['operador'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['observaciones_sim'] . '</td>';
 
                                 echo '</tr>';
                             }
@@ -787,13 +837,13 @@ if (isset($_SESSION['usuario'])) {
                             echo '<table style="text-align: center;">';
                             echo '<thead>';
                             echo '<tr>';
-                            echo '<th>Elemento</th>';
-                            echo '<th>Marca</th>';
-                            echo '<th>Modelo</th>';
-                            echo '<th>Descripcion</th>';
-                            echo '<th>Capacidad</th>';
-                            echo '<th>Num Discos</th>';
-                            echo '<th>Dias Grabacion</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Elemento</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Marca</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Modelo</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Descripcion</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Capacidad</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Num Discos</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">Dias Grabacion</th>';
                             echo '</tr>';
                             echo '</thead>';
                             echo '<tbody>';
@@ -801,13 +851,13 @@ if (isset($_SESSION['usuario'])) {
                             // Display the results of mobile phone assignments
                             foreach ($arr_dvr as $fila) {
                                 echo '<tr>';
-                                echo '<td>' . $fila['tipo_maquina'] . '</td>';
-                                echo '<td>' . $fila['marca_dvr'] . '</td>';
-                                echo '<td>' . $fila['modelo_dvr'] . '</td>';
-                                echo '<td>' . $fila['descripcion_dvr'] . '</td>';
-                                echo '<td>' . $fila['capacidad_dvr'] . '</td>';
-                                echo '<td>' . $fila['num_discos'] . '</td>';
-                                echo '<td>' . $fila['dias_grabacion'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['tipo_maquina'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['marca_dvr'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['modelo_dvr'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['descripcion_dvr'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['capacidad_dvr'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['num_discos'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['dias_grabacion'] . '</td>';
                                 echo '</tr>';
                             }
 
@@ -848,54 +898,56 @@ if (isset($_SESSION['usuario'])) {
                 </div>
             </div>
 
-        
 
-        <section id="segundahoja" style="margin-top: 50px;">
-            <div class="container" style="border: 1px solid black;padding: 100px;">
 
-                <div class="row" style="">
-                    <div class="col-md-4">
-                        <img src="../../assets/image/duquesa_logo - copia.png" alt="">
-                    </div>
-                    <div class="col-md-8">
-                        <h5 style="text-align: left;padding: 10px;">ACUERDO ACTA ENTREGA DE EQUIPOS</h5>
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 50px;">
-                    <div class="col-md-12" style="text-align: left;">
-                        <h6 id="fecha-hora"></h6>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-12" style="text-align: justify;">
-                        <p>Comedidamente se hace entrega del equipo que se describe en el documento anexo.</p><br>
-                        <p>Este equipo se entrega funcionando correctamente con los programas y recursos necesarios para el desarrollo de actividades propias de la empresa, por lo cual el usuario a quien se le hace entrega del mismo no puede realizar acciones de instalar nuevo software ni desinstalar los existentes sin previo aviso al área de Sistemas, esta última es quien se encarga de autorizar dichas acciones y efectuarlas si lo considera necesario.</p><br>
-                        <p>El usuario se hace responsable por el equipo entregado y accesorios relacionados en el anexo, cualquier daño provocado con o sin intensión es el usuario responsable quien asume los arreglos o reposición a que haya lugar.</p><br>
-                        <p>También cabe recordar que este equipo es de uso exclusivo de la compañía y con el fin de evitar inconvenientes legales con los entes de control, no es procedente almacenar archivos de audio y video ajenos a la empresa (música MP3, WAV) y otros formatos.</p><br>
-                        <p>En caso de que se encuentre alguna irregularidad o incumplimiento de estos acuerdos después de esta notificación durante la visita de un ente de control, el usuario del equipo será el responsable de las acciones legales y penales que esto conlleva.</p><br>
-                        <p>Como mutuo acuerdo firman los responsables:</p><br><br>
-                    </div>
-                </div>
+            <section id="segundahoja" style="margin-top: 50px;">
+                <div class="container" style="border: 1px solid black;padding: 100px;">
 
-                <div class="row">
-                    <div class="col-md-4"><strong>ENTREGA:</strong><br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
-                        <p><strong><?php echo utf8_encode($_SESSION['NOMBRE']); ?></strong><br> <?php echo utf8_encode($_SESSION['CARGO']); ?></p>
+                    <div class="row" style="">
+                        <div class="col-md-4">
+                            <img src="../../assets/image/duquesa_logo - copia.png" alt="">
+                        </div>
+                        <div class="col-md-8">
+                            <h5 style="text-align: left;padding: 10px;">ACUERDO ACTA ENTREGA DE EQUIPOS</h5>
+                        </div>
                     </div>
-                    <div class="col-md-4"><strong>RECIBE:</strong><br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
-                        <p><strong><?php echo $nombreCompleto; ?></strong><br> <?php echo $cargo; ?></p>
+                    <div class="row" style="margin-top: 50px;">
+                        <div class="col-md-12" style="text-align: left;">
+                            <h6 id="fecha-hora"></h6>
+                        </div>
                     </div>
-                    <div class="col-md-4"><strong>ENTREGA:</strong><br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
-                        <p><strong>Andres Robayo</strong><br> Jefe de Sistemas</p>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: justify;">
+                            <p>Comedidamente se hace entrega del equipo que se describe en el documento anexo.</p><br>
+                            <p>Este equipo se entrega funcionando correctamente con los programas y recursos necesarios para el desarrollo de actividades propias de la empresa, por lo cual el usuario a quien se le hace entrega del mismo no puede realizar acciones de instalar nuevo software ni desinstalar los existentes sin previo aviso al área de Sistemas, esta última es quien se encarga de autorizar dichas acciones y efectuarlas si lo considera necesario.</p><br>
+                            <p>El usuario se hace responsable por el equipo entregado y accesorios relacionados en el anexo, cualquier daño provocado con o sin intensión es el usuario responsable quien asume los arreglos o reposición a que haya lugar.</p><br>
+                            <p>También cabe recordar que este equipo es de uso exclusivo de la compañía y con el fin de evitar inconvenientes legales con los entes de control, no es procedente almacenar archivos de audio y video ajenos a la empresa (música MP3, WAV) y otros formatos.</p><br>
+                            <p>En caso de que se encuentre alguna irregularidad o incumplimiento de estos acuerdos después de esta notificación durante la visita de un ente de control, el usuario del equipo será el responsable de las acciones legales y penales que esto conlleva.</p><br>
+                            <p>Como mutuo acuerdo firman los responsables:</p><br><br>
+                        </div>
                     </div>
-                </div>
 
-            </div>
+                    <div class="row">
+                        <div class="col-md-4"><strong>ENTREGA:</strong><br><br>
+                            <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
+                            <p><strong><?php echo utf8_encode($_SESSION['NOMBRE']); ?></strong><br> <?php echo utf8_encode($_SESSION['CARGO']); ?></p>
+                        </div>
+                        <div class="col-md-4"><strong>RECIBE:</strong><br><br>
+                            <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
+                            <p><strong><?php echo $nombreCompleto; ?></strong><br> <?php echo $cargo; ?></p>
+                        </div>
+                        <div class="col-md-4"><strong>ENTREGA:</strong><br><br>
+                            <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
+                            <p><strong>Andres Robayo</strong><br> Jefe de Sistemas</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
         </section>
-    </section>
+
         <div class="container-fluid" style="margin-top: 90px;">
             <div class="row">
                 <div class="col-md-2"></div>
@@ -938,7 +990,7 @@ if (isset($_SESSION['usuario'])) {
                 filename: 'ACTA.pdf', // Nombre del archivo PDF
                 image: {
                     type: 'jpeg',
-                    quality: 0.99
+                    quality: 1
                 },
                 html2canvas: {
                     scale: 2
@@ -968,6 +1020,7 @@ if (isset($_SESSION['usuario'])) {
     </script>
 
 
+    <!-- OBTENER LA FECHA ACTUAL -->
     <script>
         // Obtenemos la fecha actual
         var fechaActual = new Date();

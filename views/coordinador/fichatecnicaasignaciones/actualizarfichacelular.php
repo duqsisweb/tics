@@ -41,7 +41,7 @@
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
 
-    $consulta = "SELECT marca, modelo, capacidad, ram_celular, imei FROM ControlTIC..asignacion_celular WHERE cedula = '$cedula'";
+    $consulta = "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[imei] ,[serial_equipo_celular] ,[marca] ,[modelo] ,[fecha_ingreso_cel] ,[capacidad] ,[ram_celular] ,[estado] ,[gestion] ,[fecha_garantia_cel] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_celular] WHERE cedula = '$cedula'";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>"; // Mantener el formato monoespaciado
@@ -50,6 +50,7 @@
         while ($fila = odbc_fetch_array($resultado)) {
 
             $output .= "-------------------------------------\n";
+            $output .= "Elemento: " . $fila['tipo_maquina'] . "\n";
             $output .= "Marca del Equipo: " . $fila['marca'] . "\n";
             $output .= "Modelo del Equipo:" . $fila['modelo'] . "\n";
             $output .= "Capacidad" . $fila['capacidad'] . "\n";
@@ -77,20 +78,22 @@
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalcelularasigna">
         Ver Detalles
     </button>
+
 </section>
 
-<!-- MODAL DE COMPUTADORES-->
-<div class="modal fade" id="modalcelularasigna" tabindex="-1" aria-labelledby="modalcecularasignaLabel" aria-hidden="true">
+<!-- MODAL DE CELULARES-->
+<div class="modal fade" id="modalcelularasigna" tabindex="-1" aria-labelledby="modalcelularasignaLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="modalcelularasignaLabel">
-                    <?php echo $cedula ?></h6>
+                    <h6><?php echo $cedula ?></h6>
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!-- Dentro del modal-body -->
             <div class="modal-body">
+
                 <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                     <thead>
                         <tr class="encabezado table-dark">
@@ -101,16 +104,11 @@
                             <th scope="col">Serial de Equipo Celular</th>
                             <th scope="col">Marca</th>
                             <th scope="col">Modelo</th>
-                            <th scope="col">Fecha de Ingreso</th>
                             <th scope="col">Capacidad</th>
                             <th scope="col">RAM Celular</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Gestión</th>
-                            <th scope="col">Fecha de Garantía</th>
-                            <th scope="col">Fecha de Creación</th>
-                            <th scope="col">Usuario de Creación</th>
-                            <th scope="col">Fecha de Modificación</th>
-                            <th scope="col">Usuario de Modificación</th>
+                            <th scope="col">FECHA DE GARANTIA</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -119,7 +117,7 @@
 
                         $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : '';
 
-                        $consulta = "SELECT [id_asignacion] ,[id] ,[tipo_maquina] ,[imei] ,[serial_equipo_celular] ,[marca] ,[modelo] ,[fecha_ingreso] ,[capacidad] ,[ram_celular] ,[estado] ,[gestion] ,[fecha_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_celular] where cedula= '$cedula'";
+                        $consulta = " SELECT [id_asignacion] ,[id] ,[tipo_maquina] ,[imei] ,[serial_equipo_celular] ,[marca] ,[modelo] ,[fecha_ingreso_cel] ,[capacidad] ,[ram_celular] ,[estado] ,[gestion] ,[fecha_garantia_cel] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_celular] where cedula= '$cedula'";
                         $resultadoConsulta = odbc_exec($conexion, $consulta);
 
                         if (odbc_num_rows($resultadoConsulta) > 0) {
@@ -132,17 +130,11 @@
                                 echo '<td>' . $fila['serial_equipo_celular'] . '</td>';
                                 echo '<td>' . $fila['marca'] . '</td>';
                                 echo '<td>' . $fila['modelo'] . '</td>';
-                                echo '<td>' . $fila['fecha_ingreso'] . '</td>';
                                 echo '<td>' . $fila['capacidad'] . '</td>';
                                 echo '<td>' . $fila['ram_celular'] . '</td>';
                                 echo '<td>' . $fila['estado'] . '</td>';
                                 echo '<td>' . $fila['gestion'] . '</td>';
-                                echo '<td>' . $fila['fecha_garantia'] . '</td>';
-                                echo '<td>' . $fila['fecha_crea'] . '</td>';
-                                echo '<td>' . $fila['usua_crea'] . '</td>';
-                                echo '<td>' . $fila['fecha_modifica'] . '</td>';
-                                echo '<td>' . $fila['usua_modifica'] . '</td>';
-
+                                echo '<td>' . $fila['fecha_garantia_cel'] . '</td>';
                                 echo '</tr>';
                             }
                         } else {
@@ -153,7 +145,9 @@
                         ?>
                     </tbody>
                 </table>
+
             </div>
+
             <div class="modal-footer">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton">Cerrar</button>
@@ -162,7 +156,3 @@
         </div>
     </div>
 </div>
-
-
-
-

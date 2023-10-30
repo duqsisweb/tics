@@ -1,19 +1,14 @@
 <?php
 include '../../../conexionbd.php';
 
-if (  
-
-    isset($_POST['id']) && isset($_POST['tipo_maquina']) && isset($_POST['service_tag']) && isset($_POST['serial_equipo']) && isset($_POST['nombre_equipo']) &&
+if (isset($_POST['id']) && isset($_POST['tipo_maquina']) && isset($_POST['service_tag']) && isset($_POST['serial_equipo']) && isset($_POST['nombre_equipo']) &&
     isset($_POST['sede']) && isset($_POST['empresa']) && isset($_POST['marca_computador']) && isset($_POST['modelo_computador']) &&
-    isset($_POST['tipo_comp']) && isset($_POST['tipo_ram']) && isset($_POST['memoria_ram']) && isset($_POST['tipo_discoduro']) && isset($_POST['capacidad_discoduro']) &&
+    isset($_POST['tipo_comp']) && isset($_POST['tipo_memoria_ram']) && isset($_POST['Memoria_ram']) && isset($_POST['tipo_discoduro']) && isset($_POST['capacidad_discoduro']) &&
     isset($_POST['procesador']) && isset($_POST['propietario']) && isset($_POST['proveedor']) && isset($_POST['sistema_operativo']) && isset($_POST['serial_cargador']) &&
-    isset($_POST['dominio']) && isset($_POST['tipo_usuario']) && isset($_POST['serial_activo_fijo']) && isset($_POST['fecha_ingreso']) && isset($_POST['targeta_video']) && 
-    isset($_POST['estado']) && isset($_POST['gestion']) && isset($_POST['fecha_garantia']) &&
-
-    isset($_POST['Usua_mantenimiento']) && isset($_POST['observaciones_mantenimiento']) && isset($_POST['Fecha_mantenimiento_inicio']) &&  isset($_POST['Fecha_mantenimiento_fin']) 
-    
-    )   {
-
+    isset($_POST['dominio']) && isset($_POST['tipo_usuario']) && isset($_POST['serial_activo_fijo']) && isset($_POST['fecha_ingreso_c']) && isset($_POST['targeta_video']) && 
+    isset($_POST['estado']) && isset($_POST['gestion']) && isset($_POST['fecha_garantia_c']) &&
+    isset($_POST['usuario']) && isset($_POST['observaciones_mantenimiento']) && isset($_POST['Fecha_mantenimiento_inicio']) && isset($_POST['Fecha_mantenimiento_fin']) 
+) {
 
     $id = $_POST['id'];
     $tipo_maquina = $_POST['tipo_maquina'];
@@ -25,8 +20,8 @@ if (
     $marca_computador = $_POST['marca_computador'];
     $modelo_computador = $_POST['modelo_computador'];
     $tipo_comp = $_POST['tipo_comp'];
-    $tipo_ram = $_POST['tipo_ram'];
-    $memoria_ram = $_POST['memoria_ram'];
+    $tipo_memoria_ram = $_POST['tipo_memoria_ram'];
+    $Memoria_ram = $_POST['Memoria_ram'];
     $tipo_discoduro = $_POST['tipo_discoduro'];
     $capacidad_discoduro = $_POST['capacidad_discoduro'];
     $procesador = $_POST['procesador'];
@@ -37,43 +32,42 @@ if (
     $dominio = $_POST['dominio'];
     $tipo_usuario = $_POST['tipo_usuario'];
     $serial_activo_fijo = $_POST['serial_activo_fijo'];
-    $fecha_ingreso = $_POST['fecha_ingreso'];
+    $fecha_ingreso_c = $_POST['fecha_ingreso_c'];
     $targeta_video = $_POST['targeta_video'];
     $estado = $_POST['estado'];
     $gestion = $_POST['gestion'];
-    $fecha_garantia = $_POST['fecha_garantia'];
+    $fecha_garantia_c = $_POST['fecha_garantia_c'];
     
-
-
-
     // campos de mantenimiento
-    $Usua_mantenimiento = $_POST['Usua_mantenimiento'];
+    $usuario = $_POST['usuario'];
     $observaciones_mantenimiento = $_POST['observaciones_mantenimiento'];
     $Fecha_mantenimiento_inicio = $_POST['Fecha_mantenimiento_inicio'];
     $Fecha_mantenimiento_fin = $_POST['Fecha_mantenimiento_fin'];
-    
 
     // INSERTAR DATOS A LA TABLA HISTORIAL COMPUTADOR
     $queryHistorial = "INSERT INTO ControlTIC..historial_computador (
-                id,tipo_maquina,service_tag,serial_equipo,nombre_equipo,sede,empresa,marca_computador,modelo_computador,
-                tipo_comp,tipo_ram,memoria_ram,tipo_discoduro,capacidad_discoduro,procesador,propietario,proveedor,sistema_operativo,
-                serial_cargador,dominio,tipo_usuario,serial_activo_fijo,fecha_ingreso,targeta_video,estado,gestion,fecha_garantia,
-                Usua_mantenimiento,observaciones_mantenimiento,Fecha_mantenimiento_inicio,Fecha_mantenimiento_fin
-            ) VALUES (
-                '$id','$tipo_maquina', '$service_tag', '$serial_equipo', '$nombre_equipo', '$sede', '$empresa', '$marca_computador', '$modelo_computador',
-                '$tipo_comp', '$tipo_ram','$memoria_ram','$tipo_discoduro', '$capacidad_discoduro','$procesador','$propietario','$proveedor','$sistema_operativo',
-                '$serial_cargador','$dominio','$tipo_usuario','$serial_activo_fijo','$fecha_ingreso','$targeta_video','$estado','$gestion','$fecha_garantia',
-                '$Usua_mantenimiento','$observaciones_mantenimiento','$Fecha_mantenimiento_inicio','$Fecha_mantenimiento_fin'
-            )";
+        id,tipo_maquina,service_tag,serial_equipo,nombre_equipo,sede,empresa,marca_computador,modelo_computador,
+        tipo_comp,tipo_ram,Memoria_ram,tipo_discoduro,capacidad_discoduro,procesador,propietario,proveedor,sistema_operativo,
+        serial_cargador,dominio,tipo_usuario,serial_activo_fijo,fecha_ingreso_c,targeta_video,estado,gestion,fecha_garantia_c,
+        observaciones_mantenimiento,Fecha_mantenimiento_inicio,Fecha_mantenimiento_fin,fechamov,descripcionmov,usuamov
+    ) VALUES (
+        '$id','$tipo_maquina', '$service_tag', '$serial_equipo', '$nombre_equipo', '$sede', '$empresa', '$marca_computador', '$modelo_computador',
+        '$tipo_comp', '$tipo_memoria_ram','$Memoria_ram','$tipo_discoduro', '$capacidad_discoduro','$procesador','$propietario','$proveedor','$sistema_operativo',
+        '$serial_cargador','$dominio','$tipo_usuario','$serial_activo_fijo','$fecha_ingreso_c','$targeta_video','$estado','$gestion','$fecha_garantia_c',
+        '$observaciones_mantenimiento','$Fecha_mantenimiento_inicio','$Fecha_mantenimiento_fin',CONVERT(datetime, Getdate(), 120),'SE REALIZO MANTENIMIENTO PREVENTIVO','$usuario')";
+    
+    // Mostrar los datos que se están enviando
+    var_dump($_POST);
+            
+    // Ahora se procede a insertar en la tabla 'historial_computador'
+  // Intenta ejecutar la consulta
+$resultHistorial = odbc_exec($conexion, $queryHistorial);
 
-            
-            // Ahora se procede a insertar en la tabla 'historial_computador'
-            $resultHistorial = odbc_exec($conexion, $queryHistorial);
-            
-            if ($resultHistorial) {
-                echo "Inserción exitosa en la tabla historial_computador";
-            } else {
-                echo "Error en la inserción en la tabla historial_computador: " . odbc_errormsg();
-            }
-       
-    }
+if ($resultHistorial) {
+    echo "Inserción exitosa en la tabla historial_computador";
+} else {
+    // Si hay un error, muestra el mensaje de error
+    echo "Error en la inserción en la tabla historial_computador: " . odbc_errormsg();
+}
+
+}

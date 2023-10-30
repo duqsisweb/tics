@@ -58,67 +58,61 @@ if (isset($_SESSION['usuario'])) {
                 $dominio = $_POST['Dominio'];
                 $tipo_usuario = $_POST['Tipo_usuario'];
                 $serial_activo_fijo = $_POST['Serial_activo_fijo'];
-                $fecha_ingreso = $_POST['Fecha_ingreso'];
+                $fecha_ingreso_c = $_POST['Fecha_ingreso_c'];
+                $fecha_ingreso_c = date('Y-m-d', strtotime($fecha_ingreso_c));
                 $targeta_video = $_POST['Targeta_Video'];
                 $estado = $_POST['Estado'];
-                $Fecha_garantia = $_POST['Fecha_garantia'];
+                $Fecha_garantia_c = $_POST['Fecha_garantia_c'];
+                $Fecha_garantia_c = date('Y-m-d', strtotime($Fecha_garantia_c));
 
                 $usuario = $_SESSION['usuario'];
+                $Gestion = $_POST['Gestion'];
 
+                // Obtener la fecha actual
+                $fechaActual = new DateTime();
+                // Sumar 6 meses a la fecha actual
+                $fechaMantenimientoInicio = $fechaActual->modify('+6 months');
+                // Formatear la fecha como una cadena
+                $fechaMantenimientoInicioStr = $fechaMantenimientoInicio->format('Y-m-d');
+                // Imprimir la fecha de mantenimiento
+                "Fecha de Mantenimiento: " . $fechaMantenimientoInicioStr;
 
+                $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_computador] (tipo_maquina ,Service_tag ,Serial_equipo ,Nombre_equipo ,Sede ,Empresa ,Marca_computador ,Modelo_computador ,Tipo_comp ,Tipo_ram ,Memoria_ram ,Tipo_discoduro ,Capacidad_discoduro ,Procesador ,Propietario ,Proveedor ,Sistema_Operativo ,Serial_cargador ,Dominio ,Tipo_usuario ,Serial_activo_fijo ,Fecha_ingreso_c ,Targeta_Video ,Estado ,Gestion ,Fecha_garantia_c ,Fecha_mantenimiento_inicio ,Fecha_mantenimiento_fin,usuamov ,fechamov) VALUES 
+                ('$tipomaquina' ,'$service_tag' ,'$serial' ,'$nombre_equipo' ,'$sede' ,'$Empresa' ,'$marca_computador' ,'$modelo_computador' ,'$tipo_comp' ,'$tipo_ram' ,'$cant_memoria_ram' ,'$tipo_discoduro' ,'$capacidad_discoduro' ,'$procesador' ,'$propietario' ,'$proveedor' ,'$sistema_operativo' ,'$serial_cargador' ,'$dominio' ,'$tipo_usuario' ,'$serial_activo_fijo' ,'$fecha_ingreso_c' ,'$targeta_video' ,'$estado' ,'3' ,'$Fecha_garantia_c' ,Getdate(),'$fechaMantenimientoInicioStr','$usuario' ,Getdate() )");
 
-                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_computador] (tipo_maquina,Service_tag,Serial_equipo,Nombre_equipo,Sede,Empresa,Marca_computador,
-                // Modelo_computador,Tipo_comp,Tipo_ram,Memoria_ram,Tipo_discoduro,Capacidad_discoduro,
-                // Procesador,Propietario,Proveedor,Sistema_Operativo,Serial_cargador,Dominio,Tipo_usuario,
-                // Serial_activo_fijo,Fecha_ingreso,Targeta_Video,Estado,Gestion,Fecha_garantia,Fecha_crea,usua_crea) 
-                //      VALUES ('$tipomaquina','$service_tag','$serial','$nombre_equipo','$sede','$Empresa','$marca_computador',
-                //         '$modelo_computador','$tipo_comp','$tipo_ram','$cant_memoria_ram','$tipo_discoduro','$capacidad_discoduro',
-                //         '$procesador','$propietario','$proveedor','$sistema_operativo','$serial_cargador','$dominio','$tipo_usuario',
-                //         '$serial_activo_fijo','$fecha_ingreso','$targeta_video','$estado','$gestion','$Fecha_garantia',Getdate(),'$usuario')";
-
-
-                $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_computador]
-                                                  (tipo_maquina,Service_tag,Serial_equipo,Nombre_equipo,Sede,Empresa,Marca_computador,
-                Modelo_computador,Tipo_comp,Tipo_ram,Memoria_ram,Tipo_discoduro,Capacidad_discoduro,
-                Procesador,Propietario,Proveedor,Sistema_Operativo,Serial_cargador,Dominio,Tipo_usuario,
-                Serial_activo_fijo,Fecha_ingreso,Targeta_Video,Estado,Fecha_garantia,Fecha_crea,usua_crea) 
-                                                  VALUES
-                                                  ('$tipomaquina','$service_tag','$serial','$nombre_equipo','$sede','$Empresa','$marca_computador',
-                        '$modelo_computador','$tipo_comp','$tipo_ram','$cant_memoria_ram','$tipo_discoduro','$capacidad_discoduro',
-                        '$procesador','$propietario','$proveedor','$sistema_operativo','$serial_cargador','$dominio','$tipo_usuario',
-                        '$serial_activo_fijo','$fecha_ingreso','$targeta_video','$estado','$Fecha_garantia',Getdate(),'$usuario')");
+                $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[historial_computador] (tipo_maquina ,Service_tag ,Serial_equipo ,Nombre_equipo ,Sede ,Empresa ,Marca_computador ,Modelo_computador ,Tipo_comp ,Tipo_ram ,Memoria_ram ,Tipo_discoduro ,Capacidad_discoduro ,Procesador ,Propietario ,Proveedor ,Sistema_Operativo ,Serial_cargador ,Dominio ,Tipo_usuario ,Serial_activo_fijo ,Fecha_ingreso_c ,Targeta_Video ,Estado ,Gestion ,Fecha_garantia_c ,Fecha_mantenimiento_inicio,Fecha_mantenimiento_fin,usuamov,descripcionmov,fechamov) VALUES 
+                ('$tipomaquina' ,'$service_tag' ,'$serial' ,'$nombre_equipo' ,'$sede' ,'$Empresa' ,'$marca_computador' ,'$modelo_computador' ,'$tipo_comp' ,'$tipo_ram' ,'$cant_memoria_ram' ,'$tipo_discoduro' ,'$capacidad_discoduro' ,'$procesador' ,'$propietario' ,'$proveedor' ,'$sistema_operativo' ,'$serial_cargador' ,'$dominio' ,'$tipo_usuario' ,'$serial_activo_fijo' ,'$fecha_ingreso_c' ,'$targeta_video' ,'$estado' ,'3' ,'$Fecha_garantia_c' ,Getdate() ,'$fechaMantenimientoInicioStr','$usuario','SE INGRESO AL STOCK UN COMPUTADOR' ,Getdate() )");
             }
             ?>
 
             <!-- inicio de POST enviarCelular -->
             <?php
             if (isset($_POST['enviarCelular'])) {
-                $tipomaquina = $_POST['tipo_maquina'];
+                // $tipomaquina = $_POST['tipo_maquina'];
                 $imei = $_POST['Imei'];
                 $serial_equipo_celular = $_POST['Serial_equipo_celular'];
                 $marca = $_POST['Marca'];
                 $modelo = $_POST['Modelo'];
-                $fecha_ingreso = $_POST['Fecha_ingreso'];
+                $fecha_ingreso_cel = $_POST['Fecha_ingreso_cel'];
                 $capacidad = $_POST['Capacidad'];
                 $ram_celular = $_POST['Ram_celular'];
                 $estado = $_POST['Estado'];
                 $gestion = $_POST['Gestion'];
-                $Fecha_garantia = $_POST['Fecha_garantia'];
+                $Fecha_garantia_cel = $_POST['Fecha_garantia_cel'];
                 $usuario = $_SESSION['usuario'];
 
 
-
-                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_celular]
-                //  (tipo_maquina,Imei,Serial_equipo_celular,Marca,Modelo,Fecha_ingreso,Capacidad,Ram_celular,Estado,Gestion,Fecha_garantia,Fecha_crea,usua_crea) 
-                //                                 VALUES ('$tipomaquina','$imei','$serial_equipo_celular','$marca','$modelo','$fecha_ingreso','$capacidad',
-                //                                     '$ram_celular','$estado','$gestion','$Fecha_garantia',Getdate(),'$usuario')";
-
-
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_celular]
-                                                  (tipo_maquina,Imei,Serial_equipo_celular,Marca,Modelo,Fecha_ingreso,Capacidad,Ram_celular,Estado,Gestion,Fecha_garantia,Fecha_crea,usua_crea) 
+                                                  (tipo_maquina,Imei,Serial_equipo_celular,Marca,Modelo,Fecha_ingreso_cel,Capacidad,Ram_celular,Estado,Gestion,Fecha_garantia_cel,usuamov,fechamov) 
                                                   VALUES
-                                                  ('$tipomaquina','$imei','$serial_equipo_celular','$marca','$modelo','$fecha_ingreso','$capacidad',
-                                                    '$ram_celular','$estado','$gestion','$Fecha_garantia',Getdate(),'$usuario')");
+                                                  ('2','$imei','$serial_equipo_celular','$marca','$modelo','$fecha_ingreso_cel','$capacidad'+'GB',
+                                                    '$ram_celular'+'GB','$estado','$gestion','$Fecha_garantia_cel','$usuario',getdate() )");
+
+                $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[historial_celular]
+                (tipo_maquina,Imei,Serial_equipo_celular,Marca,Modelo,Fecha_ingreso_cel,Capacidad,Ram_celular,Estado,Gestion,Fecha_garantia_cel,fechamov,descripcionmov,usuamov) 
+                VALUES
+                ('2','$imei','$serial_equipo_celular','$marca','$modelo','$fecha_ingreso_cel','$capacidad'+'GB',
+                '$ram_celular'+'GB','CONFIGURACION','SIN ASIGNACION','$Fecha_garantia_cel',getdate(),'SE CREO EQUIPO CELULAR','$usuario')");
             }
             ?>
 
@@ -129,57 +123,66 @@ if (isset($_SESSION['usuario'])) {
                 $marca = $_POST['marca'];
                 $modelo = $_POST['modelo'];
                 $descripcion = $_POST['descripcion'];
-                $tipo = $_POST['tipo'];
+                $tipo_acc = $_POST['tipo_acc'];
                 $cantidad = $_POST['cantidad'];
-                $fecha_de_ingreso = $_POST['fecha_de_ingreso'];
+                $fecha_de_ingreso_acc = $_POST['fecha_de_ingreso_acc'];
+                // Asegúrate de que $fecha_ingreso sea una fecha válida en el formato "AAAA-MM-DD"
+                $fecha_de_ingreso_acc = date('Y-m-d', strtotime($fecha_de_ingreso_acc));
                 $usuario = $_SESSION['usuario'];
 
-
-
-                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_accesorios]
-                //  (tipo_maquina,marca,modelo,descripcion,tipo,cantidad,fecha_ingreso,Fecha_crea,usua_crea) 
-                //                                 VALUES ('$tipomaquina','$marca','$modelo','$descripcion','$tipo',
-                //                                     '$cantidad','$fecha_de_ingreso',Getdate(),'$usuario')";
-
-
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_accesorios]
-                                                  (tipo_maquina,marca,modelo,descripcion,tipo,cantidad,fecha_de_ingreso,Fecha_crea,usua_crea) 
+                                                  (tipo_maquina,marca,modelo,descripcion,tipo_acc,cantidad,fecha_de_ingreso_acc,Fecha_crea,usua_crea) 
                                                   VALUES
-                                                  ('$tipomaquina','$marca','$modelo','$descripcion','$tipo',
-                                                    '$cantidad','$fecha_de_ingreso',Getdate(),'$usuario')");
+                                                  ('$tipomaquina','$marca','$modelo','$descripcion','$tipo_acc',
+                                                    '$cantidad','$fecha_de_ingreso_acc',Getdate(),'$usuario')");
+
+
+                $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[historial_accesorios]
+                (tipo_maquina,marca,modelo,descripcion,tipo_acc,cantidad,fecha_de_ingreso_acc,Fecha_crea,usua_crea,fechamov,descripcionmov,usuamov) 
+                VALUES
+                ('$tipomaquina','$marca','$modelo','$descripcion','$tipo_acc',
+                '$cantidad','$fecha_de_ingreso_acc',Getdate(),'$usuario',CONVERT(datetime, Getdate(), 120),'SE CREO UN ACCESORIO','$usuario')");
             }
             ?>
 
             <!-- inicio de POST EdComunicacion -->
             <?php
             if (isset($_POST['enviarEdcomunicacion'])) {
+
                 $tipomaquina = $_POST['tipo_maquina'];
                 $marca_edcomunicacion = $_POST['marca_edcomunicacion'];
                 $modelo_edcomunicacion = $_POST['modelo_edcomunicacion'];
                 $descripcion_edcomunicacion = $_POST['descripcion_edcomunicacion'];
                 $serial_edcomunicacion = $_POST['serial_edcomunicacion'];
-                $fecha_de_ingreso = $_POST['fecha_de_ingreso'];
+
+                $fecha_de_ingreso_edc = $_POST['fecha_de_ingreso_edc'];
+                $fecha_de_ingreso_edc = date('Y-m-d', strtotime($fecha_de_ingreso_edc));
+
                 $estado = $_POST['estado'];
                 $placa_activo_edcomunicacion = $_POST['placa_activo_edcomunicacion'];
                 $sede_edcomunicacion = $_POST['sede_edcomunicacion'];
                 $ubicacion_edcomunicacion = $_POST['ubicacion_edcomunicacion'];
                 $observaciones_edcomunicacion = $_POST['observaciones_edcomunicacion'];
-                $fecha_garantia = $_POST['fecha_garantia'];
+
+                $fecha_garantia_edc = $_POST['fecha_garantia_edc'];
+                $fecha_garantia_edc = date('Y-m-d', strtotime($fecha_garantia_edc));
+
                 $usuario = $_SESSION['usuario'];
 
-
-
-                echo "INSERT INTO [ControlTIC].[dbo].[maquina_edcomunicacion]
-                 (tipo_maquina,marca_edcomunicacion,modelo_edcomunicacion,descripcion_edcomunicacion,serial_edcomunicacion,fecha_de_ingreso,estado,placa_activo_edcomunicacion,sede_edcomunicacion,ubicacion_edcomunicacion,observaciones_edcomunicacion,fecha_garantia,Fecha_crea,usua_crea) 
-                                                VALUES ('$tipomaquina','$marca_edcomunicacion','$modelo_edcomunicacion','$descripcion_edcomunicacion','$serial_edcomunicacion',
-                                                    '$fecha_de_ingreso','$estado','$placa_activo_edcomunicacion','$sede_edcomunicacion','$ubicacion_edcomunicacion','$observaciones_edcomunicacion','$fecha_garantia',Getdate(),'$usuario')";
+                $gestion_edcomunicacion = $_POST['gestion_edcomunicacion'];
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_edcomunicacion]
-                                                  (tipo_maquina,marca_edcomunicacion,modelo_edcomunicacion,descripcion_edcomunicacion,serial_edcomunicacion,fecha_de_ingreso,estado,placa_activo_edcomunicacion,sede_edcomunicacion,ubicacion_edcomunicacion,observaciones_edcomunicacion,fecha_garantia,Fecha_crea,usua_crea) 
+                                                  (tipo_maquina,marca_edcomunicacion,modelo_edcomunicacion,descripcion_edcomunicacion,serial_edcomunicacion,fecha_de_ingreso_edc,estado,placa_activo_edcomunicacion,sede_edcomunicacion,ubicacion_edcomunicacion,observaciones_edcomunicacion,gestion_edcomunicacion,fecha_garantia_edc,Fecha_crea,usua_crea) 
                                                   VALUES
                                                   ('$tipomaquina','$marca_edcomunicacion','$modelo_edcomunicacion','$descripcion_edcomunicacion','$serial_edcomunicacion',
-                                                    '$fecha_de_ingreso','$estado','$placa_activo_edcomunicacion','$sede_edcomunicacion','$ubicacion_edcomunicacion','$observaciones_edcomunicacion','$fecha_garantia',Getdate(),'$usuario')");
+                                                    '$fecha_de_ingreso_edc','$estado','$placa_activo_edcomunicacion','$sede_edcomunicacion','$ubicacion_edcomunicacion','$observaciones_edcomunicacion','$gestion_edcomunicacion','$fecha_garantia_edc',Getdate(),'$usuario')");
+
+                $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[historial_edcomunicacion]
+                                                    (tipo_maquina,marca_edcomunicacion,modelo_edcomunicacion,descripcion_edcomunicacion,serial_edcomunicacion,fecha_de_ingreso_edc,estado,placa_activo_edcomunicacion,sede_edcomunicacion,ubicacion_edcomunicacion,observaciones_edcomunicacion,gestion_edcomunicacion,fecha_garantia_edc,Fecha_crea,usua_crea,fechamov,descripcionmov,usuamov) 
+                                                    VALUES
+                                                    ('$tipomaquina','$marca_edcomunicacion','$modelo_edcomunicacion','$descripcion_edcomunicacion','$serial_edcomunicacion',
+                                                    '$fecha_de_ingreso_edc','$estado','$placa_activo_edcomunicacion','$sede_edcomunicacion','$ubicacion_edcomunicacion','$observaciones_edcomunicacion','$gestion_edcomunicacion','$fecha_garantia_edc',Getdate(),'$usuario',CONVERT(datetime, Getdate(), 120),'SE CREA UN ELEMENTO DE COMUNICACION','$usuario')");
             }
             ?>
 
@@ -197,23 +200,24 @@ if (isset($_SESSION['usuario'])) {
                 $tipo = $_POST['tipo'];
                 $tipo_toner = $_POST['tipo_toner'];
                 $empresa = $_POST['Empresa'];
-                $fecha_garantia = $_POST['fecha_de_garantia'];
+                $fecha_de_garantia_peri = $_POST['fecha_de_garantia_peri'];
+                $fecha_de_garantia_peri = date('Y-m-d', strtotime($fecha_de_garantia_peri));
+
                 $usuario = $_SESSION['usuario'];
                 $estado = $_POST['estado'];
-
-
-
-                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_perifericos]
-                //  (tipo_maquina,serial_perifericos,descripcion_perifericos,marca_perifericos,modelo_perifericos,placa_activo_perifericos,sede_perifericos,ubicacion_perifericos,tipo,tipo_toner,Empresa,fecha_de_garantia,Fecha_crea,usua_crea,estado) 
-                //                                 VALUES ('$tipomaquina','$serial_perifericos','$descripcion_perifericos','$marca_perifericos','$modelo_perifericos','$placa_activo_perifericos','$sede_perifericos','$ubicacion_perifericos','$tipo',
-                //                                 '$tipo_toner','$empresa','$fecha_de_garantia',Getdate(),'$usuario','$estado')";
-
+                $gestion_peri = $_POST['gestion_peri'];
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_perifericos]
-                 (tipo_maquina,serial_perifericos,descripcion_perifericos,marca_perifericos,modelo_perifericos,placa_activo_perifericos,sede_perifericos,ubicacion_perifericos,tipo,tipo_toner,Empresa,fecha_de_garantia,Fecha_crea,usua_crea,estado) 
+                 (tipo_maquina,serial_perifericos,descripcion_perifericos,marca_perifericos,modelo_perifericos,placa_activo_perifericos,sede_perifericos,ubicacion_perifericos,tipo,tipo_toner,Empresa,fecha_de_garantia_peri,Fecha_crea,usua_crea,estado,gestion_peri) 
                                                   VALUES
                                                   ('$tipomaquina','$serial_perifericos','$descripcion_perifericos','$marca_perifericos','$modelo_perifericos','$placa_activo_perifericos','$sede_perifericos','$ubicacion_perifericos','$tipo',
-                                                '$tipo_toner','$empresa','$fecha_de_garantia',Getdate(),'$usuario','$estado')");
+                                                '$tipo_toner','$empresa','$fecha_de_garantia_peri',Getdate(),'$usuario','$estado','$gestion_peri')");
+
+                $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[historial_perifericos]
+                (tipo_maquina,serial_perifericos,descripcion_perifericos,marca_perifericos,modelo_perifericos,placa_activo_perifericos,sede_perifericos,ubicacion_perifericos,tipo,tipo_toner,Empresa,fecha_de_garantia_peri,Fecha_crea,usua_crea,estado,gestion_peri,fechamov,descripcionmov,usuamov) 
+                                 VALUES
+                                 ('$tipomaquina','$serial_perifericos','$descripcion_perifericos','$marca_perifericos','$modelo_perifericos','$placa_activo_perifericos','$sede_perifericos','$ubicacion_perifericos','$tipo',
+                               '$tipo_toner','$empresa','$fecha_de_garantia_peri',Getdate(),'$usuario','$estado','$gestion_peri',CONVERT(datetime, Getdate(), 120),'SE CREA UN PERIFERICO','$usuario')");
             }
             ?>
 
@@ -230,28 +234,32 @@ if (isset($_SESSION['usuario'])) {
                 $caracteristica_almacenamiento  = $_POST['caracteristica_almacenamiento'];
                 $sede_almacenamiento = $_POST['sede_almacenamiento'];
                 $ubicacion_almacenamiento = $_POST['ubicacion_almacenamiento'];
-                $fecha_de_ingreso = $_POST['fecha_de_ingreso'];
+
+                $fecha_de_ingreso_alma = $_POST['fecha_de_ingreso_alma'];
+                $fecha_de_ingreso_alma = date('Y-m-d', strtotime($fecha_de_ingreso_alma));
+
                 $estado = $_POST['estado'];
-                $fecha_de_garantia = $_POST['fecha_de_garantia'];
+
+
+                $fecha_de_garantia_alma = $_POST['fecha_de_garantia_alma'];
+                $fecha_de_garantia_alma = date('Y-m-d', strtotime($fecha_de_garantia_alma));
 
                 $usuario = $_SESSION['usuario'];
 
 
-
-                echo "INSERT INTO [ControlTIC].[dbo].[maquina_almacenamiento]
-                 (tipo_maquina,marca_almacenamiento,modelo_almacenamiento,descripcion_almacenamiento,capacidad_almacenamiento ,
-                 tipo_almacenamiento,caracteristica_almacenamiento ,sede_almacenamiento ,ubicacion_almacenamiento ,fecha_de_ingreso,estado,fecha_de_garantia,Fecha_crea,usua_crea) 
-                                                VALUES ('$tipomaquina','$marca_almacenamiento','$modelo_almacenamiento','$descripcion_almacenamiento',
-                                                '$capacidad_almacenamiento','$tipo_almacenamiento','$caracteristica_almacenamiento','$sede_almacenamiento','$ubicacion_almacenamiento',
-                                                '$fecha_de_ingreso','$estado','$fecha_de_garantia',Getdate(),'$usuario')";
-
-
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_almacenamiento]
                 (tipo_maquina,marca_almacenamiento,modelo_almacenamiento,descripcion_almacenamiento,capacidad_almacenamiento,
-                tipo_almacenamiento, caracteristica_almacenamiento, sede_almacenamiento ,ubicacion_almacenamiento ,fecha_de_ingreso,estado,fecha_de_garantia,Fecha_crea,usua_crea) 
-                                               VALUES ('$tipomaquina','$marca_almacenamiento','$modelo_almacenamiento','$descripcion_almacenamiento',
-                                               '$capacidad_almacenamiento','$tipo_almacenamiento','$caracteristica_almacenamiento','$sede_almacenamiento','$ubicacion_almacenamiento',
-                                               '$fecha_de_ingreso','$estado','$fecha_de_garantia',Getdate(),'$usuario')");
+                tipo_almacenamiento, caracteristica_almacenamiento, sede_almacenamiento ,ubicacion_almacenamiento ,fecha_de_ingreso_alma,estado,fecha_de_garantia_alma,Fecha_crea,usua_crea) 
+                            VALUES ('$tipomaquina','$marca_almacenamiento','$modelo_almacenamiento','$descripcion_almacenamiento',
+                            '$capacidad_almacenamiento'+'GB','$tipo_almacenamiento','$caracteristica_almacenamiento','$sede_almacenamiento','$ubicacion_almacenamiento',
+                            '$fecha_de_ingreso_alma','$estado','$fecha_de_garantia_alma',Getdate(),'$usuario')");
+
+                $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[historial_almacenamiento]
+                (tipo_maquina,marca_almacenamiento,modelo_almacenamiento,descripcion_almacenamiento,capacidad_almacenamiento,
+                tipo_almacenamiento, caracteristica_almacenamiento, sede_almacenamiento ,ubicacion_almacenamiento ,fecha_de_ingreso_alma,estado,fecha_de_garantia_alma,Fecha_crea,usua_crea,fechamov,descripcionmov,usuamov) 
+                            VALUES ('$tipomaquina','$marca_almacenamiento','$modelo_almacenamiento','$descripcion_almacenamiento',
+                            '$capacidad_almacenamiento'+'GB','$tipo_almacenamiento','$caracteristica_almacenamiento','$sede_almacenamiento','$ubicacion_almacenamiento',
+                            '$fecha_de_ingreso_alma','$estado','$fecha_de_garantia_alma',Getdate(),'$usuario',CONVERT(datetime, Getdate(), 120),'SE CREA UN ELEMENTO DE ALMACENAMIENTO','$usuario')");
             }
             ?>
 
@@ -271,18 +279,22 @@ if (isset($_SESSION['usuario'])) {
                 $estado = $_POST['estado'];
                 $usuario = $_SESSION['usuario'];
 
+                $gestion = $_POST['gestion'];
 
-                echo "INSERT INTO [ControlTIC].[dbo].[maquina_simcard]
-                 (tipo_maquina,numero_linea,nombre_plan,fecha_apertura,valor_plan,operador,cod_cliente,observaciones_sim,fecha_fin_plan,estado,Fecha_crea,usua_crea) 
-                                                VALUES ('$tipo_maquina','$numero_linea','$nombre_plan','$fecha_apertura','$valor_plan','$operador',
-                                                '$cod_cliente','$observaciones_sim','$fecha_fin_plan','$estado',Getdate(),'$usuario')";
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_simcard]
-                 (tipo_maquina,numero_linea,nombre_plan,fecha_apertura,valor_plan,operador,cod_cliente,observaciones_sim,fecha_fin_plan,estado,Fecha_crea,usua_crea) 
+                 (tipo_maquina,numero_linea,nombre_plan,fecha_apertura,valor_plan,operador,cod_cliente,observaciones_sim,fecha_fin_plan,estado,Fecha_crea,usua_crea,gestion) 
                                                   VALUES
                                                   ('$tipo_maquina','$numero_linea','$nombre_plan','$fecha_apertura','$valor_plan','$operador',
-                                                '$cod_cliente','$observaciones_sim','$fecha_fin_plan','$estado',Getdate(),'$usuario')");
+                                                '$cod_cliente','$observaciones_sim','$fecha_fin_plan','$estado',Getdate(),'$usuario','$gestion')");
+
+                $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[historial_simcard]
+                (tipo_maquina,numero_linea,nombre_plan,fecha_apertura,valor_plan,operador,cod_cliente,observaciones_sim,fecha_fin_plan,estado,
+                Fecha_crea,usua_crea,gestion,fechamov,descripcionmov,usuamov)
+                                                VALUES
+                                                ('$tipo_maquina','$numero_linea','$nombre_plan','$fecha_apertura','$valor_plan','$operador',
+                                            '$cod_cliente','$observaciones_sim','$fecha_fin_plan','$estado',Getdate(),'$usuario','$gestion',CONVERT(datetime, Getdate(), 120),'SE CREA UNA LINEA DE SIMCARD','$usuario')");
             }
             ?>
 
@@ -309,21 +321,29 @@ if (isset($_SESSION['usuario'])) {
                 $usuario = $_SESSION['usuario'];
 
 
-                echo "INSERT INTO [ControlTIC].[dbo].[maquina_dvr]
+                $fechaActual = new DateTime();
+                // Sumar 6 meses a la fecha actual
+                $fechaMantenimientoInicio = $fechaActual->modify('+6 months');
+                // Formatear la fecha como una cadena
+                $fechaMantenimientoInicioStrdvr = $fechaMantenimientoInicio->format('Y-m-d');
+                // Imprimir la fecha de mantenimiento
+                "Fecha de Mantenimiento: " . $fechaMantenimientoInicioStrdvr;
+
+
+                $Consulta = odbc_exec($conexion, " INSERT INTO [ControlTIC].[dbo].[maquina_dvr]
                  (tipo_maquina,marca_dvr,modelo_dvr,descripcion_dvr,capacidad_dvr,tipo_dvr,sede_dvr,ubicacion_dvr,software,fecha_ingreso,num_canales,num_discos,
-                 dias_grabacion,ip_dvr,estado,fecha_garantia,Fecha_crea,usua_crea) 
+                 dias_grabacion,ip_dvr,estado,estado_asignacion,fecha_garantia,fecha_mantenimiento_inicio,fecha_mantenimiento_fin) 
                                                 VALUES ('$tipo_maquina','$marca_dvr','$modelo_dvr','$descripcion_dvr','$capacidad_dvr',
                                                 '$tipo_dvr','$sede_dvr','$ubicacion_dvr','$software','$fecha_ingreso',
-                                                '$num_canales','$num_discos','$dias_grabacion','$ip_dvr','$estado','$fecha_garantia',Getdate(),'$usuario')";
+                                                '$num_canales','$num_discos','$dias_grabacion','$ip_dvr','$estado','1','$fecha_garantia',getdate(),'$fechaMantenimientoInicioStrdvr')");
 
 
-                $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_dvr]
-                 (tipo_maquina,marca_dvr,modelo_dvr,descripcion_dvr,capacidad_dvr,tipo_dvr,sede_dvr,ubicacion_dvr,software,fecha_ingreso,num_canales,num_discos,
-                 dias_grabacion,ip_dvr,estado,fecha_garantia,Fecha_crea,usua_crea) 
-                                                  VALUES
-                                                  ('$tipo_maquina','$marca_dvr','$modelo_dvr','$descripcion_dvr','$capacidad_dvr',
-                                                '$tipo_dvr','$sede_dvr','$ubicacion_dvr','$software','$fecha_ingreso',
-                                                '$num_canales','$num_discos','$dias_grabacion','$ip_dvr','$estado','$fecha_garantia',Getdate(),'$usuario')");
+                $Consulta = odbc_exec($conexion, " INSERT INTO [ControlTIC].[dbo].[historial_dvr]
+                (tipo_maquina,marca_dvr,modelo_dvr,descripcion_dvr,capacidad_dvr,tipo_dvr,sede_dvr,ubicacion_dvr,software,fecha_ingreso,num_canales,num_discos,
+                dias_grabacion,ip_dvr,estado,estado_asignacion,fecha_garantia,fecha_mantenimiento_inicio,fecha_mantenimiento_fin,descripcionmov,fechamov,usuamov) 
+                               VALUES ('$tipo_maquina','$marca_dvr','$modelo_dvr','$descripcion_dvr','$capacidad_dvr',
+                               '$tipo_dvr','$sede_dvr','$ubicacion_dvr','$software','$fecha_ingreso',
+                               '$num_canales','$num_discos','$dias_grabacion','$ip_dvr','$estado','1','$fecha_garantia',getdate(),'$fechaMantenimientoInicioStrdvr','SE CREO UN QUIPO DVR', getdate() ,'$usuario' )");
             }
             ?>
 
@@ -397,6 +417,7 @@ if (isset($_SESSION['usuario'])) {
             }
             ?>
 
+
             <style>
                 .campo-incompleto {
                     border: 1px solid red;
@@ -404,12 +425,10 @@ if (isset($_SESSION['usuario'])) {
             </style>
 
 
-
-
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container">
                     <div>
-                        <h3>Subir Maquinas Al stock</h3>
+                        <h3>SUBIR EQUIPOS TECNOLOGICOS AL STOCK O INVENTARIO</h3>
                     </div>
                 </div>
             </div>
@@ -556,7 +575,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Modelo_computador" required oninput="convertirAMayusculas(this)" >
+                                        <input type="text" class="form-control" id="" placeholder="" name="Modelo_computador" required oninput="convertirAMayusculas(this)">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -712,7 +731,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Procesador</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Procesador" required oninput="convertirAMayusculas(this)" > 
+                                        <input type="text" class="form-control" id="" placeholder="" name="Procesador" required oninput="convertirAMayusculas(this)">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -782,7 +801,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Serial del Cargador</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_cargador" required oninput="convertirAMayusculas(this)" >
+                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_cargador" required oninput="convertirAMayusculas(this)">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -812,13 +831,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Serial de Activo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_activo_fijo" required oninput="convertirAMayusculas(this)" >
+                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_activo_fijo" required oninput="convertirAMayusculas(this)">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha de Ingreso</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="Fecha_ingreso" max="<?php echo date('Y-m-d'); ?>" required>
+                                        <input type="date" class="form-control" id="" placeholder="" name="Fecha_ingreso_c" max="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -834,7 +853,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha de Garantia</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="Fecha_garantia" min="<?php echo date('Y-m-d'); ?>" required>
+                                        <input type="date" class="form-control" id="" placeholder="" name="Fecha_garantia_c" min="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -847,15 +866,13 @@ if (isset($_SESSION['usuario'])) {
                             <div>
                                 <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
                                 <input type="hidden" class="form-control" id="" placeholder="" value="1" name="Estado">
+                                <input type="hidden" class="form-control" id="" placeholder="" value="3" name="Gestion">
                             </div>
-
-
-
 
                             <div style="text-align: center;margin-top:15px;">
                                 <!-- <button type="submit" class="btn btn-warning" name="enviarComputador" id="enviarComputador">GUARDAR</button> -->
                                 <button id="enviarComputador" type="submit" class="btn btn-warning enviarComputador" name="enviarComputador" value="" style="display:none"></button>
-                                <button type="button" id="guardarButton" class="btn btn-success showAlertButton" name="enviarComputador">GUARDAR</button>
+                                <button type="button" id="guardarButtoncomputador" class="btn btn-success showAlertButton" name="enviarComputador">GUARDAR</button>
                             </div>
 
                         </div>
@@ -863,48 +880,46 @@ if (isset($_SESSION['usuario'])) {
                         <!-- FORMULARIO CELULAR -->
                         <div action="" id="formulario2" style="display: none;">
 
-
                             <!-- PRIMER BLOQUE DE FORMULARIO -->
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">IMEI</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Imei">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="Imei" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Serial</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_equipo_celular">
+                                        <input type="text" class="form-control" id="" placeholder="" name="Serial_equipo_celular" oninput="convertirAMayusculas(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Marca">
+                                        <input type="text" class="form-control" id="" placeholder="" name="Marca" oninput="convertirAMayusculas(this)" required>
                                     </div>
                                 </div>
                             </div>
-
 
                             <!-- SEGUNDO BLOQUE DE FORMULARIO -->
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Modelo">
+                                        <input type="text" class="form-control" id="" placeholder="" name="Modelo" oninput="convertirAMayusculas(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha de Ingreso</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="Fecha_ingreso" max="<?php echo date('Y-m-d'); ?>">
+                                        <input type="date" class="form-control" id="" placeholder="" name="Fecha_ingreso_cel" max="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Capacidad</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Capacidad">
+                                        <input type="number" class="form-control" id="" placeholder="GB" name="Capacidad" oninput="convertirAMayusculas(this)" required>
                                     </div>
                                 </div>
                             </div>
@@ -914,13 +929,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ram</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Ram_celular">
+                                        <input type="number" class="form-control" id="" placeholder="GB" name="Ram_celular" oninput="convertirAMayusculas(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha Garantia</label>
-                                        <input type="Date" class="form-control" id="" placeholder="" name="Fecha_garantia" min="<?php echo date('Y-m-d'); ?>">
+                                        <input type="Date" class="form-control" id="" placeholder="" name="Fecha_garantia_cel" min="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -929,7 +944,9 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <div style="text-align: center;margin-top:15px;">
-                                <button type="submit" class="btn btn-warning" name="enviarCelular" id="enviarCelular">GUARDAR</button>
+                                <!-- <button type="submit" class="btn btn-warning" name="enviarComputador" id="enviarComputador">GUARDAR</button> -->
+                                <button id="enviarCelular" type="submit" class="btn btn-warning enviarCelular" name="enviarCelular" value="" style="display:none"></button>
+                                <button type="button" id="guardarButtoncelular" class="btn btn-success showAlertButtoncelular" name="enviarCelular">GUARDAR</button>
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
@@ -946,20 +963,20 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="marca">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="marca" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="modelo">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="modelo" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Descripción</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="descripcion">
-                                            <option selected>SELECCIONE</option>
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="descripcion" required>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                             <?php
@@ -990,8 +1007,8 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Tipo</label>
-                                        <select class="form-select" aria-label="" name="tipo">
-                                            <option selected>SELECCIONE</option>
+                                        <select class="form-select" aria-label="" name="tipo_acc" required>
+                                            <option value="" selected>SELECCIONE</option>
                                             <option value="INALAMBRICA">INALAMBRICA</option>
                                             <option value="ALAMBRICA">ALAMBRICA</option>
                                             <option value="NINGUNA">NINGUNA</option>
@@ -1001,19 +1018,21 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Cantidad</label>
-                                        <input type="number" class="form-control" id="" placeholder="" name="cantidad">
+                                        <input type="number" class="form-control" id="" placeholder="" name="cantidad" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha Ingreso</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_de_ingreso" max="<?php echo date('Y-m-d'); ?>">
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_de_ingreso_acc" max="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                             </div>
 
                             <div style="text-align: center;margin-top:15px;">
-                                <button type="submit" class="btn btn-warning" name="enviarAccesorios" id="enviarComputador">GUARDAR</button>
+                                <!-- <button type="submit" class="btn btn-warning" name="enviarComputador" id="enviarComputador">GUARDAR</button> -->
+                                <button id="enviarAccesorios" type="submit" class="btn btn-warning enviarAccesorios" name="enviarAccesorios" value="" style="display:none"></button>
+                                <button type="button" id="guardarButtonaccesorios" class="btn btn-success showAlertButtonaccesorios" name="enviarAccesorios">GUARDAR</button>
                             </div>
 
                         </div>
@@ -1026,8 +1045,8 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Descripción</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="descripcion_edcomunicacion">
-                                            <option selected>SELECCIONE</option>
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="descripcion_edcomunicacion" required>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                             <?php
@@ -1053,13 +1072,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="marca_edcomunicacion">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="marca_edcomunicacion" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="modelo_edcomunicacion">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="modelo_edcomunicacion" required>
                                     </div>
                                 </div>
                             </div>
@@ -1069,19 +1088,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Serial</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="serial_edcomunicacion">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="serial_edcomunicacion" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha de Ingreso</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_de_ingreso" max="<?php echo date('Y-m-d'); ?>">
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_de_ingreso_edc" max="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Placa Activo fijo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="placa_activo_edcomunicacion">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="placa_activo_edcomunicacion" required>
                                     </div>
                                 </div>
                             </div>
@@ -1092,8 +1111,8 @@ if (isset($_SESSION['usuario'])) {
                                     <div class="mb-3">
                                         <label for="" class="form-label">Sede</label>
                                         <div class="mb-3">
-                                            <select class="form-select" aria-label="Default select example" id="sede_edcomunicacion" onchange="mostrarFormulario()" name="sede_edcomunicacion">
-                                                <option selected>SELECCIONE</option>
+                                            <select class="form-select" aria-label="Default select example" id="sede_edcomunicacion" onchange="mostrarFormulario()" name="sede_edcomunicacion" required>
+                                                <option value="" selected>SELECCIONE</option>
 
                                                 <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                                 <?php
@@ -1120,13 +1139,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ubicación</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_edcomunicacion">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="ubicacion_edcomunicacion" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Observaciones</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="observaciones_edcomunicacion">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="observaciones_edcomunicacion" required>
                                     </div>
                                 </div>
                             </div>
@@ -1136,7 +1155,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha de Garantia</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_garantia" min="<?php echo date('Y-m-d'); ?>">
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_garantia_edc" min="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1148,12 +1167,15 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <div style="text-align: center;margin-top:15px;">
-                                <button type="submit" class="btn btn-warning" name="enviarEdcomunicacion" id="enviarComputador">GUARDAR</button>
+                                <!-- <button type="submit" class="btn btn-warning" name="enviarComputador" id="enviarComputador">GUARDAR</button> -->
+                                <button id="enviarEdcomunicacion" type="submit" class="btn btn-warning enviarEdcomunicacion" name="enviarEdcomunicacion" value="" style="display:none"></button>
+                                <button type="button" id="guardarButtonedcomunicacion" class="btn btn-success showAlertButtonedcomunicacion" name="enviarAccesorios">GUARDAR</button>
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
                             <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
                             <input type="hidden" class="form-control" id="" placeholder="" value="1" name="Estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="3" name="gestion_edcomunicacion">
 
                         </div>
 
@@ -1164,15 +1186,9 @@ if (isset($_SESSION['usuario'])) {
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <label for="" class="form-label">Serial</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="serial_perifericos">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
                                         <label for="" class="form-label">Descripción</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="descripcion_perifericos">
-                                            <option selected>SELECCIONE</option>
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="descripcion_perifericos" required>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                             <?php
@@ -1196,10 +1212,18 @@ if (isset($_SESSION['usuario'])) {
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Serial</label>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="serial_perifericos" required>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="marca_perifericos">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="marca_perifericos" required>
                                     </div>
                                 </div>
                             </div>
@@ -1209,20 +1233,20 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="modelo_perifericos">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="modelo_perifericos" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Placa Activo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="placa_activo_perifericos">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="placa_activo_perifericos" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Sede</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_perifericos">
-                                            <option selected>SELECCIONE</option>
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_perifericos" required>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                             <?php
@@ -1253,14 +1277,14 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ubicación</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_perifericos">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="ubicacion_perifericos" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Tipo</label>
-                                        <select class="form-select" aria-label="" name="tipo">
-                                            <option selected>SELECCIONE</option>
+                                        <select class="form-select" aria-label="" name="tipo" required>
+                                            <option value="" selected>SELECCIONE</option>
                                             <option value="LASER">LASER</option>
                                             <option value="INYECCION">INYECCION</option>
                                             <option value="ESCANER">ESCANER</option>
@@ -1270,7 +1294,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Tipo Toner</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="tipo_toner">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="tipo_toner" required>
                                     </div>
                                 </div>
                             </div>
@@ -1280,8 +1304,8 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Empresa</label>
-                                        <select class="form-select" aria-label="Default select example" id="" onchange="mostrarFormulario()" name="Empresa">
-                                            <option selected>SELECCIONE</option>
+                                        <select class="form-select" aria-label="Default select example" id="" onchange="mostrarFormulario()" name="Empresa" required>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                             <?php
@@ -1309,7 +1333,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha de Garantia</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_de_garantia" min="<?php echo date('Y-m-d'); ?>">
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_de_garantia_peri" min="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1320,12 +1344,15 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <div style="text-align: center;margin-top:15px;">
-                                <button type="submit" class="btn btn-warning" name="enviarPerifericos" id="enviarPerifericos">GUARDAR</button>
+                                <!-- <button type="submit" class="btn btn-warning" name="enviarComputador" id="enviarComputador">GUARDAR</button> -->
+                                <button id="enviarPerifericos" type="submit" class="btn btn-warning enviarPerifericos" name="enviarPerifericos" value="" style="display:none"></button>
+                                <button type="button" id="guardarButtonperifericos" class="btn btn-success showAlertButtonperifericos" name="enviarPerifericos">GUARDAR</button>
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
                             <input type="hidden" name="usua_crea" value="<?php echo ($a['usuario']) ?>"></input>
                             <input type="hidden" class="form-control" id="" placeholder="" value="1" name="Estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="3" name="gestion_peri">
 
                         </div>
 
@@ -1334,24 +1361,12 @@ if (isset($_SESSION['usuario'])) {
 
                             <!-- PRIMER BLOQUE DE FORMULARIO -->
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="marca_almacenamiento">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="modelo_almacenamiento">
 
-                                    </div>
-                                </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Descripción</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="descripcion_almacenamiento">
-                                            <option selected>SELECCIONE</option>
+                                        <select class="form-select" aria-label="Default select example" id="sede" oninput="convertirAMayusculas(this)" name="descripcion_almacenamiento" required>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                             <?php
@@ -1371,10 +1386,24 @@ if (isset($_SESSION['usuario'])) {
                                             // Liberar recursos
                                             odbc_free_result($resultado);
                                             ?>
-
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Marca</label>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="marca_almacenamiento" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Modelo</label>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="modelo_almacenamiento" required>
+
+                                    </div>
+                                </div>
+
 
                             </div>
 
@@ -1383,14 +1412,14 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Capacidad</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="capacidad_almacenamiento">
+                                        <input type="number" class="form-control" id="" placeholder="GB" oninput="convertirAMayusculas(this)" name="capacidad_almacenamiento" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Tipo</label>
-                                        <select class="form-select" aria-label="" name="tipo_almacenamiento">
-                                            <option selected>SELECCIONE</option>
+                                        <select class="form-select" aria-label="" name="tipo_almacenamiento" required>
+                                            <option value="" selected>SELECCIONE</option>
                                             <option value="MECANICO">MECANICO</option>
                                             <option value="SOLIDO">SOLIDO</option>
                                         </select>
@@ -1400,8 +1429,8 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Caracterisica</label>
-                                        <select class="form-select" aria-label="" name="caracteristica_almacenamiento">
-                                            <option selected>SELECCIONE</option>
+                                        <select class="form-select" aria-label="" name="caracteristica_almacenamiento" required>
+                                            <option value="" selected>SELECCIONE</option>
                                             <option value="INTERNO">INTERNO</option>
                                             <option value="EXTERNO">EXTERNO</option>
                                         </select>
@@ -1416,8 +1445,8 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Sede</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_almacenamiento">
-                                            <option selected>SELECCIONE</option>
+                                        <select class="form-select" aria-label="Default select example" id="sede" oninput="convertirAMayusculas(this)" name="sede_almacenamiento" required>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                             <?php
@@ -1444,13 +1473,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ubicación</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_almacenamiento">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="ubicacion_almacenamiento" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha de ingreso</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_de_ingreso" max="<?php echo date('Y-m-d'); ?>">
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_de_ingreso_alma" max="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
 
@@ -1462,7 +1491,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha de garantia</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_de_garantia" min="<?php echo date('Y-m-d'); ?>">
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_de_garantia_alma" min="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1478,7 +1507,9 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <div style="text-align: center;margin-top:15px;">
-                                <button type="submit" class="btn btn-warning" name="enviarAlmacenamiento" id="enviarAlmacenamiento">GUARDAR</button>
+                                <!-- <button type="submit" class="btn btn-warning" name="enviarComputador" id="enviarComputador">GUARDAR</button> -->
+                                <button id="enviarAlmacenamiento" type="submit" class="btn btn-warning enviarAlmacenamiento" name="enviarAlmacenamiento" value="" style="display:none"></button>
+                                <button type="button" id="guardarButtonalmacenamiento" class="btn btn-success showAlertButtonalmacenamiento" name="enviarAlmacenamiento">GUARDAR</button>
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
@@ -1494,19 +1525,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Número de Linea</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="numero_linea">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="numero_linea" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Nombre Plan</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="nombre_plan">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="nombre_plan" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha de Apertura</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_apertura" max="<?php echo date('Y-m-d'); ?>">
+                                        <input type="date" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="fecha_apertura" max="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
 
@@ -1517,19 +1548,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Valor Plan</label>
-                                        <input type="number" class="form-control" id="" placeholder="" name="valor_plan">
+                                        <input type="number" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="valor_plan" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Operador</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="operador">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="operador" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Cod cliente</label>
-                                        <input type="number" class="form-control" id="" placeholder="" name="cod_cliente">
+                                        <input type="number" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="cod_cliente" required>
                                     </div>
                                 </div>
 
@@ -1540,13 +1571,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Observaciones</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="observaciones_sim">
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="observaciones_sim" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha Final Plan</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_fin_plan" min="<?php echo date('Y-m-d'); ?>">
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_fin_plan" min="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1558,11 +1589,14 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <div style="text-align: center;margin-top:15px;">
-                                <button type="submit" class="btn btn-warning" name="enviarSimcard" id="enviarSimcard">GUARDAR</button>
+                                <!-- <button type="submit" class="btn btn-warning" name="enviarComputador" id="enviarComputador">GUARDAR</button> -->
+                                <button id="enviarSimcard" type="submit" class="btn btn-warning enviarSimcard" name="enviarSimcard" value="" style="display:none"></button>
+                                <button type="button" id="guardarButtonsimcard" class="btn btn-success showAlertButtonsimcard" name="enviarSimcard">GUARDAR</button>
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
                             <input type="hidden" class="form-control" id="" placeholder="" value="1" name="estado">
+                            <input type="hidden" class="form-control" id="" placeholder="" value="3" name="gestion">
 
                         </div>
 
@@ -1574,19 +1608,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="marca_dvr">
+                                        <input type="text" class="form-control" id="" placeholder="" name="marca_dvr" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="modelo_dvr">
+                                        <input type="text" class="form-control" id="" placeholder="" name="modelo_dvr" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Descripcion</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_dvr">
+                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_dvr" required>
                                     </div>
                                 </div>
                             </div>
@@ -1596,20 +1630,20 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Capacidad</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="capacidad_dvr">
+                                        <input type="text" class="form-control" id="" placeholder="" name="capacidad_dvr" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Tipo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="tipo_dvr">
+                                        <input type="text" class="form-control" id="" placeholder="" name="tipo_dvr" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Sede</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_dvr">
-                                            <option selected>SELECCIONE</option>
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_dvr" required>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                             <?php
@@ -1641,19 +1675,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ubicación</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_dvr">
+                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_dvr" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Software</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="software">
+                                        <input type="text" class="form-control" id="" placeholder="" name="software" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha Ingreso</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_ingreso" max="<?php echo date('Y-m-d'); ?>">
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_ingreso" max="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -1663,19 +1697,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Num de Canales</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="num_canales">
+                                        <input type="text" class="form-control" id="" placeholder="" name="num_canales" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Num de Discos</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="num_discos">
+                                        <input type="text" class="form-control" id="" placeholder="" name="num_discos" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">dias de Grabacion</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="dias_grabacion">
+                                        <input type="text" class="form-control" id="" placeholder="" name="dias_grabacion" required>
                                     </div>
                                 </div>
                             </div>
@@ -1685,13 +1719,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">ip</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="ip_dvr">
+                                        <input type="text" class="form-control" id="" placeholder="" name="ip_dvr" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha de Garantia</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_garantia" min="<?php echo date('Y-m-d'); ?>">
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_garantia" min="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1702,7 +1736,9 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <div style="text-align: center;margin-top:15px;">
-                                <button type="submit" class="btn btn-warning" name="enviarDvr" id="enviarDvr">GUARDAR</button>
+                                <!-- <button type="submit" class="btn btn-warning" name="enviarComputador" id="enviarComputador">GUARDAR</button> -->
+                                <button id="enviarDvr" type="submit" class="btn btn-warning enviarDvr" name="enviarDvr" value="" style="display:none"></button>
+                                <button type="button" id="guardarButtondvr" class="btn btn-success showAlertButtondvr" name="enviarSimcard">GUARDAR</button>
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
@@ -1935,8 +1971,6 @@ if (isset($_SESSION['usuario'])) {
 
             </form>
 
-
-
         </section>
     </body>
 
@@ -2000,9 +2034,9 @@ if (isset($_SESSION['usuario'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
 
 
-
-    <!-- SCRIPT ALERTA COMPUTADOR -->
+    <!-- ALERTAS -->
     <script>
+        // ALERTA COMPUTADOR
         $(document).ready(function() {
             $('.showAlertButton').click(function() {
                 Swal.fire({
@@ -2024,11 +2058,167 @@ if (isset($_SESSION['usuario'])) {
                 });
             });
         });
+        // ALERTA CECULAR
+        $(document).ready(function() {
+            $('.showAlertButtoncelular').click(function() {
+                Swal.fire({
+                    title: '¿Quieres guardar los cambios?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar',
+                    denyButtonText: `No guardar`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire('¡Guardado!', '', 'success');
+                        // Ejecutar el trigger después de 2 segundos
+                        setTimeout(function() {
+                            $('.enviarCelular').trigger('click');
+                        }, 2000);
+                    } else if (result.isDenied) {
+                        Swal.fire('Los cambios no se guardaron', '', 'info');
+                    }
+                });
+            });
+        });
+        // ALERTA ACCESORIOS
+        $(document).ready(function() {
+            $('.showAlertButtonaccesorios').click(function() {
+                Swal.fire({
+                    title: '¿Quieres guardar los cambios?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar',
+                    denyButtonText: `No guardar`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire('¡Guardado!', '', 'success');
+                        // Ejecutar el trigger después de 2 segundos
+                        setTimeout(function() {
+                            $('.enviarAccesorios').trigger('click');
+                        }, 2000);
+                    } else if (result.isDenied) {
+                        Swal.fire('Los cambios no se guardaron', '', 'info');
+                    }
+                });
+            });
+        });
+        // ALERTA EDCOMUNICACION
+        $(document).ready(function() {
+            $('.showAlertButtonedcomunicacion').click(function() {
+                Swal.fire({
+                    title: '¿Quieres guardar los cambios?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar',
+                    denyButtonText: `No guardar`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire('¡Guardado!', '', 'success');
+                        // Ejecutar el trigger después de 2 segundos
+                        setTimeout(function() {
+                            $('.enviarEdcomunicacion').trigger('click');
+                        }, 2000);
+                    } else if (result.isDenied) {
+                        Swal.fire('Los cambios no se guardaron', '', 'info');
+                    }
+                });
+            });
+        });
+        // ALERTA PERIFERICOS
+        $(document).ready(function() {
+            $('.showAlertButtonperifericos').click(function() {
+                Swal.fire({
+                    title: '¿Quieres guardar los cambios?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar',
+                    denyButtonText: `No guardar`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire('¡Guardado!', '', 'success');
+                        // Ejecutar el trigger después de 2 segundos
+                        setTimeout(function() {
+                            $('.enviarPerifericos').trigger('click');
+                        }, 2000);
+                    } else if (result.isDenied) {
+                        Swal.fire('Los cambios no se guardaron', '', 'info');
+                    }
+                });
+            });
+        });
+        // ALERTA DE ALMACENAMIENTO
+        $(document).ready(function() {
+            $('.showAlertButtonalmacenamiento').click(function() {
+                Swal.fire({
+                    title: '¿Quieres guardar los cambios?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar',
+                    denyButtonText: `No guardar`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire('¡Guardado!', '', 'success');
+                        // Ejecutar el trigger después de 2 segundos
+                        setTimeout(function() {
+                            $('.enviarAlmacenamiento').trigger('click');
+                        }, 2000);
+                    } else if (result.isDenied) {
+                        Swal.fire('Los cambios no se guardaron', '', 'info');
+                    }
+                });
+            });
+        });
+        // ALERTA DE SIMCARD
+        $(document).ready(function() {
+            $('.showAlertButtonsimcard').click(function() {
+                Swal.fire({
+                    title: '¿Quieres guardar los cambios?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar',
+                    denyButtonText: `No guardar`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire('¡Guardado!', '', 'success');
+                        // Ejecutar el trigger después de 2 segundos
+                        setTimeout(function() {
+                            $('.enviarSimcard').trigger('click');
+                        }, 2000);
+                    } else if (result.isDenied) {
+                        Swal.fire('Los cambios no se guardaron', '', 'info');
+                    }
+                });
+            });
+        });
+        // ALERTA DE DVR
+        $(document).ready(function() {
+            $('.showAlertButtondvr').click(function() {
+                Swal.fire({
+                    title: '¿Quieres guardar los cambios?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar',
+                    denyButtonText: `No guardar`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire('¡Guardado!', '', 'success');
+                        // Ejecutar el trigger después de 2 segundos
+                        setTimeout(function() {
+                            $('.enviarDvr').trigger('click');
+                        }, 2000);
+                    } else if (result.isDenied) {
+                        Swal.fire('Los cambios no se guardaron', '', 'info');
+                    }
+                });
+            });
+        });
     </script>
 
+    <!-- VALDIACION DE CAMPOS -->
     <script>
+        // VALIDACION DE CAMPOS COMPUTADOR
         $(document).ready(function() {
-            $('#guardarButton').click(function() {
+            $('#guardarButtoncomputador').click(function() {
                 // Obtener todos los campos de entrada dentro del formulario
                 var campos = $('#formulario1 input, #formulario1 select');
 
@@ -2047,7 +2237,203 @@ if (isset($_SESSION['usuario'])) {
 
                 if (todosCompletos) {
                     // Si todos los campos están completos, enviar el formulario
-                    $('#').click();
+                    $('').click();
+                } else {
+                    // Mostrar una alerta indicando que algunos campos deben estar completos
+                    Swal.fire('Alerta', 'Todos los campos deben estar completos.', 'warning');
+                }
+            });
+        });
+        // VALIDACION DE CAMPOS CELULAR
+        $(document).ready(function() {
+            $('#guardarButtoncelular').click(function() {
+                // Obtener todos los campos de entrada dentro del formulario
+                var campos = $('#formulario2 input, #formulario2 select');
+
+                // Bandera para rastrear si todos los campos obligatorios están completos
+                var todosCompletos = true;
+
+                // Verificar cada campo
+                campos.each(function() {
+                    if ($(this).prop('required') && $(this).val() === '') {
+                        todosCompletos = false;
+                        $(this).addClass('campo-incompleto'); // Agregar clase de estilo
+                    } else {
+                        $(this).removeClass('campo-incompleto'); // Quitar clase de estilo si está completa
+                    }
+                });
+
+                if (todosCompletos) {
+                    // Si todos los campos están completos, enviar el formulario
+                    $('').click();
+                } else {
+                    // Mostrar una alerta indicando que algunos campos deben estar completos
+                    Swal.fire('Alerta', 'Todos los campos deben estar completos.', 'warning');
+                }
+            });
+        });
+        // VALIDACION DE CAMPOS ACCESORIOS
+        $(document).ready(function() {
+            $('#guardarButtonaccesorios').click(function() {
+                // Obtener todos los campos de entrada dentro del formulario
+                var campos = $('#formulario3 input, #formulario3 select');
+
+                // Bandera para rastrear si todos los campos obligatorios están completos
+                var todosCompletos = true;
+
+                // Verificar cada campo
+                campos.each(function() {
+                    if ($(this).prop('required') && $(this).val() === '') {
+                        todosCompletos = false;
+                        $(this).addClass('campo-incompleto'); // Agregar clase de estilo
+                    } else {
+                        $(this).removeClass('campo-incompleto'); // Quitar clase de estilo si está completa
+                    }
+                });
+
+                if (todosCompletos) {
+                    // Si todos los campos están completos, enviar el formulario
+                    $('').click();
+                } else {
+                    // Mostrar una alerta indicando que algunos campos deben estar completos
+                    Swal.fire('Alerta', 'Todos los campos deben estar completos.', 'warning');
+                }
+            });
+        });
+        // VALIDACION DE CAMPOS EDCOMUNICACION
+        $(document).ready(function() {
+            $('#guardarButtonedcomunicacion').click(function() {
+                // Obtener todos los campos de entrada dentro del formulario
+                var campos = $('#formulario4 input, #formulario4 select');
+
+                // Bandera para rastrear si todos los campos obligatorios están completos
+                var todosCompletos = true;
+
+                // Verificar cada campo
+                campos.each(function() {
+                    if ($(this).prop('required') && $(this).val() === '') {
+                        todosCompletos = false;
+                        $(this).addClass('campo-incompleto'); // Agregar clase de estilo
+                    } else {
+                        $(this).removeClass('campo-incompleto'); // Quitar clase de estilo si está completa
+                    }
+                });
+
+                if (todosCompletos) {
+                    // Si todos los campos están completos, enviar el formulario
+                    $('').click();
+                } else {
+                    // Mostrar una alerta indicando que algunos campos deben estar completos
+                    Swal.fire('Alerta', 'Todos los campos deben estar completos.', 'warning');
+                }
+            });
+        });
+        // VALIDACION DE CAMPOS PERIFERICOS
+        $(document).ready(function() {
+            $('#guardarButtonperifericos').click(function() {
+                // Obtener todos los campos de entrada dentro del formulario
+                var campos = $('#formulario5 input, #formulario5 select');
+
+                // Bandera para rastrear si todos los campos obligatorios están completos
+                var todosCompletos = true;
+
+                // Verificar cada campo
+                campos.each(function() {
+                    if ($(this).prop('required') && $(this).val() === '') {
+                        todosCompletos = false;
+                        $(this).addClass('campo-incompleto'); // Agregar clase de estilo
+                    } else {
+                        $(this).removeClass('campo-incompleto'); // Quitar clase de estilo si está completa
+                    }
+                });
+
+                if (todosCompletos) {
+                    // Si todos los campos están completos, enviar el formulario
+                    $('').click();
+                } else {
+                    // Mostrar una alerta indicando que algunos campos deben estar completos
+                    Swal.fire('Alerta', 'Todos los campos deben estar completos.', 'warning');
+                }
+            });
+        });
+        // VALIDACION DE CAMPOS ALMACENAMIENTO
+        $(document).ready(function() {
+            $('#guardarButtonalmacenamiento').click(function() {
+                // Obtener todos los campos de entrada dentro del formulario
+                var campos = $('#formulario6 input, #formulario6 select');
+
+                // Bandera para rastrear si todos los campos obligatorios están completos
+                var todosCompletos = true;
+
+                // Verificar cada campo
+                campos.each(function() {
+                    if ($(this).prop('required') && $(this).val() === '') {
+                        todosCompletos = false;
+                        $(this).addClass('campo-incompleto'); // Agregar clase de estilo
+                    } else {
+                        $(this).removeClass('campo-incompleto'); // Quitar clase de estilo si está completa
+                    }
+                });
+
+                if (todosCompletos) {
+                    // Si todos los campos están completos, enviar el formulario
+                    $('').click();
+                } else {
+                    // Mostrar una alerta indicando que algunos campos deben estar completos
+                    Swal.fire('Alerta', 'Todos los campos deben estar completos.', 'warning');
+                }
+            });
+        });
+        // VALIDACION DE CAMPOS SIMCARD
+        $(document).ready(function() {
+            $('#guardarButtonsimcard').click(function() {
+                // Obtener todos los campos de entrada dentro del formulario
+                var campos = $('#formulario7 input, #formulario7 select');
+
+                // Bandera para rastrear si todos los campos obligatorios están completos
+                var todosCompletos = true;
+
+                // Verificar cada campo
+                campos.each(function() {
+                    if ($(this).prop('required') && $(this).val() === '') {
+                        todosCompletos = false;
+                        $(this).addClass('campo-incompleto'); // Agregar clase de estilo
+                    } else {
+                        $(this).removeClass('campo-incompleto'); // Quitar clase de estilo si está completa
+                    }
+                });
+
+                if (todosCompletos) {
+                    // Si todos los campos están completos, enviar el formulario
+                    $('').click();
+                } else {
+                    // Mostrar una alerta indicando que algunos campos deben estar completos
+                    Swal.fire('Alerta', 'Todos los campos deben estar completos.', 'warning');
+                }
+            });
+        });
+        // VALIDACION DE CAMPOS SIMCARD
+        $(document).ready(function() {
+            $('#guardarButtondvr').click(function() {
+                // Obtener todos los campos de entrada dentro del formulario
+                var campos = $('#formulario8 input, #formulario8 select');
+
+                // Bandera para rastrear si todos los campos obligatorios están completos
+                var todosCompletos = true;
+
+                // Verificar cada campo
+                campos.each(function() {
+                    if ($(this).prop('required') && $(this).val() === '') {
+                        todosCompletos = false;
+                        $(this).addClass('campo-incompleto'); // Agregar clase de estilo
+                    } else {
+                        $(this).removeClass('campo-incompleto'); // Quitar clase de estilo si está completa
+                    }
+                });
+
+                if (todosCompletos) {
+                    // Si todos los campos están completos, enviar el formulario
+                    $('').click();
                 } else {
                     // Mostrar una alerta indicando que algunos campos deben estar completos
                     Swal.fire('Alerta', 'Todos los campos deben estar completos.', 'warning');
@@ -2066,9 +2452,4 @@ if (isset($_SESSION['usuario'])) {
 
     </html>
 
-<?php } else { ?>
-    <script languaje "JavaScript">
-        alert("Acceso Incorrecto");
-        window.location.href = "../login.php";
-    </script><?php
-            } ?>
+    <?php } else { ?><?php } ?>

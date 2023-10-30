@@ -73,16 +73,68 @@ if (isset($_SESSION['usuario'])) {
         </div>
 
 
-
+        <!-- 1 TABLA -->
         <?php
-
         if ($mostrarTabla) {
+        ?>
+            <table class="table table-bordered dt-responsive table-hover display nowrap" id="" cellspacing="0" style="text-align: center;">
+                <thead>
+                    <tr class="encabezado table-dark">
+                        <th>ID</th>
+                        <th>TIPO MAQUINA</th>
+                        <th>IMEI</th>
+                        <th>SERIAL</th>
+                        <th>MARCA</th>
+                        <th>MODELO</th>
+                        <th>FECHA DE INGRESO</th>
+                        <th>CAPACIDAD</th>
+                        <th>RAM</th>
+                        <th>ESTADO</th>
+                        <th>GESTION</th>
+                        <th>FECHA GARANTIA</th>
+                        <th>USUARIO DE CREACION</th>
+                        <th>FECHA DE CREACION</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if (isset($_POST['consultar'])) {
+                        // Obtener el valor ingresado en el campo Nombre_equipo
+                        $imei = $_POST['imei'];
+                        // Llamar a la función con el parámetro de búsqueda
+                        $datosEquipos = hvcelularcab($conexion, $imei);
+                        foreach ($datosEquipos as $row) {
+                            echo "<tr>";
+                            foreach ($row as $key => $value) {
+                                if ($key === 'Estado' && $value === 'Asignado') {
+                                    echo "<td>$value</td>";
+                                } else {
+                                    echo "<td>" . $value . "</td>";
+                                }
+                            }
+                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
+        <?php
+        } else {
+            // Mostrar un mensaje si no hay resultados
+            echo "<div style='text-align: center;'>No se encontraron resultados.</div>";
+        }
+        ?>
 
+
+        <!-- 2 TABLA -->
+        <?php
+        if ($mostrarTabla) {
         ?>
             <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                 <thead>
                     <tr class="encabezado table-dark">
                         <th>ID</th>
+                        <th>ID HISTORIAL</th>
                         <th>TIPO MAQUINA</th>
                         <th>IMEI</th>
                         <th>SERIAL</th>
@@ -109,6 +161,13 @@ if (isset($_SESSION['usuario'])) {
                         <th>EMPRESA</th>
                         <th>ESTADO ASIGNACION</th>
                         <th>OBSERVACIONES</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>FECHA DE MOVIMIENTO</th>
+                        <th>MOVIMIENTO</th>
+                        <th>USUARIO</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
@@ -132,7 +191,6 @@ if (isset($_SESSION['usuario'])) {
                     ?>
                 </tbody>
             </table>
-
         <?php
         } else {
             // Mostrar un mensaje si no hay resultados

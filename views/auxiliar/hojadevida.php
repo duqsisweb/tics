@@ -64,7 +64,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Accesorios</h5>
                                 <p class="card-text"></p>
-                                <a href="stock_accesorios.php" class="btn btn-success">Seleccionar</a>
+                                <a href="hv/hvaccesorios.php" class="btn btn-success">Seleccionar</a>
                             </div>
                         </div>
                     </div>

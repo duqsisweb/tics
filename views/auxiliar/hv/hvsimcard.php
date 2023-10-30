@@ -109,6 +109,13 @@ if (isset($_SESSION['usuario'])) {
                         <th>EMPRESA</th>
                         <th>ESTADO</th>
                         <th>OBSERVACIONES DESASIGNA</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
 
                 </thead>

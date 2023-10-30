@@ -118,47 +118,46 @@ if (isset($_SESSION['usuario'])) {
 
                     $showSections = true;
 
-                    //  MENSAJES SI LA CONSULTA ES EXITOSA O NO HAY INFORMACIÓN
-                    echo '<div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                            <div class="toast-header">
-                    <strong class="me-auto">Éxito</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
-                             </div>
-                <div class="toast-body">
-                    Consulta satisfactoria.
-                </div>
-            </div>';
-                    echo '<script>
-            var toastEl = document.querySelector(".toast");
-            var toast = new bootstrap.Toast(toastEl);
-            toast.show();
-          </script>';
-                } else {
-                    // Mostrar un mensaje de error
-                    echo '<div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <strong class="me-auto">Error</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
-                </div>
-                <div class="toast-body">
-                    No se encontraron registros para la consulta.
-                </div>
-            </div>';
-                    echo '<script>
-            var toastEl = document.querySelector(".toast");
-            var toast = new bootstrap.Toast(toastEl);
-            toast.show();
-          </script>';
+                                        //  MENSAJES SI LA CONSULTA ES EXITOSA O NO HAY INFORMACIÓN
+                                        echo '<div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                                <div class="toast-header">
+                                        <strong class="me-auto">Éxito</strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+                                                </div>
+                                    <div class="toast-body">
+                                        Consulta satisfactoria.
+                                    </div>
+                                </div>';
+                                        echo '<script>
+                                var toastEl = document.querySelector(".toast");
+                                var toast = new bootstrap.Toast(toastEl);
+                                toast.show();
+                            </script>';
+                                    } else {
+                                        // Mostrar un mensaje de error
+                                        echo '<div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                    <div class="toast-header">
+                                        <strong class="me-auto">Error</strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+                                    </div>
+                                    <div class="toast-body">
+                                        No se encontraron registros para la consulta.
+                                    </div>
+                                </div>';
+                                        echo '<script>
+                                var toastEl = document.querySelector(".toast");
+                                var toast = new bootstrap.Toast(toastEl);
+                                toast.show();
+                            </script>';
                 }
             }
-
             ?>
 
 
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container" style="text-align: center;">
                     <div>
-                        <h3>Equipos Asignados a Usuarios</h3>
+                        <h3>EQUIPOS ASIGNADOS A USUARIOS</h3>
                     </div>
                 </div>
             </div>
@@ -169,7 +168,6 @@ if (isset($_SESSION['usuario'])) {
             <form method="POST">
                 <div class="container">
                     <div class="row">
-
                         <div class="col-md-3" style="margin: 50px 0px 0px 0px;">
                             <label class="form-label">Empresa</label>
                             <select id="empresaSelect" name="empresa" class="form-select" aria-label="Default select example" required>
@@ -339,7 +337,6 @@ if (isset($_SESSION['usuario'])) {
                     <!-- .... -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-danger" id="descargarPDF">DESCARGAR</button>
                     </div>
                 </div>
             </div>
@@ -514,16 +511,17 @@ if (isset($_SESSION['usuario'])) {
             }
         });
     </script>
+
     <!-- Script y AJAX asignación de  ACCESORIOS -->
-    <!-- <script>
+    <script>
         $(document).ready(function() {
-            $('#fila3').show(); // Mostrar #fila3 al cargar la página
+            $('#fila3').show(); // Mostrar #fila2 al cargar la página
             actualizarFila3();
 
             function actualizarFila3() {
                 var cedula = '<?php echo $cedula; ?>';
                 $.ajax({
-                    url: 'fichatecnica/.php',
+                    url: 'fichatecnicaasignaciones/actualizarfichaaccesorios.php',
                     method: 'GET',
                     data: {
                         cedula: cedula
@@ -534,7 +532,8 @@ if (isset($_SESSION['usuario'])) {
                 });
             }
         });
-    </script> -->
+    </script>
+
     <!-- Script y AJAX asignación de PERIFERICOS -->
     <script>
         $(document).ready(function() {

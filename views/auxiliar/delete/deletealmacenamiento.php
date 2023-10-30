@@ -9,7 +9,7 @@ if (isset($_POST['idToUpdate'])) {
     $idToUpdate = $_POST['idToUpdate'];
     
     // Consulta SQL para actualizar el estado del registro en la tabla maquina_computador
-    $updateQueryy = "UPDATE [ControlTIC].[dbo].[maquina_almacenamiento] SET [Estado] = 6 WHERE [id] = '$idToUpdate'";
+    $updateQueryy = "UPDATE [ControlTIC].[dbo].[maquina_almacenamiento] SET [Estado] = 1 WHERE [id] = '$idToUpdate'";
     
     // Consulta SQL para actualizar el estado del registro en la tabla asignacion_computador
     $updateQuery = "DELETE FROM [ControlTIC].[dbo].[asignacion_almacenamiento] WHERE [id] = '$idToUpdate'";

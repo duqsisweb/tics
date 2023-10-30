@@ -36,10 +36,12 @@ if (isset($_SESSION['usuario'])) {
                 </div>
             </div>
 
+            <!-- AQUI COMIENZA LOS ESTADOS -->
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="accordion" id="accordionExample">
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -106,6 +108,7 @@ if (isset($_SESSION['usuario'])) {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -170,6 +173,7 @@ if (isset($_SESSION['usuario'])) {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -182,6 +186,7 @@ if (isset($_SESSION['usuario'])) {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -247,6 +252,7 @@ if (isset($_SESSION['usuario'])) {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
@@ -314,6 +320,7 @@ if (isset($_SESSION['usuario'])) {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
@@ -378,6 +385,7 @@ if (isset($_SESSION['usuario'])) {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
@@ -441,6 +449,7 @@ if (isset($_SESSION['usuario'])) {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
@@ -505,6 +514,7 @@ if (isset($_SESSION['usuario'])) {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -517,7 +527,7 @@ if (isset($_SESSION['usuario'])) {
 
     </html>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- AJAX COMPUTADOR -->
     <script>
         $(document).ready(function() {
@@ -532,26 +542,47 @@ if (isset($_SESSION['usuario'])) {
                 console.log("Valor seleccionado en el select:", selectedValue);
                 console.log("ID a actualizar:", idToUpdate);
 
-                // Realizar la solicitud AJAX para actualizar el estado en la base de datos
-                $.ajax({
-                    type: "POST",
-                    url: "estados/estado_computador.php",
-                    data: {
-                        idToUpdate: idToUpdate, // Asegúrate de que el nombre sea 'idToUpdate'
-                        estado: selectedValue
-                    },
-                    success: function(response) {
-                        console.log("Respuesta del servidor:", response); // Registrar la respuesta del servidor
-                        alert("Estado actualizado correctamente");
-                    },
-                    error: function(error) {
-                        console.error("Error al actualizar el estado:", error); // Registrar errores
-                        alert("Error al actualizar el estado");
+                // Mostrar el cuadro de diálogo SweetAlert2
+                Swal.fire({
+                    title: '¿Quiere Guardar los cambios?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Ajustar',
+                    denyButtonText: `No Guardar`,
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        // Realizar la solicitud AJAX para actualizar el estado en la base de datos
+                        $.ajax({
+                            type: "POST",
+                            url: "estados/estado_computador.php",
+                            data: {
+                                idToUpdate: idToUpdate,
+                                estado: selectedValue
+                            },
+                            success: function(response) {
+                                console.log("Respuesta del servidor:", response);
+                                Swal.fire('¡Ajustado!', '', 'success');
+
+                                // Retrasar la recarga de la página en 3 segundos (3000 milisegundos)
+                                setTimeout(function() {
+                                    location.reload(); // Recargar la página
+                                }, 2000); // 3000 milisegundos = 3 segundos
+                            },
+                            error: function(error) {
+                                console.error("Error al actualizar el estado:", error);
+                                alert("Error al actualizar el estado");
+                            }
+                        });
+                    } else if (result.isDenied) {
+                        Swal.fire('No se realizaron los ajustes', '', 'info');
                     }
                 });
             });
         });
     </script>
+
+
     <!-- AJAX CELULAR -->
     <script>
         $(document).ready(function() {

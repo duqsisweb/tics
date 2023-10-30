@@ -44,7 +44,7 @@
     <?php
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
-    $consulta = "SELECT numero_linea, nombre_plan FROM ControlTIC..asignacion_simcard  WHERE cedula = '$cedula'";
+    $consulta = "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[numero_linea] ,[nombre_plan] ,[fecha_apertura] ,[valor_plan] ,[operador] ,[cod_cliente] ,[observaciones_sim] ,[fecha_fin_plan] ,[estado] ,[gestion] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[fecha_asigna] ,[usua_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_simcard]  WHERE cedula = '$cedula'";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>"; // Mantener el formato monoespaciado
@@ -52,8 +52,10 @@
     if (odbc_num_rows($resultado) > 0) {
         while ($fila = odbc_fetch_array($resultado)) {
             $output .= "-------------------------------------\n";
+            $output .= "Elemento: " . $fila['tipo_maquina'] . "\n";
             $output .= "Número de la linea: " . $fila['numero_linea'] . "\n";
             $output .= "Nombre Plan: " . $fila['nombre_plan'] . "\n";
+            $output .= "Operador: " . $fila['operador'] . "\n";
             $output .= "-------------------------------------\n";
         }
     } else {
@@ -106,10 +108,6 @@
                             <th scope="col">Fecha Fin Plan</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Gestion</th>
-                            <th scope="col">Fecha Crea</th>
-                            <th scope="col">Usua Crea</th>
-                            <th scope="col">Fecha Modifica</th>
-                            <th scope="col">Usua Modifica</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -136,10 +134,6 @@
                                 echo '<td>' . $fila['fecha_fin_plan'] . '</td>';
                                 echo '<td>' . $fila['estado'] . '</td>';
                                 echo '<td>' . $fila['gestion'] . '</td>';
-                                echo '<td>' . $fila['fecha_crea'] . '</td>';
-                                echo '<td>' . $fila['usua_crea'] . '</td>';
-                                echo '<td>' . $fila['fecha_modifica'] . '</td>';
-                                echo '<td>' . $fila['usua_modifica'] . '</td>';
                                 echo '</tr>';
                             }
                         } else {
