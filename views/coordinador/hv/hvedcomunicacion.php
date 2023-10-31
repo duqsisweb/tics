@@ -73,17 +73,16 @@ if (isset($_SESSION['usuario'])) {
         </div>
 
 
-
+        <!-- 1 TABLA -->
         <?php
-
         if ($mostrarTabla) {
 
         ?>
-            <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
+            <table class="table table-bordered dt-responsive table-hover display nowrap" id="" cellspacing="0" style="text-align: center;">
                 <thead>
                     <tr class="encabezado table-dark">
                         <th>ID</th>
-                        <th>TIPO DE MAQUINA</th>
+                        <th>ELEMENTO</th>
                         <th>MARCA</th>
                         <th>MODELO</th>
                         <th>DESCRIPCION</th>
@@ -96,25 +95,73 @@ if (isset($_SESSION['usuario'])) {
                         <th>OBSERVACIONES</th>
                         <th>GESTION</th>
                         <th>FECHA GARANTIA</th>
-                        <th>FECHA DE CREACION</th>
-                        <th>USUARIO CREACION</th>
-                        <th>FECHA MODIFICACION</th>
-                        <th>USUA MODIFICA</th>
-                        <th>USUA ASIGNA</th>
-                        <th>FECHA ASIGNA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if (isset($_POST['consultar'])) {
+                        // Obtener el valor ingresado en el campo Nombre_equipo
+                        $serial_edcomunicacion = $_POST['serial_edcomunicacion'];
+                        // Llamar a la función con el parámetro de búsqueda
+                        $datosEquipos = hvedcomunicacioncab($conexion, $serial_edcomunicacion);
+                        foreach ($datosEquipos as $row) {
+                            echo "<tr>";
+                            foreach ($row as $key => $value) {
+                                if ($key === 'Estado' && $value === 'Asignado') {
+                                    echo "<td>$value</td>";
+                                } else {
+                                    echo "<td>" . $value . "</td>";
+                                }
+                            }
+                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
+
+        <?php
+        } else {
+            // Mostrar un mensaje si no hay resultados
+            echo "<div style='text-align: center;'>No se encontraron resultados.</div>";
+        }
+        ?>
+
+
+        <!-- 2 TABLA -->
+        <?php
+        if ($mostrarTabla) {
+
+        ?>
+            <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
+                <thead>
+                    <tr class="encabezado table-dark">
+                        <th>ID</th>
+                        <th>ELEMENTO</th>
+                        <th>MARCA</th>
+                        <th>MODELO</th>
+                        <th>DESCRIPCION</th>
+                        <th>SERIAL</th>
+                        <th>FECHA DE INGRESO</th>
+                        <th>ESTADO</th>
+                        <th>PLACA ACTIVO</th>
+                        <th>SEDE</th>
+                        <th>UBICACION</th>
+                        <th>OBSERVACIONES</th>
+                        <th>GESTION</th>
+                        <th>FECHA GARANTIA</th>
                         <th>CEDULA</th>
                         <th>CARGO</th>
                         <th>PRIMER NOMBRE</th>
                         <th>SEGUNDO NOMBRE</th>
                         <th>PRIMER APELLIDO</th>
                         <th>SEGUNDO APELLIDO</th>
-                        <th>EMPRESA</th>
-                        <th>ESTADO DE ASIGNACION</th>
-                        <th>OBSERVACIONES DESASIGNACION</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>OBSERVACIONES DE ASIGNACIÓN</th>
+                        <th>LINK DE ASIGNACION</th>
+                        <th>OBSERVACIONES DE RETIRO</th>
+                        <th>LINK DE RETIRO </th>
+                        <th>FECHA DE MOVIMIENTO</th>
+                        <th>MOVIMIENTO</th>
+                        <th>USUARIO</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -26,7 +26,7 @@ if (isset($_SESSION['usuario'])) {
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container">
                     <div>
-                        <h3>Inventario de Elementos De Comunicación</h3>
+                        <h3>INVENTARIO ELEMENTOS DE COMUNICACIÓN</h3>
                     </div>
                 </div>
             </div>
@@ -37,23 +37,45 @@ if (isset($_SESSION['usuario'])) {
                         <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                             <thead>
                                 <tr class="encabezado table-dark">
-                                    <?php
-                                    $sql = "SELECT TOP 1 * FROM [ControlTIC].[dbo].[maquina_edcomunicacion]";
-                                    $result = odbc_exec($conexion, $sql);
-
-                                    if ($result !== false) {
-                                        $row = odbc_fetch_array($result);
-                                        foreach ($row as $column_name => $value) {
-                                            echo "<th>" . $column_name . "</th>";
-                                        }
-                                        odbc_free_result($result);
-                                    }
-                                    ?>
+                                    <th>ID</th>
+                                    <th>ELEMENTO</th>
+                                    <th>MARCA</th>
+                                    <th>MODELO</th>
+                                    <th>DESCRIPCIÓN</th>
+                                    <th>SERIAL</th>
+                                    <th>FECHA DE INGRESO</th>
+                                    <th>ESTADO</th>
+                                    <th>PLACA ACTIVO</th>
+                                    <th>SEDE</th>
+                                    <th>UBICACIÓN</th>
+                                    <th>OBSERVACIONES</th>
+                                    <th>GESTION</th>
+                                    <th>FECHA DE GARANTIA</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM [ControlTIC].[dbo].[maquina_edcomunicacion]";
+                                $sql = " SELECT mc.[id]
+                                ,tipomaquin.[nombre_maquina] as tipo_maquina 
+                                ,[marca_edcomunicacion]
+                                ,[modelo_edcomunicacion]
+                                ,descripcion_edcomunicacion.[nombre_descripcion] as descripcion_edcomunicacion
+                                ,[serial_edcomunicacion]
+                                ,[fecha_de_ingreso_edc]
+                                ,estad.[nombre_estado] AS EST
+                                ,[placa_activo_edcomunicacion]
+                                ,sed.[nombre_sede] as sede_edcomunicacion 
+                                ,[ubicacion_edcomunicacion]
+                                ,[observaciones_edcomunicacion]
+                                ,gestio.[estado_gestion] as gestion_edcomunicacion 
+                                ,[fecha_garantia_edc]
+                                FROM [ControlTIC].[dbo].[maquina_edcomunicacion] AS mc 
+                                LEFT JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] 
+                                LEFT JOIN [ControlTIC].[dbo].[estado] AS estad ON mc.estado = estad.id 
+                                LEFT JOIN [ControlTIC].[dbo].[sede] as sed ON mc.sede_edcomunicacion = sed.id 
+                                LEFT JOIN [ControlTIC].[dbo].[gestion] AS gestio ON gestion_edcomunicacion = gestio.id
+                                LEFT JOIN [ControlTIC].[dbo].descripcion_edcomunicacion AS descripcion_edcomunicacion ON mc.descripcion_edcomunicacion = descripcion_edcomunicacion.id
+                                ";
                                 $result = odbc_exec($conexion, $sql);
 
                                 if ($result !== false) {
@@ -77,8 +99,8 @@ if (isset($_SESSION['usuario'])) {
 
     </html>
 
-        <!-- Inicio DataTable -->
-        <script type="text/javascript">
+    <!-- Inicio DataTable -->
+    <script type="text/javascript">
         $(document).ready(function() {
             var lenguaje = $('#mtable').DataTable({
                 info: false,

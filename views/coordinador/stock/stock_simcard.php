@@ -37,23 +37,39 @@ if (isset($_SESSION['usuario'])) {
                         <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                             <thead>
                                 <tr class="encabezado table-dark">
-                                    <?php
-                                    $sql = "SELECT TOP 1 * FROM [ControlTIC].[dbo].[maquina_simcard]";
-                                    $result = odbc_exec($conexion, $sql);
-
-                                    if ($result !== false) {
-                                        $row = odbc_fetch_array($result);
-                                        foreach ($row as $column_name => $value) {
-                                            echo "<th>" . $column_name . "</th>";
-                                        }
-                                        odbc_free_result($result);
-                                    }
-                                    ?>
+                                    <th>ID</th>
+                                    <th>ELEMENTO</th>
+                                    <th>NÚMERO DE LINEA</th>
+                                    <th>NOMBRE PLAN</th>
+                                    <th>FECHA APERTURA</th>
+                                    <th>VALOR PLAN</th>
+                                    <th>OPERADOR</th>
+                                    <th>COD CLIENTE</th>
+                                    <th>OBSERVACIONES</th>
+                                    <th>FECHA FIN PLAN</th>
+                                    <th>ESTADO</th>
+                                    <th>GESTION</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM [ControlTIC].[dbo].[maquina_simcard]";
+                                $sql = " SELECT mc.[id]
+                                ,tipo_maquina.[nombre_maquina] as tipo_maquina
+                               ,[numero_linea]
+                               ,[nombre_plan]
+                               ,[fecha_apertura]
+                               ,[valor_plan]
+                               ,[operador]
+                               ,[cod_cliente]
+                               ,[observaciones_sim]
+                               ,[fecha_fin_plan]
+                               ,estad.[nombre_estado] as Estado 
+                               ,gestio.[estado_gestion] as Gestion 
+                               FROM [ControlTIC].[dbo].[maquina_simcard] as mc 
+                               JOIN [ControlTIC].[dbo].[estado] estad ON mc.estado = estad.id 
+                               JOIN [ControlTIC].[dbo].[gestion] gestio ON mc.gestion = gestio.id
+                               LEFT JOIN [ControlTIC].[dbo].tipo_maquina as tipo_maquina ON mc.tipo_maquina = tipo_maquina.id
+                                ";
                                 $result = odbc_exec($conexion, $sql);
 
                                 if ($result !== false) {
@@ -78,8 +94,8 @@ if (isset($_SESSION['usuario'])) {
     </html>
 
 
-        <!-- Inicio DataTable -->
-        <script type="text/javascript">
+    <!-- Inicio DataTable -->
+    <script type="text/javascript">
         $(document).ready(function() {
             var lenguaje = $('#mtable').DataTable({
                 info: false,

@@ -37,30 +37,30 @@ if (isset($_SESSION['usuario'])) {
                         <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                             <thead>
                                 <tr class="encabezado table-dark">
-                                    <th>id</th>
-                                    <th>Tipo Maquina</th>
-                                    <th>Service Tag</th>
-                                    <th>Serial Equipo</th>
-                                    <th>Nombre Equipo</th>
-                                    <th>Nombre Sede</th>
-                                    <th>Nombre Empresa</th>
-                                    <th>Marca</th>
-                                    <th>Modelo</th>
-                                    <th>Tipo Comp.</th>
-                                    <th>Tipo Ram</th>
-                                    <th>Ram</th>
-                                    <th>Tipo Disco</th>
-                                    <th>Capacidad Disco</th>
-                                    <th>Procesador</th>
-                                    <th>Propietario</th>
-                                    <th>Proveedor</th>
-                                    <th>Sistema Operativo</th>
-                                    <th>Serial Cargador</th>
-                                    <th>Dominio</th>
-                                    <th>Tipo Usuario</th>
-                                    <th>Serial Activo</th>
-                                    <th>Fecha Ingreso</th>
-                                    <th>Targeta Video</th>
+                                    <th>ID</th>
+                                    <th>ELEMENTO</th>
+                                    <th>SERVICE TAG</th>
+                                    <th>SERIAL</th>
+                                    <th>NOMBRE DEL EQUIPO</th>
+                                    <th>SEDE</th>
+                                    <th>EMPRESA</th>
+                                    <th>MARCA</th>
+                                    <th>MODELO</th>
+                                    <th>TIPO COMPUTADOR</th>
+                                    <th>TIPO RAM</th>
+                                    <th>CAPACIDAD RAM</th>
+                                    <th>TIPO DISCO</th>
+                                    <th>CAPACIDAD DE DISCO</th>
+                                    <th>PROCESADOR</th>
+                                    <th>PROPIETARIO</th>
+                                    <th>PROVEEDOR</th>
+                                    <th>SISTEMA OPERATIVO Operativo</th>
+                                    <th>SERIAL CARGADOR</th>
+                                    <th>DOMINIO</th>
+                                    <th>TIPO USUARIO</th>
+                                    <th>SERIAL ACTIVO</th>
+                                    <th>FECHA DE INGRESO</th>
+                                    <th>TARGETA DE VIDEO</th>
                                     <th>ESTADO</th>
                                     <th>GESTION</th>
                                     <th>FECHA GARANTIA</th>
@@ -69,7 +69,7 @@ if (isset($_SESSION['usuario'])) {
                                     <th>DIAS RESTANTES</th>
                                     <th>OBSERVACIONES DE MANTENIMIENTO</th> -->
                                     <th>USUARIO QUE CREO</th>
-                                    <th>FECHA DE CREACION</th>
+                                    <th>FECHA DE CREACIÓN</th>
                                    
                                 </tr>
                             </thead>

@@ -115,7 +115,6 @@ if (isset($_SESSION['usuario'])) {
                 '$ram_celular'+'GB','CONFIGURACION','SIN ASIGNACION','$Fecha_garantia_cel',getdate(),'SE CREO EQUIPO CELULAR','$usuario')");
             }
             ?>
-
             <!-- inicio de POST enviarAccesorios -->
             <?php
             if (isset($_POST['enviarAccesorios'])) {
@@ -315,7 +314,7 @@ if (isset($_SESSION['usuario'])) {
                 $num_canales = $_POST['num_canales'];
                 $num_discos = $_POST['num_discos'];
                 $dias_grabacion = $_POST['dias_grabacion'];
-                $ip_dvr = $_POST['ip'];
+                $ip_dvr = $_POST['ip_dvr'];
                 $estado = $_POST['estado'];
                 $fecha_garantia = $_POST['fecha_garantia'];
                 $usuario = $_SESSION['usuario'];
@@ -1681,7 +1680,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Software</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="software" required>
+                                        <input type="number" class="form-control" id="" placeholder="" name="software" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1755,19 +1754,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="marca_cctv">
+                                        <input type="text" class="form-control" id="" placeholder="" name="marca_cctv" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="modelo_cctv">
+                                        <input type="text" class="form-control" id="" placeholder="" name="modelo_cctv" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Descripcion</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_cctv">
+                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_cctv" required>
                                     </div>
                                 </div>
                             </div>
@@ -1777,8 +1776,8 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Sede</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_cctv">
-                                            <option selected>SELECCIONE</option>
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_cctv" required>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                             <?php
@@ -1805,13 +1804,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ubicación</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_cctv">
+                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_cctv" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha Ingreso</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_ingreso" max="<?php echo date('Y-m-d'); ?>">
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_ingreso" max="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -1821,19 +1820,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">IP CCTV</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="pi_cctv">
+                                        <input type="text" class="form-control" id="" placeholder="" name="pi_cctv" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Vision</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="vision_enfoque">
+                                        <input type="text" class="form-control" id="" placeholder="" name="vision_enfoque" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Serial</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="serial_dvr">
+                                        <input type="text" class="form-control" id="" placeholder="" name="serial_dvr" required>
                                     </div>
                                 </div>
                             </div>
@@ -1843,13 +1842,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Canal</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="canal">
+                                        <input type="text" class="form-control" id="" placeholder="" name="canal" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha de Garantia</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_garantia" min="<?php echo date('Y-m-d'); ?>">
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_garantia" min="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1860,7 +1859,9 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <div style="text-align: center;margin-top:15px;">
-                                <button type="submit" class="btn btn-warning" name="enviarCctv" id="enviarCctv">GUARDAR</button>
+                                <!-- <button type="submit" class="btn btn-warning" name="enviarComputador" id="enviarComputador">GUARDAR</button> -->
+                                <button id="enviarCctv" type="submit" class="btn btn-warning enviarCctv" name="enviarCctv" value="" style="display:none"></button>
+                                <button type="button" id="guardarButtoncctv" class="btn btn-success showAlertButtoncctv" name="enviarCctv">GUARDAR</button>
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
@@ -1875,20 +1876,20 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Placa Activo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="placa_activo_torre">
+                                        <input type="text" class="form-control" id="" placeholder="" name="placa_activo_torre" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Descripción</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_torre">
+                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_torre" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Sede</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_torre">
-                                            <option selected>SELECCIONE</option>
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="sede_torre" required>
+                                            <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
                                             <?php
@@ -1920,19 +1921,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Tipo Torre</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="tipo_torre">
+                                        <input type="text" class="form-control" id="" placeholder="" name="tipo_torre" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Altura en Metros</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="altura_metros">
+                                        <input type="text" class="form-control" id="" placeholder="" name="altura_metros" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha Ingreso</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_ingreso" max="<?php echo date('Y-m-d'); ?>">
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_ingreso" max="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -1942,7 +1943,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ultimo Mantenimiento</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_ult_mantenimiento" max="<?php echo date('Y-m-d'); ?>">
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_ult_mantenimiento" max="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1958,7 +1959,9 @@ if (isset($_SESSION['usuario'])) {
                             </div>
 
                             <div style="text-align: center;margin-top:15px;">
-                                <button type="submit" class="btn btn-warning" name="enviarTorre" id="enviarTorre">GUARDAR</button>
+                                <!-- <button type="submit" class="btn btn-warning" name="enviarComputador" id="enviarComputador">GUARDAR</button> -->
+                                <button id="enviarTorre" type="submit" class="btn btn-warning enviarTorre" name="enviarTorre" value="" style="display:none"></button>
+                                <button type="button" id="guardarButtontorre" class="btn btn-success showAlertButtontorre" name="enviarTorre">GUARDAR</button>
                             </div>
 
                             <!-- CAMPOS OCULTOS -->
@@ -2212,6 +2215,50 @@ if (isset($_SESSION['usuario'])) {
                 });
             });
         });
+        // ALERTA DE CCTV
+        $(document).ready(function() {
+            $('.showAlertButtoncctv').click(function() {
+                Swal.fire({
+                    title: '¿Quieres guardar los cambios?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar',
+                    denyButtonText: `No guardar`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire('¡Guardado!', '', 'success');
+                        // Ejecutar el trigger después de 2 segundos
+                        setTimeout(function() {
+                            $('.enviarCctv').trigger('click');
+                        }, 2000);
+                    } else if (result.isDenied) {
+                        Swal.fire('Los cambios no se guardaron', '', 'info');
+                    }
+                });
+            });
+        });
+        // ALERTA DE TORRE
+        $(document).ready(function() {
+            $('.showAlertButtontorre').click(function() {
+                Swal.fire({
+                    title: '¿Quieres guardar los cambios?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar',
+                    denyButtonText: `No guardar`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire('¡Guardado!', '', 'success');
+                        // Ejecutar el trigger después de 2 segundos
+                        setTimeout(function() {
+                            $('.enviarTorre').trigger('click');
+                        }, 2000);
+                    } else if (result.isDenied) {
+                        Swal.fire('Los cambios no se guardaron', '', 'info');
+                    }
+                });
+            });
+        });
     </script>
 
     <!-- VALDIACION DE CAMPOS -->
@@ -2417,6 +2464,62 @@ if (isset($_SESSION['usuario'])) {
             $('#guardarButtondvr').click(function() {
                 // Obtener todos los campos de entrada dentro del formulario
                 var campos = $('#formulario8 input, #formulario8 select');
+
+                // Bandera para rastrear si todos los campos obligatorios están completos
+                var todosCompletos = true;
+
+                // Verificar cada campo
+                campos.each(function() {
+                    if ($(this).prop('required') && $(this).val() === '') {
+                        todosCompletos = false;
+                        $(this).addClass('campo-incompleto'); // Agregar clase de estilo
+                    } else {
+                        $(this).removeClass('campo-incompleto'); // Quitar clase de estilo si está completa
+                    }
+                });
+
+                if (todosCompletos) {
+                    // Si todos los campos están completos, enviar el formulario
+                    $('').click();
+                } else {
+                    // Mostrar una alerta indicando que algunos campos deben estar completos
+                    Swal.fire('Alerta', 'Todos los campos deben estar completos.', 'warning');
+                }
+            });
+        });
+        // VALIDACION DE CAMPOS CCTV
+        $(document).ready(function() {
+            $('#guardarButtoncctv').click(function() {
+                // Obtener todos los campos de entrada dentro del formulario
+                var campos = $('#formulario9 input, #formulario9 select');
+
+                // Bandera para rastrear si todos los campos obligatorios están completos
+                var todosCompletos = true;
+
+                // Verificar cada campo
+                campos.each(function() {
+                    if ($(this).prop('required') && $(this).val() === '') {
+                        todosCompletos = false;
+                        $(this).addClass('campo-incompleto'); // Agregar clase de estilo
+                    } else {
+                        $(this).removeClass('campo-incompleto'); // Quitar clase de estilo si está completa
+                    }
+                });
+
+                if (todosCompletos) {
+                    // Si todos los campos están completos, enviar el formulario
+                    $('').click();
+                } else {
+                    // Mostrar una alerta indicando que algunos campos deben estar completos
+                    Swal.fire('Alerta', 'Todos los campos deben estar completos.', 'warning');
+                }
+            });
+        });
+        // VALIDACION DE CAMPOS TORRE
+        $(document).ready(function() {
+            $('#guardarButtontorre').click(function() {
+                // Obtener todos los campos de entrada dentro del formulario
+                var campos = $('#formulario10 input, #formulario10 select');
 
                 // Bandera para rastrear si todos los campos obligatorios están completos
                 var todosCompletos = true;

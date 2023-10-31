@@ -83,6 +83,7 @@ if (isset($_SESSION['usuario'])) {
                 <thead>
                     <tr class="encabezado table-dark">
                         <th>ID</th>
+                        <th>ID HISTORIAL</th>
                         <th>TIPO</th>
                         <th>NUMERO DE LINEA</th>
                         <th>NOMBRE PLAN</th>
@@ -94,12 +95,7 @@ if (isset($_SESSION['usuario'])) {
                         <th>FECHA FIN PLAN</th>
                         <th>ESTADO</th>
                         <th>GESTION</th>
-                        <th>FECHA DE CREACION</th>
-                        <th>USUA CREA</th>
-                        <th>FECHA MODIFICA</th>
-                        <th>USUARIO MODIFICA</th>
-                        <th>FECHA ASIGNACION</th>
-                        <th>USUA ASIGNACION</th>
+
                         <th>CEDULA</th>
                         <th>CARGO</th>
                         <th>PRIMER NOMBRE</th>
@@ -107,15 +103,15 @@ if (isset($_SESSION['usuario'])) {
                         <th>PRIMER APELLIDO</th>
                         <th>SEGUNDO APELLIDO</th>
                         <th>EMPRESA</th>
-                        <th>ESTADO</th>
-                        <th>OBSERVACIONES DESASIGNA</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+
+                        <th>OBSERVACIONES DE ASIGNACMIENTO</th>
+                        <th>LINK DE ASIGNAMIENTO</th>
+
+                        <th>OBSERVACIONES DE RETIRO</th>
+                        <th>LINK DE RETIRO</th>
+                        <th>FECHA DE MOVIMIENTO</th>
+                        <th>OBSERVACION DE MOVIMIENTO</th>
+                        <th>USUARIO</th>
                     </tr>
 
                 </thead>

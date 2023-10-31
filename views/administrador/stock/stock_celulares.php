@@ -37,7 +37,7 @@ if (isset($_SESSION['usuario'])) {
                         <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                             <thead>
                                 <tr class="encabezado table-dark">
-                                    <th>id</th>
+                                    <th>ID</th>
                                     <th>ELEMENTO</th>
                                     <th>IMEI</th>
                                     <th>SERIAL</th>

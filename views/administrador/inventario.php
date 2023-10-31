@@ -30,10 +30,12 @@ if (isset($_SESSION['usuario'])) {
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container">
                     <div>
-                        <h3>Información de maquinas o equipos</h3>
+                        <h3>INFORMACIÓN DE MAQUINAS O EQUIPOS</h3>
                     </div>
                 </div>
             </div>
+            
+            <br>
 
             <!-- Primer bloque -->
             <div class="container" style="text-align: center;margin-bottom: 50px;">

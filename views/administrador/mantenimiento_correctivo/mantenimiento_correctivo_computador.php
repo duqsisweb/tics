@@ -513,9 +513,9 @@ if (isset($_SESSION['usuario'])) {
                             success: function(response) {
                                 console.log("Respuesta del servidor:", response);
                                 Swal.fire('¡Guardado!', '', 'success');
-                                // setTimeout(function() {
-                                //     location.reload();
-                                // }, 3000);
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 2000);
                             },
                         });
                     } else if (result.isDenied) {

@@ -12,7 +12,7 @@ $cedula = isset($_POST['cedula']) ? $_POST['cedula'] : '';
 $cargo = isset($_POST['cargo']) ? $_POST['cargo'] : '';
 $empresa = isset($_POST['empresa']) ? $_POST['empresa'] : '';
 
-$data = odbc_exec($conexion, "SELECT  [id] ,[tipo_maquina] ,[marca_dvr] ,[modelo_dvr] ,[descripcion_dvr] ,[capacidad_dvr] ,[tipo_dvr] ,[sede_dvr] ,[ubicacion_dvr] ,[software] ,[fecha_ingreso] ,[num_canales] ,[num_discos] ,[dias_grabacion] ,[ip_dvr] ,[estado] ,[fecha_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] FROM [ControlTIC].[dbo].[maquina_dvr] where estado = '6' ");
+$data = odbc_exec($conexion, "SELECT  mc.[id] ,tipomaquin.[nombre_maquina] as tipo_maquina ,[marca_dvr] ,[modelo_dvr] ,[descripcion_dvr] ,[capacidad_dvr] ,[tipo_dvr] ,sed.[nombre_sede] as Sede ,[ubicacion_dvr] ,[software] ,[num_canales] ,[num_discos] ,[dias_grabacion] ,[ip_dvr] ,estad.[nombre_estado] as Estado ,estadoa.[nombre_estado] as estado_asignacion ,[fecha_garantia],[usuamov] ,[fechamov] FROM [ControlTIC].[dbo].[maquina_dvr] as mc LEFT JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] LEFT JOIN [ControlTIC].[dbo].[sede] as sed ON mc.sede_dvr = sed.id LEFT JOIN [ControlTIC].[dbo].[estado] as estad ON mc.estado = estad.id LEFT JOIN [ControlTIC].[dbo].estado_asignacion AS estadoa ON mc.estado_asignacion = estadoa.id where estado like '%CONFIGURACION%' ");
 
 $arr = array();
 while ($Element = odbc_fetch_array($data)) {
@@ -63,11 +63,6 @@ while ($Element = odbc_fetch_array($data)) {
                     <th scope="col">Ip DVR</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Fecha Garantia</th>
-                    <th scope="col">Fecha Crea</th>
-                    <th scope="col">Usua Crea</th>
-                    <th scope="col">Fecha Modifica</th>
-                    <th scope="col">Usuario Modifica</th>
-
                     <th scope="col">Seleccione</th>
 
                 </tr>
@@ -99,10 +94,7 @@ while ($Element = odbc_fetch_array($data)) {
                         <td><?= $fila['ip_dvr'] ?></td>
                         <td><?= $fila['estado'] ?></td>
                         <td><?= $fila['fecha_garantia'] ?></td>
-                        <td><?= $fila['fecha_crea'] ?></td>
-                        <td><?= $fila['usua_crea'] ?></td>
-                        <td><?= $fila['fecha_modifica'] ?></td>
-                        <td><?= $fila['usua_modifica'] ?></td>
+
 
                         <td>
                             <button id="enviardvr" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" 
@@ -123,10 +115,6 @@ while ($Element = odbc_fetch_array($data)) {
                             data-ip-dvr="<?= $fila['ip_dvr'] ?>" 
                             data-estado="<?= $fila['estado'] ?>" 
                             data-fecha-garantia="<?= $fila['fecha_garantia'] ?>" 
-                            data-fecha-crea="<?= $fila['fecha_crea'] ?>" 
-                            data-usua-crea="<?= $fila['usua_crea'] ?>" 
-                            data-fecha-modifica="<?= $fila['fecha_modifica'] ?>" 
-                            data-usua-modifica="<?= $fila['usua_modifica'] ?>" 
                             data-primernombre="<?= $primernombre ?>" 
                             data-segundonombre="<?= $segundonombre ?>" 
                             data-primerapellido="<?= $primerapellido ?>" 
@@ -142,6 +130,7 @@ while ($Element = odbc_fetch_array($data)) {
                 <?php } ?>
             </tbody>
         </table>
+
     </div>
 </div>
 

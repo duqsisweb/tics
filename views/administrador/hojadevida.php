@@ -121,7 +121,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">DVR</h5>
                                 <p class="card-text"></p>
-                                <a href="hv/hvdvr.php" class="btn btn-success">Seleccionar</a>
+                                <a href="hv/hvdvr.php" class="btn btn-success disabled">Seleccionar</a>
                             </div>
                         </div>
                     </div>

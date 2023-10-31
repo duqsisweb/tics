@@ -15,38 +15,52 @@ if (isset($_SESSION['usuario'])) {
     <?php require '../estilosadmin/head.php'; ?>
 
     <body>
-
         <!-- NAV -->
         <?php require '../estilosadmin/nav.php'; ?>
 
 
-        <!-- NAVINGRESOS -->
-        <?php require '../estilosadmin/navingresos.php'; ?>
-
         <section style="margin-top: 100px;">
+            <!-- NAVINGRESOS -->
+            <?php require '../estilosadmin/navinventario.php'; ?>
+
+            <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
+                <div class="container">
+                    <div>
+                        <h3>INVENTARIO DE ACCESORIOS</h3>
+                    </div>
+                </div>
+            </div>
+
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-8">
                         <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                             <thead>
                                 <tr class="encabezado table-dark">
-                                    <?php
-                                    $sql = "SELECT TOP 1 * FROM [ControlTIC].[dbo].[maquina_accesorios]";
-                                    $result = odbc_exec($conexion, $sql);
+                                    <th>ID</th>
+                                    <th>ELEMENTO</th>
+                                    <th>MARCA</th>
+                                    <th>MODELO</th>
+                                    <th>DESCRIPCIÓN</th>
+                                    <th>CANTIDAD</th>
+                                    <th>FECHA DE INGRESO</th>
+                                    <th>FECHA CREACIÓN</th>
 
-                                    if ($result !== false) {
-                                        $row = odbc_fetch_array($result);
-                                        foreach ($row as $column_name => $value) {
-                                            echo "<th>" . $column_name . "</th>";
-                                        }
-                                        odbc_free_result($result);
-                                    }
-                                    ?>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM [ControlTIC].[dbo].[maquina_accesorios]";
+                                $sql = " SELECT  mc.[id]
+                                ,tipo_maquina.[nombre_maquina] as tipo_maquina
+                                ,[marca]
+                                ,[modelo]
+                                ,acc.[nombre_descripcion] as descripcion
+                                ,[cantidad]
+                                ,[fecha_de_ingreso_acc]
+                                ,fecha_crea
+                            FROM [ControlTIC].[dbo].[maquina_accesorios] as mc
+                            LEFT JOIN [ControlTIC].[dbo].tipo_maquina as tipo_maquina ON mc.tipo_maquina = tipo_maquina.id
+                            LEFT JOIN [ControlTIC].[dbo].[descripcion_accesorios] as acc on mc.descripcion = acc.id ";
                                 $result = odbc_exec($conexion, $sql);
 
                                 if ($result !== false) {
@@ -69,6 +83,7 @@ if (isset($_SESSION['usuario'])) {
     </body>
 
     </html>
+
 
     <!-- Inicio DataTable -->
     <script type="text/javascript">
@@ -105,6 +120,9 @@ if (isset($_SESSION['usuario'])) {
         });
     </script>
     <!-- Fin DataTable -->
+
+
+
 
 <?php } else { ?>
     <script language="JavaScript">

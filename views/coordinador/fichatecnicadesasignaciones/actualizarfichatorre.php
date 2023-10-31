@@ -1,0 +1,29 @@
+<?php
+include '../../../conexionbd.php';
+$cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
+$consulta = "SELECT descripcion_torre FROM ControlTIC..asignacion_torre WHERE cedula = '$cedula'";
+$resultado = odbc_exec($conexion, $consulta);
+
+$output = "<pre>"; // Mantener el formato monoespaciado
+
+if (odbc_num_rows($resultado) > 0) {
+    while ($fila = odbc_fetch_array($resultado)) {
+        $output .= "-------------------------------------\n";
+        $output .= "Descripción Torre: " . $fila['descripcion_torre'] . "\n";
+        $output .= "-------------------------------------\n";
+
+    }
+} else {
+    $output .= '<div id="" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Sin asignacion de TORRE</strong> 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>';
+}
+
+$output .= "</pre>";
+
+odbc_close($conexion);
+
+echo $output; // Enviar la respuesta al cliente (JavaScript)
+
+?>

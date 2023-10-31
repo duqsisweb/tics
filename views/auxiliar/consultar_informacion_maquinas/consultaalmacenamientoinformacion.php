@@ -112,7 +112,17 @@ if (isset($_POST['cedula'])) {
                             </td>
 
                             <td>
-                                <button id="enviaralmacenamiento" style="display: none;" type="submit" class="btn btn-outline-danger asignar-btn" data-id="<?= $fila['id'] ?>" data-primernombre="<?= $primernombre ?>" data-segundonombre="<?= $segundonombre ?>" data-primerapellido="<?= $primerapellido ?>" data-segundoapellido="<?= $segundoapellido ?>" data-cedula="<?= $cedula ?>" data-cargo="<?= $cargo ?>" data-empresa="<?= $empresa ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-marca-almacenamiento="<?= $fila['marca_almacenamiento'] ?>" data-modelo-almacenamiento="<?= $fila['modelo_almacenamiento'] ?>" data-descripcion-almacenamiento="<?= $fila['descripcion_almacenamiento'] ?>" data-capacidad-almacenamiento="<?= $fila['capacidad_almacenamiento'] ?>" data-tipo-almacenamiento="<?= $fila['tipo_almacenamiento'] ?>" data-caracteristica-almacenamiento="<?= $fila['caracteristica_almacenamiento'] ?>" data-sede-almacenamiento="<?= $fila['sede_almacenamiento'] ?>" data-ubicacion-almacenamiento="<?= $fila['ubicacion_almacenamiento'] ?>" data-fecha-de-ingreso-alma="<?= $fila['fecha_de_ingreso_alma'] ?>" data-estado="<?= $fila['estado'] ?>" data-fecha-de-garantia-alma="<?= $fila['fecha_de_garantia_alma'] ?>" data-fecha-crea="<?= $fila['fecha_crea'] ?>" data-usua-crea="<?= $fila['usua_crea'] ?>" data-fecha-modifica="<?= $fila['fecha_modifica'] ?>" data-usua-modifica="<?= $fila['usua_modifica'] ?>" data-usua-asigna="<?php echo $Usua_asigna; ?>" ></button>
+                                <button id="enviaralmacenamiento" style="display: none;" type="submit" class="btn btn-outline-danger asignar-btn" 
+                                data-id="<?= $fila['id'] ?>" 
+                                data-primernombre="<?= $primernombre ?>" 
+                                data-segundonombre="<?= $segundonombre ?>" 
+                                data-primerapellido="<?= $primerapellido ?>" 
+                                data-segundoapellido="<?= $segundoapellido ?>" 
+                                data-cedula="<?= $cedula ?>" 
+                                data-cargo="<?= $cargo ?>" 
+                                data-empresa="<?= $empresa ?>" 
+                                data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" 
+                                data-marca-almacenamiento="<?= $fila['marca_almacenamiento'] ?>" data-modelo-almacenamiento="<?= $fila['modelo_almacenamiento'] ?>" data-descripcion-almacenamiento="<?= $fila['descripcion_almacenamiento'] ?>" data-capacidad-almacenamiento="<?= $fila['capacidad_almacenamiento'] ?>" data-tipo-almacenamiento="<?= $fila['tipo_almacenamiento'] ?>" data-caracteristica-almacenamiento="<?= $fila['caracteristica_almacenamiento'] ?>" data-sede-almacenamiento="<?= $fila['sede_almacenamiento'] ?>" data-ubicacion-almacenamiento="<?= $fila['ubicacion_almacenamiento'] ?>" ></button>
                                 <!-- btn escondido para la alerta -->
                                 <button id="" type="button" class="btn btn-outline-danger showAlertButton">REMOVER</button>
                             </td>

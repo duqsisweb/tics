@@ -26,7 +26,7 @@ if (isset($_SESSION['usuario'])) {
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container">
                     <div>
-                        <h3>Inventario de DVR</h3>
+                        <h3>INVENTARIO DVR</h3>
                     </div>
                 </div>
             </div>
@@ -38,23 +38,29 @@ if (isset($_SESSION['usuario'])) {
                         <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                             <thead>
                                 <tr class="encabezado table-dark">
-                                    <?php
-                                    $sql = "SELECT TOP 1 * FROM [ControlTIC].[dbo].[maquina_dvr]";
-                                    $result = odbc_exec($conexion, $sql);
-
-                                    if ($result !== false) {
-                                        $row = odbc_fetch_array($result);
-                                        foreach ($row as $column_name => $value) {
-                                            echo "<th>" . $column_name . "</th>";
-                                        }
-                                        odbc_free_result($result);
-                                    }
-                                    ?>
+                                    <th>ID</th>
+                                    <th>ELEMENTO</th>
+                                    <th>MARCA</th>
+                                    <th>MODELO</th>
+                                    <th>DESCRIPCIÓN</th>
+                                    <th>CAPACIDAD</th>
+                                    <th>TIPO</th>
+                                    <th>SEDE</th>
+                                    <th>UBICACIÓN</th>
+                                    <th>SOFTWARE</th>
+                                    <th># CANALES</th>
+                                    <th># DISCOS</th>
+                                    <th>DIAS DE GRABACIÓN</th>
+                                    <th>IP DVR</th>
+                                    <th>ESTADO</th>
+                                    <th>ESTADO DE ASIGNACION</th>
+                                    <th>FECHA DE GARANTIA</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM [ControlTIC].[dbo].[maquina_dvr]";
+                                $sql = " SELECT  mc.[id] ,tipomaquin.[nombre_maquina] as tipo_maquina ,[marca_dvr] ,[modelo_dvr] ,[descripcion_dvr] ,[capacidad_dvr] ,[tipo_dvr] ,sed.[nombre_sede] as Sede ,[ubicacion_dvr] ,[software] ,[num_canales] ,[num_discos] ,[dias_grabacion] ,[ip_dvr] ,estad.[nombre_estado] as Estado ,estadoa.[nombre_estado] as estado_asignacion ,[fecha_garantia] FROM [ControlTIC].[dbo].[maquina_dvr] as mc LEFT JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] LEFT JOIN [ControlTIC].[dbo].[sede] as sed ON mc.sede_dvr = sed.id LEFT JOIN [ControlTIC].[dbo].[estado] as estad ON mc.estado = estad.id LEFT JOIN [ControlTIC].[dbo].estado_asignacion AS estadoa ON mc.estado_asignacion = estadoa.id
+                                ";
                                 $result = odbc_exec($conexion, $sql);
 
                                 if ($result !== false) {
@@ -78,8 +84,8 @@ if (isset($_SESSION['usuario'])) {
 
     </html>
 
-        <!-- Inicio DataTable -->
-        <script type="text/javascript">
+    <!-- Inicio DataTable -->
+    <script type="text/javascript">
         $(document).ready(function() {
             var lenguaje = $('#mtable').DataTable({
                 info: false,

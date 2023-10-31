@@ -583,7 +583,7 @@ if (isset($_SESSION['usuario'])) {
                 </div>
 
                 <!-- AQUI MUESTRA LAS SECCION  DVR -->
-                <div class="container" style="margin-top: 50px;">
+                <!-- <div class="container" style="margin-top: 50px;">
                     <div class="row">
 
                         <div class="col-md-2">
@@ -612,7 +612,7 @@ if (isset($_SESSION['usuario'])) {
 
 
                     </div>
-                </div>
+                </div> -->
 
                 <!-- AQUI MUESTRA LAS SECCION  CCTV -->
                 <!-- <div class="container" style="margin-top: 50px;">
@@ -2239,7 +2239,7 @@ if (isset($_SESSION['usuario'])) {
                 var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
 
                 $.ajax({
-                    url: 'consultas/consultadvr.php',
+                    url: 'consulta_de_maquinas/consultadvr.php',
                     type: 'POST',
                     data: {
                         empresa: empresaOptionValue,
@@ -2271,7 +2271,7 @@ if (isset($_SESSION['usuario'])) {
                 var cargo = $('input[name="cargo"]').val(); // Obtén el valor del campo oculto
 
                 $.ajax({
-                    url: 'informacion/consultadvrinformacion.php',
+                    url: 'consultar_informacion_maquinas/consultasimcardinformacion.php',
                     type: 'POST',
                     data: {
                         empresa: empresaOptionValue,

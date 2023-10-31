@@ -67,7 +67,7 @@ if (isset($_POST['cedula'])) {
     <div class="text-right mt-3">
         <div class="col-md-12">
             <!-- tbl info de celulares -->
-            <table class="table table-bordered dt-responsive table-hover display nowrap" id="infodetallefactura" cellspacing="0" style="text-align: center;">
+              <table class="table table-bordered dt-responsive table-hover display nowrap" id="infodetallefactura" cellspacing="0" style="text-align: center;">
                 <thead>
                     <tr class="encabezado table-dark">
                         <th scope="col" class="hidden-cell">Usua_asigna</th>
@@ -130,11 +130,28 @@ if (isset($_POST['cedula'])) {
                             <td>
                                 <input id="link_peri_desasigna<?= $fila['id'] ?>" name="link_peri_desasigna"></input>
                             </td>
-
                             <td>
-                                <button id="enviarperifericos" style="display: none;" type="submit" class="btn btn-outline-danger asignar-btn" data-id="<?= $fila['id'] ?>" data-primernombre="<?= $primernombre ?>" data-segundonombre="<?= $segundonombre ?>" data-primerapellido="<?= $primerapellido ?>" data-segundoapellido="<?= $segundoapellido ?>" data-cedula="<?= $cedula ?>" data-cargo="<?= $cargo ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-serial-perifericos="<?= $fila['serial_perifericos'] ?>" data-descripcion-perifericos="<?= $fila['descripcion_perifericos'] ?>" data-marca-perifericos="<?= $fila['marca_perifericos'] ?>" data-modelo-perifericos="<?= $fila['modelo_perifericos'] ?>" data-placa-activo-perifericos="<?= $fila['placa_activo_perifericos'] ?>" data-sede-perifericos="<?= $fila['sede_perifericos'] ?>" data-ubicacion-perifericos="<?= $fila['ubicacion_perifericos'] ?>" data-tipo="<?= $fila['tipo'] ?>" data-tipo-toner="<?= $fila['tipo_toner'] ?>" data-gestion-peri="<?= $fila['gestion_peri'] ?>" data-empresa="<?= $fila['empresa'] ?>" data-fecha-de-garantia="<?= $fila['fecha_de_garantia'] ?>" data-fecha-crea="<?= $fila['fecha_crea'] ?>" data-usua-crea="<?= $fila['usua_crea'] ?>" data-fecha-modifica="<?= $fila['fecha_modifica'] ?>" data-usua-modifica="<?= $fila['usua_modifica'] ?>" data-estado="<?= $fila['estado'] ?>" data-usua-asigna="<?php echo $Usua_asigna; ?>"></button>
-                                <!-- btn escondido para la alerta -->
-                                <button id="" type="button" class="btn btn-outline-danger showAlertButton">REMOVER</button>
+                                <button id="enviarperifericos" style="display: none;" type="submit" class="btn btn-outline-danger asignar-btn" 
+                                data-id="<?= $fila['id'] ?>" 
+                                data-primernombre="<?= $primernombre ?>" 
+                                data-segundonombre="<?= $segundonombre ?>" 
+                                data-primerapellido="<?= $primerapellido ?>" 
+                                data-segundoapellido="<?= $segundoapellido ?>" 
+                                data-cedula="<?= $cedula ?>" 
+                                data-cargo="<?= $cargo ?>" 
+                                data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" 
+                                data-serial-perifericos="<?= $fila['serial_perifericos'] ?>" 
+                                data-descripcion-perifericos="<?= $fila['descripcion_perifericos'] ?>" 
+                                data-marca-perifericos="<?= $fila['marca_perifericos'] ?>" 
+                                data-modelo-perifericos="<?= $fila['modelo_perifericos'] ?>" 
+                                data-placa-activo-perifericos="<?= $fila['placa_activo_perifericos'] ?>" 
+                                data-sede-perifericos="<?= $fila['sede_perifericos'] ?>" 
+                                data-ubicacion-perifericos="<?= $fila['ubicacion_perifericos'] ?>" 
+                                data-tipo="<?= $fila['tipo'] ?>" 
+                                data-tipo-toner="<?= $fila['tipo_toner'] ?>" >
+                                </button>
+                                <!-- Botón oculto para la alerta -->
+                                <button  type="button" class="btn btn-outline-danger showAlertButton" > REMOVER </button>
                             </td>
                         </tr>
                     <?php } ?>

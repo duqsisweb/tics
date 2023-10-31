@@ -63,7 +63,7 @@ echo "</script>"; {
         '$id', '$tipo_maquina', '$imei', '$serial_equipo_celular', '$marca', '$modelo',
         '$fecha_ingreso_cel', '$capacidad', '$ram_celular', 'CONFIGURACION', 'SIN ASIGNACION', '$fecha_garantia_cel',
         '$primernombre', '$segundonombre',
-        '$primerapellido', '$segundoapellido', '$cedula', '$cargo', '$observaciones_desasigna', '$link_celular_desasigna',CONVERT(datetime, Getdate(), 120),'SE ELIMINO ASIGNACION DE UNV CELULAR','$Usua_asigna'
+        '$primerapellido', '$segundoapellido', '$cedula', '$cargo', '$observaciones_desasigna', '$link_celular_desasigna',CONVERT(datetime, Getdate(), 120),'SE ELIMINO ASIGNACION DE UN CELULAR','$Usua_asigna'
         )";
 
     var_dump($_POST);

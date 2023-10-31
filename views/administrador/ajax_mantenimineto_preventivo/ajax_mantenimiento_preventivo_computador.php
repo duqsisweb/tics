@@ -427,9 +427,11 @@ if (
                             },
                             success: function(response) {
                                 console.log("Actualización exitosa:", response);
-
                                 // Activar el botón oculto correspondiente a la fila seleccionada
                                 $asignarBtn.trigger('click');
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 2000);
                             }
                         });
 

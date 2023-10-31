@@ -146,12 +146,6 @@ if (isset($_SESSION['usuario'])) {
                         <th>ESTADO</th>
                         <th>GESTION</th>
                         <th>FECHA GARANTIA</th>
-                        <th>FECHA DE CREACION</th>
-                        <th>USUARIO DE CREACION</th>
-                        <th>FECHA MOD</th>
-                        <th>USUA MOD</th>
-                        <th>USUARIO ASIGNA</th>
-                        <th>FECHA ASIGNA</th>
                         <th>CEDULA</th>
                         <th>CARGO</th>
                         <th>PRIMER NOMBRE</th>
@@ -160,10 +154,10 @@ if (isset($_SESSION['usuario'])) {
                         <th>SEGUNDO APELLIDO</th>
                         <th>EMPRESA</th>
                         <th>ESTADO ASIGNACION</th>
-                        <th>OBSERVACIONES</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>OBSERVACIONES DE ASIGNAMIENTO</th>
+                        <th>LINK DE ASIGNACION</th>
+                        <th>OBSERVACIONES AL REMOVER ASIGNACION</th>
+                        <th>LINK AL REMOVER ASIGNACION</th>
                         <th>FECHA DE MOVIMIENTO</th>
                         <th>MOVIMIENTO</th>
                         <th>USUARIO</th>

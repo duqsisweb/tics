@@ -26,7 +26,7 @@ if (isset($_SESSION['usuario'])) {
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container">
                     <div>
-                        <h3>Inventario de Perifericos</h3>
+                        <h3>INVENTARIO PERIFERICOS</h3>
                     </div>
                 </div>
             </div>
@@ -37,23 +37,49 @@ if (isset($_SESSION['usuario'])) {
                         <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                             <thead>
                                 <tr class="encabezado table-dark">
-                                    <?php
-                                    $sql = "SELECT TOP 1 * FROM [ControlTIC].[dbo].[maquina_perifericos]";
-                                    $result = odbc_exec($conexion, $sql);
-
-                                    if ($result !== false) {
-                                        $row = odbc_fetch_array($result);
-                                        foreach ($row as $column_name => $value) {
-                                            echo "<th>" . $column_name . "</th>";
-                                        }
-                                        odbc_free_result($result);
-                                    }
-                                    ?>
+                                    <th>ID</th>
+                                    <th>ELEMENTO</th>
+                                    <th>SERIAL</th>
+                                    <th>DESCRIPCION</th>
+                                    <th>MARCA</th>
+                                    <th>MODELO</th>
+                                    <th>PLACA DE ACTIVO</th>
+                                    <th>SEDE</th>
+                                    <th>UBICACIÓN</th>
+                                    <th>TIPO</th>
+                                    <th>TIPO TONER</th>
+                                    <th>ESTADO</th>
+                                    <th>GESTION</th>
+                                    <th>EMPRESA</th>
+                                    <th>FECHA DE GARANTIA</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM [ControlTIC].[dbo].[maquina_perifericos]";
+                                $sql = " SELECT mc.[id]
+                                ,tipomaquin.[nombre_maquina] as tipo_maquina 
+                                ,[serial_perifericos]
+                                ,desperifericos.[nombre_descripcion] as descripcion
+                                ,[marca_perifericos]
+                                ,[modelo_perifericos]
+                                ,[placa_activo_perifericos]
+                                ,sed.[nombre_sede] as sede
+                                ,[ubicacion_perifericos]
+                                ,[tipo] 
+                                ,[tipo_toner]
+                                ,estad.[nombre_estado] AS estado
+                                ,gestio.estado_gestion as gestion_peri
+                                ,empres.[nombre_empresa] as empresa
+                                ,[fecha_de_garantia_peri]
+                                FROM [ControlTIC].[dbo].[maquina_perifericos] as mc 
+                                LEFT JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] 
+                                LEFT JOIN [ControlTIC].[dbo].[descripcion_perifericos] as desperifericos ON mc.descripcion_perifericos = desperifericos.id 
+                                LEFT JOIN [ControlTIC].[dbo].[sede] as sed ON mc.sede_perifericos =sed.id 
+                                LEFT JOIN [ControlTIC].[dbo].[gestion] AS gestio ON gestion_peri = gestio.id
+                                LEFT JOIN [ControlTIC].[dbo].[empresa] as empres ON mc.empresa = empres.id 
+                                LEFT JOIN [ControlTIC].[dbo].[estado] AS estad ON mc.estado = estad.id
+                                
+                                ";
                                 $result = odbc_exec($conexion, $sql);
 
                                 if ($result !== false) {
@@ -77,8 +103,8 @@ if (isset($_SESSION['usuario'])) {
 
     </html>
 
-        <!-- Inicio DataTable -->
-        <script type="text/javascript">
+    <!-- Inicio DataTable -->
+    <script type="text/javascript">
         $(document).ready(function() {
             var lenguaje = $('#mtable').DataTable({
                 info: false,

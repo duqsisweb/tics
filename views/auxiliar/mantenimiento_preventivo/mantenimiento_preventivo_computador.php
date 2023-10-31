@@ -50,26 +50,26 @@ if (isset($_SESSION['usuario'])) {
                                 <tr class="encabezado table-dark">
                                     <th>ID</th>
                                     <th class="hidden-cell">Service Tag</th>
-                                    <th>Serial Equipo</th>
-                                    <th>Nombre Equipo</th>
-                                    <th>Nombre Sede</th>
-                                    <th>Nombre Empresa</th>
-                                    <th>Marca</th>
-                                    <th>Modelo</th>
-                                    <th>Tipo Comp.</th>
-                                    <th>Tipo Ram</th>
-                                    <th>Ram</th>
-                                    <th>Tipo Disco</th>
-                                    <th>Capacidad Disco</th>
-                                    <th>Procesador</th>
-                                    <th>Propietario</th>
-                                    <th>Proveedor</th>
-                                    <th>Sistema Operativo</th>
-                                    <th>Serial Cargador</th>
-                                    <th>Dominio</th>
-                                    <th>Tipo Usuario</th>
+                                    <th>SERIAL</th>
+                                    <th>NOMBRE</th>
+                                    <th>SEDE</th>
+                                    <th>EMPRESA</th>
+                                    <th>MARCA</th>
+                                    <th>MODELO</th>
+                                    <th>TIPO DE COMPUTADOR</th>
+                                    <th>TIPO RAM</th>
+                                    <th>RAM</th>
+                                    <th>TIPO DE DISCO</th>
+                                    <th>CAPACIDAD DE DISCO</th>
+                                    <th>PROCESADOR</th>
+                                    <th>PROPIETARIO</th>
+                                    <th>PROVEEDOR</th>
+                                    <th>SISTEMA OPERATIVO</th>
+                                    <th>SERIAL CARGADOR</th>
+                                    <th>DOMINIO</th>
+                                    <th>TIPO USUARIO</th>
                                     <th class="hidden-cell">Serial Activo</th>
-                                    <th>Targeta Video</th>
+                                    <th>TARGETA DE VIDEO</th>
                                     <th>ESTADO</th>
                                     <th>INICIO MANTENIMIENTO</th>
                                     <th>FIN MANTENIMIENTO</th>

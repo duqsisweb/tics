@@ -34,13 +34,13 @@ if (isset($_SESSION['usuario'])) {
     <?php require '../estilosadmin/head.php'; ?>
 
     <body>
-        
-         <!-- NAV -->
+
+        <!-- NAV -->
         <?php require '../estilosadmin/nav.php'; ?>
 
         <section style="margin-top: 100px;">
-                       <!--  -->
-                       <?php require '../estilosadmin/navinventario.php'; ?>
+            <!--  -->
+            <?php require '../estilosadmin/navinventario.php'; ?>
 
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container">
@@ -74,44 +74,49 @@ if (isset($_SESSION['usuario'])) {
 
 
 
+
+        <!-- 2 TABLA -->
         <?php
-
         if ($mostrarTabla) {
-
         ?>
             <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                 <thead>
                     <tr class="encabezado table-dark">
+                        <th>ID HISTORIAL</th>
+                        <th>ID</th>
+                        <th>ELEMENTO</th>
+                        <th>MARCA</th>
+                        <th>MODELO</th>
+                        <th>DESCRIPCION</th>
+                        <th>CAPACIDAD</th>
+                        <th>TIPO ALMACENAMIENTO</th>
+                        <th>CARACTERISTICA</th>
+                        <th>SEDE</th>
+                        <th>UBICACIÓN</th>
+                        <th>FECHA INGRESO</th>
+                        <th>ESTADO</th>
+                        <th>FECHA GARANTIA</th>
+                        <!-- <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th></th> -->
+                        <th>CEDULA</th>
+                        <th>CARGO</th>
+                        <th>PRIMER NOMBRE</th>
+                        <th>SEGUNDO NOMBRE</th>
+                        <th>PRIMER APELLIDO</th>
+                        <th>SEGUNDO APELLIDO</th>
+                        <th>EMPRESA</th>
+                        <!-- <th></th> -->
+                        <th>OBSERVACIONES DE ASIGNAMIENTO</th>
+                        <th>LINK DE ASIGNAMIENTO</th>
+                        <th>OBSERVACIONES DE RETIRO</th>
+                        <th>LINK DE RETIRO</th>
+                        <th>FECHA DE MOVIMIENTO</th>
+                        <th>DESCRIPCIÓN</th>
+                        <th>USUARIO</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -142,6 +147,7 @@ if (isset($_SESSION['usuario'])) {
             echo "<div style='text-align: center;'>No se encontraron resultados.</div>";
         }
         ?>
+
 
 
 
