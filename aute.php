@@ -36,6 +36,7 @@ if ($_POST['iniciar']) {
                 header("Location: views/coordinador/inicio_coordinador.php");
                 break;
             case 'YALONSO':
+            case 'HGUERRERO':
                 header("Location: views/auxiliar/inicio_auxiliar.php");
                 break;
             default:

@@ -15,6 +15,7 @@ if (isset($_SESSION['usuario'])) {
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
     $cargo = isset($_GET['cargo']) ? $_GET['cargo'] : ''; // Obtener la cédula pasada por AJAX
     $nombreCompleto = isset($_GET['nombreCompleto']) ? $_GET['nombreCompleto'] : '';
+    $empresa = isset($_GET['empresa']) ? $_GET['empresa'] : ''; // Obtener la cédula pasada por AJAX
 
 
     // COMPUTADOR CONSULTA
@@ -217,7 +218,7 @@ if (isset($_SESSION['usuario'])) {
         FROM [ControlTIC].[dbo].[asignacion_perifericos]
                         where cedula='$cedula' 
 
-    ");
+          ");
     $arr_perifericos = array();
     while ($Element = odbc_fetch_array($data_perifericos)) {
         $arr_perifericos[] = $Element;
@@ -255,7 +256,7 @@ if (isset($_SESSION['usuario'])) {
                     ,[observaciones_desasigna]
                 FROM [ControlTIC].[dbo].[asignacion_almacenamiento] where cedula='$cedula' 
                                                 
-    ");
+            ");
     $arr_almacenamiento = array();
     while ($Element = odbc_fetch_array($data_almacenamiento)) {
         $arr_almacenamiento[] = $Element;
@@ -294,7 +295,7 @@ if (isset($_SESSION['usuario'])) {
             FROM [ControlTIC].[dbo].[asignacion_simcard]
                                     where cedula='$cedula' 
         
-    ");
+            ");
     $arr_simcard = array();
     while ($Element = odbc_fetch_array($data_simcard)) {
         $arr_simcard[] = $Element;
@@ -340,7 +341,7 @@ if (isset($_SESSION['usuario'])) {
                     LEFT JOIN [ControlTIC].[dbo].empresa AS empresa ON mc.empresa = empresa.id 
                      where cedula='$cedula' 
         
-    ");
+                ");
     $arr_dvr = array();
     while ($Element = odbc_fetch_array($data_dvr)) {
         $arr_dvr[] = $Element;
@@ -373,7 +374,17 @@ if (isset($_SESSION['usuario'])) {
             <div class="container">
 
                 <div class="row">
-                    <div class="col-md-2 col-xs-12 col-sm-2" style="border: 1px solid black;"><img src="../../assets/image/duquesa_logo - copia.png" alt=""></div>
+                    <div class="col-md-2 col-xs-12 col-sm-2" style="border: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
+                        <?php
+                        if ($empresa == 1) {
+                            echo '<img src="../../assets/image/duquesaacta.png" alt="">';
+                        } elseif ($empresa == 2) {
+                            echo '<img src="../../assets/image/palmerasacta.png" alt="">';
+                        } elseif ($empresa == 3) {
+                            echo '<img src="../../assets/image/j25acta.png" alt="">';
+                        }
+                        ?>
+                    </div>
                     <div class="col-md-6 col-xs-12 col-sm-6" style="border: 1px solid black;text-align: center;">
                         <h6>
                             <p style="margin-top: 10px;">ACTA DE ASIGNACION DE EQUIPOS</p>
@@ -385,6 +396,7 @@ if (isset($_SESSION['usuario'])) {
                         </h6>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-12 col-xs-12 col-sm-12" style="border: 1px solid black;text-align: right;">
                         <p>FECHA DE ENTREGA: <strong><?php echo date("Y-m-d H:i:s"); ?></strong></p>
@@ -898,36 +910,49 @@ if (isset($_SESSION['usuario'])) {
                 </div>
             </div>
 
+        </section>
 
+        <section id="segundahoja" style="margin-top: 30px;">
+            <div class="container" style="border: 1px solid black;padding-left: 50px;padding-right: 50px;padding-top: 25px;padding-bottom: 20px;">
 
-            <section id="segundahoja" style="margin-top: 50px;">
-                <div class="container" style="border: 1px solid black;padding: 100px;">
-
-                    <div class="row" style="">
-                        <div class="col-md-4">
-                            <img src="../../assets/image/duquesa_logo - copia.png" alt="">
-                        </div>
-                        <div class="col-md-8">
-                            <h5 style="text-align: left;padding: 10px;">ACUERDO ACTA ENTREGA DE EQUIPOS</h5>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 50px;">
-                        <div class="col-md-12" style="text-align: left;">
-                            <h6 id="fecha-hora"></h6>
-                        </div>
-                    </div>
-                    <br>
+                <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12" style="text-align: justify;">
-                            <p>Comedidamente se hace entrega del equipo que se describe en el documento anexo.</p><br>
-                            <p>Este equipo se entrega funcionando correctamente con los programas y recursos necesarios para el desarrollo de actividades propias de la empresa, por lo cual el usuario a quien se le hace entrega del mismo no puede realizar acciones de instalar nuevo software ni desinstalar los existentes sin previo aviso al área de Sistemas, esta última es quien se encarga de autorizar dichas acciones y efectuarlas si lo considera necesario.</p><br>
-                            <p>El usuario se hace responsable por el equipo entregado y accesorios relacionados en el anexo, cualquier daño provocado con o sin intensión es el usuario responsable quien asume los arreglos o reposición a que haya lugar.</p><br>
-                            <p>También cabe recordar que este equipo es de uso exclusivo de la compañía y con el fin de evitar inconvenientes legales con los entes de control, no es procedente almacenar archivos de audio y video ajenos a la empresa (música MP3, WAV) y otros formatos.</p><br>
-                            <p>En caso de que se encuentre alguna irregularidad o incumplimiento de estos acuerdos después de esta notificación durante la visita de un ente de control, el usuario del equipo será el responsable de las acciones legales y penales que esto conlleva.</p><br>
-                            <p>Como mutuo acuerdo firman los responsables:</p><br><br>
+                        <div class="col-md-2">
+                            <?php
+                            if ($empresa == 1) {
+                                echo '<img src="../../assets/image/duquesaacta.png" alt="">';
+                            } elseif ($empresa == 2) {
+                                echo '<img src="../../assets/image/palmerasacta.png" alt="">';
+                            } elseif ($empresa == 3) {
+                                echo '<img src="../../assets/image/j25acta.png" alt="">';
+                            }
+                            ?>
+                        </div>
+                        <div class="col-md-10">
+                            <h5 style="margin-left: 80px;margin-top: 15px;">ACUERDO ACTA ENTREGA DE EQUIPOS</h5>
                         </div>
                     </div>
+                </div>
 
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-md-12" style="text-align: left;">
+                        <h6 id="fecha-hora"></h6>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col-md-12" style="text-align: justify;">
+                        <p>Comedidamente se hace entrega del equipo que se describe en el documento anexo.</p><br>
+                        <p>Este equipo se entrega funcionando correctamente con los programas y recursos necesarios para el desarrollo de actividades propias de la empresa, por lo cual el usuario a quien se le hace entrega del mismo no puede realizar acciones de instalar nuevo software ni desinstalar los existentes sin previo aviso al área de Sistemas, esta última es quien se encarga de autorizar dichas acciones y efectuarlas si lo considera necesario.</p><br>
+                        <p>El usuario se hace responsable por el equipo entregado y accesorios relacionados en el anexo, cualquier daño provocado con o sin intensión es el usuario responsable quien asume los arreglos o reposición a que haya lugar.</p><br>
+                        <p>También cabe recordar que este equipo es de uso exclusivo de la compañía y con el fin de evitar inconvenientes legales con los entes de control, no es procedente almacenar archivos de audio y video ajenos a la empresa (música MP3, WAV) y otros formatos.</p><br>
+                        <p>En caso de que se encuentre alguna irregularidad o incumplimiento de estos acuerdos después de esta notificación durante la visita de un ente de control, el usuario del equipo será el responsable de las acciones legales y penales que esto conlleva.</p><br>
+                        <p>Como mutuo acuerdo firman los responsables:</p><br><br>
+                    </div>
+                </div>
+
+                <div class="container-fluid" style="text-align: center;">
                     <div class="row">
                         <div class="col-md-4"><strong>ENTREGA:</strong><br><br>
                             <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
@@ -939,21 +964,35 @@ if (isset($_SESSION['usuario'])) {
                         </div>
                         <div class="col-md-4"><strong>ENTREGA:</strong><br><br>
                             <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
-                            <p><strong>Andres Robayo</strong><br> Jefe de Sistemas</p>
+                            <p><strong>ANDRES ROBAYO</strong><br> Jefe de Sistemas</p>
                         </div>
                     </div>
-
                 </div>
-            </section>
-
+            </div>
         </section>
+
+
 
         <div class="container-fluid" style="margin-top: 90px;">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8" style="text-align: center;">
                     <div class="d-grid gap-2">
-                        <button id="descargarPdf" type="button" class="btn btn-danger pdf-button">DESCARGAR PDF</button>
+                        <button id="descargarPdf" type="button" class="btn btn-danger pdf-button">ACTA DE ASIGNACION DE EQUIPOS</button>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="container-fluid" style="margin-top: 5px;">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8" style="text-align: center;">
+                    <div class="d-grid gap-2">
+                        <button id="descargarPdfSegundaHoja" type="button" class="btn btn-danger pdf-button">ACUERDO ACTA ENTREGA DE EQUIPOS</button>
                     </div>
                 </div>
                 <div class="col-md-2"></div>
@@ -1020,6 +1059,57 @@ if (isset($_SESSION['usuario'])) {
     </script>
 
 
+    <!-- script para descargar segunda hoja -->
+    <script>
+        // Función para convertir la sección "segundahoja" en PDF y descargarla
+        function descargarPDFSegundaHoja() {
+            // Oculta los botones antes de generar el PDF
+            var pdfButtons = document.querySelectorAll('.pdf-button');
+            pdfButtons.forEach(function(button) {
+                button.style.display = 'none';
+            });
+
+            const elemento = document.getElementById('segundahoja'); // ID de la sección "segundahoja"
+
+            // Cambiar el estilo de la sección antes de generar el PDF (si es necesario)
+            elemento.style.fontSize = '14px';
+
+            // Configuración de opciones para html2pdf (puedes ajustar según tus necesidades)
+            const opciones = {
+                margin: 9,
+                filename: 'SegundaHoja.pdf', // Nombre del archivo PDF para la segunda hoja
+                image: {
+                    type: 'jpeg',
+                    quality: 2
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'portrait'
+                },
+            };
+
+            // Comienza la conversión y descarga
+            html2pdf()
+                .from(elemento)
+                .set(opciones)
+                .save()
+                .then(function() {
+                    // Restaura la visibilidad de los botones después de generar el PDF
+                    pdfButtons.forEach(function(button) {
+                        button.style.display = 'block';
+                    });
+                });
+        }
+
+        // Asocia la función de descarga al botón de la segunda hoja
+        document.getElementById('descargarPdfSegundaHoja').addEventListener('click', descargarPDFSegundaHoja);
+    </script>
+
+
     <!-- OBTENER LA FECHA ACTUAL -->
     <script>
         // Obtenemos la fecha actual
@@ -1049,6 +1139,7 @@ if (isset($_SESSION['usuario'])) {
         // Mostramos la fecha y hora en el elemento h6
         h6Element.textContent = fechaHoraFormateada;
     </script>
+
 
 
 

@@ -15,36 +15,64 @@ if (isset($_SESSION['usuario'])) {
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
     $cargo = isset($_GET['cargo']) ? $_GET['cargo'] : ''; // Obtener la cédula pasada por AJAX
     $nombreCompleto = isset($_GET['nombreCompleto']) ? $_GET['nombreCompleto'] : '';
+    $empresa = isset($_GET['empresa']) ? $_GET['empresa'] : ''; // Obtener la cédula pasada por AJAX
 
 
-
-    $data = odbc_exec($conexion, "SELECT  [id_asignacion] ,mc.[id] ,tipomaquin.[nombre_maquina] as Tipo_maquina ,[Service_tag] ,[Serial_equipo],[Nombre_equipo] ,sed.[nombre_sede] as Sede ,empres.[nombre_empresa] as Empresa ,[Marca_computador] ,[Modelo_computador] ,tipocomp.[nombre_tipo_comp] as Tipo_comp ,[Tipo_ram] ,[Memoria_ram] ,tipodisco.[nombre_tipo_discoduro] as Tipo_disco ,capacidaddisco.[capacidad_discoduro] as Capacidad_dico ,[Procesador] ,propietari.[descripcion] as Propietario ,[Proveedor] ,sistemao.[nombre_sistema_operativo] as Sistema_O ,[Serial_cargador] ,[Dominio] ,[Tipo_usuario] ,[Serial_activo_fijo] ,[Fecha_ingreso] ,[Targeta_Video] ,estad.[nombre_estado] Estado ,gestio.[estado_gestion] as Estado_Gestion ,[Fecha_garantia] ,[Fecha_crea] ,[Usua_crea] ,[Fecha_modifica] ,[Usua_modifica] ,[Usua_asigna] ,[Fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[estado_asignacion] ,[observaciones]
-FROM [ControlTIC].[dbo].[asignacion_computador] as mc 
-JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] 
-JOIN [ControlTIC].[dbo].sede as sed ON mc.Sede = sed.id 
-JOIN [ControlTIC].[dbo].empresa as empres ON mc.Empresa = empres.id 
-JOIN [ControlTIC].[dbo].tipo_comp as tipocomp ON mc.Tipo_comp = tipocomp.id 
-JOIN [ControlTIC].[dbo].tipo_discoduro as tipodisco ON mc.Tipo_discoduro = tipodisco.id 
-JOIN [ControlTIC].[dbo].propietario as propietari ON mc.Propietario = propietari.id 
-JOIN [ControlTIC].[dbo].capacidad_discoduro as capacidaddisco ON mc.Capacidad_discoduro = capacidaddisco.id 
-JOIN [ControlTIC].[dbo].sistema_operativo as sistemao ON mc.Sistema_Operativo = sistemao.id 
-JOIN [ControlTIC].[dbo].estado as estad ON mc.Estado = estad.id 
-JOIN [ControlTIC].[dbo].gestion as gestio ON mc.Gestion = gestio.id where cedula='$cedula'");
+    // COMPUTADOR CONSULTA
+    $data = odbc_exec($conexion, "SELECT  [id_asignacion]
+                    ,[id]
+                    ,[tipo_maquina]
+                    ,[Service_tag]
+                    ,[Serial_equipo]
+                    ,[Nombre_equipo]
+                    ,[Sede]
+                    ,[Empresa]
+                    ,[Marca_computador]
+                    ,[Modelo_computador]
+                    ,[Tipo_comp]
+                    ,[Tipo_ram]
+                    ,[Memoria_ram]
+                    ,[Tipo_discoduro]
+                    ,[Capacidad_discoduro]
+                    ,[Procesador]
+                    ,[Propietario]
+                    ,[Proveedor]
+                    ,[Sistema_Operativo]
+                    ,[Serial_cargador]
+                    ,[Dominio]
+                    ,[Tipo_usuario]
+                    ,[Serial_activo_fijo]
+                    ,[Fecha_ingreso_c]
+                    ,[Targeta_Video]
+                    ,[Estado]
+                    ,[Gestion]
+                    ,[Fecha_garantia_c]
+                    ,[Fecha_crea]
+                    ,[Usua_crea]
+                    ,[Fecha_modifica]
+                    ,[Usua_modifica]
+                    ,[Usua_asigna]
+                    ,[Fecha_asigna]
+                    ,[cedula]
+                    ,[cargo]
+                    ,[primernombre]
+                    ,[segundonombre]
+                    ,[primerapellido]
+                    ,[segundoapellido]
+                    ,[estado_asignacion]
+                    ,[observaciones]
+                    ,[observaciones_asigna]
+                    ,[link_computador_asigna]
+                FROM [ControlTIC].[dbo].[asignacion_computador]
+        where cedula='$cedula'");
     $arr = array();
     while ($Element = odbc_fetch_array($data)) {
         $arr[] = $Element;
     }
 
-
-
-    $data_celular = odbc_exec($conexion, "SELECT [id_asignacion], mc.[id], tipomaquin.[nombre_maquina] as tipo_maquina, [imei], [serial_equipo_celular], [marca], [modelo], [fecha_ingreso], [capacidad], [ram_celular], estad.[nombre_estado] AS [Estado], gestio.[estado_gestion] as gestion, [fecha_garantia], [fecha_crea], [usua_crea], [fecha_modifica], [usua_modifica], [usua_asigna], [fecha_asigna], [cedula], [cargo], [primernombre], [segundonombre], [primerapellido], [segundoapellido], empres.[nombre_empresa] as empresa, estadoasigna.[nombre_estado] as Estado_asignacion, [observaciones] FROM [ControlTIC].[dbo].[asignacion_celular] AS mc JOIN [ControlTIC].[dbo].[tipo_maquina] AS tipomaquin ON mc.tipo_maquina = tipomaquin.[id] JOIN [ControlTIC].[dbo].[estado] AS estad ON mc.[Estado] = estad.[id] JOIN [ControlTIC].[dbo].[gestion] AS gestio ON mc.gestion = gestio.[id] JOIN [ControlTIC].[dbo].[empresa] AS empres ON mc.empresa = empres.id JOIN [ControlTIC].[dbo].[estado_asignacion] as estadoasigna ON mc.estado_asignacion = estadoasigna.id where cedula='$cedula'");
-    $arr_celular = array();
-    while ($Element = odbc_fetch_array($data_celular)) {
-        $arr_celular[] = $Element;
-    }
-
-
     ?>
+
+
 
     <!DOCTYPE html>
     <html lang="en">
@@ -53,13 +81,6 @@ JOIN [ControlTIC].[dbo].gestion as gestio ON mc.Gestion = gestio.id where cedula
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Información de Máquinas</title>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.6.172/pdf.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
-
-
     </head>
 
     <!-- HEAD -->
@@ -67,41 +88,28 @@ JOIN [ControlTIC].[dbo].gestion as gestio ON mc.Gestion = gestio.id where cedula
     require '../../views/head.php';
     ?>
 
-    <body style="font-size: 12px;">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
+    <body>
 
-        <style>
-            /* Estilos para pantallas grandes */
-            @media screen and (min-width: 768px) {
-                /* Agrega aquí tus estilos para pantallas grandes */
-            }
-
-            /* Estilos para pantallas medianas */
-            @media screen and (max-width: 767px) {
-                /* Agrega aquí tus estilos para pantallas medianas */
-            }
-
-            /* Estilos para pantallas pequeñas (móviles) */
-            @media screen and (max-width: 576px) {
-                /* Agrega aquí tus estilos para pantallas pequeñas */
-            }
-
-            /* Estilos para la factura */
-            .factura {
-                font-family: Arial, sans-serif;
-                font-size: 10px;
-                /* Tamaño de fuente más pequeño */
-                /* Otros estilos de factura como color de fondo, bordes, márgenes, etc. */
-            }
-        </style>
-
-        <section id="previewHtmlContent">
+        <section id="descargaresto" style="font-size: 14px;">
             <div class="container">
+
                 <div class="row">
-                    <div class="col-md-2 col-xs-12 col-sm-2" style="border: 1px solid black;"><img src="../../assets/image/duquesa_logo - copia.png" alt=""></div>
-                    <div class="col-md-6 col-xs-12 col-sm-6" style="border: 1px solid black;">
+                    <div class="col-md-2 col-xs-12 col-sm-2" style="border: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
+                        <?php
+                        if ($empresa == 1) {
+                            echo '<img src="../../assets/image/duquesaacta.png" alt="">';
+                        } elseif ($empresa == 2) {
+                            echo '<img src="../../assets/image/palmerasacta.png" alt="">';
+                        } elseif ($empresa == 3) {
+                            echo '<img src="../../assets/image/j25acta.png" alt="">';
+                        }
+                        ?>
+                    </div>
+                    <div class="col-md-6 col-xs-12 col-sm-6" style="border: 1px solid black;text-align: center;">
                         <h6>
-                            <p>ACTA DE ASIGNACION DE EQUIPOS</p>
+                            <p style="margin-top: 10px;">ACTA DE ASIGNACION DE EQUIPOS</p>
                         </h6>
                     </div>
                     <div class="col-md-4 col-xs-12 col-sm-4" style="border: 1px solid black;">
@@ -110,58 +118,49 @@ JOIN [ControlTIC].[dbo].gestion as gestio ON mc.Gestion = gestio.id where cedula
                         </h6>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-12 col-xs-12 col-sm-12" style="border: 1px solid black;text-align: right;">
                         <p>FECHA DE ENTREGA: <strong><?php echo date("Y-m-d H:i:s"); ?></strong></p>
                     </div>
                 </div>
+
                 <div class="row" style="border-left: 1px solid black;border-right:1px solid black ;">
-                    <div class="col-md-6 col-xs-12 col-sm-6">
-                        <p>NOMBRE DEL TRABAJADOR QUE RECIBE <br> <strong><?php echo $nombreCompleto; ?></strong></p>
+                    <div class="col-md-4 col-xs-12 col-sm-4">
+                        <p>NOMBRE DEL TRABAJADOR QUE RECIBE:<br> <strong><?php echo $nombreCompleto; ?></strong></p>
                     </div>
-                    <div class="col-md-6 col-xs-12 col-sm-6">
-                        <p>CC: <strong><?php echo $cedula; ?></strong></p>
+                    <div class="col-md-4 col-xs-12 col-sm-4">
+                        <p>CC/ IDENTIFICACIÓN DE TRABAJADOR:<br> <strong><?php echo $cedula; ?></strong></p>
                     </div>
-                </div>
-                <div class="row" style="border-left: 1px solid black;border-right:1px solid black ;">
-                    <div class="col-md-6 col-xs-12 col-sm-6">
+                    <div class="col-md-4 col-xs-12 col-sm-4">
                         <p>CARGO QUE DESEMPEÑA:<br> <strong><?php echo $cargo; ?></strong></p>
                     </div>
-                    <div class="col-md-6 col-xs-12 col-sm-6">
-                        <p>CORREO ASIGNADO:</p>
-                    </div>
                 </div>
+
 
                 <div class="row" style="border-left: 1px solid black;border-right:1px solid black ;">
-                    <div class="col-md-6 col-xs-12 col-sm-6">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
                         <p>NOMBRE DEL TRABAJADOR QUE ENTREGA: <br> <strong><?php echo utf8_encode($_SESSION['NOMBRE']); ?></strong></p>
                     </div>
-                    <div class="col-md-6 col-xs-12 col-sm-6">
-                        <p>CARGO QUE DESEMPEÑA: <br> <strong><?php echo utf8_encode($_SESSION['CARGO']); ?></strong></p>
-                    </div>
+                    <div class="col-md-4"></div>
                 </div>
 
-                <div class="row">
+                <div class="row" style="text-align: center;">
                     <div class="col-md-12 col-xs-12 col-sm-12" style="border: 1px solid black;">
-                        <p>CARACTERISTICAS DE LOS ELEMENTOS ASIGNADOS</p>
+                        <p>CARACTERÍSTICAS DE LOS ELEMENTOS ASIGNADOS</p>
                     </div>
                 </div>
 
-                <div class="row">
+                <!-- ETIQUETAS -->
+                <div class="row" style="text-align: center;">
+
                     <?php
                     $columnasMostrarcomp = array(
-                        'Tipo_maquina' => 'ELEMENTO',
+                        'tipo_maquina' => 'ELEMENTO',
                         'Marca_computador' => 'MARCA',
                         'Modelo_computador' => 'MODELO',
-                        'Serial_equipo' => 'SERIAL',
-                        // Agrega aquí las columnas que deseas mostrar y sus etiquetas
-                    );
-
-                    $columnasMostrarcel = array(
-                        'tipo_maquina' => '',
-                        'marca' => '',
-                        'modelo' => '',
-                        'serial_equipo_celular' => '',
+                        'Serial_equipo' => 'SERIAL/PLAN/ACT',
                         // Agrega aquí las columnas que deseas mostrar y sus etiquetas
                     );
 
@@ -176,143 +175,119 @@ JOIN [ControlTIC].[dbo].gestion as gestio ON mc.Gestion = gestio.id where cedula
                     echo '</thead>';
                     echo '<tbody>';
 
-                    // Mostrar los datos de la primera consulta
-                    foreach ($arr as $fila) {
-                        echo '<tr>';
-                        foreach ($columnasMostrarcomp as $columna => $etiqueta) {
-                            echo '<td>' . $fila[$columna] . '</td>';
-                        }
-                        echo '</tr>';
-                    }
 
-                    // Mostrar los datos de la segunda consulta
-                    foreach ($arr_celular as $fila) {
-                        echo '<tr>';
-                        foreach ($columnasMostrarcel as $columna => $etiqueta) {
-                            echo '<td>' . $fila[$columna] . '</td>';
-                        }
-                        echo '</tr>';
-                    }
                     echo '</tbody>';
                     echo '</table>';
                     ?>
                 </div>
 
-                <div class="row" style="border: 1px solid black;text-align: left;">
-                    <div class="col-md-12">
-                        <!-- Aquí puedes mostrar el resultado de la consulta SQL en formato de texto simple -->
+                <!-- AQUI EMPIEZA TODO -->
+                <div class="row" style="border: 1px solid black;">
+
+                    <!-- empieza aqui  COMPUTADOR -->
+                    <div class="col-md-12" style="padding: 10px;">
                         <?php
-                        // Verificar si hay datos en el arreglo $arr
-                        if (!empty($arr) || !empty($arr_celular)) {
-                            echo '<strong></strong><br>';
-
-                            // Mostrar los resultados en una tabla
+                        // Check if there are computer assignment records
+                        if (!empty($arr)) {
+                            // echo '<p>Computadoras</p>';
                             echo '<table>';
+                            echo '<thead>';
                             echo '<tr>';
-
-                            // Mostrar los resultados de las computadoras
-                            foreach ($arr as $fila) {
-                                echo '<td style="margin-right: 10px; padding: 30px; ">'; // Agrega espacio y bordes
-                                echo '<p>';
-                                echo 'Tipo de Máquina: <strong>' . $fila['Tipo_maquina'] . '</strong><br>';
-                                echo 'Marca: <strong>' . $fila['Marca_computador'] . '</strong><br>';
-                                echo 'Modelo: <strong>' . $fila['Modelo_computador'] . '</strong><br>';
-                                echo 'Serial: <strong>' . $fila['Serial_equipo'] . '</strong><br>';
-                                echo 'Procesador: <strong>' . $fila['Procesador'] . '</strong><br>';
-                                echo 'Memoria Ram: <strong>' . $fila['Memoria_ram'] . '</strong><br>';
-                                echo 'Tipo Disco: <strong>' . $fila['Tipo_disco'] . '</strong><br>';
-                                echo 'Capacidad Disco: <strong>'  . $fila['Capacidad_dico'] . '</strong><br>';
-                                // Agrega aquí más campos y sus valores si es necesario
-                                echo '</p>';
-                                echo '</td>';
-                            }
-
-                            // Mostrar los resultados de los teléfonos celulares
-                            foreach ($arr_celular as $fila) {
-                                echo '<td style="margin-right: 10px; padding: 30px;">'; // Agrega espacio y bordes
-                                echo '<p>';
-                                echo 'Tipo de Máquina: <strong>' . $fila['tipo_maquina'] . '</strong><br>';
-                                echo 'Marca: <strong>' . $fila['marca'] . '</strong><br>';
-                                echo 'Modelo: <strong>' . $fila['modelo'] . '</strong><br>';
-                                echo 'Serial: <strong>' . $fila['serial_equipo_celular'] . '</strong><br>';
-                                echo 'IMEI: <strong>' . $fila['imei'] . '</strong><br>';
-                                echo 'Capacidad: <strong>' . $fila['capacidad'] . '</strong><br>';
-                                echo 'Ram: <strong>' . $fila['ram_celular'] . '</strong><br>';
-                                // Agrega aquí más campos y sus valores si es necesario
-                                echo '</p>';
-                                echo '</td>';
-                            }
-
+                            echo '<th style="padding-right: 20px;text-align: center">ELEMENTO </th>';
+                            echo '<th style="padding-right: 20px;text-align: center">MARCA</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">MODELO</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">SERIAL</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">PROCESADOR</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">MEMORIA RAM</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">TIPO DISCO</th>';
+                            echo '<th style="padding-right: 20px;text-align: center">CAPACIDAD DISCO</th>';
+                            echo '<th style="padding-right: 20px;">OBSERVACIONES</th>';
                             echo '</tr>';
+                            echo '</thead>';
+                            echo '<tbody>';
+
+                            // Display the results of computer assignments
+                            foreach ($arr as $fila) {
+                                echo '<tr>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['tipo_maquina'] . ' </td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['Marca_computador'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['Modelo_computador'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['Serial_equipo'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['Procesador'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['Memoria_ram'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['Tipo_discoduro'] . '</td>';
+                                echo '<td style="padding-right: 20px;text-align: center">' . $fila['Capacidad_discoduro'] . '</td>';
+                                echo '<td style="padding-right: 20px;">' . $fila['observaciones_asigna'] . '</td>';
+                                echo '</tr>';
+                            }
+
+                            echo '</tbody>';
                             echo '</table>';
-                        } else {
-                            echo 'No se encontraron datos para mostrar.';
                         }
                         ?>
                     </div>
 
-                </div>
+                    <!-- TERMINA COMPUTADOR -->
 
-                <div class="row" style="border: 1px solid black;padding: 10px;">
-                    <div class="col-md-2">
-                        <p>OBSERVACIONES:</p>
-                    </div>
-                    <div class="col-md-10">
-                        <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                            <label for="floatingTextarea2"></label>
-                        </div>
-                    </div>
                 </div>
+                <!-- AQUI FINALIZA TODO -->
 
                 <div class="row">
-                    <div class="col-md-12" style="border: 1px solid black;text-align: justify;padding: 30px;">
+                    <div class="col-md-12" style="border: 1px solid black;text-align: justify;padding: 10px;">
                         <p>EL FUNCIONARIO QUE RECIBE, ABAJO FIRMANTE, SE HACE RESPONSABLE DEL USO DEL SOFTWARE INSTALADO
                             EN ESTE EQUIPO Y APROBADO POR DUQUESA S.A. Y ASUME LA RESPONSABILIDAD,
                             ADMINISTRATIVA Y LEGAL POR EL USO DEL SOFTWARE NO AUTORIZADO. </p>
-                        <div>
-                            <p> EL EQUIPO SE ENTREGA A SATISFACCIÓN DEL USUARIO. </p><br>
+                        <p> EL EQUIPO SE ENTREGA A SATISFACCIÓN DEL USUARIO. </p>
+                    </div>
+                </div>
+
+                <div class="row" style="text-align: center;">
+                    <div class="col-md-4" style="border: 1px solid black;"><strong>ENTREGA:</strong><br><br>
+                        <img src="../../assets/image/firma.png" alt="" style="width: 100px;"><br><br>
+                        <p><strong><?php echo utf8_encode($_SESSION['NOMBRE']); ?></strong><br> <?php echo utf8_encode($_SESSION['CARGO']); ?></p>
+                    </div>
+                    <div class="col-md-4" style="border: 1px solid black;"><strong>RECIBE:</strong><br><br>
+                        <img src="../../assets/image/firma.png" alt="" style="width: 100px;"><br><br>
+                        <p><strong><?php echo $nombreCompleto; ?></strong><br> <?php echo $cargo; ?></p>
+                    </div>
+                    <div class="col-md-4" style="border: 1px solid black;"><strong>AUTORIZACION:</strong><br><br>
+                        <img src="../../assets/image/firma.png" alt="" style="width: 100px;"><br><br>
+                        <p><strong>ANDRES ROBAYO </strong><br> JEFE DE SISTEMAS</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section id="segundahoja" style="margin-top: 30px;">
+            <div class="container" style="border: 1px solid black;padding-left: 50px;padding-right: 50px;padding-top: 25px;padding-bottom: 20px;">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <?php
+                            if ($empresa == 1) {
+                                echo '<img src="../../assets/image/duquesaacta.png" alt="">';
+                            } elseif ($empresa == 2) {
+                                echo '<img src="../../assets/image/palmerasacta.png" alt="">';
+                            } elseif ($empresa == 3) {
+                                echo '<img src="../../assets/image/j25acta.png" alt="">';
+                            }
+                            ?>
+                        </div>
+                        <div class="col-md-10">
+                            <h5 style="margin-left: 80px;margin-top: 15px;">ACUERDO ACTA ENTREGA DE EQUIPOS</h5>
                         </div>
                     </div>
                 </div>
 
-
-                <div class="row">
-                    <div class="col-md-4" style="border: 1px solid black;">ENTREGA: <br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 150px;"><br><br>
-                        <p><strong><?php echo utf8_encode($_SESSION['NOMBRE']); ?></strong><br> <?php echo utf8_encode($_SESSION['CARGO']); ?></p>
-                    </div>
-                    <div class="col-md-4" style="border: 1px solid black;">RECIBE: <br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 150px;"><br><br>
-                        <p><strong><?php echo $nombreCompleto; ?></strong><br> <?php echo $cargo; ?></p>
-                    </div>
-                    <div class="col-md-4" style="border: 1px solid black;">AUTORIZACION <br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 150px;"><br><br>
-                        <p><strong>Andres Robayo</strong><br> Jefe de Sistemas</p>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <button type="button" class="btn btn-danger " id="activepdf" class="btnGetPdf" style="width: 100%;">Descargar</button>
-
-        <section id="acuerdo" style="margin-top: 50px;">
-            <div class="container" style="border: 1px solid black;padding: 100px;">
-
-                <div class="row" style="">
-                    <div class="col-md-4">
-                        <img src="../../assets/image/duquesa_logo - copia.png" alt="">
-                    </div>
-                    <div class="col-md-8">
-                        <h5 style="text-align: left;padding: 10px;">ACUERDO ACTA ENTREGA DE EQUIPOS</h5>
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 50px;">
+                <div class="row" style="margin-top: 30px;">
                     <div class="col-md-12" style="text-align: left;">
                         <h6 id="fecha-hora"></h6>
                     </div>
                 </div>
+
                 <br>
                 <div class="row">
                     <div class="col-md-12" style="text-align: justify;">
@@ -325,24 +300,46 @@ JOIN [ControlTIC].[dbo].gestion as gestio ON mc.Gestion = gestio.id where cedula
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-4" style="">ENTREGA: <br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 150px;"><br><br>
-                        <p><strong><?php echo utf8_encode($_SESSION['NOMBRE']); ?></strong><br> <?php echo utf8_encode($_SESSION['CARGO']); ?></p>
-                    </div>
-                    <div class="col-md-4" style="">RECIBE: <br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 150px;"><br><br>
-                        <p><strong><?php echo $nombreCompleto; ?></strong><br> <?php echo $cargo; ?></p>
-                    </div>
-                    <div class="col-md-4" style="">ENTREGA: <br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 150px;"><br><br>
-                        <p><strong>Andres Robayo</strong><br> Jefe de Sistemas</p>
+                <div class="container-fluid" style="text-align: center;">
+                    <div class="row">
+                        <div class="col-md-4"><strong>ENTREGA:</strong><br><br>
+                            <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
+                            <p><strong><?php echo utf8_encode($_SESSION['NOMBRE']); ?></strong><br> <?php echo utf8_encode($_SESSION['CARGO']); ?></p>
+                        </div>
+                        <div class="col-md-4"><strong>RECIBE:</strong><br><br>
+                            <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
+                            <p><strong><?php echo $nombreCompleto; ?></strong><br> <?php echo $cargo; ?></p>
+                        </div>
+                        <div class="col-md-4"><strong>ENTREGA:</strong><br><br>
+                            <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
+                            <p><strong>ANDRES ROBAYO</strong><br> Jefe de Sistemas</p>
+                        </div>
                     </div>
                 </div>
-
             </div>
+
+            <div class="d-grid gap-2">
+                <button id="descargarPdfSegundaHoja" type="button" class="btn btn-danger pdf-button">DESCARGAR SEGUNDA HOJA PDF</button>
+            </div>
+
         </section>
 
+
+
+        <div class="container-fluid" style="margin-top: 90px;">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8" style="text-align: center;">
+                    <div class="d-grid gap-2">
+                        <button id="descargarPdf" type="button" class="btn btn-danger pdf-button">DESCARGAR PDF</button>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+
+
+        <div class="d-grid gap-2">
 
 
     </body>
@@ -350,7 +347,109 @@ JOIN [ControlTIC].[dbo].gestion as gestio ON mc.Gestion = gestio.id where cedula
     </html>
 
 
+    <!-- script para descargar en pdf -->
+    <script>
+        // Función para convertir la sección en PDF y descargarlo
+        function descargarPDF() {
+            // Oculta los botones antes de generar el PDF
+            var pdfButtons = document.querySelectorAll('.pdf-button');
+            pdfButtons.forEach(function(button) {
+                button.style.display = 'none';
+            });
 
+            const elemento = document.getElementById('descargaresto'); // ID de la sección que deseas convertir a PDF
+
+            // Cambiar el estilo de la sección antes de generar el PDF
+            elemento.style.fontSize = '10px';
+
+            // Configuración de opciones para html2pdf
+            const opciones = {
+                margin: 9,
+                filename: 'ACTA.pdf', // Nombre del archivo PDF
+                image: {
+                    type: 'jpeg',
+                    quality: 1
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'portrait'
+                },
+            };
+
+            // Comienza la conversión y descarga
+            html2pdf()
+                .from(elemento)
+                .set(opciones)
+                .save()
+                .then(function() {
+                    // Restaura la visibilidad de los botones después de generar el PDF
+                    pdfButtons.forEach(function(button) {
+                        button.style.display = 'block';
+                    });
+                });
+        }
+
+        // Asocia la función de descarga al botón
+        document.getElementById('descargarPdf').addEventListener('click', descargarPDF);
+    </script>
+
+
+    <!-- script para descargar segunda hoja -->
+    <script>
+        // Función para convertir la sección "segundahoja" en PDF y descargarla
+        function descargarPDFSegundaHoja() {
+            // Oculta los botones antes de generar el PDF
+            var pdfButtons = document.querySelectorAll('.pdf-button');
+            pdfButtons.forEach(function(button) {
+                button.style.display = 'none';
+            });
+
+            const elemento = document.getElementById('segundahoja'); // ID de la sección "segundahoja"
+
+            // Cambiar el estilo de la sección antes de generar el PDF (si es necesario)
+            elemento.style.fontSize = '14px';
+
+            // Configuración de opciones para html2pdf (puedes ajustar según tus necesidades)
+            const opciones = {
+                margin: 9,
+                filename: 'SegundaHoja.pdf', // Nombre del archivo PDF para la segunda hoja
+                image: {
+                    type: 'jpeg',
+                    quality: 2
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'portrait'
+                },
+            };
+
+            // Comienza la conversión y descarga
+            html2pdf()
+                .from(elemento)
+                .set(opciones)
+                .save()
+                .then(function() {
+                    // Restaura la visibilidad de los botones después de generar el PDF
+                    pdfButtons.forEach(function(button) {
+                        button.style.display = 'block';
+                    });
+                });
+        }
+
+        // Asocia la función de descarga al botón de la segunda hoja
+        document.getElementById('descargarPdfSegundaHoja').addEventListener('click', descargarPDFSegundaHoja);
+    </script>
+
+
+    <!-- OBTENER LA FECHA ACTUAL -->
     <script>
         // Obtenemos la fecha actual
         var fechaActual = new Date();
@@ -380,47 +479,7 @@ JOIN [ControlTIC].[dbo].gestion as gestio ON mc.Gestion = gestio.id where cedula
         h6Element.textContent = fechaHoraFormateada;
     </script>
 
-    <!-- SCRIPT DE EXPORTAR PDF -->
-    <script>
-        // document.oncontextmenu = function(){return false;}
-        function converHTMLToPDF() {
-            const $elementoParaConvertir = document.getElementById('previewHtmlContent'); // <-- Aquí puedes elegir cualquier elemento del DOM
-            html2pdf()
-                .set({
-                    margin: 6,
-                    filename: 'Certificado.pdf',
-                    image: {
-                        type: 'jpeg',
-                        quality: 0.98,
-                    },
-                    html2canvas: {
-                        scale: 3, // A mayor escala, mejores gráficos, pero más peso
-                        letterRendering: true,
-                    },
-                    jsPDF: {
-                        orientation: 'p',
-                        unit: 'mm',
-                        format: 'a4',
-                        putOnlyUsedFonts: true,
-                        format: 'letter',
-                        precision: '16'
 
-                    }
-                })
-                .from($elementoParaConvertir)
-                .save()
-                .catch(err => console.log(err));
-        }
-
-        document.getElementById('activepdf').addEventListener('click', function() {
-            converHTMLToPDF()
-        });
-
-        var doc = new jsPDF()
-        doc.text(10, 10, 'Invoice', {
-            align: 'center'
-        })
-    </script>
 
 
 

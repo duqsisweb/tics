@@ -48,22 +48,22 @@ if (isset($_SESSION['usuario'])) {
                         <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                             <thead>
                                 <tr class="encabezado table-dark">
-                                   <th>ID</th>
-                                   <th>ELEMENTO</th>
-                                   <th>MARCA</th>
-                                   <th>MODELO</th>
-                                   <th>DESCRIPCION</th>
-                                   <th>SERIAL</th>
-                                   <th>FECHA DE INGRESO</th>
-                                   <th>ESTADO</th>
-                                   <th class="hidden-cell">ESTADOID</th>
-                                   <th>PLACA DE ACTIVO</th>
-                                   <th>SEDE</th>
-                                   <th>UBICACION</th>
-                                   <th>OBSERVACIONES</th>
-                                   <th>GESTION</th>
-                                   <th>FECHA DE GARANTIA</th>
-                                   <th>ACCIONES</th>
+                                    <th>ID</th>
+                                    <th>ELEMENTO</th>
+                                    <th>MARCA</th>
+                                    <th>MODELO</th>
+                                    <th>DESCRIPCION</th>
+                                    <th>SERIAL</th>
+                                    <th>FECHA DE INGRESO</th>
+                                    <th>ESTADO</th>
+                                    <th class="hidden-cell">ESTADOID</th>
+                                    <th>PLACA DE ACTIVO</th>
+                                    <th>SEDE</th>
+                                    <th>UBICACION</th>
+                                    <th>OBSERVACIONES</th>
+                                    <th>GESTION</th>
+                                    <th>FECHA DE GARANTIA</th>
+                                    <th>ACCIONES</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -90,10 +90,10 @@ if (isset($_SESSION['usuario'])) {
 
 
                                     // Verificar si el estado no es "Asignado" para mostrar el select y el botón
-                                    if ($row['estadoid'] !== 'Asignado') {
+                                    if ($row['estado'] !== 'ASIGNADO' && $row['estado'] !== 'BAJA') {
                                         echo '<td>';
-                                        echo '<select class="form-select estadoid-select" aria-label="Default select example">';
-                                        echo '<option selected disabled>Seleccionar</option>';
+                                        echo '<select class="form-select estadoid-select" aria-label="Default select example" required>';
+                                        echo '<option value="" selected disabled>Seleccionar</option>'; // Opción inválida
                                         echo '<option value="1">CONFIGURACION</option>';
                                         echo '<option value="2">BAJA</option>';
                                         echo '<option value="3">VENDIDO</option>';
@@ -104,11 +104,11 @@ if (isset($_SESSION['usuario'])) {
                                         echo '<button type="button" class="btn btn-warning btn-ajustarcomp asignar-btn" data-id="' . $row['id'] . '">AJUSTAR</button>';
                                         echo '</td>';
                                     } else {
-                                        echo '<td></td>'; // Espacio en blanco si el estado es "Asignado"
+                                        echo '<td></td>'; // Espacio en blanco si el estado es "Asignado" o "Baja"
                                     }
+
                                     echo "</tr>";
                                 }
-
                                 ?>
                             </tbody>
                         </table>
@@ -123,7 +123,7 @@ if (isset($_SESSION['usuario'])) {
                     </div>
                 </div>
             </div>
-            
+
         </section>
     </body>
 
@@ -175,6 +175,21 @@ if (isset($_SESSION['usuario'])) {
         $(document).ready(function() {
             // Cuando se hace clic en un botón con la clase "btn-ajustarcomp"
             $('.btn-ajustarcomp').click(function() {
+
+
+                // VALIDAR SI EL USUARIO NO SELECCIONA NINGUNA OPCION EN EL SELECT O AJUSTES
+                var button = $(this);
+                var select = button.closest('tr').find('.estadoid-select');
+                var selectedValue = select.val();
+
+                // Validar si se ha seleccionado una opción válida
+                if (selectedValue === "" || selectedValue === null) {
+                    Swal.fire('Seleccione una opción válida', '', 'warning');
+                    return;
+                }
+                // FIN DEL VALIDADOR
+
+
                 // Obtener el valor del usuario de $_SESSION['usuario']
                 var usuario = "<?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : ''; ?>";
 

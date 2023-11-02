@@ -19,7 +19,6 @@ if (isset($_SESSION['usuario'])) {
 
     <body>
 
-
         <!-- PARTE DEL NAV -->
         <?php
         require '../../views/nav.php';
@@ -160,20 +159,19 @@ if (isset($_SESSION['usuario'])) {
                     </div>
 
                     <div class="col-md-4">
-                        <!-- <div class="card text-center">
+                        <div class="card text-center">
                             <div class="card-header">
-                                Devoluciones
+                                Remover Asignación
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Remover Asignación</h5>
-                                <p class="card-text">Aquí puede liberar o remover equipos de los usuarios</p>
-                                <a href="devoluciones.php" class="btn btn-success">Ingresar</a>
+                                <h5 class="card-title">Devolución de equipos</h5>
+                                <p class="card-text">Aquí puede liberar o remover equipos de los usuarios</p><br>
+                                <a href="desasignacionesusuario.php" class="btn btn-success">Ingresar</a>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
-
 
             <br>
             <!-- CUARTO BLOQUE -->
@@ -221,8 +219,6 @@ if (isset($_SESSION['usuario'])) {
                     </div> -->
                 </div>
             </div>
-
-
 
         </section>
 
