@@ -70,7 +70,7 @@ if (isset($_POST['cedula'])) {
               <table class="table table-bordered dt-responsive table-hover display nowrap" id="infodetallefactura" cellspacing="0" style="text-align: center;">
                 <thead>
                     <tr class="encabezado table-dark">
-                        <th scope="col" class="hidden-cell">Usua_asigna</th>
+                        <th scope="col" class="">Usua_asigna</th>
                         <th scope="col" class="hidden-cell">Primer Nombre</th>
                         <th scope="col" class="hidden-cell">Segundo Nombre</th>
                         <th scope="col" class="hidden-cell">Primer Apellido</th>
@@ -148,8 +148,8 @@ if (isset($_POST['cedula'])) {
                                 data-sede-perifericos="<?= $fila['sede_perifericos'] ?>" 
                                 data-ubicacion-perifericos="<?= $fila['ubicacion_perifericos'] ?>" 
                                 data-tipo="<?= $fila['tipo'] ?>" 
-                                data-tipo-toner="<?= $fila['tipo_toner'] ?>" >
-                                </button>
+                                data-tipo-toner="<?= $fila['tipo_toner'] ?>" 
+                                data-usua-asigna="<?php echo $Usua_asigna; ?>"></button>
                                 <!-- Botón oculto para la alerta -->
                                 <button  type="button" class="btn btn-outline-danger showAlertButton" > REMOVER </button>
                             </td>

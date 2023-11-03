@@ -122,7 +122,15 @@ if (isset($_POST['cedula'])) {
                                 data-cargo="<?= $cargo ?>" 
                                 data-empresa="<?= $empresa ?>" 
                                 data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" 
-                                data-marca-almacenamiento="<?= $fila['marca_almacenamiento'] ?>" data-modelo-almacenamiento="<?= $fila['modelo_almacenamiento'] ?>" data-descripcion-almacenamiento="<?= $fila['descripcion_almacenamiento'] ?>" data-capacidad-almacenamiento="<?= $fila['capacidad_almacenamiento'] ?>" data-tipo-almacenamiento="<?= $fila['tipo_almacenamiento'] ?>" data-caracteristica-almacenamiento="<?= $fila['caracteristica_almacenamiento'] ?>" data-sede-almacenamiento="<?= $fila['sede_almacenamiento'] ?>" data-ubicacion-almacenamiento="<?= $fila['ubicacion_almacenamiento'] ?>" ></button>
+                                data-marca-almacenamiento="<?= $fila['marca_almacenamiento'] ?>" 
+                                data-modelo-almacenamiento="<?= $fila['modelo_almacenamiento'] ?>" 
+                                data-descripcion-almacenamiento="<?= $fila['descripcion_almacenamiento'] ?>" 
+                                data-capacidad-almacenamiento="<?= $fila['capacidad_almacenamiento'] ?>" 
+                                data-tipo-almacenamiento="<?= $fila['tipo_almacenamiento'] ?>" 
+                                data-caracteristica-almacenamiento="<?= $fila['caracteristica_almacenamiento'] ?>" 
+                                data-sede-almacenamiento="<?= $fila['sede_almacenamiento'] ?>" 
+                                data-ubicacion-almacenamiento="<?= $fila['ubicacion_almacenamiento'] ?>" 
+                                data-usua-asigna="<?php echo $Usua_asigna; ?>"></button>
                                 <!-- btn escondido para la alerta -->
                                 <button id="" type="button" class="btn btn-outline-danger showAlertButton">REMOVER</button>
                             </td>

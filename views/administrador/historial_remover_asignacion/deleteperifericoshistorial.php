@@ -42,9 +42,6 @@ echo "</script>"; {
     $cedula = $_POST['cedula'];
     $cargo = $_POST['cargo'];
 
-
-    $Usua_asigna = $_POST['Usua_asigna'];
-
     $observaciones_desasigna_peri = $_POST['observaciones_desasigna_peri'];
     $link_peri_desasigna = $_POST['link_peri_desasigna'];
 

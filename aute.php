@@ -1,64 +1,93 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
-error_reporting(0);
+// error_reporting(0);
 
-if ($_POST['iniciar']) {
-    header("Cache-control: private");
+if (isset($_POST['iniciar'])) {
     include("./conexionbd.php");
-    $usuario1 = utf8_decode($_POST['usuario']);
-    $usuario = rtrim($usuario1);
+
+    $usuario = rtrim($_POST['usuario']);
     $password = rtrim($_POST['password']);
-    $typeUser = $_POST['typeUser'];
 
-    $resul = odbc_exec($conexion, " SELECT MV.NOMBRE, RTRIM(MV.CODUSUARIO) AS CODUSUARIO, RTRIM(MV.PASSWORD) AS CLAVE FROM CONTROL_OFIMAEnterprise..MTUSUARIO AS MV WHERE (MV.CODUSUARIO = '$usuario' AND MV.CODUSUARIO IN ('YFGONZALEZ','COORDSISTEMAS','YALONSO','DORTEGA','ANALISTAV','AROBAYO')) AND MV.PASSWORD = '$password'") or die(exit("Error al ejecutar consulta"));
+    $resul = odbc_exec($conexion, "SELECT RTRIM(US.name) AS NOMBRE, RTRIM(US.email) AS EMAIL, RTRIM(US.password) AS CLAVE, [estadopassword], [sistemaClasificador]
+    FROM  [ControlTIC].[dbo].[users] AS US
+    WHERE US.email = '$usuario' and Estado = '1' ") or die(exit("Error al ejecutar consulta"));
 
-    $Nombre = odbc_result($resul, 'NOMBRE');
-    $usua = rtrim(odbc_result($resul, 'CODUSUARIO'));
-    $pass = rtrim(odbc_result($resul, 'CLAVE'));
+    if (odbc_num_rows($resul) > 0) {
+        $row = odbc_fetch_array($resul);
+        $Nombre = $row['NOMBRE'];
+        $usua = $row['EMAIL'];
+        $pass = $row['CLAVE'];
+        $sistemaClasificador = $row['sistemaClasificador'];
 
-    $usua = strtoupper($usua);
-    $usuario = strtoupper($usuario);
+        if (($usua == 'ANDRESROBAYO' && $password == $pass) || password_verify($password, $pass)) {
+            // Contraseña válida
+            session_start();
+            $_SESSION['usuario'] = $usua;
+            $_SESSION['NOMBRE'] = $Nombre;
 
-    if ($usua == $usuario && $pass == $password) {
-        session_start();
-        $_SESSION['usuario'] = $usua;
-        $_SESSION['NOMBRE'] = $Nombre;
+            // Asignar perfil/rol basado en el valor de $sistemaClasificador
+            if ($sistemaClasificador == 'AUXILIAR') {
+                $perfil = 'perfil1';
+            } elseif ($sistemaClasificador == 'COORDINADOR') {
+                $perfil = 'perfil2';
+            } elseif ($usua == 'ANDRESROBAYO') {
+                $perfil = 'perfil3';
+            } else {
+                // Asignar un perfil predeterminado si el valor de sistemaClasificador no coincide con ninguno de los perfiles anteriores
+                $perfil = 'perfil_predeterminado';
+            }
 
-        // Redireccionar a diferentes vistas según el perfil del usuario
-        switch ($usua) {
-            case 'YFGONZALEZ':
-            case 'AROBAYO':
-            case 'ANALISTAV':
-            case 'DORTEGA':
-                header("Location: views/administrador/inicio_administrador.php");
-                break;
-            case 'COORDSISTEMAS':
-                header("Location: views/coordinador/inicio_coordinador.php");
-                break;
-            case 'YALONSO':
-            case 'HGUERRERO':
-                header("Location: views/auxiliar/inicio_auxiliar.php");
-                break;
-            default:
-                // En caso de que el usuario no tenga un perfil definido, redireccionar a una página de error o login.
-                header("Location: login.php");
-                break;
+            $_SESSION['perfil'] = $perfil;
+
+            switch ($perfil) {
+                case 'perfil1':
+                    header("Location: views/auxiliar/inicio_auxiliar.php");
+                    exit();
+                    break;
+                case 'perfil2':
+                    header("Location: views/coordinador/inicio_coordinador.php");
+                    exit();
+                    break;
+                case 'perfil3':
+                    header("Location: views/administrador/inicio_administrador.php");
+                    exit();
+                    break;
+                default:
+                    // Redirigir a una vista predeterminada si el perfil no coincide con ninguno de los perfiles anteriores
+                    header("Location: view/administrador/ASH.php");
+                    exit();
+                    break;
+            }
+
+        ?>
+            <script>
+                alert("Hola <?php echo $Nombre ?>");
+            </script>
+        <?php
+        } else {
+            // Contraseña incorrecta
+        ?>
+            <script>
+                alert("Credenciales incorrectas");
+                window.location.href = "login.php";
+            </script>
+        <?php
         }
-        exit();
     } else {
+        // No se encontró el usuario en la base de datos
         ?>
         <script>
             alert("Credenciales incorrectas");
-            window.location.href="login.php"; 
+            window.location.href = "login.php";
         </script>
-        <?php
+    <?php
     }
-} else { 
+} else {
     ?>
     <script>
         alert("Ingreso Erroneo");
-        window.location.href="login.php"; 
+        window.location.href = "login.php";
     </script>
-    <?php
+<?php
 }
 ?>

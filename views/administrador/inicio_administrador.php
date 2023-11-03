@@ -191,19 +191,19 @@ if (isset($_SESSION['usuario'])) {
                         </div>
                     </div>
 
-                    <!-- <div class="col-md-4">
+                    <div class="col-md-4">
                         <div class="card text-center">
                             <div class="card-header">
-                                
+                                Usuarios
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Usuarios con Equipos Asignados</h5>
-                                <p class="card-text">Aquí puede verificar que Dispositivos o Máquinas están asociadas a los usuarios</p>
-                                <a href="asignacionesusuario.php" class="btn btn-success">Ingresar</a>
+                                <h5 class="card-title">USUARIOS DEL SISTEMA GESTION TICS</h5>
+                                <p class="card-text">Registro de usuarios</p>
+                                <a href="usuarios/usuarios.php" class="btn btn-success">Ingresar</a>
                             </div>
 
                         </div>
-                    </div> -->
+                    </div>
 
                     <!-- <div class="col-md-4">
                         <div class="card text-center">

@@ -203,16 +203,12 @@ if (isset($_SESSION['usuario'])) {
     <!-- Fin DataTable -->
 
 
-
-
-
     <script type="text/javascript">
         $(document).ready(function() {
             // Escuchar el clic en los botones "Ver listado"
             $(".open-modal").click(function() {
                 // Obtener el ID de la fila seleccionada
                 var equipoId = $(this).data("id");
-
                 // Obtén el contenido de la etiqueta <strong> con el id "nombreStrong"
                 var usuario = $('#usuario').text();
 

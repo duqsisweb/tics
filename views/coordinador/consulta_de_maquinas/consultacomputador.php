@@ -171,50 +171,15 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
                                 <td class=""><?= $fila['Fecha_garantia_c'] ?></td>
 
                                 <td>
-                                    <textarea placeholder="AGREGE UNA OBSERVACIÓN" id="observaciones_asigna<?= $fila['id'] ?>" name="observaciones_asigna" style="width: 300px; height: 160px;"></textarea>
+                                    <textarea placeholder="AGREGE UNA OBSERVACIÓN" id="observaciones_asigna<?= $fila['id'] ?>" name="observaciones_asigna" style="width: 300px; height: 160px;" oninput="convertirAMayusculas(this)" autocomplete="off"></textarea>
                                 </td>
 
                                 <td>
-                                    <input id="link_computador_asigna<?= $fila['id'] ?>" name="link_computador_asigna"></input>
+                                    <input id="link_computador_asigna<?= $fila['id'] ?>" name="link_computador_asigna" autocomplete="off"></input>
                                 </td>
 
                                 <td>
-                                    <button id="enviarcomputador" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" 
-                                    data-id="<?= $fila['id'] ?>" 
-                                    data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" 
-                                    data-service-tag="<?= $fila['Service_tag'] ?>" 
-                                    data-serial-equipo="<?= $fila['Serial_equipo'] ?>"
-                                    data-nombre-equipo="<?= $fila['Nombre_equipo'] ?>" 
-                                    data-sede="<?= $fila['Sede'] ?>" 
-                                    data-empresa="<?= $fila['Empresa'] ?>" 
-                                    data-marca-computador="<?= $fila['Marca_computador'] ?>" 
-                                    data-modelo-computador="<?= $fila['Modelo_computador'] ?>" 
-                                    data-tipo-comp="<?= $fila['Tipo_comp'] ?>" 
-                                    data-tipo-memoria-ram="<?= $fila['tipo_memoria_ram'] ?>" 
-                                    data-capacidad-ram="<?= $fila['capacidad_ram'] ?>" 
-                                    data-tipo-discoduro="<?= $fila['Tipo_discoduro'] ?>" 
-                                    data-capacidad-discoduro="<?= $fila['Capacidad_discoduro'] ?>" 
-                                    data-procesador="<?= $fila['Procesador'] ?>" 
-                                    data-propietario="<?= $fila['Propietario'] ?>" 
-                                    data-proveedor="<?= $fila['Proveedor'] ?>" 
-                                    data-sistema-operativo="<?= $fila['Sistema_Operativo'] ?>" 
-                                    data-serial-cargador="<?= $fila['Serial_cargador'] ?>" 
-                                    data-dominio="<?= $fila['Dominio'] ?>" 
-                                    data-tipo-usuario="<?= $fila['Tipo_usuario'] ?>" 
-                                    data-serial-activo-fijo="<?= $fila['Serial_activo_fijo'] ?>" 
-                                    data-fecha-ingreso-c="<?= $fila['Fecha_ingreso_c'] ?>" 
-                                    data-tarjeta-video="<?= $fila['Targeta_Video'] ?>" 
-                                    data-estado="<?= $fila['Estado'] ?>" 
-                                    data-gestion="<?= $fila['Gestion'] ?>" 
-                                    data-fecha-garantia-c="<?= $fila['Fecha_garantia_c'] ?>" 
-
-                                    data-primernombre="<?php echo $primernombre; ?>" 
-                                    data-segundonombre="<?php echo $segundonombre; ?>" 
-                                    data-primerapellido="<?php echo $primerapellido; ?>" 
-                                    data-segundoapellido="<?php echo $segundoapellido; ?>" 
-                                    data-cedula="<?php echo $cedula; ?>" 
-                                    data-cargo="<?php echo $cargo; ?>" 
-                                    data-usua-asigna="<?php echo $Usua_asigna; ?>"></button>
+                                    <button id="enviarcomputador" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-service-tag="<?= $fila['Service_tag'] ?>" data-serial-equipo="<?= $fila['Serial_equipo'] ?>" data-nombre-equipo="<?= $fila['Nombre_equipo'] ?>" data-sede="<?= $fila['Sede'] ?>" data-empresa="<?= $fila['Empresa'] ?>" data-marca-computador="<?= $fila['Marca_computador'] ?>" data-modelo-computador="<?= $fila['Modelo_computador'] ?>" data-tipo-comp="<?= $fila['Tipo_comp'] ?>" data-tipo-memoria-ram="<?= $fila['tipo_memoria_ram'] ?>" data-capacidad-ram="<?= $fila['capacidad_ram'] ?>" data-tipo-discoduro="<?= $fila['Tipo_discoduro'] ?>" data-capacidad-discoduro="<?= $fila['Capacidad_discoduro'] ?>" data-procesador="<?= $fila['Procesador'] ?>" data-propietario="<?= $fila['Propietario'] ?>" data-proveedor="<?= $fila['Proveedor'] ?>" data-sistema-operativo="<?= $fila['Sistema_Operativo'] ?>" data-serial-cargador="<?= $fila['Serial_cargador'] ?>" data-dominio="<?= $fila['Dominio'] ?>" data-tipo-usuario="<?= $fila['Tipo_usuario'] ?>" data-serial-activo-fijo="<?= $fila['Serial_activo_fijo'] ?>" data-fecha-ingreso-c="<?= $fila['Fecha_ingreso_c'] ?>" data-tarjeta-video="<?= $fila['Targeta_Video'] ?>" data-estado="<?= $fila['Estado'] ?>" data-gestion="<?= $fila['Gestion'] ?>" data-fecha-garantia-c="<?= $fila['Fecha_garantia_c'] ?>" data-primernombre="<?php echo $primernombre; ?>" data-segundonombre="<?php echo $segundonombre; ?>" data-primerapellido="<?php echo $primerapellido; ?>" data-segundoapellido="<?php echo $segundoapellido; ?>" data-cedula="<?php echo $cedula; ?>" data-cargo="<?php echo $cargo; ?>" data-usua-asigna="<?php echo $Usua_asigna; ?>"></button>
                                     <!-- btn escondido para la alerta -->
                                     <button id="" type="button" class="btn btn-warning showAlertButton">Asignar</button>
                                 </td>
@@ -373,7 +338,7 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
     <script>
         $(document).ready(function() {
             $('.showAlertButton').click(function() {
-                
+
                 var $asignarBtn = $(this).prev('.asignar-btn'); // Obtener el botón oculto previo
                 var idToUpdate = $asignarBtn.data('id'); // Obtener el ID del botón oculto
 
@@ -420,14 +385,14 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
 
 
 
-<!-- SCRIPT DATATABLE -->
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+    <!-- SCRIPT DATATABLE -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 
     <!-- Inicio DataTable -->
     <script type="text/javascript">
@@ -464,6 +429,14 @@ if (isset($_POST['tipocomputador']) && isset($_POST['empresaOption'])) {
         });
     </script>
     <!-- Fin DataTable -->
+
+    <!-- MAYUSCULAS -->
+    <script>
+        function convertirAMayusculas(input) {
+            input.value = input.value.toUpperCase();
+        }
+    </script>
+
 
 
 

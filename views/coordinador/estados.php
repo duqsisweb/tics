@@ -42,7 +42,7 @@ if (isset($_SESSION['usuario'])) {
                         <div class="card" style="width: 18rem;">
                             <img src="../../assets/image/pc-modified.png" class="card-img-top mx-auto" alt="..." style="width: 150px;">
                             <div class="card-body">
-                                <h5 class="card-title">Computadores</h5>
+                                <h5 class="card-title">COMPUTADORAS</h5>
                                 <p class="card-text"></p>
                                 <a href="estados/estado_computadores.php" class="btn btn-success">Seleccionar</a>
                             </div>
@@ -52,7 +52,7 @@ if (isset($_SESSION['usuario'])) {
                         <div class="card" style="width: 18rem;">
                             <img src="../../assets/image/celular-modified.png" class="card-img-top mx-auto" alt="..." style="width: 150px;">
                             <div class="card-body">
-                                <h5 class="card-title">Celulares</h5>
+                                <h5 class="card-title">CELULARES</h5>
                                 <p class="card-text"></p>
                                 <a href="estados/estado_celulares.php" class="btn btn-success">Seleccionar</a>
                             </div>
@@ -72,7 +72,7 @@ if (isset($_SESSION['usuario'])) {
                         <div class="card" style="width: 18rem;">
                             <img src="../../assets/image/edcomunicacion-modified.png" class="card-img-top mx-auto" alt="..." style="width: 150px;">
                             <div class="card-body">
-                                <h5 class="card-title">E. Comunicación</h5>
+                                <h5 class="card-title">E. DE COMUNICACIÓN</h5>
                                 <p class="card-text"></p>
                                 <a href="estados/estado_edcomunicacion.php" class="btn btn-success">Seleccionar</a>
                             </div>
@@ -89,7 +89,7 @@ if (isset($_SESSION['usuario'])) {
                         <div class="card" style="width: 18rem;">
                             <img src="../../assets/image/video-bean-modified.png" class="card-img-top mx-auto" alt="..." style="width: 150px;">
                             <div class="card-body">
-                                <h5 class="card-title">Perifericos</h5>
+                                <h5 class="card-title">PERIFERICOS</h5>
                                 <p class="card-text"></p>
                                 <a href="estados/estado_perifericos.php" class="btn btn-success">Seleccionar</a>
                             </div>
@@ -99,7 +99,7 @@ if (isset($_SESSION['usuario'])) {
                         <div class="card" style="width: 18rem;">
                             <img src="../../assets/image/discos-duros-modified.png" class="card-img-top mx-auto" alt="..." style="width: 150px;">
                             <div class="card-body">
-                                <h5 class="card-title">Almacenamiento</h5>
+                                <h5 class="card-title">ALMACENAMIENTO</h5>
                                 <p class="card-text"></p>
                                 <a href="estados/estado_almacenamiento.php" class="btn btn-success">Seleccionar</a>
                             </div>
@@ -109,7 +109,7 @@ if (isset($_SESSION['usuario'])) {
                         <div class="card" style="width: 18rem;">
                             <img src="../../assets/image/simcard.png" class="card-img-top mx-auto" alt="..." style="width: 150px;">
                             <div class="card-body">
-                                <h5 class="card-title">Sim Card</h5>
+                                <h5 class="card-title">SIMCARD</h5>
                                 <p class="card-text"></p>
                                 <a href="estados/estado_simcard.php" class="btn btn-success">Seleccionar</a>
                             </div>

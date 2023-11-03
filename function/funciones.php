@@ -5,19 +5,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ESTADOS
 function obtenerDatosEquiposcomputadorasignados($conexion)
 {
@@ -1210,4 +1197,22 @@ function hvdvr($conexion, $id)
     }
 
     return $datosEquipos;
+}
+
+
+
+
+class funciones
+{
+// usuarios 
+function usuarios()
+{
+    include '../../../conexionbd.php';
+
+    $data = odbc_exec($conexion, "SELECT [id] ,[name] ,[email] ,[email_verified_at] ,[password] ,[remember_token] ,[created_at] ,[updated_at] ,[cod_vendedor] ,[TipoUsuario] ,[Estado] ,[sistemaClasificador] ,[estadopassword] FROM [ControlTIC].[dbo].[users] where TipoUsuario = '6'");
+    while ($Element = odbc_fetch_array($data)) {
+        $arr[] = $Element;
+    }
+    return $arr;
+}
 }

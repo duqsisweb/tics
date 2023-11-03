@@ -375,18 +375,18 @@ if (isset($_SESSION['usuario'])) {
         <section id="descargaresto" style="font-size: 14px;">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-2 col-xs-12 col-sm-2" style="border: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
+                <div class="col-md-3" style="border: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
                         <?php
                         if ($empresa == 1) {
-                            echo '<img src="../../assets/image/duquesaacta.png" alt="">';
+                            echo '<img src="../../assets/image/duquesaacta.png" alt="" style="width: 150px;" >';
                         } elseif ($empresa == 2) {
-                            echo '<img src="../../assets/image/palmerasacta.png" alt="">';
+                            echo '<img src="../../assets/image/palmerasacta.png" alt="" style="width: 150px;">';
                         } elseif ($empresa == 3) {
-                            echo '<img src="../../assets/image/j25acta.png" alt="">';
+                            echo '<img src="../../assets/image/j25acta.png" alt="" style="width: 150px;">';
                         }
                         ?>
                     </div>
-                    <div class="col-md-6 col-xs-12 col-sm-6" style="border: 1px solid black;text-align: center;">
+                    <div class="col-md-5 col-xs-12 col-sm-6" style="border: 1px solid black;text-align: center;">
                         <h6>
                             <p style="margin-top: 10px;">ACTA DE DEVOLUCIÓN DE EQUIPOS</p>
                         </h6>
@@ -930,19 +930,19 @@ if (isset($_SESSION['usuario'])) {
 
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-2">
-                            <?php
-                            if ($empresa == 1) {
-                                echo '<img src="../../assets/image/duquesaacta.png" alt="">';
-                            } elseif ($empresa == 2) {
-                                echo '<img src="../../assets/image/palmerasacta.png" alt="">';
-                            } elseif ($empresa == 3) {
-                                echo '<img src="../../assets/image/j25acta.png" alt="">';
-                            }
-                            ?>
-                        </div>
-                        <div class="col-md-10">
-                            <h5 style="margin-left: 80px;margin-top: 15px;">ACUERDO ACTA DE DEVOLUCIÓN DE EQUIPOS</h5>
+                    <div class="col-md-4" style="border: 0px solid black;padding-top: 10px;padding-bottom: 10px;">
+                        <?php
+                        if ($empresa == 1) {
+                            echo '<img src="../../assets/image/duquesaacta.png" alt="" style="width: 150px;" >';
+                        } elseif ($empresa == 2) {
+                            echo '<img src="../../assets/image/palmerasacta.png" alt="" style="width: 150px;">';
+                        } elseif ($empresa == 3) {
+                            echo '<img src="../../assets/image/j25acta.png" alt="" style="width: 150px;">';
+                        }
+                        ?>
+                    </div>
+                        <div class="col-md-8">
+                            <h5 style="margin-left: 50px;margin-top: 15px;">ACUERDO ACTA DE DEVOLUCIÓN DE EQUIPOS</h5>
                         </div>
                     </div>
                 </div>
@@ -1042,7 +1042,7 @@ if (isset($_SESSION['usuario'])) {
                 filename: 'ACTA.pdf', // Nombre del archivo PDF
                 image: {
                     type: 'jpeg',
-                    quality: 1
+                    quality: 3
                 },
                 html2canvas: {
                     scale: 2
@@ -1090,10 +1090,10 @@ if (isset($_SESSION['usuario'])) {
             // Configuración de opciones para html2pdf (puedes ajustar según tus necesidades)
             const opciones = {
                 margin: 9,
-                filename: 'SegundaHoja.pdf', // Nombre del archivo PDF para la segunda hoja
+                filename: 'Acuerdo.pdf', // Nombre del archivo PDF para la segunda hoja
                 image: {
                     type: 'jpeg',
-                    quality: 2
+                    quality: 3
                 },
                 html2canvas: {
                     scale: 2
