@@ -76,6 +76,7 @@ if (isset($_SESSION['usuario'])) {
                 $fechaMantenimientoInicioStr = $fechaMantenimientoInicio->format('Y-m-d');
                 // Imprimir la fecha de mantenimiento
                 "Fecha de Mantenimiento: " . $fechaMantenimientoInicioStr;
+                
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_computador] (tipo_maquina ,Service_tag ,Serial_equipo ,Nombre_equipo ,Sede ,Empresa ,Marca_computador ,Modelo_computador ,Tipo_comp ,Tipo_ram ,Memoria_ram ,Tipo_discoduro ,Capacidad_discoduro ,Procesador ,Propietario ,Proveedor ,Sistema_Operativo ,Serial_cargador ,Dominio ,Tipo_usuario ,Serial_activo_fijo ,Fecha_ingreso_c ,Targeta_Video ,Estado ,Gestion ,Fecha_garantia_c ,Fecha_mantenimiento_inicio ,Fecha_mantenimiento_fin,descripcionmov,usuamov ,fechamov) VALUES 
                 ('$tipomaquina' ,'$service_tag' ,'$serial' ,'$nombre_equipo' ,'$sede' ,'$Empresa' ,'$marca_computador' ,'$modelo_computador' ,'$tipo_comp' ,'$tipo_ram' ,'$cant_memoria_ram' ,'$tipo_discoduro' ,'$capacidad_discoduro' ,'$procesador' ,'$propietario' ,'$proveedor' ,'$sistema_operativo' ,'$serial_cargador' ,'$dominio' ,'$tipo_usuario' ,'$serial_activo_fijo' ,'$fecha_ingreso_c' ,'$targeta_video' ,'$estado' ,'3' ,'$Fecha_garantia_c' ,Getdate(),'$fechaMantenimientoInicioStr','SE INGRESO AL STOCK O INVENTARIO UN COMPUTADOR','$usuario' ,Getdate() )");
@@ -105,7 +106,6 @@ if (isset($_SESSION['usuario'])) {
                                                   VALUES
                                                   ('2','$imei','$serial_equipo_celular','$marca','$modelo','$fecha_ingreso_cel','$capacidad'+'GB',
                                                     '$ram_celular'+'GB','$estado','$gestion','$Fecha_garantia_cel','$usuario',getdate(),'SE INGRESO UN CELULAR AL STOCK O INVENTARIO' )");
-
             }
             ?>
             <!-- inicio de POST enviarAccesorios -->
@@ -162,7 +162,7 @@ if (isset($_SESSION['usuario'])) {
                 $usuario = $_SESSION['usuario'];
 
                 $gestion_edcomunicacion = $_POST['gestion_edcomunicacion'];
-                
+
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_edcomunicacion]
@@ -199,7 +199,6 @@ if (isset($_SESSION['usuario'])) {
                                                   VALUES
                                                   ('$tipomaquina','$serial_perifericos','$descripcion_perifericos','$marca_perifericos','$modelo_perifericos','$placa_activo_perifericos','$sede_perifericos','$ubicacion_perifericos','$tipo',
                                                 '$tipo_toner','$empresa','$fecha_de_garantia_peri',Getdate(),'$usuario','$estado','$gestion_peri','SE CREO UN ELEMENTO PERIFERICO',getdate(),'$usuario'  )");
-
             }
             ?>
 
@@ -236,8 +235,6 @@ if (isset($_SESSION['usuario'])) {
                             VALUES ('$tipomaquina','$marca_almacenamiento','$modelo_almacenamiento','$descripcion_almacenamiento',
                             '$capacidad_almacenamiento'+'GB','$tipo_almacenamiento','$caracteristica_almacenamiento','$sede_almacenamiento','$ubicacion_almacenamiento',
                             '$fecha_de_ingreso_alma','$estado','$gestion_alma','$fecha_de_garantia_alma','SE CREO UN ELEMENTO DE ALMACENAMIENTO',Getdate(),'$usuario' )");
-
-
             }
             ?>
 
@@ -257,7 +254,7 @@ if (isset($_SESSION['usuario'])) {
                 $estado = $_POST['estado'];
                 $usuario = $_SESSION['usuario'];
                 $gestion = $_POST['gestion'];
-                
+
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_simcard]
@@ -294,7 +291,6 @@ if (isset($_SESSION['usuario'])) {
                            ,getdate()
                            ,'$usuario'
                            )");
-        
             }
             ?>
 
@@ -367,12 +363,12 @@ if (isset($_SESSION['usuario'])) {
                 $usuario = $_SESSION['usuario'];
 
 
-                echo "INSERT INTO [ControlTIC].[dbo].[maquina_cctv]
-                 (tipo_maquina,marca_cctv,modelo_cctv,descripcion_cctv,sede_cctv,ubicacion_cctv,fecha_ingreso,ip_cctv,
-                 vision_enfoque,serial_dvr,canal,estado,fecha_garantia,Fecha_crea,usua_crea) 
-                                                VALUES ('$tipo_maquina','$marca_cctv','$modelo_cctv','$descripcion_cctv','$sede_cctv',
-                                                '$ubicacion_cctv','$fecha_ingreso','$ip_cctv','$vision_enfoque','$serial_drv',
-                                                '$canal','$estado','$fecha_garantia',Getdate(),'$usuario')";
+                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_cctv]
+                //  (tipo_maquina,marca_cctv,modelo_cctv,descripcion_cctv,sede_cctv,ubicacion_cctv,fecha_ingreso,ip_cctv,
+                //  vision_enfoque,serial_dvr,canal,estado,fecha_garantia,Fecha_crea,usua_crea) 
+                //                                 VALUES ('$tipo_maquina','$marca_cctv','$modelo_cctv','$descripcion_cctv','$sede_cctv',
+                //                                 '$ubicacion_cctv','$fecha_ingreso','$ip_cctv','$vision_enfoque','$serial_drv',
+                //                                 '$canal','$estado','$fecha_garantia',Getdate(),'$usuario')";
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_cctv]
@@ -401,11 +397,11 @@ if (isset($_SESSION['usuario'])) {
                 $estado = $_POST['estado'];
 
 
-                echo "INSERT INTO [ControlTIC].[dbo].[maquina_torre]
-                 (tipo_maquina,placa_activo_torre,descripcion_torre,sede_torre,tipo_torre,altura_metros,fecha_ingreso,fecha_ult_mantenimiento,Fecha_crea,usua_crea,estado) 
-                                                VALUES ('$tipo_maquina','$placa_activo_torre','$descripcion_torre','$sede_torre','$tipo_torre','$altura_metros',
-                                                '$fecha_ingreso','$fecha_ult_mantenimiento',
-                                                Getdate(),'$usuario','$estado')";
+                // echo "INSERT INTO [ControlTIC].[dbo].[maquina_torre]
+                //  (tipo_maquina,placa_activo_torre,descripcion_torre,sede_torre,tipo_torre,altura_metros,fecha_ingreso,fecha_ult_mantenimiento,Fecha_crea,usua_crea,estado) 
+                //                                 VALUES ('$tipo_maquina','$placa_activo_torre','$descripcion_torre','$sede_torre','$tipo_torre','$altura_metros',
+                //                                 '$fecha_ingreso','$fecha_ult_mantenimiento',
+                //                                 Getdate(),'$usuario','$estado')";
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_torre]
@@ -575,7 +571,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="Modelo_computador" required oninput="convertirAMayusculas(this)" autocomplete="off"> 
+                                        <input type="text" class="form-control" id="" placeholder="" name="Modelo_computador" required oninput="convertirAMayusculas(this)" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -610,7 +606,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Tipo de Ram</label>
-                                        <select class="form-select" aria-label="Default select example" id="Tipo_ram" onchange="mostrarFormulario()" name="Tipo_ram" required >
+                                        <select class="form-select" aria-label="Default select example" id="Tipo_ram" onchange="mostrarFormulario()" name="Tipo_ram" required>
                                             <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de computadores -->
@@ -671,7 +667,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Tipo Disco duro</label>
-                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="Tipo_discoduro" required >
+                                        <select class="form-select" aria-label="Default select example" id="sede" onchange="mostrarFormulario()" name="Tipo_discoduro" required>
                                             <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
@@ -737,7 +733,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Propietario</label>
-                                        <select class="form-select" aria-label="Default select example" id="Propietario" onchange="mostrarFormulario()" name="Propietario" required >
+                                        <select class="form-select" aria-label="Default select example" id="Propietario" onchange="mostrarFormulario()" name="Propietario" required>
                                             <option value="" selected>SELECCIONE</option>
 
                                             <!-- mediante la sentencia PHP se hace el llamado de la tabla donde se encuentran Los tipos de sede -->
@@ -823,8 +819,8 @@ if (isset($_SESSION['usuario'])) {
                                         <label for="" class="form-label">Usuario</label>
                                         <select class="form-select" aria-label="Default select example" name="Tipo_usuario" required>
                                             <option value="" selected>SELECCIONE</option>
-                                            <option value="Administrador">Administrador</option>
-                                            <option value="Estandar">Estandar</option>
+                                            <option value="Administrador">ADMINISTRADOR</option>
+                                            <option value="Estandar">ESTANDAR</option>
                                         </select>
                                     </div>
                                 </div>
@@ -913,7 +909,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha de Ingreso</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="Fecha_ingreso_cel" max="<?php echo date('Y-m-d'); ?>" required >
+                                        <input type="date" class="form-control" id="" placeholder="" name="Fecha_ingreso_cel" max="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1578,7 +1574,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha Final Plan</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_fin_plan" min="<?php echo date('Y-m-d'); ?>" required >
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_fin_plan" min="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1744,8 +1740,6 @@ if (isset($_SESSION['usuario'])) {
 
                             <!-- CAMPOS OCULTOS -->
                             <input type="hidden" class="form-control" id="" placeholder="" value="1" name="estado">
-
-
                         </div>
 
                         <!-- FORMULARIO CCTV -->
@@ -1756,19 +1750,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="marca_cctv" required autocomplete="off">
+                                        <input type="text" class="form-control" id="" placeholder="" name="marca_cctv" oninput="convertirAMayusculas(this)" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="modelo_cctv" required autocomplete="off">
+                                        <input type="text" class="form-control" id="" placeholder="" name="modelo_cctv"  oninput="convertirAMayusculas(this)" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Descripcion</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_cctv" required autocomplete="off">
+                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_cctv" oninput="convertirAMayusculas(this)" required autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -1806,7 +1800,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ubicación</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_cctv" required autocomplete="off">
+                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_cctv" oninput="convertirAMayusculas(this)" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1822,19 +1816,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">IP CCTV</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="pi_cctv" required autocomplete="off">
+                                        <input type="text" class="form-control" id="" placeholder="" name="pi_cctv" oninput="convertirAMayusculas(this)" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Vision</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="vision_enfoque" required autocomplete="off">
+                                        <input type="text" class="form-control" id="" placeholder="" name="vision_enfoque" oninput="convertirAMayusculas(this)" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Serial</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="serial_dvr" required autocomplete="off">
+                                        <input type="text" class="form-control" id="" placeholder="" name="serial_dvr" oninput="convertirAMayusculas(this)" required autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -1844,7 +1838,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Canal</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="canal" required autocomplete="off">
+                                        <input type="text" class="form-control" id="" placeholder="" name="canal" oninput="convertirAMayusculas(this)" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1878,13 +1872,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Placa Activo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="placa_activo_torre" required autocomplete="off">
+                                        <input type="text" class="form-control" id="" placeholder="" name="placa_activo_torre" oninput="convertirAMayusculas(this)" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Descripción</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_torre" required autocomplete="off">
+                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_torre" oninput="convertirAMayusculas(this)" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1923,13 +1917,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Tipo Torre</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="tipo_torre" required autocomplete="off">
+                                        <input type="text" class="form-control" id="" placeholder="" name="tipo_torre" oninput="convertirAMayusculas(this)" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Altura en Metros</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="altura_metros" required autocomplete="off">
+                                        <input type="text" class="form-control" id="" placeholder="" name="altura_metros" oninput="convertirAMayusculas(this)" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1968,11 +1962,9 @@ if (isset($_SESSION['usuario'])) {
 
                             <!-- CAMPOS OCULTOS -->
                             <input type="hidden" class="form-control" id="" placeholder="" value="1" name="estado">
-
                         </div>
 
                     </div>
-                </div>
 
             </form>
 
@@ -2029,8 +2021,6 @@ if (isset($_SESSION['usuario'])) {
             } else if (select.value === "10") {
                 formulario10.style.display = "block";
             }
-
-
 
         }
     </script>

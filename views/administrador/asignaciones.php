@@ -18,6 +18,7 @@ if (isset($_SESSION['usuario'])) {
 
     <!-- Asegúrate de cargar jQuery primero -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <body>
 
@@ -310,7 +311,7 @@ if (isset($_SESSION['usuario'])) {
                         </div>
                         <!-- TERCER BLOQUE LUEGO DE LA CONSULTA CON EL TIPO DE COMPUTADOR LISTAR -->
                         <div class="col-md-2" id="fila2" style="display: none;">
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalcomputador">
+                            <button type="button" class="btn btn-success" id="verListadoButtoncomputador" data-bs-toggle="modal" data-bs-target="#modalcomputador">
                                 Ver listado
                             </button>
                         </div>
@@ -426,7 +427,7 @@ if (isset($_SESSION['usuario'])) {
                         </div>
 
                         <div class="col-md-2" id="fila2edcomunicacion" style="display: none;">
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaledcomunicacion">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" id="verListadoButtonedcomunica" data-bs-target="#modaledcomunicacion">
                                 Ver listado
                             </button>
                         </div>
@@ -481,7 +482,7 @@ if (isset($_SESSION['usuario'])) {
                         </div>
 
                         <div class="col-md-2" id="fila2perifericos" style="display: none;">
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalperifericos">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" id="verListadoButtonperifericos" data-bs-target="#modalperifericos">
                                 Ver listado
                             </button>
                         </div>
@@ -537,7 +538,7 @@ if (isset($_SESSION['usuario'])) {
                         </div>
 
                         <div class="col-md-2" id="fila2almacenamiento" style="display: none;">
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalalmacenamiento">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" id='verListadoButtonalmacenamiento' data-bs-target="#modalalmacenamiento">
                                 Ver listado
                             </button>
                         </div>
@@ -2085,7 +2086,7 @@ if (isset($_SESSION['usuario'])) {
     <!-- AJAX PARA CONSULTA DE ALMACENAMIENTO -->
     <script>
         // ASIGNACION
-         var empresaOptionValue = "<?php echo $empresaOption; ?>";
+        var empresaOptionValue = "<?php echo $empresaOption; ?>";
         $(document).ready(function() {
             $('#fila2almacenamiento button').on('click', function() {
                 var tipo_almacenamiento = $('#tipo_almacenamiento').val();
@@ -2433,6 +2434,52 @@ if (isset($_SESSION['usuario'])) {
                 }
 
             });
+        });
+    </script>
+
+
+    <!-- SCRIPT DE ALERTA PRIMERO DEBE SELECCIONAR UN TIPO DE: -->
+
+    <script>
+        document.getElementById('verListadoButtoncomputador').addEventListener('click', function() {
+            var tipocomputador = document.getElementById('tipocomputador').value;
+            if (tipocomputador === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Error!',
+                    text: 'Por favor, seleccione un TIPO DE COMPUTADORA primero.',
+                });
+            }
+        });
+        document.getElementById('verListadoButtonedcomunica').addEventListener('click', function() {
+            var tipocomputador = document.getElementById('tipo_edcomunicacion').value;
+            if (tipocomputador === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Error!',
+                    text: 'Por favor, seleccione un TIPO DE ELEMENTO DE COMUNICACIÓN primero.',
+                });
+            }
+        });
+        document.getElementById('verListadoButtonperifericos').addEventListener('click', function() {
+            var tipocomputador = document.getElementById('tipo_perifericos').value;
+            if (tipocomputador === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Error!',
+                    text: 'Por favor, seleccione un TIPO DE PERIFERICOS primero.',
+                });
+            }
+        });
+        document.getElementById('verListadoButtonalmacenamiento').addEventListener('click', function() {
+            var tipocomputador = document.getElementById('tipo_almacenamiento').value;
+            if (tipocomputador === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Error!',
+                    text: 'Por favor, seleccione un TIPO DE ALMACENAMIENTO  primero.',
+                });
+            }
         });
     </script>
 

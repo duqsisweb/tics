@@ -46,8 +46,6 @@ if (
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
-
-
     <body>
 
         <section id="descargaresto">
@@ -293,7 +291,6 @@ if (
                 var estado = $(this).data('estado');
                 var gestion = $(this).data('gestion');
                 var fecha_garantia_c = $(this).data('fecha-garantia-c');
-
 
 
                 var observaciones_mantenimiento = $('#observaciones_mantenimiento' + id).val();

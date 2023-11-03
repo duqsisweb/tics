@@ -39,8 +39,8 @@ if (isset($_SESSION['usuario'])) {
                                 Ingresos
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Ingresar Productos al stock</h5>
-                                <p class="card-text">Aquí puede ingresar Dispositivos o Maquinas de computo al inventario</p>
+                                <h5 class="card-title">Ingresar productos al stock</h5>
+                                <p class="card-text">Simplifica la gestión de inventarios.</p>
                                 <a href="ingresos.php" class="btn btn-success">Ingresar</a>
                             </div>
 
@@ -53,8 +53,8 @@ if (isset($_SESSION['usuario'])) {
                                 Inventario
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Equipos En El Inventario</h5>
-                                <p class="card-text">...</p>
+                                <h5 class="card-title">Equipos en el inventario</h5>
+                                <p class="card-text">Optimiza tu control de activos</p>
                                 <a href="inventario.php" class="btn btn-success">Ingresar</a>
                             </div>
 
@@ -66,8 +66,8 @@ if (isset($_SESSION['usuario'])) {
                                 Estado
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Estado De Equipos</h5>
-                                <p class="card-text">Aquí puede visualizar el estado de las máquinas o dispositivos</p>
+                                <h5 class="card-title">Estado de equipos</h5>
+                                <p class="card-text">Monitoriza la condición de tus activos</p>
                                 <a href="estados.php" class="btn btn-success">Ingresar</a>
                             </div>
 
@@ -87,8 +87,8 @@ if (isset($_SESSION['usuario'])) {
                                 Historial de Equipos
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">HV de Equipos</h5>
-                                <p class="card-text">...</p>
+                                <h5 class="card-title">Hoja de vida de equipos</h5>
+                                <p class="card-text">Rastrea el historial de tus activos</p>
                                 <a href="hojadevida.php" class="btn btn-success">Ingresar</a>
                             </div>
 
@@ -102,8 +102,8 @@ if (isset($_SESSION['usuario'])) {
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Mantenimiento Correctivo</h5>
-                                <p class="card-text">...</p>
-                                <a href="mantenimiento_correctivo.php" class="btn btn-success">Ingresar</a>
+                                <p class="card-text">Solucion de harware de manera eficaz</p>
+                                <a href="mantenimiento_correctivo/mantenimiento_correctivo_computador.php" class="btn btn-success">Ingresar</a>
                             </div>
 
                         </div>
@@ -116,8 +116,8 @@ if (isset($_SESSION['usuario'])) {
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Mantenimiento Preventivo</h5>
-                                <p class="card-text">...</p>
-                                <a href="mantenimiento_preventivo.php" class="btn btn-success">Ingresar</a>
+                                <p class="card-text">Asegura la durabilidad de tus equipos</p>
+                                <a href="mantenimiento_preventivo/mantenimiento_preventivo_computador.php" class="btn btn-success">Ingresar</a>
                             </div>
 
                         </div>
@@ -136,8 +136,8 @@ if (isset($_SESSION['usuario'])) {
                                 Asignaciones
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Asignar Equipos a Usuarios</h5>
-                                <p class="card-text">Aquí puede asignar los dispositivos o equipos a los trabajadores</p>
+                                <h5 class="card-title">Asignar Equipos</h5>
+                                <p class="card-text">Controla la distribución de recursos</p>
                                 <a href="asignaciones.php" class="btn btn-success">Ingresar</a>
                             </div>
 
@@ -150,8 +150,8 @@ if (isset($_SESSION['usuario'])) {
                                 Asignaciones
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Usuarios con Equipos Asignados</h5>
-                                <p class="card-text">Aquí puede verificar que Dispositivos o Máquinas están asociadas a los usuarios</p>
+                                <h5 class="card-title">Equipos Asignados</h5>
+                                <p class="card-text">Gestion y visualizacion de forma eficiente</p>
                                 <a href="asignacionesusuario.php" class="btn btn-success">Ingresar</a>
                             </div>
 
@@ -165,7 +165,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Devolución de equipos</h5>
-                                <p class="card-text">Aquí puede liberar o remover equipos de los usuarios</p>
+                                <p class="card-text">Flujo de recursos con acta</p>
                                 <a href="desasignacionesusuario.php" class="btn btn-success">Ingresar</a>
                             </div>
                         </div>
@@ -180,11 +180,11 @@ if (isset($_SESSION['usuario'])) {
                     <div class="col-md-4">
                         <div class="card text-center">
                             <div class="card-header">
-                                AGREGAR COMPLEMENTOS
+                                Complementos
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title"> AGREGAR COMPLEMENTOS</h5>
-                                <p class="card-text"></p>
+                                <p class="card-text">Personaliza y amplía al sistema de gestión de inventarios</p>
                                 <a href="complementos.php" class="btn btn-success">Ingresar</a>
                             </div>
 
