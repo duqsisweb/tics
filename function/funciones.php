@@ -655,6 +655,56 @@ function hvcelular($conexion, $imei)
     return $datosEquipos;
 }
 
+//HOJA DE VIDA DEL ACCESORIOS
+function hvacc($conexion, $imei)
+{
+    $datosEquipos = array();
+
+    $sql = " SELECT [id_historial]
+                ,[id]
+                ,[tipo_maquina]
+                ,[marca]
+                ,[modelo]
+                ,[descripcion]
+                ,[tipo_acc]
+                ,[cantidad]
+                ,[fecha_de_ingreso_acc]
+                ,[fecha_crea]
+                ,[usua_crea]
+                ,[cedula]
+                ,[cargo]
+                ,[primernombre]
+                ,[segundonombre]
+                ,[primerapellido]
+                ,[segundoapellido]
+                ,[empresa]
+                ,[observaciones_asigna_acc]
+                ,[link_acc_asigna]
+                ,[observaciones_desasigna_acc]
+                ,[link_acc_desasigna]
+                ,[fechamov]
+                ,[descripcionmov]
+                ,[usuamov]
+            FROM [ControlTIC].[dbo].[historial_accesorios] where id = ? ";
+    $params = array($imei);
+
+    $result = odbc_prepare($conexion, $sql);
+    if ($result !== false) {
+        odbc_execute($result, $params);
+        while ($row = odbc_fetch_array($result)) {
+            $datosEquipos[] = $row;
+        }
+        odbc_free_result($result);
+    }
+
+    // Si no se encontraron resultados, agregar un mensaje especial
+    if (empty($datosEquipos)) {
+        $datosEquipos[] = array('Mensaje' => 'SIN REGISTRO');
+    }
+
+    return $datosEquipos;
+}
+
 
 
 //HOJA DE VIDA DEL EQUIPO EDCOMUNICACION
@@ -1045,7 +1095,7 @@ function hvsimcard($conexion, $numero_linea)
 {
     $datosEquipos = array();
 
-            $sql = " SELECT  [id_historial]
+    $sql = " SELECT  [id_historial]
             ,[id]
             ,[tipo_maquina]
             ,[numero_linea]

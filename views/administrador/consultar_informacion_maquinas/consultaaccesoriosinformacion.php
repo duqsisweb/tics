@@ -14,7 +14,8 @@ $empresa = isset($_POST['empresa']) ? $_POST['empresa'] : '';
 
 $Usua_asigna = $_POST['Usua_asigna'];
 
-$data = odbc_exec($conexion, " SELECT [id_asignacion] ,[id] ,[tipo_maquina] ,[marca] ,[modelo] ,[descripcion] ,[tipo_acc] ,[cantidad] ,[fecha_de_ingreso_acc] ,[fecha_crea] ,[usua_crea] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[observaciones_asigna_acc] ,[link_acc_asigna] ,[observaciones_desasigna_acc] ,[link_acc_desasigna] ,[fechamov] ,[descripcionmov] ,[usuamov] FROM [ControlTIC].[dbo].[asignacion_accesorios] where cedula = '$cedula'");
+$data = odbc_exec($conexion, " SELECT [id_asignacion] ,[id] ,[tipo_maquina] ,[marca] ,[modelo] ,[descripcion] ,[tipo_acc] ,[cantidad] ,[fecha_de_ingreso_acc] ,[fecha_crea] ,[usua_crea] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[observaciones_asigna_acc] ,[link_acc_asigna] ,[observaciones_desasigna_acc] ,[link_acc_desasigna] ,[fechamov] ,[descripcionmov] ,[usuamov] 
+FROM [ControlTIC].[dbo].[asignacion_accesorios] where cedula = '$cedula' and estado_asignacion = 'VIGENTE' ");
 $arr = array();
 while ($Element = odbc_fetch_array($data)) {
     $arr[] = $Element;
@@ -207,8 +208,10 @@ while ($Element = odbc_fetch_array($data)) {
     $(document).ready(function() {
         $('.showAlertButton').click(function() {
 
+            
             var $asignarBtn = $(this).prev('.asignar-btn'); // Obtener el botón oculto previo
             var idToUpdate = $asignarBtn.data('id'); // Obtener el ID del botón oculto
+            var linkInput = $('#observaciones_desasigna_acc' + idToUpdate).val(); // Obtener el valor del campo de entrada
 
             Swal.fire({
                 title: '¿Quieres guardar los cambios?',
@@ -229,7 +232,8 @@ while ($Element = odbc_fetch_array($data)) {
                         url: 'delete/deleteacc.php',
                         type: 'POST',
                         data: {
-                            idToUpdate: idToUpdate
+                            idToUpdate: idToUpdate,
+                            linkInput: linkInput
                         },
                         success: function(response) {
                             console.log("Actualización exitosa:", response);

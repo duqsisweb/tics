@@ -10,6 +10,8 @@ if (isset($_POST['idToUpdate'])) {
     
     // Consulta SQL para actualizar el estado del registro
     $updateQuery = "UPDATE [ControlTIC].[dbo].[maquina_accesorios] SET [cantidad] = [cantidad] - 1 WHERE [id] = '$idToUpdate'";
+
+    $updateQuery4 = "DELETE FROM [ControlTIC].[dbo].[asignacion_accesorios] WHERE [id] = '$idToUpdate' and estado_asignacion = 'NO VIGENTE' ";
     
     // Ejecutar la consulta de actualización
     if (odbc_exec($conexion, $updateQuery)) {

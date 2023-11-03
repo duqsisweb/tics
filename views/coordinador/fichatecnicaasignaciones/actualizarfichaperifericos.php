@@ -42,7 +42,7 @@
     <?php
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
-    $consulta = "SELECT[id_asignacion] ,[id] ,[tipo_maquina] ,[serial_perifericos] ,[descripcion_perifericos] ,[marca_perifericos] ,[modelo_perifericos] ,[placa_activo_perifericos] ,[sede_perifericos] ,[ubicacion_perifericos] ,[tipo] ,[tipo_toner] ,[estado] ,[gestion] ,[empresa] ,[fecha_de_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_perifericos] WHERE cedula = '$cedula'";
+    $consulta = "SELECT[id_asignacion] ,[id] ,[tipo_maquina] ,[serial_perifericos] ,[descripcion_perifericos] ,[marca_perifericos] ,[modelo_perifericos] ,[placa_activo_perifericos] ,[sede_perifericos] ,[ubicacion_perifericos] ,[tipo] ,[tipo_toner] ,[estado] ,[gestion] ,[empresa] ,[fecha_de_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_perifericos] WHERE cedula = '$cedula' AND estado_asignacion = 'VIGENTE' ";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>"; // Mantener el formato monoespaciado
@@ -108,9 +108,7 @@
                             <th scope="col">Ubicación</th>
                             <th scope="col">Tipo</th>
                             <th scope="col">Tipo de Toner</th>
-                            <th scope="col">Gestion</th>
-                            <th scope="col">Empresa</th>
-                            <th scope="col">Estado</th>
+
 
                         </tr>
                     </thead>
@@ -120,7 +118,7 @@
 
                         $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : '';
 
-                        $consulta = "SELECT [id_asignacion] ,[id] ,[tipo_maquina] ,[serial_perifericos] ,[descripcion_perifericos] ,[marca_perifericos] ,[modelo_perifericos] ,[placa_activo_perifericos] ,[sede_perifericos] ,[ubicacion_perifericos] ,[tipo] ,[tipo_toner] ,[gestion] ,[empresa] ,[fecha_de_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[estado] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_perifericos] where cedula= '$cedula'";
+                        $consulta = " SELECT[id_asignacion] ,[id] ,[tipo_maquina] ,[serial_perifericos] ,[descripcion_perifericos] ,[marca_perifericos] ,[modelo_perifericos] ,[placa_activo_perifericos] ,[sede_perifericos] ,[ubicacion_perifericos] ,[tipo] ,[tipo_toner] ,[estado] ,[gestion] ,[empresa] ,[fecha_de_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_perifericos] WHERE cedula = '$cedula' AND estado_asignacion = 'VIGENTE' ";
                         $resultadoConsulta = odbc_exec($conexion, $consulta);
 
                         if (odbc_num_rows($resultadoConsulta) > 0) {
@@ -137,10 +135,6 @@
                                 echo '<td>' . $fila['ubicacion_perifericos'] . '</td>';
                                 echo '<td>' . $fila['tipo'] . '</td>';
                                 echo '<td>' . $fila['tipo_toner'] . '</td>';
-                                echo '<td>' . $fila['gestion'] . '</td>';
-                                echo '<td>' . $fila['empresa'] . '</td>';
-                                echo '<td>' . $fila['fecha_de_garantia'] . '</td>';
-                                echo '<td>' . $fila['estado'] . '</td>';
 
                                 echo '</tr>';
                             }

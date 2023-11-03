@@ -66,7 +66,7 @@ if (isset($_SESSION['usuario'])) {
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <form method="POST">
-                        <input class="form-control" type="text" name="Nombre_equipo" style="width: 100%;" id="Nombre_equipo" placeholder="INGRESE NOMBRE EQUIPO" required>
+                        <input class="form-control" type="text" name="Nombre_equipo" style="width: 100%;" id="Nombre_equipo" placeholder="INGRESE NOMBRE EQUIPO" required autocomplete="off">
 
                         <h5 style="text-align: center;"></h5>
                         <input type="submit" class="btn btn-success" name='consultar' value="Consultar" id="btncolor" autocomplete="off">
@@ -499,6 +499,13 @@ if (isset($_SESSION['usuario'])) {
         });
     </script>
     <!-- Fin DataTable -->
+
+    <!-- MAYUSCULAS -->
+    <script>
+        function convertirAMayusculas(input) {
+            input.value = input.value.toUpperCase();
+        }
+    </script>
 
 <?php } else { ?>
     <script language="JavaScript">

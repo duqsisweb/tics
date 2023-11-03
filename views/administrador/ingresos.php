@@ -256,9 +256,8 @@ if (isset($_SESSION['usuario'])) {
                 $fecha_fin_plan = $_POST['fecha_fin_plan'];
                 $estado = $_POST['estado'];
                 $usuario = $_SESSION['usuario'];
-
                 $gestion = $_POST['gestion'];
-
+                
 
 
                 $Consulta = odbc_exec($conexion, "INSERT INTO [ControlTIC].[dbo].[maquina_simcard]
@@ -964,13 +963,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="marca" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="marca" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="modelo" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="modelo" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1019,7 +1018,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Cantidad</label>
-                                        <input type="number" class="form-control" id="" placeholder="" name="cantidad" required>
+                                        <input type="number" class="form-control" id="" placeholder="" name="cantidad" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1073,13 +1072,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="marca_edcomunicacion" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="marca_edcomunicacion" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="modelo_edcomunicacion" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="modelo_edcomunicacion" required autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -1089,7 +1088,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Serial</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="serial_edcomunicacion" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="serial_edcomunicacion" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1101,7 +1100,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Placa Activo fijo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="placa_activo_edcomunicacion" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="placa_activo_edcomunicacion" required autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -1140,13 +1139,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ubicación</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="ubicacion_edcomunicacion" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="ubicacion_edcomunicacion" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Observaciones</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="observaciones_edcomunicacion" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="observaciones_edcomunicacion" required autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -1217,14 +1216,14 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Serial</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="serial_perifericos" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="serial_perifericos" required autocomplete="off">
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="marca_perifericos" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="marca_perifericos" required autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -1234,13 +1233,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="modelo_perifericos" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="modelo_perifericos" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Placa Activo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="placa_activo_perifericos" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="placa_activo_perifericos" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1278,7 +1277,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ubicación</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="ubicacion_perifericos" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="ubicacion_perifericos" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1295,7 +1294,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Tipo Toner</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="tipo_toner" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="tipo_toner" required autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -1394,13 +1393,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="marca_almacenamiento" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="marca_almacenamiento" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="modelo_almacenamiento" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="modelo_almacenamiento" required autocomplete="off">
 
                                     </div>
                                 </div>
@@ -1413,7 +1412,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Capacidad</label>
-                                        <input type="number" class="form-control" id="" placeholder="GB" oninput="convertirAMayusculas(this)" name="capacidad_almacenamiento" required>
+                                        <input type="number" class="form-control" id="" placeholder="GB" oninput="convertirAMayusculas(this)" name="capacidad_almacenamiento" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1474,7 +1473,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ubicación</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="ubicacion_almacenamiento" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="ubicacion_almacenamiento" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1527,13 +1526,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Número de Linea</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="numero_linea" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="numero_linea" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Nombre Plan</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="nombre_plan" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="nombre_plan" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1550,19 +1549,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Valor Plan</label>
-                                        <input type="number" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="valor_plan" required>
+                                        <input type="number" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="valor_plan" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Operador</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="operador" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="operador" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Cod cliente</label>
-                                        <input type="number" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="cod_cliente" required>
+                                        <input type="number" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="cod_cliente" required autocomplete="off">
                                     </div>
                                 </div>
 
@@ -1573,13 +1572,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Observaciones</label>
-                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="observaciones_sim" required>
+                                        <input type="text" class="form-control" id="" placeholder="" oninput="convertirAMayusculas(this)" name="observaciones_sim" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Fecha Final Plan</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_fin_plan" min="<?php echo date('Y-m-d'); ?>" required>
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_fin_plan" min="<?php echo date('Y-m-d'); ?>" required >
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1610,19 +1609,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="marca_dvr" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="marca_dvr" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="modelo_dvr" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="modelo_dvr" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Descripcion</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_dvr" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_dvr" required autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -1632,13 +1631,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Capacidad</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="capacidad_dvr" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="capacidad_dvr" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Tipo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="tipo_dvr" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="tipo_dvr" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1677,13 +1676,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ubicación</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_dvr" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_dvr" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Software</label>
-                                        <input type="number" class="form-control" id="" placeholder="" name="software" required>
+                                        <input type="number" class="form-control" id="" placeholder="" name="software" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1699,19 +1698,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Num de Canales</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="num_canales" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="num_canales" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Num de Discos</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="num_discos" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="num_discos" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">dias de Grabacion</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="dias_grabacion" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="dias_grabacion" required autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -1721,7 +1720,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">ip</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="ip_dvr" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="ip_dvr" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1757,19 +1756,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="marca_cctv" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="marca_cctv" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="modelo_cctv" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="modelo_cctv" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Descripcion</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_cctv" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_cctv" required autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -1807,7 +1806,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ubicación</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_cctv" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="ubicacion_cctv" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1823,19 +1822,19 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">IP CCTV</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="pi_cctv" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="pi_cctv" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Vision</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="vision_enfoque" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="vision_enfoque" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Serial</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="serial_dvr" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="serial_dvr" required autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -1845,7 +1844,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Canal</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="canal" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="canal" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1879,13 +1878,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Placa Activo</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="placa_activo_torre" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="placa_activo_torre" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Descripción</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_torre" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="descripcion_torre" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1924,13 +1923,13 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Tipo Torre</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="tipo_torre" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="tipo_torre" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Altura en Metros</label>
-                                        <input type="text" class="form-control" id="" placeholder="" name="altura_metros" required>
+                                        <input type="text" class="form-control" id="" placeholder="" name="altura_metros" required autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1946,7 +1945,7 @@ if (isset($_SESSION['usuario'])) {
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Ultimo Mantenimiento</label>
-                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_ult_mantenimiento" max="<?php echo date('Y-m-d'); ?>" required>
+                                        <input type="date" class="form-control" id="" placeholder="" name="fecha_ult_mantenimiento" max="<?php echo date('Y-m-d'); ?>" required autocomplete="off"> 
                                     </div>
                                 </div>
                                 <div class="col-md-4">

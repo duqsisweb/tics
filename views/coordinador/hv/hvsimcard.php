@@ -64,7 +64,7 @@ if (isset($_SESSION['usuario'])) {
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <form method="POST">
-                        <input class="form-control" type="text" name="numero_linea" style="width: 100%;" id="numero_linea" placeholder="INGRESE NUMERO DE LINEA" required>
+                        <input class="form-control" type="text" name="numero_linea" style="width: 100%;" id="numero_linea" placeholder="INGRESE NUMERO DE LINEA" required autocomplete="off">
 
                         <h5 style="text-align: center;"></h5>
                         <input type="submit" class="btn btn-success" name='consultar' value="Consultar" id="btncolor">

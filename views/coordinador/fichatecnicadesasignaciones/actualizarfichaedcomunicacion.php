@@ -42,45 +42,37 @@
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
 
-    $consulta = " SELECT [id_historial]
-    ,[id]
-    ,[tipo_maquina]
-    ,[marca_edcomunicacion]
-    ,[modelo_edcomunicacion]
-    ,[descripcion_edcomunicacion]
-    ,[serial_edcomunicacion]
-    ,[fecha_de_ingreso_edc]
-    ,[estado]
-    ,[placa_activo_edcomunicacion]
-    ,[sede_edcomunicacion]
-    ,[ubicacion_edcomunicacion]
-    ,[observaciones_edcomunicacion]
-    ,[gestion_edcomunicacion]
-    ,[fecha_garantia_edc]
-    ,[fecha_crea]
-    ,[usua_crea]
-    ,[fecha_modifica]
-    ,[usua_modifica]
-    ,[usua_asigna]
-    ,[fecha_asigna]
-    ,[cedula]
-    ,[cargo]
-    ,[primernombre]
-    ,[segundonombre]
-    ,[primerapellido]
-    ,[segundoapellido]
-    ,[empresa]
-    ,[estado_asignacion]
-    ,[observaciones_desasigna]
-    ,[link_edc_desasigna]
-    ,[observaciones_asigna_edc]
-    ,[link_edc_asigna]
-    ,[fechamov]
-    ,[descripcionmov]
-    ,[usuamov]
-FROM [ControlTIC].[dbo].[historial_edcomunicacion]
-      where cedula = '$cedula' AND descripcionmov like '%SE REALIZO ELIMINACION DE UN ELEMENTO DE COMUNICACION%'
-ORDER BY id_historial DESC ";
+    $consulta = " SELECT  [id_asignacion]
+                ,[id]
+                ,[tipo_maquina]
+                ,[marca_edcomunicacion]
+                ,[modelo_edcomunicacion]
+                ,[descripcion_edcomunicacion]
+                ,[serial_edcomunicacion]
+                ,[fecha_de_ingreso_edc]
+                ,[estado]
+                ,[placa_activo_edcomunicacion]
+                ,[sede_edcomunicacion]
+                ,[ubicacion_edcomunicacion]
+                ,[observaciones_edcomunicacion]
+                ,[gestion_edcomunicacion]
+                ,[fecha_garantia_edc]
+                ,[fecha_crea]
+                ,[usua_crea]
+                ,[fecha_modifica]
+                ,[usua_modifica]
+                ,[usua_asigna]
+                ,[fecha_asigna]
+                ,[cedula]
+                ,[cargo]
+                ,[primernombre]
+                ,[segundonombre]
+                ,[primerapellido]
+                ,[segundoapellido]
+                ,[empresa]
+                ,[estado_asignacion]
+                ,[observaciones_desasigna]
+            FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] where cedula = '$cedula' and estado_asignacion = 'NO VIGENTE' ";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>"; // Mantener el formato monoespaciado
@@ -146,7 +138,6 @@ ORDER BY id_historial DESC ";
                             <th scope="col">Sede</th>
                             <th scope="col">Ubicación</th>
                             <th scope="col">observaciones_edcomunicacion</th>
-                            <th scope="col">Gestion</th>
                       
                         </tr>
                     </thead>
@@ -156,45 +147,37 @@ ORDER BY id_historial DESC ";
 
                         $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : '';
 
-                        $consulta = "  SELECT [id_historial]
-                        ,[id]
-                        ,[tipo_maquina]
-                        ,[marca_edcomunicacion]
-                        ,[modelo_edcomunicacion]
-                        ,[descripcion_edcomunicacion]
-                        ,[serial_edcomunicacion]
-                        ,[fecha_de_ingreso_edc]
-                        ,[estado]
-                        ,[placa_activo_edcomunicacion]
-                        ,[sede_edcomunicacion]
-                        ,[ubicacion_edcomunicacion]
-                        ,[observaciones_edcomunicacion]
-                        ,[gestion_edcomunicacion]
-                        ,[fecha_garantia_edc]
-                        ,[fecha_crea]
-                        ,[usua_crea]
-                        ,[fecha_modifica]
-                        ,[usua_modifica]
-                        ,[usua_asigna]
-                        ,[fecha_asigna]
-                        ,[cedula]
-                        ,[cargo]
-                        ,[primernombre]
-                        ,[segundonombre]
-                        ,[primerapellido]
-                        ,[segundoapellido]
-                        ,[empresa]
-                        ,[estado_asignacion]
-                        ,[observaciones_desasigna]
-                        ,[link_edc_desasigna]
-                        ,[observaciones_asigna_edc]
-                        ,[link_edc_asigna]
-                        ,[fechamov]
-                        ,[descripcionmov]
-                        ,[usuamov]
-                    FROM [ControlTIC].[dbo].[historial_edcomunicacion]
-                          where cedula = '$cedula' AND descripcionmov like '%SE REALIZO ELIMINACION DE UN ELEMENTO DE COMUNICACION%'
-                    ORDER BY id_historial DESC ";
+                        $consulta = "  SELECT  [id_asignacion]
+                                    ,[id]
+                                    ,[tipo_maquina]
+                                    ,[marca_edcomunicacion]
+                                    ,[modelo_edcomunicacion]
+                                    ,[descripcion_edcomunicacion]
+                                    ,[serial_edcomunicacion]
+                                    ,[fecha_de_ingreso_edc]
+                                    ,[estado]
+                                    ,[placa_activo_edcomunicacion]
+                                    ,[sede_edcomunicacion]
+                                    ,[ubicacion_edcomunicacion]
+                                    ,[observaciones_edcomunicacion]
+                                    ,[gestion_edcomunicacion]
+                                    ,[fecha_garantia_edc]
+                                    ,[fecha_crea]
+                                    ,[usua_crea]
+                                    ,[fecha_modifica]
+                                    ,[usua_modifica]
+                                    ,[usua_asigna]
+                                    ,[fecha_asigna]
+                                    ,[cedula]
+                                    ,[cargo]
+                                    ,[primernombre]
+                                    ,[segundonombre]
+                                    ,[primerapellido]
+                                    ,[segundoapellido]
+                                    ,[empresa]
+                                    ,[estado_asignacion]
+                                    ,[observaciones_desasigna]
+                                FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] where cedula = '$cedula' and estado_asignacion = 'NO VIGENTE'  ";
                         $resultadoConsulta = odbc_exec($conexion, $consulta);
 
                         if (odbc_num_rows($resultadoConsulta) > 0) {
@@ -212,7 +195,6 @@ ORDER BY id_historial DESC ";
                                 echo '<td>' . $fila['sede_edcomunicacion'] . '</td>';
                                 echo '<td>' . $fila['ubicacion_edcomunicacion'] . '</td>';
                                 echo '<td>' . $fila['observaciones_edcomunicacion'] . '</td>';
-                                echo '<td>' . $fila['gestion_edcomunicacion'] . '</td>';
 
                                 echo '</tr>';
                             }

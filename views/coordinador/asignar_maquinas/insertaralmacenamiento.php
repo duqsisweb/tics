@@ -56,13 +56,13 @@ echo "</script>"; {
         descripcion_almacenamiento, capacidad_almacenamiento, caracteristica_almacenamiento,
         sede_almacenamiento, ubicacion_almacenamiento, fecha_de_ingreso, estado,
         fecha_de_garantia, fecha_crea, usua_crea, fecha_modifica, usua_modifica,
-        primernombre, segundonombre, primerapellido, segundoapellido, cedula, cargo, empresa
+        primernombre, segundonombre, primerapellido, segundoapellido, cedula, cargo, empresa, estado_asignacion
     ) VALUES (
         '$id', '$tipo_maquina', '$marca_almacenamiento', '$modelo_almacenamiento',
         '$descripcion_almacenamiento', '$capacidad_almacenamiento', '$caracteristica_almacenamiento',
         '$sede_almacenamiento', '$ubicacion_almacenamiento', '$fecha_de_ingreso', 'ASIGNADO',
         '$fecha_de_garantia_alma', '$fecha_crea', '$usua_crea', '$fecha_modifica', '$usua_modifica',
-        '$primernombre', '$segundonombre', '$primerapellido', '$segundoapellido', '$cedula', '$cargo', '$empresa'
+        '$primernombre', '$segundonombre', '$primerapellido', '$segundoapellido', '$cedula', '$cargo', '$empresa','VIGENTE'
     )";
 
     // INSERTAR DATOS A LA TABLA historial_almacenamiento

@@ -235,8 +235,6 @@ if (isset($_POST['tipo_perifericos'])) {
     </script>
 
 
-
-
     <script>
         $(document).ready(function() {
             $('.showAlertButton').click(function() {

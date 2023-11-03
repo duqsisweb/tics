@@ -7,24 +7,40 @@ if (isset($_POST['idToUpdate'])) {
     
     // Obtener el ID para actualizar desde la solicitud POST
     $idToUpdate = $_POST['idToUpdate'];
+    $linkInput = $_POST['linkInput'];
     
     // Consulta SQL para actualizar el estado del registro
-    $updateQuery = "UPDATE [ControlTIC].[dbo].[maquina_accesorios] SET [cantidad] = [cantidad] + 1 WHERE [id] = '$idToUpdate'";
+    $updateQuery1 = "UPDATE [ControlTIC].[dbo].[maquina_accesorios] SET [cantidad] = [cantidad] + 1 WHERE [id] = '$idToUpdate'";
 
-    $updateQuery2 = "DELETE FROM [ControlTIC].[dbo].[asignacion_accesorios] WHERE [id] = '$idToUpdate'";
-    
-    // Ejecutar la primera consulta de actualización
-    $result1 = odbc_exec($conexion, $updateQuery);
-    
-    // Ejecutar la segunda consulta de eliminación
-    $result2 = odbc_exec($conexion, $updateQuery2);
+    $updateQuery2= "UPDATE [ControlTIC].[dbo].[asignacion_accesorios] SET [estado_asignacion] = 'NO VIGENTE' WHERE [id] = '$idToUpdate'";
 
-    if ($result1 && $result2) {
-        // Si ambas consultas se ejecutaron correctamente, devolver un mensaje
-        echo "Actualización y eliminación realizadas correctamente";
+    $updateQuery3 = "UPDATE [ControlTIC].[dbo].[asignacion_accesorios] SET [observaciones_desasigna_acc] = '$linkInput' WHERE [id] = '$idToUpdate'";
+
+    
+    
+     // Ejecutar la consulta de actualización
+     if (odbc_exec($conexion, $updateQuery1)) {
+        // Si la actualización se realizó correctamente, devolver un mensaje
+        echo "Actualización realizada correctamente";
     } else {
-        // Si hubo un error en alguna de las consultas, devolver un mensaje de error
-        echo "Error al realizar la actualización y/o eliminación";
+        // Si hubo un error en la actualización, devolver un mensaje de error
+        echo "Error al realizar la actualización";
+    }
+      // Ejecutar la consulta de actualización
+      if (odbc_exec($conexion, $updateQuery2)) {
+        // Si la actualización se realizó correctamente, devolver un mensaje
+        echo "Actualización realizada correctamente";
+    } else {
+        // Si hubo un error en la actualización, devolver un mensaje de error
+        echo "Error al realizar la actualización";
+    }
+     // Ejecutar la consulta de actualización
+     if (odbc_exec($conexion, $updateQuery3)) {
+        // Si la actualización se realizó correctamente, devolver un mensaje
+        echo "Actualización realizada correctamente";
+    } else {
+        // Si hubo un error en la actualización, devolver un mensaje de error
+        echo "Error al realizar la actualización";
     }
 }
 ?>

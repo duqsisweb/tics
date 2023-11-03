@@ -44,7 +44,35 @@
     <?php
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
-    $consulta = "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[numero_linea] ,[nombre_plan] ,[fecha_apertura] ,[valor_plan] ,[operador] ,[cod_cliente] ,[observaciones_sim] ,[fecha_fin_plan] ,[estado] ,[gestion] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[fecha_asigna] ,[usua_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_simcard]  WHERE cedula = '$cedula'";
+    $consulta = " SELECT [id_asignacion]
+            ,[id]
+            ,[tipo_maquina]
+            ,[numero_linea]
+            ,[nombre_plan]
+            ,[fecha_apertura]
+            ,[valor_plan]
+            ,[operador]
+            ,[cod_cliente]
+            ,[observaciones_sim]
+            ,[fecha_fin_plan]
+            ,[estado]
+            ,[gestion]
+            ,[fecha_crea]
+            ,[usua_crea]
+            ,[fecha_modifica]
+            ,[usua_modifica]
+            ,[fecha_asigna]
+            ,[usua_asigna]
+            ,[cedula]
+            ,[cargo]
+            ,[primernombre]
+            ,[segundonombre]
+            ,[primerapellido]
+            ,[segundoapellido]
+            ,[empresa]
+            ,[estado_asignacion]
+            ,[observaciones_desasigna]
+        FROM [ControlTIC].[dbo].[asignacion_simcard] where cedula = '$cedula' and estado_asignacion = 'VIGENTE'";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>"; // Mantener el formato monoespaciado
@@ -116,7 +144,35 @@
 
                         $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : '';
 
-                        $consulta = "SELECT [id_asignacion] ,[id] ,[tipo_maquina] ,[numero_linea] ,[nombre_plan] ,[fecha_apertura] ,[valor_plan] ,[operador] ,[cod_cliente] ,[observaciones_sim] ,[fecha_fin_plan] ,[estado] ,[gestion] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[fecha_asigna] ,[usua_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_simcard] where cedula= '$cedula'";
+                        $consulta = "SELECT [id_asignacion]
+                        ,[id]
+                        ,[tipo_maquina]
+                        ,[numero_linea]
+                        ,[nombre_plan]
+                        ,[fecha_apertura]
+                        ,[valor_plan]
+                        ,[operador]
+                        ,[cod_cliente]
+                        ,[observaciones_sim]
+                        ,[fecha_fin_plan]
+                        ,[estado]
+                        ,[gestion]
+                        ,[fecha_crea]
+                        ,[usua_crea]
+                        ,[fecha_modifica]
+                        ,[usua_modifica]
+                        ,[fecha_asigna]
+                        ,[usua_asigna]
+                        ,[cedula]
+                        ,[cargo]
+                        ,[primernombre]
+                        ,[segundonombre]
+                        ,[primerapellido]
+                        ,[segundoapellido]
+                        ,[empresa]
+                        ,[estado_asignacion]
+                        ,[observaciones_desasigna]
+                    FROM [ControlTIC].[dbo].[asignacion_simcard] where cedula = '$cedula' and estado_asignacion = 'VIGENTE' ";
                         $resultadoConsulta = odbc_exec($conexion, $consulta);
 
                         if (odbc_num_rows($resultadoConsulta) > 0) {

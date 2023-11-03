@@ -1,7 +1,35 @@
 <?php
 include '../../../conexionbd.php';
 $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
-$consulta = "SELECT numero_linea, nombre_plan FROM ControlTIC..asignacion_simcard  WHERE cedula = '$cedula'";
+$consulta = "SELECT [id_asignacion]
+,[id]
+,[tipo_maquina]
+,[numero_linea]
+,[nombre_plan]
+,[fecha_apertura]
+,[valor_plan]
+,[operador]
+,[cod_cliente]
+,[observaciones_sim]
+,[fecha_fin_plan]
+,[estado]
+,[gestion]
+,[fecha_crea]
+,[usua_crea]
+,[fecha_modifica]
+,[usua_modifica]
+,[fecha_asigna]
+,[usua_asigna]
+,[cedula]
+,[cargo]
+,[primernombre]
+,[segundonombre]
+,[primerapellido]
+,[segundoapellido]
+,[empresa]
+,[estado_asignacion]
+,[observaciones_desasigna]
+FROM [ControlTIC].[dbo].[asignacion_simcard] where cedula = '$cedula' and estado_asignacion = 'VIGENTE'";
 $resultado = odbc_exec($conexion, $consulta);
 
 $output = "<pre>"; // Mantener el formato monoespaciado
@@ -11,6 +39,7 @@ if (odbc_num_rows($resultado) > 0) {
         $output .= "-------------------------------------\n";
         $output .= "Número de la linea: " . $fila['numero_linea'] . "\n";
         $output .= "Nombre Plan: " . $fila['nombre_plan'] . "\n";
+        $output .= "Operador: " . $fila['operador'] . "\n";
         $output .= "-------------------------------------\n";
 
     }

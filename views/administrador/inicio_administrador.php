@@ -165,7 +165,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Devolución de equipos</h5>
-                                <p class="card-text">Aquí puede liberar o remover equipos de los usuarios</p><br>
+                                <p class="card-text">Aquí puede liberar o remover equipos de los usuarios</p>
                                 <a href="desasignacionesusuario.php" class="btn btn-success">Ingresar</a>
                             </div>
                         </div>

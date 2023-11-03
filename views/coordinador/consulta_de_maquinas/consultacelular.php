@@ -65,7 +65,7 @@ while ($Element = odbc_fetch_array($data)) {
                     <th scope="col" class="hidden-cell">Segundo Apellido</th>
                     <th scope="col" class="hidden-cell">Cedula</th>
                     <th scope="col" class="hidden-cell">Cargo</th>
-                    <th scope="col" class="hidden-cell">Empresa</th>
+                    <th scope="col" class="">Empresa</th>
                     <th scope="col">ID</th>
                     <th scope="col">Tipo de Máquina</th>
                     <th scope="col">IMEI</th>
@@ -93,7 +93,7 @@ while ($Element = odbc_fetch_array($data)) {
                         <td class="hidden-cell"><?php echo $segundoapellido; ?></td>
                         <td class="hidden-cell"><?php echo $cedula; ?></td>
                         <td class="hidden-cell"><?php echo $cargo; ?></td>
-                        <td class="hidden-cell"><?php echo $empresa; ?></td>
+                        <td class=""><?php echo $empresa; ?></td>
                         <td><?= $fila['id'] ?></td>
                         <td><?= $fila['tipo_maquina'] ?></td>
                         <td><?= $fila['imei'] ?></td>

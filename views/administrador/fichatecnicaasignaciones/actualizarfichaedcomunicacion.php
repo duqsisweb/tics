@@ -42,7 +42,7 @@
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
 
-    $consulta = "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[marca_edcomunicacion] ,[modelo_edcomunicacion] ,[descripcion_edcomunicacion] ,[serial_edcomunicacion] ,[fecha_de_ingreso_edc] ,[estado] ,[placa_activo_edcomunicacion] ,[sede_edcomunicacion] ,[ubicacion_edcomunicacion] ,[observaciones_edcomunicacion] ,[gestion_edcomunicacion] ,[fecha_garantia_edc] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] WHERE cedula = '$cedula'";
+    $consulta = "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[marca_edcomunicacion] ,[modelo_edcomunicacion] ,[descripcion_edcomunicacion] ,[serial_edcomunicacion] ,[fecha_de_ingreso_edc] ,[estado] ,[placa_activo_edcomunicacion] ,[sede_edcomunicacion] ,[ubicacion_edcomunicacion] ,[observaciones_edcomunicacion] ,[gestion_edcomunicacion] ,[fecha_garantia_edc] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] WHERE cedula = '$cedula' and estado_asignacion = 'VIGENTE' ";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>"; // Mantener el formato monoespaciado
@@ -118,7 +118,7 @@
 
                         $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : '';
 
-                        $consulta = "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[marca_edcomunicacion] ,[modelo_edcomunicacion] ,[descripcion_edcomunicacion] ,[serial_edcomunicacion] ,[fecha_de_ingreso_edc] ,[estado] ,[placa_activo_edcomunicacion] ,[sede_edcomunicacion] ,[ubicacion_edcomunicacion] ,[observaciones_edcomunicacion] ,[gestion_edcomunicacion] ,[fecha_garantia_edc] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] where cedula= '$cedula'";
+                        $consulta = " SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[marca_edcomunicacion] ,[modelo_edcomunicacion] ,[descripcion_edcomunicacion] ,[serial_edcomunicacion] ,[fecha_de_ingreso_edc] ,[estado] ,[placa_activo_edcomunicacion] ,[sede_edcomunicacion] ,[ubicacion_edcomunicacion] ,[observaciones_edcomunicacion] ,[gestion_edcomunicacion] ,[fecha_garantia_edc] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] WHERE cedula = '$cedula' and estado_asignacion = 'VIGENTE' ";
                         $resultadoConsulta = odbc_exec($conexion, $consulta);
 
                         if (odbc_num_rows($resultadoConsulta) > 0) {

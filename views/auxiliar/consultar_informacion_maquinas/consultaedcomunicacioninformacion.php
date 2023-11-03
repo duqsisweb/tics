@@ -46,7 +46,7 @@ include '../../../conexionbd.php';;
                     ,[empresa]
                     ,[estado_asignacion]
                     ,[observaciones_desasigna]
-                FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] where cedula = '$cedula'");
+                FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] where cedula = '$cedula' AND estado_asignacion = 'VIGENTE' ");
 
     $arr = array();
     while ($Element = odbc_fetch_array($data)) {
@@ -269,6 +269,7 @@ include '../../../conexionbd.php';;
 
                 var $asignarBtn = $(this).prev('.asignar-btn'); // Obtener el botón oculto previo
                 var idToUpdate = $asignarBtn.data('id'); // Obtener el ID del botón oculto
+                var linkInput = $('#observaciones_desasigna' + idToUpdate).val(); // Obtener el valor del campo de entrada
 
                 Swal.fire({
                     title: '¿Quieres guardar los cambios?',
@@ -289,7 +290,8 @@ include '../../../conexionbd.php';;
                             url: 'delete/deleteedcomunicacion.php',
                             type: 'POST',
                             data: {
-                                idToUpdate: idToUpdate
+                                idToUpdate: idToUpdate,
+                                linkInput: linkInput
                             },
                             success: function(response) {
                                 console.log("Actualización exitosa:", response);

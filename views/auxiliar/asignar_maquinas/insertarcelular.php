@@ -13,8 +13,8 @@ if (
 
     // se Agrega esto para mostrar los datos en la consola del navegador
     echo "<script>";
-echo "console.log(" . json_encode($_POST) . ");";
-echo "</script>";
+    echo "console.log(" . json_encode($_POST) . ");";
+    echo "</script>";
 
 {
 
@@ -44,7 +44,6 @@ echo "</script>";
     $empresa = $_POST['empresa'];
     $Usua_asigna = $_POST['Usua_asigna'];
     
-
     $observaciones_asigna = $_POST['observaciones_asigna'];
     $link_celular_asigna = $_POST['link_celular_asigna'];
 
@@ -53,23 +52,24 @@ echo "</script>";
         id, tipo_maquina, imei, serial_equipo_celular, marca, modelo,
         fecha_ingreso_cel, capacidad, ram_celular, estado, gestion, fecha_garantia_cel,
         primernombre, segundonombre,
-        primerapellido, segundoapellido, cedula, cargo,Usua_asigna
+        primerapellido, segundoapellido, cedula, cargo,Usua_asigna,estado_asignacion
     ) VALUES (
         '$id', '$tipo_maquina', '$imei', '$serial_equipo_celular', '$marca', '$modelo',
         '$fecha_ingreso_cel', '$capacidad', '$ram_celular', 'ASIGNADO', 'ASIGNACION', '$fecha_garantia_cel',
         '$primernombre', '$segundonombre',
-        '$primerapellido', '$segundoapellido', '$cedula', '$cargo','$Usua_asigna'
+        '$primerapellido', '$segundoapellido', '$cedula', '$cargo','$Usua_asigna','VIGENTE'
     )";
 
     // INSERTAR DATOS A LA TABLA
     $queryHistorial = "INSERT INTO ControlTIC..historial_celular (
         id, tipo_maquina, imei, serial_equipo_celular, marca, modelo,
         fecha_ingreso_cel, capacidad, ram_celular, estado, gestion, fecha_garantia_cel,primernombre, segundonombre,
-        primerapellido, segundoapellido, cedula, cargo,observaciones_asigna, link_celular_asigna,fechamov,descripcionmov,usuamov
+        primerapellido, segundoapellido, cedula, cargo,observaciones_asigna, link_celular_asigna,fechamov,descripcionmov,usuamov,estado_asignacion
     ) VALUES (
         '$id', '$tipo_maquina', '$imei', '$serial_equipo_celular', '$marca', '$modelo',
         '$fecha_ingreso_cel', '$capacidad', '$ram_celular', 'ASIGNADO', 'ASIGNACION', '$fecha_garantia_cel','$primernombre', '$segundonombre',
-        '$primerapellido', '$segundoapellido', '$cedula', '$cargo','$observaciones_asigna','$link_celular_asigna',CONVERT(datetime, Getdate(), 120),'SE REALIZO ASIGNAMIENTO DE ELEMENTO CELULAR','$Usua_asigna'
+        '$primerapellido', '$segundoapellido', '$cedula', '$cargo','$observaciones_asigna','$link_celular_asigna',CONVERT(datetime, Getdate(), 120)
+        ,'SE REALIZO ASIGNAMIENTO DE ELEMENTO CELULAR','$Usua_asigna','VIGENTE'
         )";
 
     var_dump($_POST);

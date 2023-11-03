@@ -71,6 +71,7 @@ echo "</script>";
         ,segundonombre
         ,primerapellido
         ,segundoapellido
+        ,estado_asignacion
         ) 
         VALUES ( 
             '$id'
@@ -93,6 +94,7 @@ echo "</script>";
             ,'$segundonombre'
             ,'$primerapellido'
             ,'$segundoapellido'
+            ,'VIGENTE'
              )";
 
     // INSERTAR DATOS A LA TABLA

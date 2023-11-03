@@ -41,34 +41,35 @@
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
 
-    $consulta = " SELECT  [id_historial]
-    ,[id]
-    ,[tipo_maquina]
-    ,[marca]
-    ,[modelo]
-    ,[descripcion]
-    ,[tipo_acc]
-    ,[cantidad]
-    ,[fecha_de_ingreso_acc]
-    ,[fecha_crea]
-    ,[usua_crea]
-    ,[cedula]
-    ,[cargo]
-    ,[primernombre]
-    ,[segundonombre]
-    ,[primerapellido]
-    ,[segundoapellido]
-    ,[empresa]
-    ,[observaciones_asigna_acc]
-    ,[link_acc_asigna]
-    ,[observaciones_desasigna_acc]
-    ,[link_acc_desasigna]
-    ,[fechamov]
-    ,[descripcionmov]
-    ,[usuamov]
-FROM [ControlTIC].[dbo].[historial_accesorios]
-    where cedula = '1015453120' AND descripcionmov like '%SE ELIMINO ASIGNAMIENTO DE UN ACCESORIO%'
-ORDER BY id_historial DESC ";
+    $consulta = " SELECT  [id_asignacion]
+                ,[id]
+                ,[tipo_maquina]
+                ,[marca]
+                ,[modelo]
+                ,[descripcion]
+                ,[tipo_acc]
+                ,[cantidad]
+                ,[fecha_de_ingreso_acc]
+                ,[fecha_crea]
+                ,[usua_crea]
+                ,[cedula]
+                ,[cargo]
+                ,[primernombre]
+                ,[segundonombre]
+                ,[primerapellido]
+                ,[segundoapellido]
+                ,[empresa]
+                ,[observaciones_asigna_acc]
+                ,[link_acc_asigna]
+                ,[observaciones_desasigna_acc]
+                ,[link_acc_desasigna]
+                ,[fechamov]
+                ,[descripcionmov]
+                ,[usuamov]
+                ,[estado_asignacion]
+                ,[estado]
+                ,[gestion]
+            FROM [ControlTIC].[dbo].[asignacion_accesorios] where cedula = '$cedula' and estado_asignacion = 'NO VIGENTE' ";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>"; // Mantener el formato monoespaciado
@@ -140,7 +141,7 @@ ORDER BY id_historial DESC ";
 
                         $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : '';
 
-                        $consulta = " SELECT  [id_historial]
+                        $consulta = " SELECT  [id_asignacion]
                         ,[id]
                         ,[tipo_maquina]
                         ,[marca]
@@ -165,9 +166,10 @@ ORDER BY id_historial DESC ";
                         ,[fechamov]
                         ,[descripcionmov]
                         ,[usuamov]
-                    FROM [ControlTIC].[dbo].[historial_accesorios]
-                        where cedula = '1015453120' AND descripcionmov like '%SE ELIMINO ASIGNAMIENTO DE UN ACCESORIO%'
-                    ORDER BY id_historial DESC  ";
+                        ,[estado_asignacion]
+                        ,[estado]
+                        ,[gestion]
+                    FROM [ControlTIC].[dbo].[asignacion_accesorios] where cedula = '$cedula' and estado_asignacion = 'NO VIGENTE'";
                         $resultadoConsulta = odbc_exec($conexion, $consulta);
 
                         if (odbc_num_rows($resultadoConsulta) > 0) {

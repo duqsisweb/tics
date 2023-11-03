@@ -41,7 +41,7 @@
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
 
-    $consulta = " SELECT  [id_historial]
+    $consulta = " SELECT  [id_asignacion]
     ,[id]
     ,[tipo_maquina]
     ,[marca_almacenamiento]
@@ -52,9 +52,9 @@
     ,[caracteristica_almacenamiento]
     ,[sede_almacenamiento]
     ,[ubicacion_almacenamiento]
-    ,[fecha_de_ingreso_alma]
+    ,[fecha_de_ingreso]
     ,[estado]
-    ,[fecha_de_garantia_alma]
+    ,[fecha_de_garantia]
     ,[fecha_crea]
     ,[usua_crea]
     ,[fecha_modifica]
@@ -68,16 +68,9 @@
     ,[primerapellido]
     ,[segundoapellido]
     ,[empresa]
-    ,[estado_asigna]
-    ,[observaciones_asigna_alma]
-    ,[link_alma_asigna]
-    ,[observaciones_desasigna_alma]
-    ,[link_alma_desasigna]
-    ,[fechamov]
-    ,[descripcionmov]
-    ,[usuamov]
-FROM [ControlTIC].[dbo].[historial_almacenamiento]
-   where cedula = '$cedula' AND descripcionmov like '%SE ELIMINA ASIGNACION DE UN PERIFERICO%' ";
+    ,[estado_asignacion]
+    ,[observaciones_desasigna]
+FROM [ControlTIC].[dbo].[asignacion_almacenamiento] where cedula = '$cedula' and estado_asignacion = 'NO VIGENTE'  ";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>"; // Mantener el formato monoespaciado
@@ -141,7 +134,6 @@ FROM [ControlTIC].[dbo].[historial_almacenamiento]
                             <th scope="col">Caracteristica</th>
                             <th scope="col">Sede</th>
                             <th scope="col">Ubicación</th>
-                            <th scope="col">Estado</th>
 
 
                         </tr>
@@ -152,7 +144,7 @@ FROM [ControlTIC].[dbo].[historial_almacenamiento]
 
                         $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : '';
 
-                        $consulta = " SELECT  [id_historial]
+                        $consulta = " SELECT  [id_asignacion]
                         ,[id]
                         ,[tipo_maquina]
                         ,[marca_almacenamiento]
@@ -163,9 +155,9 @@ FROM [ControlTIC].[dbo].[historial_almacenamiento]
                         ,[caracteristica_almacenamiento]
                         ,[sede_almacenamiento]
                         ,[ubicacion_almacenamiento]
-                        ,[fecha_de_ingreso_alma]
+                        ,[fecha_de_ingreso]
                         ,[estado]
-                        ,[fecha_de_garantia_alma]
+                        ,[fecha_de_garantia]
                         ,[fecha_crea]
                         ,[usua_crea]
                         ,[fecha_modifica]
@@ -179,16 +171,9 @@ FROM [ControlTIC].[dbo].[historial_almacenamiento]
                         ,[primerapellido]
                         ,[segundoapellido]
                         ,[empresa]
-                        ,[estado_asigna]
-                        ,[observaciones_asigna_alma]
-                        ,[link_alma_asigna]
-                        ,[observaciones_desasigna_alma]
-                        ,[link_alma_desasigna]
-                        ,[fechamov]
-                        ,[descripcionmov]
-                        ,[usuamov]
-                    FROM [ControlTIC].[dbo].[historial_almacenamiento]
-                       where cedula = '$cedula' AND descripcionmov like '%SE ELIMINA ASIGNACION DE UN PERIFERICO%' ";
+                        ,[estado_asignacion]
+                        ,[observaciones_desasigna]
+                    FROM [ControlTIC].[dbo].[asignacion_almacenamiento] where cedula = '$cedula' and estado_asignacion = 'NO VIGENTE'  ";
                         $resultadoConsulta = odbc_exec($conexion, $consulta);
 
                         if (odbc_num_rows($resultadoConsulta) > 0) {
@@ -205,7 +190,6 @@ FROM [ControlTIC].[dbo].[historial_almacenamiento]
                                 echo '<td>' . $fila['caracteristica_almacenamiento'] . '</td>';
                                 echo '<td>' . $fila['sede_almacenamiento'] . '</td>';
                                 echo '<td>' . $fila['ubicacion_almacenamiento'] . '</td>';
-                                echo '<td>' . $fila['estado'] . '</td>';
                             
 
 

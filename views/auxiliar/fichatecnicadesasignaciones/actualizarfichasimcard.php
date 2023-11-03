@@ -44,43 +44,35 @@
     <?php
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
-    $consulta = " SELECT  [id_historial]
-    ,[id]
-    ,[tipo_maquina]
-    ,[numero_linea]
-    ,[nombre_plan]
-    ,[fecha_apertura]
-    ,[valor_plan]
-    ,[operador]
-    ,[cod_cliente]
-    ,[observaciones_sim]
-    ,[fecha_fin_plan]
-    ,[estado]
-    ,[gestion]
-    ,[fecha_crea]
-    ,[usua_crea]
-    ,[fecha_modifica]
-    ,[usua_modifica]
-    ,[fecha_asigna]
-    ,[usua_asigna]
-    ,[cedula]
-    ,[cargo]
-    ,[primernombre]
-    ,[segundonombre]
-    ,[primerapellido]
-    ,[segundoapellido]
-    ,[empresa]
-    ,[estado_asignacion]
-    ,[observaciones_asigna_sim]
-    ,[link_sim_asigna]
-    ,[observaciones_desasigna_sim]
-    ,[link_sim_desasigna]
-    ,[fechamov]
-    ,[descripcionmov]
-    ,[usuamov]
-FROM [ControlTIC].[dbo].[historial_simcard]
-  where cedula = '$cedula' AND descripcionmov like '%SE ELIMINO ASIGNACION DE LA LINEA SIMCARD%'
-ORDER BY id_historial DESC ";
+            $consulta = " SELECT [id_asignacion]
+            ,[id]
+            ,[tipo_maquina]
+            ,[numero_linea]
+            ,[nombre_plan]
+            ,[fecha_apertura]
+            ,[valor_plan]
+            ,[operador]
+            ,[cod_cliente]
+            ,[observaciones_sim]
+            ,[fecha_fin_plan]
+            ,[estado]
+            ,[gestion]
+            ,[fecha_crea]
+            ,[usua_crea]
+            ,[fecha_modifica]
+            ,[usua_modifica]
+            ,[fecha_asigna]
+            ,[usua_asigna]
+            ,[cedula]
+            ,[cargo]
+            ,[primernombre]
+            ,[segundonombre]
+            ,[primerapellido]
+            ,[segundoapellido]
+            ,[empresa]
+            ,[estado_asignacion]
+            ,[observaciones_desasigna]
+        FROM [ControlTIC].[dbo].[asignacion_simcard] where cedula = '$cedula' and estado_asignacion = 'NO VIGENTE' ";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>"; // Mantener el formato monoespaciado
@@ -142,8 +134,6 @@ ORDER BY id_historial DESC ";
                             <th scope="col">Cod Cliente</th>
                             <th scope="col">Observaciones</th>
                             <th scope="col">Fecha Fin Plan</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Gestion</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -152,43 +142,35 @@ ORDER BY id_historial DESC ";
 
                         $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : '';
 
-                        $consulta = " SELECT [id_historial]
-                        ,[id]
-                        ,[tipo_maquina]
-                        ,[numero_linea]
-                        ,[nombre_plan]
-                        ,[fecha_apertura]
-                        ,[valor_plan]
-                        ,[operador]
-                        ,[cod_cliente]
-                        ,[observaciones_sim]
-                        ,[fecha_fin_plan]
-                        ,[estado]
-                        ,[gestion]
-                        ,[fecha_crea]
-                        ,[usua_crea]
-                        ,[fecha_modifica]
-                        ,[usua_modifica]
-                        ,[fecha_asigna]
-                        ,[usua_asigna]
-                        ,[cedula]
-                        ,[cargo]
-                        ,[primernombre]
-                        ,[segundonombre]
-                        ,[primerapellido]
-                        ,[segundoapellido]
-                        ,[empresa]
-                        ,[estado_asignacion]
-                        ,[observaciones_asigna_sim]
-                        ,[link_sim_asigna]
-                        ,[observaciones_desasigna_sim]
-                        ,[link_sim_desasigna]
-                        ,[fechamov]
-                        ,[descripcionmov]
-                        ,[usuamov]
-                    FROM [ControlTIC].[dbo].[historial_simcard]
-                      where cedula = '$cedula' AND descripcionmov like '%SE ELIMINO ASIGNACION DE LA LINEA SIMCARD%'
-                    ORDER BY id_historial DESC ";
+                        $consulta = " SELECT [id_asignacion]
+                                ,[id]
+                                ,[tipo_maquina]
+                                ,[numero_linea]
+                                ,[nombre_plan]
+                                ,[fecha_apertura]
+                                ,[valor_plan]
+                                ,[operador]
+                                ,[cod_cliente]
+                                ,[observaciones_sim]
+                                ,[fecha_fin_plan]
+                                ,[estado]
+                                ,[gestion]
+                                ,[fecha_crea]
+                                ,[usua_crea]
+                                ,[fecha_modifica]
+                                ,[usua_modifica]
+                                ,[fecha_asigna]
+                                ,[usua_asigna]
+                                ,[cedula]
+                                ,[cargo]
+                                ,[primernombre]
+                                ,[segundonombre]
+                                ,[primerapellido]
+                                ,[segundoapellido]
+                                ,[empresa]
+                                ,[estado_asignacion]
+                                ,[observaciones_desasigna]
+                            FROM [ControlTIC].[dbo].[asignacion_simcard] where cedula = '$cedula' and estado_asignacion = 'NO VIGENTE'";
                         $resultadoConsulta = odbc_exec($conexion, $consulta);
 
                         if (odbc_num_rows($resultadoConsulta) > 0) {
@@ -204,8 +186,6 @@ ORDER BY id_historial DESC ";
                                 echo '<td>' . $fila['cod_cliente'] . '</td>';
                                 echo '<td>' . $fila['observaciones_sim'] . '</td>';
                                 echo '<td>' . $fila['fecha_fin_plan'] . '</td>';
-                                echo '<td>' . $fila['estado'] . '</td>';
-                                echo '<td>' . $fila['gestion'] . '</td>';
                                 echo '</tr>';
                             }
                         } else {

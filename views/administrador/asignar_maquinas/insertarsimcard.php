@@ -82,7 +82,8 @@ if (
         segundoapellido,
         cedula,
         cargo,
-        empresa
+        empresa,
+        estado_asignacion
         )
          VALUES (
             '$id',
@@ -107,7 +108,8 @@ if (
             '$segundoapellido',
             '$cedula',
             '$cargo',
-            '$empresa'
+            '$empresa',
+            'VIGENTE'
             )";
 
     // INSERTAR DATOS A LA TABLA 'historial_simcard'
@@ -139,7 +141,8 @@ if (
         link_sim_asigna,
         fechamov,
         descripcionmov,
-        usuamov
+        usuamov,
+        estado_asignacion
         )
          VALUES (
             '$id',
@@ -169,7 +172,8 @@ if (
             '$link_sim_asigna'
             ,CONVERT(datetime, Getdate(), 120),
             'SE REALIZO ASIGNAMIENTO DE LINEA SIMCARD',
-            '$Usua_asigna'
+            '$Usua_asigna',
+            'VIGENTE'
             )";
 
     // Ejecuta la consulta en la tabla 'asignacion_simcard'

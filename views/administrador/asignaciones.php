@@ -1470,7 +1470,6 @@ if (isset($_SESSION['usuario'])) {
             });
         }
     </script>
-
     <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN ACCESORIOS-->
     <script>
         $(document).ready(function() {
@@ -1504,7 +1503,6 @@ if (isset($_SESSION['usuario'])) {
             });
         }
     </script>
-
     <!-- SCRIPT Y AJAX DE ACTUALIZAR FICHA TECNICA DE ASIGNACIÓN EDCOMUNICACION-->
     <script>
         $(document).ready(function() {
@@ -1816,6 +1814,7 @@ if (isset($_SESSION['usuario'])) {
     <script>
         $(document).ready(function() {
 
+            var empresa = '<?php echo $empresaOption; ?>'; // Obtener el nombre completo del PHP
             var nombre1 = $('#Usua_asigna').text();
             // Función para cargar información en el modal
             function cargarInformacionEnModal() {
@@ -1829,6 +1828,7 @@ if (isset($_SESSION['usuario'])) {
                         segundoapellido: "<?php echo htmlspecialchars($segundoapellido); ?>",
                         cedula: "<?php echo htmlspecialchars($cedula); ?>",
                         cargo: "<?php echo htmlspecialchars($cargo); ?>",
+                        empresa: empresa,
                         Usua_asigna: nombre1 // Incluye el contenido de la etiqueta <strong> como parámetro
                     },
                     success: function(response) {
@@ -1847,8 +1847,6 @@ if (isset($_SESSION['usuario'])) {
         $(document).ready(function() {
 
             var nombre1 = $('#Usua_asigna').text();
-
-
             $('#fila4celular button').on('click', function() {
                 $.ajax({
                     url: 'consultar_informacion_maquinas/consultacelularinformacion.php',
@@ -2140,7 +2138,6 @@ if (isset($_SESSION['usuario'])) {
                         empresa: empresaOptionValue,
                         tipo_almacenamiento: tipo_almacenamiento,
                         Usua_asigna: nombre1, // Incluye el contenido de la etiqueta <strong> como parámetro
-
 
                         primernombre: "<?php echo htmlspecialchars($primernombre); ?>",
                         segundonombre: "<?php echo htmlspecialchars($segundonombre); ?>",

@@ -41,7 +41,35 @@
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
 
-    $consulta = "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[marca] ,[modelo] ,[descripcion] ,[tipo_acc] ,[cantidad] ,[fecha_de_ingreso_acc] ,[fecha_crea] ,[usua_crea] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[observaciones_asigna_acc] ,[link_acc_asigna] ,[observaciones_desasigna_acc] ,[link_acc_desasigna] ,[fechamov] ,[descripcionmov] ,[usuamov] FROM [ControlTIC].[dbo].[asignacion_accesorios] WHERE cedula = '$cedula'";
+    $consulta = "SELECT [id_asignacion]
+                ,[id]
+                ,[tipo_maquina]
+                ,[marca]
+                ,[modelo]
+                ,[descripcion]
+                ,[tipo_acc]
+                ,[cantidad]
+                ,[fecha_de_ingreso_acc]
+                ,[fecha_crea]
+                ,[usua_crea]
+                ,[cedula]
+                ,[cargo]
+                ,[primernombre]
+                ,[segundonombre]
+                ,[primerapellido]
+                ,[segundoapellido]
+                ,[empresa]
+                ,[observaciones_asigna_acc]
+                ,[link_acc_asigna]
+                ,[observaciones_desasigna_acc]
+                ,[link_acc_desasigna]
+                ,[fechamov]
+                ,[descripcionmov]
+                ,[usuamov]
+                ,[estado_asignacion]
+                ,[estado]
+                ,[gestion]
+            FROM [ControlTIC].[dbo].[asignacion_accesorios] WHERE cedula = '$cedula' and estado_asignacion = 'VIGENTE'";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>"; // Mantener el formato monoespaciado
@@ -113,7 +141,35 @@
 
                         $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : '';
 
-                        $consulta = "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[marca] ,[modelo] ,[descripcion] ,[tipo_acc] ,[cantidad] ,[fecha_de_ingreso_acc] ,[fecha_crea] ,[usua_crea] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[observaciones_asigna_acc] ,[link_acc_asigna] ,[observaciones_desasigna_acc] ,[link_acc_desasigna] ,[fechamov] ,[descripcionmov] ,[usuamov] FROM [ControlTIC].[dbo].[asignacion_accesorios] where cedula= '$cedula'";
+                        $consulta = " SELECT [id_asignacion]
+                                    ,[id]
+                                    ,[tipo_maquina]
+                                    ,[marca]
+                                    ,[modelo]
+                                    ,[descripcion]
+                                    ,[tipo_acc]
+                                    ,[cantidad]
+                                    ,[fecha_de_ingreso_acc]
+                                    ,[fecha_crea]
+                                    ,[usua_crea]
+                                    ,[cedula]
+                                    ,[cargo]
+                                    ,[primernombre]
+                                    ,[segundonombre]
+                                    ,[primerapellido]
+                                    ,[segundoapellido]
+                                    ,[empresa]
+                                    ,[observaciones_asigna_acc]
+                                    ,[link_acc_asigna]
+                                    ,[observaciones_desasigna_acc]
+                                    ,[link_acc_desasigna]
+                                    ,[fechamov]
+                                    ,[descripcionmov]
+                                    ,[usuamov]
+                                    ,[estado_asignacion]
+                                    ,[estado]
+                                    ,[gestion]
+                                FROM [ControlTIC].[dbo].[asignacion_accesorios] WHERE cedula = '$cedula' and estado_asignacion = 'VIGENTE' ";
                         $resultadoConsulta = odbc_exec($conexion, $consulta);
 
                         if (odbc_num_rows($resultadoConsulta) > 0) {

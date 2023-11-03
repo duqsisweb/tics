@@ -533,8 +533,7 @@ if (isset($_SESSION['usuario'])) {
             }
         });
     </script>
-
-    <!-- Script y AJAX asignación de PERIFERICOS -->
+    <!-- Script y AJAX asignación de EDCOMUNICACION -->
     <script>
         $(document).ready(function() {
             $('#fila4').show(); // Mostrar #fila4 al cargar la página
@@ -597,7 +596,7 @@ if (isset($_SESSION['usuario'])) {
             }
         });
     </script>
-    <!-- Script y AJAX asignación de ALMACENAMIENTO -->
+    <!-- Script y AJAX asignación de SIMCARD -->
     <script>
         $(document).ready(function() {
             $('#fila7').show(); // Mostrar #fila4 al cargar la página

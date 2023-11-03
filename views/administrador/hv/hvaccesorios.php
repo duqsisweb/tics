@@ -15,9 +15,9 @@ if (isset($_SESSION['usuario'])) {
 
     if (isset($_POST['consultar'])) {
         // Obtener el valor ingresado en el campo Nombre_equipo
-        $imei = $_POST['imei'];
+        $id = $_POST['id'];
         // Llamar a la función con el parámetro de búsqueda
-        $datosEquipos = hvcelular($conexion, $imei);
+        $datosEquipos = hvacc($conexion, $id);
 
         // Si se encontraron resultados, configurar la bandera en true
         if (!empty($datosEquipos)) {
@@ -34,13 +34,12 @@ if (isset($_SESSION['usuario'])) {
     <?php require '../estilosadmin/head.php'; ?>
 
     <body>
-        
-         <!-- NAV -->
+        <!-- NAV -->
         <?php require '../estilosadmin/nav.php'; ?>
 
         <section style="margin-top: 100px;">
-                       <!--  -->
-                       <?php require '../estilosadmin/navinventario.php'; ?>
+            <!--  -->
+            <?php require '../estilosadmin/navinventario.php'; ?>
 
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container">
@@ -58,7 +57,7 @@ if (isset($_SESSION['usuario'])) {
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <form method="POST">
-                        <input class="form-control" type="text" name="imei" style="width: 100%;" id="imei" placeholder="INGRESE IMEI" required>
+                        <input class="form-control" type="text" name="id" style="width: 100%;" id="id" placeholder="INGRESE ID" required autocomplete="off">
 
                         <h5 style="text-align: center;"></h5>
                         <input type="submit" class="btn btn-success" name='consultar' value="Consultar" id="btncolor">
@@ -77,115 +76,73 @@ if (isset($_SESSION['usuario'])) {
         <?php
         if ($mostrarTabla) {
         ?>
-            <table class="table table-bordered dt-responsive table-hover display nowrap" id="" cellspacing="0" style="text-align: center;">
+            <table class="table table-bordered dt-responsive table-hover display nowrap" id="#mtable" cellspacing="0" style="text-align: center;">
                 <thead>
                     <tr class="encabezado table-dark">
-                        <th>ID</th>
-                        <th>TIPO MAQUINA</th>
-                        <th>IMEI</th>
-                        <th>SERIAL</th>
-                        <th>MARCA</th>
-                        <th>MODELO</th>
-                        <th>FECHA DE INGRESO</th>
-                        <th>CAPACIDAD</th>
-                        <th>RAM</th>
-                        <th>ESTADO</th>
-                        <th>GESTION</th>
-                        <th>FECHA GARANTIA</th>
-                        <th>USUARIO DE CREACION</th>
-                        <th>FECHA DE CREACION</th>
-                       
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if (isset($_POST['consultar'])) {
-                        // Obtener el valor ingresado en el campo Nombre_equipo
-                        $imei = $_POST['imei'];
-                        // Llamar a la función con el parámetro de búsqueda
-                        $datosEquipos = hvcelularcab($conexion, $imei);
-                        foreach ($datosEquipos as $row) {
-                            echo "<tr>";
-                            foreach ($row as $key => $value) {
-                                if ($key === 'Estado' && $value === 'Asignado') {
-                                    echo "<td>$value</td>";
-                                } else {
-                                    echo "<td>" . $value . "</td>";
-                                }
-                            }
-                        }
-                    }
-                    ?>
-                </tbody>
-            </table>
-        <?php
-        } else {
-            // Mostrar un mensaje si no hay resultados
-            echo "<div style='text-align: center;'>No se encontraron resultados.</div>";
-        }
-        ?>
-
-
-        <!-- 2 TABLA -->
-        <?php
-        if ($mostrarTabla) {
-        ?>
-            <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
-                <thead>
-                    <tr class="encabezado table-dark">
-                        <th>ID</th>
                         <th>ID HISTORIAL</th>
-                        <th>TIPO MAQUINA</th>
-                        <th>IMEI</th>
-                        <th>SERIAL</th>
+                        <th>ID</th>
+                        <th>ELEMENTO</th>
                         <th>MARCA</th>
                         <th>MODELO</th>
-                        <th>FECHA DE INGRESO</th>
-                        <th>CAPACIDAD</th>
-                        <th>RAM</th>
-                        <th>ESTADO</th>
-                        <th>GESTION</th>
-                        <th>FECHA GARANTIA</th>
-                        <th>FECHA DE CREACION</th>
-                        <th>USUARIO DE CREACION</th>
-                        <th>FECHA MOD</th>
-                        <th>USUA MOD</th>
-                        <th>USUARIO ASIGNA</th>
-                        <th>FECHA ASIGNA</th>
+                        <th>DESCRIPCIÓN</th>
+                        <th>TIPO DE ACCESORIO</th>
+                        <th>CANTIDAD</th>
+                        <th>FECHA DE INGRESO ASL SISTEMA</th>
+
                         <th>CEDULA</th>
                         <th>CARGO</th>
                         <th>PRIMER NOMBRE</th>
                         <th>SEGUNDO NOMBRE</th>
                         <th>PRIMER APELLIDO</th>
                         <th>SEGUNDO APELLIDO</th>
-                        <th>EMPRESA</th>
-                        <th>ESTADO ASIGNACION</th>
-                        <th>OBSERVACIONES</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th>FECHA DE MOVIMIENTO</th>
+
+                        <th>OBSERVACIONES DE ASIGNACIÓN</th>
+                        <th>LINK DE ASIGNACION</th>
+                        <th>OBSERVACIONES RETIRO</th>
+                        <th>LINK AL REMOVER ASIGNACION</th>
+
                         <th>MOVIMIENTO</th>
+                        <th>FECHA DE MOVIMIENTO</th>
                         <th>USUARIO</th>
-                       
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     if (isset($_POST['consultar'])) {
                         // Obtener el valor ingresado en el campo Nombre_equipo
-                        $imei = $_POST['imei'];
+                        $id = $_POST['id'];
                         // Llamar a la función con el parámetro de búsqueda
-                        $datosEquipos = hvcelular($conexion, $imei);
+                        $datosEquipos = hvacc($conexion, $id);
                         foreach ($datosEquipos as $row) {
                             echo "<tr>";
-                            foreach ($row as $key => $value) {
-                                if ($key === 'Estado' && $value === 'Asignado') {
-                                    echo "<td>$value</td>";
-                                } else {
-                                    echo "<td>" . $value . "</td>";
-                                }
-                            }
+
+                            echo "<td>" . $row['id_historial'] . "</td>";
+                            echo "<td>" . $row['id'] . "</td>";
+                            echo "<td>" . $row['tipo_maquina'] . "</td>";
+                            echo "<td>" . $row['marca'] . "</td>";
+                            echo "<td>" . $row['modelo'] . "</td>";
+                            echo "<td>" . $row['descripcion'] . "</td>";
+                            echo "<td>" . $row['tipo_acc'] . "</td>";
+                            echo "<td>" . $row['cantidad'] . "</td>";
+                            echo "<td>" . $row['fecha_de_ingreso_acc'] . "</td>";
+
+                            echo "<td>" . $row['cedula'] . "</td>";
+                            echo "<td>" . $row['cargo'] . "</td>";
+                            echo "<td>" . $row['primernombre'] . "</td>";
+                            echo "<td>" . $row['segundonombre'] . "</td>";
+                            echo "<td>" . $row['primerapellido'] . "</td>";
+                            echo "<td>" . $row['segundoapellido'] . "</td>";
+
+                            echo "<td>" . $row['observaciones_asigna_acc'] . "</td>";
+                            echo "<td>   <a target='_blank' href='" . $row['link_acc_asigna'] . "'>" . $row['link_acc_asigna'] . "</a></td>";
+                            echo "<td>" . $row['observaciones_desasigna_acc'] . "</td>";
+                            echo "<td>   <a target='_blank' href='" . $row['link_acc_desasigna'] . "'>" . $row['link_acc_desasigna'] . "</a></td>";
+
+                            echo "<td>" . $row['fechamov'] . "</td>";
+                            echo "<td>" . $row['descripcionmov'] . "</td>";
+                            echo "<td>" . $row['usuamov'] . "</td>";
+
+                            echo "</tr>";
                         }
                     }
                     ?>
@@ -197,8 +154,6 @@ if (isset($_SESSION['usuario'])) {
             echo "<div style='text-align: center;'>No se encontraron resultados.</div>";
         }
         ?>
-
-
 
     </body>
 

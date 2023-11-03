@@ -41,43 +41,35 @@
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
 
-    $consulta = "  SELECT TOP (1000) [id_historial]
-    ,[id]
-    ,[tipo_maquina]
-    ,[imei]
-    ,[serial_equipo_celular]
-    ,[marca]
-    ,[modelo]
-    ,[fecha_ingreso_cel]
-    ,[capacidad]
-    ,[ram_celular]
-    ,[estado]
-    ,[gestion]
-    ,[fecha_garantia_cel]
-    ,[fecha_crea]
-    ,[usua_crea]
-    ,[fecha_modifica]
-    ,[usua_modifica]
-    ,[usua_asigna]
-    ,[fecha_asigna]
-    ,[cedula]
-    ,[cargo]
-    ,[primernombre]
-    ,[segundonombre]
-    ,[primerapellido]
-    ,[segundoapellido]
-    ,[empresa]
-    ,[estado_asignacion]
-    ,[observaciones_asigna]
-    ,[link_celular_asigna]
-    ,[observaciones_desasigna]
-    ,[link_celular_desasigna]
-    ,[fechamov]
-    ,[descripcionmov]
-    ,[usuamov]
-FROM [ControlTIC].[dbo].[historial_celular]
-  where cedula = '$cedula' AND descripcionmov like '%SE ELIMINO ASIGNACION DE UN CELULAR%'
-ORDER BY id_historial DESC  ";
+    $consulta = " SELECT [id_asignacion]
+            ,[id]
+            ,[tipo_maquina]
+            ,[imei]
+            ,[serial_equipo_celular]
+            ,[marca]
+            ,[modelo]
+            ,[fecha_ingreso_cel]
+            ,[capacidad]
+            ,[ram_celular]
+            ,[estado]
+            ,[gestion]
+            ,[fecha_garantia_cel]
+            ,[fecha_crea]
+            ,[usua_crea]
+            ,[fecha_modifica]
+            ,[usua_modifica]
+            ,[usua_asigna]
+            ,[fecha_asigna]
+            ,[cedula]
+            ,[cargo]
+            ,[primernombre]
+            ,[segundonombre]
+            ,[primerapellido]
+            ,[segundoapellido]
+            ,[empresa]
+            ,[estado_asignacion]
+            ,[observaciones_desasigna]
+        FROM [ControlTIC].[dbo].[asignacion_celular] where estado_asignacion = 'NO VIGENTE' ";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>"; // Mantener el formato monoespaciado
@@ -153,7 +145,7 @@ ORDER BY id_historial DESC  ";
 
                         $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : '';
 
-                        $consulta = " SELECT TOP (1000) [id_historial]
+                        $consulta = " SELECT [id_asignacion]
                         ,[id]
                         ,[tipo_maquina]
                         ,[imei]
@@ -180,16 +172,8 @@ ORDER BY id_historial DESC  ";
                         ,[segundoapellido]
                         ,[empresa]
                         ,[estado_asignacion]
-                        ,[observaciones_asigna]
-                        ,[link_celular_asigna]
                         ,[observaciones_desasigna]
-                        ,[link_celular_desasigna]
-                        ,[fechamov]
-                        ,[descripcionmov]
-                        ,[usuamov]
-                    FROM [ControlTIC].[dbo].[historial_celular]
-                      where cedula = '$cedula' AND descripcionmov like '%SE ELIMINO ASIGNACION DE UN CELULAR%'
-                    ORDER BY id_historial DESC ";
+                    FROM [ControlTIC].[dbo].[asignacion_celular] where estado_asignacion = 'NO VIGENTE' ";
                         $resultadoConsulta = odbc_exec($conexion, $consulta);
 
                         if (odbc_num_rows($resultadoConsulta) > 0) {

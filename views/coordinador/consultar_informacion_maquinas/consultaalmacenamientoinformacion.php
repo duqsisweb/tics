@@ -17,7 +17,7 @@ if (isset($_POST['cedula'])) {
 
 
 
-    $data = odbc_exec($conexion, "SELECT [id_asignacion] ,[id] ,[tipo_maquina] ,[marca_almacenamiento] ,[modelo_almacenamiento] ,[descripcion_almacenamiento] ,[capacidad_almacenamiento] ,[tipo_almacenamiento] ,[caracteristica_almacenamiento] ,[sede_almacenamiento] ,[ubicacion_almacenamiento] ,[fecha_de_ingreso] ,[estado] ,[fecha_de_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_almacenamiento] where cedula = '$cedula' ");
+    $data = odbc_exec($conexion, "SELECT [id_asignacion] ,[id] ,[tipo_maquina] ,[marca_almacenamiento] ,[modelo_almacenamiento] ,[descripcion_almacenamiento] ,[capacidad_almacenamiento] ,[tipo_almacenamiento] ,[caracteristica_almacenamiento] ,[sede_almacenamiento] ,[ubicacion_almacenamiento] ,[fecha_de_ingreso] ,[estado] ,[fecha_de_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[empresa] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_almacenamiento] where cedula = '$cedula' and estado_asignacion = 'VIGENTE' ");
 
     $arr = array();
     while ($Element = odbc_fetch_array($data)) {
@@ -250,6 +250,7 @@ if (isset($_POST['cedula'])) {
 
                 var $asignarBtn = $(this).prev('.asignar-btn'); // Obtener el botón oculto previo
                 var idToUpdate = $asignarBtn.data('id'); // Obtener el ID del botón oculto
+                var linkInput = $('#observaciones_desasigna_alma' + idToUpdate).val(); // Obtener el valor del campo de entrada
 
                 Swal.fire({
                     title: '¿Quieres guardar los cambios?',
@@ -270,7 +271,8 @@ if (isset($_POST['cedula'])) {
                             url: 'delete/deletealmacenamiento.php',
                             type: 'POST',
                             data: {
-                                idToUpdate: idToUpdate
+                                idToUpdate: idToUpdate,
+                                linkInput: linkInput
                             },
                             success: function(response) {
                                 console.log("Actualización exitosa:", response);

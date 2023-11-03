@@ -1,7 +1,7 @@
 <?php
 include '../../../conexionbd.php';
 $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
-$consulta = "SELECT marca_perifericos, descripcion_perifericos, ubicacion_perifericos, tipo, tipo_toner  FROM ControlTIC..asignacion_perifericos WHERE cedula = '$cedula'";
+$consulta = "SELECT marca_perifericos, descripcion_perifericos, ubicacion_perifericos, tipo, tipo_toner  FROM ControlTIC..asignacion_perifericos WHERE cedula = '$cedula' and estado_asignacion = 'VIGENTE' ";
 $resultado = odbc_exec($conexion, $consulta);
 
 $output = "<pre>"; // Mantener el formato monoespaciado

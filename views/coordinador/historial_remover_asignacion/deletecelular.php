@@ -7,12 +7,15 @@ if (isset($_POST['idToUpdate'])) {
     
     // Obtener el ID para actualizar desde la solicitud POST
     $idToUpdate = $_POST['idToUpdate'];
+    $linkInput = $_POST['linkInput'];
     
     // Consulta SQL para actualizar el estado del registro en la tabla maquina_computador
-    $updateQueryy = "UPDATE [ControlTIC].[dbo].[maquina_celular] SET [Estado] = 6 WHERE [id] = '$idToUpdate'";
+    $updateQuery = "UPDATE [ControlTIC].[dbo].[maquina_celular] SET [Estado] = 6 WHERE [id] = '$idToUpdate'";
+
     
-    // Consulta SQL para actualizar el estado del registro en la tabla asignacion_computador
-    $updateQuery = "DELETE FROM [ControlTIC].[dbo].[asignacion_celular] WHERE [id] = '$idToUpdate'";
+    $updateQuery3 = "UPDATE [ControlTIC].[dbo].[asignacion_celular] SET [estado_asignacion] = 'NO VIGENTE' WHERE [id] = '$idToUpdate'";
+
+    $updateQuery4 = "UPDATE [ControlTIC].[dbo].[asignacion_celular] SET [observaciones_desasigna] = '$linkInput' WHERE [id] = '$idToUpdate'";
     
     
     // Ejecutar la consulta de eliminación
@@ -23,9 +26,19 @@ if (isset($_POST['idToUpdate'])) {
         // Si hubo un error en la eliminación, devolver un mensaje de error
         echo "Error al realizar la eliminación";
     }
-    
-    // Ejecutar la consulta de actualización
-    if (odbc_exec($conexion, $updateQueryy)) {
+
+
+     // Ejecutar la consulta de actualización
+     if (odbc_exec($conexion, $updateQuery3)) {
+        // Si la actualización se realizó correctamente, devolver un mensaje
+        echo "Actualización realizada correctamente";
+    } else {
+        // Si hubo un error en la actualización, devolver un mensaje de error
+        echo "Error al realizar la actualización";
+    }
+
+     // Ejecutar la consulta de actualización
+     if (odbc_exec($conexion, $updateQuery4)) {
         // Si la actualización se realizó correctamente, devolver un mensaje
         echo "Actualización realizada correctamente";
     } else {

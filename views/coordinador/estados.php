@@ -58,7 +58,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                         <div class="card" style="width: 18rem;">
                             <img src="../../assets/image/accesorios-modified.png" class="card-img-top mx-auto" alt="..." style="width: 150px;">
                             <div class="card-body">
@@ -67,7 +67,7 @@ if (isset($_SESSION['usuario'])) {
                                 <a href="stock/stock_accesorios.php" class="btn btn-success disabled">Seleccionar</a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-3">
                         <div class="card" style="width: 18rem;">
                             <img src="../../assets/image/edcomunicacion-modified.png" class="card-img-top mx-auto" alt="..." style="width: 150px;">
@@ -115,7 +115,7 @@ if (isset($_SESSION['usuario'])) {
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                         <div class="card" style="width: 18rem;">
                             <img src="../../assets/image/dvr.png" class="card-img-top mx-auto" alt="..." style="width: 150px;">
                             <div class="card-body">
@@ -124,12 +124,12 @@ if (isset($_SESSION['usuario'])) {
                                 <a href="" class="btn btn-success disabled">Seleccionar</a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
             <!-- Tercer bloque     -->
-            <div class="container" style="text-align: center;margin-bottom: 50px;">
+            <!-- <div class="container" style="text-align: center;margin-bottom: 50px;">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="card" style="width: 18rem;">
@@ -152,7 +152,7 @@ if (isset($_SESSION['usuario'])) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
 
         </section>

@@ -17,7 +17,7 @@ if (
     $cedula = isset($_POST['cedula']) ? $_POST['cedula'] : '';
     $cargo = isset($_POST['cargo']) ? $_POST['cargo'] : '';
 
-    $data = odbc_exec($conexion, "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[Service_tag] ,[Serial_equipo] ,[Nombre_equipo] ,[Sede] ,[Empresa] ,[Marca_computador] ,[Modelo_computador] ,[Tipo_comp] ,[Tipo_ram] ,[Memoria_ram] ,[Tipo_discoduro] ,[Capacidad_discoduro] ,[Procesador] ,[Propietario] ,[Proveedor] ,[Sistema_Operativo] ,[Serial_cargador] ,[Dominio] ,[Tipo_usuario] ,[Serial_activo_fijo] ,[Fecha_ingreso_c] ,[Targeta_Video] ,[Estado] ,[Gestion] ,[Fecha_garantia_c] ,[Fecha_crea] ,[Usua_crea] ,[Fecha_modifica] ,[Usua_modifica] ,[Usua_asigna] ,[Fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[estado_asignacion] ,[observaciones] FROM [ControlTIC].[dbo].[asignacion_computador] where cedula = '$cedula'");
+    $data = odbc_exec($conexion, "SELECT  [id_asignacion] ,[id] ,[tipo_maquina] ,[Service_tag] ,[Serial_equipo] ,[Nombre_equipo] ,[Sede] ,[Empresa] ,[Marca_computador] ,[Modelo_computador] ,[Tipo_comp] ,[Tipo_ram] ,[Memoria_ram] ,[Tipo_discoduro] ,[Capacidad_discoduro] ,[Procesador] ,[Propietario] ,[Proveedor] ,[Sistema_Operativo] ,[Serial_cargador] ,[Dominio] ,[Tipo_usuario] ,[Serial_activo_fijo] ,[Fecha_ingreso_c] ,[Targeta_Video] ,[Estado] ,[Gestion] ,[Fecha_garantia_c] ,[Fecha_crea] ,[Usua_crea] ,[Fecha_modifica] ,[Usua_modifica] ,[Usua_asigna] ,[Fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[estado_asignacion] ,[observaciones] FROM [ControlTIC].[dbo].[asignacion_computador] where cedula = '$cedula' AND estado_asignacion = 'VIGENTE' ");
     $arr = array();
     while ($Element = odbc_fetch_array($data)) {
         $arr[] = $Element;
@@ -102,7 +102,7 @@ if (
                                 </td>
 
                                 <td>
-                                    <button id="enviarcomputador" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-service-tag="<?= $fila['Service_tag'] ?>" data-serial-equipo="<?= $fila['Serial_equipo'] ?>" data-nombre-equipo="<?= $fila['Nombre_equipo'] ?>" data-sede="<?= $fila['Sede'] ?>" data-empresa="<?= $fila['Empresa'] ?>" data-marca-computador="<?= $fila['Marca_computador'] ?>" data-modelo-computador="<?= $fila['Modelo_computador'] ?>" data-tipo-comp="<?= $fila['Tipo_comp'] ?>" data-tipo-ram="<?= $fila['Tipo_ram'] ?>" data-memoria-ram="<?= $fila['Memoria_ram'] ?>" data-tipo-discoduro="<?= $fila['Tipo_discoduro'] ?>" data-capacidad-discoduro="<?= $fila['Capacidad_discoduro'] ?>" data-procesador="<?= $fila['Procesador'] ?>" data-propietario="<?= $fila['Propietario'] ?>" data-proveedor="<?= $fila['Proveedor'] ?>" data-sistema-operativo="<?= $fila['Sistema_Operativo'] ?>" data-serial-cargador="<?= $fila['Serial_cargador'] ?>" data-dominio="<?= $fila['Dominio'] ?>" data-tipo-usuario="<?= $fila['Tipo_usuario'] ?>" data-serial-activo-fijo="<?= $fila['Serial_activo_fijo'] ?>" data-fecha-ingreso-c="<?= $fila['Fecha_ingreso_c'] ?>" data-tarjeta-video="<?= $fila['Targeta_Video'] ?>" data-estado="<?= $fila['Estado'] ?>" data-gestion="<?= $fila['Gestion'] ?>" data-fecha-garantia-c="<?= $fila['Fecha_garantia_c'] ?>" data-fecha-crea="<?= $fila['Fecha_crea'] ?>" data-usua-crea="<?= $fila['Usua_crea'] ?>" data-fecha-modifica="<?= $fila['Fecha_modifica'] ?>" data-usua-modifica="<?= $fila['Usua_modifica'] ?>" data-primernombre="<?php echo $primernombre; ?>" data-segundonombre="<?php echo $segundonombre; ?>" data-primerapellido="<?php echo $primerapellido; ?>" data-segundoapellido="<?php echo $segundoapellido; ?>" data-cedula="<?php echo $cedula; ?>" data-cargo="<?php echo $cargo; ?>" data-usua-retira="<?php echo $Usua_retira ?>" ></button>
+                                    <button id="enviarcomputador" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-service-tag="<?= $fila['Service_tag'] ?>" data-serial-equipo="<?= $fila['Serial_equipo'] ?>" data-nombre-equipo="<?= $fila['Nombre_equipo'] ?>" data-sede="<?= $fila['Sede'] ?>" data-empresa="<?= $fila['Empresa'] ?>" data-marca-computador="<?= $fila['Marca_computador'] ?>" data-modelo-computador="<?= $fila['Modelo_computador'] ?>" data-tipo-comp="<?= $fila['Tipo_comp'] ?>" data-tipo-ram="<?= $fila['Tipo_ram'] ?>" data-memoria-ram="<?= $fila['Memoria_ram'] ?>" data-tipo-discoduro="<?= $fila['Tipo_discoduro'] ?>" data-capacidad-discoduro="<?= $fila['Capacidad_discoduro'] ?>" data-procesador="<?= $fila['Procesador'] ?>" data-propietario="<?= $fila['Propietario'] ?>" data-proveedor="<?= $fila['Proveedor'] ?>" data-sistema-operativo="<?= $fila['Sistema_Operativo'] ?>" data-serial-cargador="<?= $fila['Serial_cargador'] ?>" data-dominio="<?= $fila['Dominio'] ?>" data-tipo-usuario="<?= $fila['Tipo_usuario'] ?>" data-serial-activo-fijo="<?= $fila['Serial_activo_fijo'] ?>" data-fecha-ingreso-c="<?= $fila['Fecha_ingreso_c'] ?>" data-tarjeta-video="<?= $fila['Targeta_Video'] ?>" data-estado="<?= $fila['Estado'] ?>" data-gestion="<?= $fila['Gestion'] ?>" data-fecha-garantia-c="<?= $fila['Fecha_garantia_c'] ?>" data-fecha-crea="<?= $fila['Fecha_crea'] ?>" data-usua-crea="<?= $fila['Usua_crea'] ?>" data-fecha-modifica="<?= $fila['Fecha_modifica'] ?>" data-usua-modifica="<?= $fila['Usua_modifica'] ?>" data-primernombre="<?php echo $primernombre; ?>" data-segundonombre="<?php echo $segundonombre; ?>" data-primerapellido="<?php echo $primerapellido; ?>" data-segundoapellido="<?php echo $segundoapellido; ?>" data-cedula="<?php echo $cedula; ?>" data-cargo="<?php echo $cargo; ?>" data-usua-retira="<?php echo $Usua_retira ?>"></button>
                                     <!-- btn escondido para la alerta -->
                                     <button id="" type="button" class="btn btn-danger showAlertButton">Descartar</button>
                                 </td>
@@ -269,9 +269,9 @@ if (
     <script>
         $(document).ready(function() {
             $('.showAlertButton').click(function() {
-
                 var $asignarBtn = $(this).prev('.asignar-btn'); // Obtener el botón oculto previo
                 var idToUpdate = $asignarBtn.data('id'); // Obtener el ID del botón oculto
+                var linkInput = $('#observaciones_desasigna' + idToUpdate).val(); // Obtener el valor del campo de entrada
 
                 Swal.fire({
                     title: '¿Quieres guardar los cambios?',
@@ -281,10 +281,9 @@ if (
                     denyButtonText: `No guardar`,
                 }).then((result) => {
                     if (result.isConfirmed) {
-
                         // Cerrar el modal
                         $('#modalcomputadorinformacion').modal('hide');
-                        //mensaje de exito
+                        //mensaje de éxito
                         Swal.fire('¡Guardado!', '', 'success');
 
                         // Hacer el update mediante AJAX con el ID obtenido para actualizar
@@ -292,13 +291,16 @@ if (
                             url: 'delete/deletecomputador.php',
                             type: 'POST',
                             data: {
-                                idToUpdate: idToUpdate
+                                idToUpdate: idToUpdate,
+                                linkInput: linkInput
                             },
                             success: function(response) {
                                 console.log("Desasignación exitosa:", response);
-
                                 // Activar el botón oculto correspondiente a la fila seleccionada
                                 $asignarBtn.trigger('click');
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 2000);
                             }
                         });
 

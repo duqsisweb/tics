@@ -118,8 +118,8 @@ if (isset($_SESSION['usuario'])) {
 
                     $showSections = true;
 
-                                        //  MENSAJES SI LA CONSULTA ES EXITOSA O NO HAY INFORMACIÓN
-                                        echo '<div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    //  MENSAJES SI LA CONSULTA ES EXITOSA O NO HAY INFORMACIÓN
+                    echo '<div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
                                                 <div class="toast-header">
                                         <strong class="me-auto">Éxito</strong>
                                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
@@ -128,14 +128,14 @@ if (isset($_SESSION['usuario'])) {
                                         Consulta satisfactoria.
                                     </div>
                                 </div>';
-                                        echo '<script>
+                    echo '<script>
                                 var toastEl = document.querySelector(".toast");
                                 var toast = new bootstrap.Toast(toastEl);
                                 toast.show();
                             </script>';
-                                    } else {
-                                        // Mostrar un mensaje de error
-                                        echo '<div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                } else {
+                    // Mostrar un mensaje de error
+                    echo '<div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
                                     <div class="toast-header">
                                         <strong class="me-auto">Error</strong>
                                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
@@ -144,7 +144,7 @@ if (isset($_SESSION['usuario'])) {
                                         No se encontraron registros para la consulta.
                                     </div>
                                 </div>';
-                                        echo '<script>
+                    echo '<script>
                                 var toastEl = document.querySelector(".toast");
                                 var toast = new bootstrap.Toast(toastEl);
                                 toast.show();
@@ -355,6 +355,8 @@ if (isset($_SESSION['usuario'])) {
             var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
             var cargo = '<?php echo $cargo; ?>'; // Obtener el cargo del PHP
             var nombreCompleto = '<?php echo $nombreCompleto; ?>'; // Obtener el nombre completo del PHP
+            var empresa = '<?php echo $empresaOption; ?>'; // Obtener el nombre completo del PHP
+
 
             // Realiza la solicitud AJAX aquí
             $.ajax({
@@ -363,7 +365,8 @@ if (isset($_SESSION['usuario'])) {
                 data: {
                     cedula: cedula,
                     cargo: cargo,
-                    nombreCompleto: nombreCompleto
+                    nombreCompleto: nombreCompleto,
+                    empresa: empresa
                 }, // Envía la cédula, el cargo y el nombre completo como parámetros
                 // dataType: 'html',
                 success: function(response) {
@@ -466,10 +469,7 @@ if (isset($_SESSION['usuario'])) {
     </script>
 
 
-
-
-
-    <!-- Script y AJAX asignación de COMPUTADOR -->
+    <!-- Script y AJAX DESasignación de COMPUTADOR -->
     <script>
         $(document).ready(function() {
             $('#fila1').show(); // Mostrar #fila3 al cargar la página
@@ -597,7 +597,7 @@ if (isset($_SESSION['usuario'])) {
             }
         });
     </script>
-    <!-- Script y AJAX asignación de ALMACENAMIENTO -->
+    <!-- Script y AJAX asignación de SIMCARD -->
     <script>
         $(document).ready(function() {
             $('#fila7').show(); // Mostrar #fila4 al cargar la página

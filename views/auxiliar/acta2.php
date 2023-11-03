@@ -2,6 +2,7 @@
 header('Content-Type: text/html; charset=UTF-8');
 session_start();
 error_reporting(0);
+date_default_timezone_set("America/Bogota");
 
 include '../../conexionbd.php';
 if (isset($_SESSION['usuario'])) {
@@ -64,7 +65,7 @@ if (isset($_SESSION['usuario'])) {
                     ,[observaciones_asigna]
                     ,[link_computador_asigna]
                 FROM [ControlTIC].[dbo].[asignacion_computador]
-        where cedula='$cedula'");
+        where cedula='$cedula' AND estado_asignacion = 'VIGENTE'");
     $arr = array();
     while ($Element = odbc_fetch_array($data)) {
         $arr[] = $Element;
@@ -101,7 +102,7 @@ if (isset($_SESSION['usuario'])) {
                             ,[estado_asignacion]
                             ,[observaciones_desasigna]
                         FROM [ControlTIC].[dbo].[asignacion_celular]
-                                                where cedula='$cedula' 
+                                                where cedula='$cedula' AND estado_asignacion = 'VIGENTE'
                                                 
     ");
     $arr_celular = array();
@@ -136,7 +137,7 @@ if (isset($_SESSION['usuario'])) {
                 ,[descripcionmov]
                 ,[usuamov]
             FROM [ControlTIC].[dbo].[asignacion_accesorios]
-                                                where cedula='$cedula' 
+                                                where cedula='$cedula'  AND estado_asignacion = 'VIGENTE'
                                         
                     ");
     $arr_accesorios = array();
@@ -176,7 +177,7 @@ if (isset($_SESSION['usuario'])) {
             ,[empresa]
             ,[estado_asignacion]
             ,[observaciones_desasigna]
-        FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] where cedula='$cedula' 
+        FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] where cedula='$cedula'  AND estado_asignacion = 'VIGENTE'
         
             ");
     $arr_edcomunicacion = array();
@@ -216,7 +217,7 @@ if (isset($_SESSION['usuario'])) {
             ,[estado_asignacion]
             ,[observaciones_desasigna]
         FROM [ControlTIC].[dbo].[asignacion_perifericos]
-                        where cedula='$cedula' 
+                        where cedula='$cedula'  AND estado_asignacion = 'VIGENTE'
 
           ");
     $arr_perifericos = array();
@@ -254,7 +255,7 @@ if (isset($_SESSION['usuario'])) {
                     ,[empresa]
                     ,[estado_asignacion]
                     ,[observaciones_desasigna]
-                FROM [ControlTIC].[dbo].[asignacion_almacenamiento] where cedula='$cedula' 
+                FROM [ControlTIC].[dbo].[asignacion_almacenamiento] where cedula='$cedula'  AND estado_asignacion = 'VIGENTE'
                                                 
             ");
     $arr_almacenamiento = array();
@@ -293,7 +294,7 @@ if (isset($_SESSION['usuario'])) {
                 ,[estado_asignacion]
                 ,[observaciones_desasigna]
             FROM [ControlTIC].[dbo].[asignacion_simcard]
-                                    where cedula='$cedula' 
+                                    where cedula='$cedula' AND estado_asignacion = 'VIGENTE'
         
             ");
     $arr_simcard = array();
@@ -339,7 +340,7 @@ if (isset($_SESSION['usuario'])) {
                     LEFT JOIN [ControlTIC].[dbo].[sede] as sed ON mc.sede_dvr = sed.id
                     LEFT JOIN [ControlTIC].[dbo].[estado] as estad ON mc.estado = estad.id
                     LEFT JOIN [ControlTIC].[dbo].empresa AS empresa ON mc.empresa = empresa.id 
-                     where cedula='$cedula' 
+                     where cedula='$cedula'  AND estado_asignacion = 'VIGENTE'
         
                 ");
     $arr_dvr = array();

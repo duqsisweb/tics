@@ -56,9 +56,11 @@ if (
 
     // INSERTAR DATOS A LA TABLA
     $queryAsignacion = "INSERT INTO ControlTIC..asignacion_accesorios (
-        id,tipo_maquina,marca,modelo,descripcion,tipo_acc,cantidad,fecha_de_ingreso_acc,primernombre, segundonombre,primerapellido,segundoapellido,cedula,cargo
+        id,tipo_maquina,marca,modelo,descripcion,tipo_acc,cantidad,fecha_de_ingreso_acc,primernombre,
+        segundonombre,primerapellido,segundoapellido,cedula,cargo,estado_asignacion,estado,gestion
     ) VALUES (
-        '$id','$tipo_maquina','$marca','$modelo','$descripcion','$tipo_acc','1','$fecha_de_ingreso_acc','$primernombre','$segundonombre','$primerapellido','$segundoapellido','$cedula','$cargo'
+        '$id','$tipo_maquina','$marca','$modelo','$descripcion','$tipo_acc','1','$fecha_de_ingreso_acc',
+        '$primernombre','$segundonombre','$primerapellido','$segundoapellido','$cedula','$cargo','VIGENTE','ASIGNADO','ASIGNACION'
     )";
 
     // INSERTAR DATOS A LA TABLA

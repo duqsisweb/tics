@@ -42,46 +42,7 @@
     <?php
     include '../../../conexionbd.php';
     $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : ''; // Obtener la cédula pasada por AJAX
-    $consulta = "SELECT  [id_historial]
-    ,[id]
-    ,[tipo_maquina]
-    ,[serial_perifericos]
-    ,[descripcion_perifericos]
-    ,[marca_perifericos]
-    ,[modelo_perifericos]
-    ,[placa_activo_perifericos]
-    ,[sede_perifericos]
-    ,[ubicacion_perifericos]
-    ,[tipo]
-    ,[tipo_toner]
-    ,[estado]
-    ,[gestion_peri]
-    ,[empresa]
-    ,[fecha_de_garantia_peri]
-    ,[fecha_crea]
-    ,[usua_crea]
-    ,[fecha_modifica]
-    ,[usua_modifica]
-    ,[usua_asigna]
-    ,[fecha_asigna]
-    ,[cedula]
-    ,[cargo]
-    ,[primernombre]
-    ,[segundonombre]
-    ,[primerapellido]
-    ,[segundoapellido]
-    ,[estado_asignacion]
-    ,[observaciones_desasigna]
-    ,[observaciones_asigna_peri]
-    ,[link_peri_asigna]
-    ,[observaciones_desasigna_peri]
-    ,[link_peri_desasigna]
-    ,[fechamov]
-    ,[descripcionmov]
-    ,[usuamov]
-FROM [ControlTIC].[dbo].[historial_perifericos]
-        where cedula = '$cedula' AND descripcionmov like '%SE REALIZO LA ELIMINACION DE ASIGNAMIENTO DE UN PERIFERICO%'
-ORDER BY id_historial DESC ";
+    $consulta = "SELECT[id_asignacion] ,[id] ,[tipo_maquina] ,[serial_perifericos] ,[descripcion_perifericos] ,[marca_perifericos] ,[modelo_perifericos] ,[placa_activo_perifericos] ,[sede_perifericos] ,[ubicacion_perifericos] ,[tipo] ,[tipo_toner] ,[estado] ,[gestion] ,[empresa] ,[fecha_de_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_perifericos] WHERE cedula = '$cedula' AND estado_asignacion = 'NO VIGENTE'";
     $resultado = odbc_exec($conexion, $consulta);
 
     $output = "<pre>"; // Mantener el formato monoespaciado
@@ -146,7 +107,6 @@ ORDER BY id_historial DESC ";
                             <th scope="col">Sede</th>
                             <th scope="col">Ubicación</th>
                             <th scope="col">Tipo</th>
-                            <th scope="col">EMPRESA</th>
 
 
                         </tr>
@@ -157,46 +117,7 @@ ORDER BY id_historial DESC ";
 
                         $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : '';
 
-                        $consulta = "SELECT [id_historial]
-      ,[id]
-      ,[tipo_maquina]
-      ,[serial_perifericos]
-      ,[descripcion_perifericos]
-      ,[marca_perifericos]
-      ,[modelo_perifericos]
-      ,[placa_activo_perifericos]
-      ,[sede_perifericos]
-      ,[ubicacion_perifericos]
-      ,[tipo]
-      ,[tipo_toner]
-      ,[estado]
-      ,[gestion_peri]
-      ,[empresa]
-      ,[fecha_de_garantia_peri]
-      ,[fecha_crea]
-      ,[usua_crea]
-      ,[fecha_modifica]
-      ,[usua_modifica]
-      ,[usua_asigna]
-      ,[fecha_asigna]
-      ,[cedula]
-      ,[cargo]
-      ,[primernombre]
-      ,[segundonombre]
-      ,[primerapellido]
-      ,[segundoapellido]
-      ,[estado_asignacion]
-      ,[observaciones_desasigna]
-      ,[observaciones_asigna_peri]
-      ,[link_peri_asigna]
-      ,[observaciones_desasigna_peri]
-      ,[link_peri_desasigna]
-      ,[fechamov]
-      ,[descripcionmov]
-      ,[usuamov]
-  FROM [ControlTIC].[dbo].[historial_perifericos]
-          where cedula = '$cedula' AND descripcionmov like '%SE REALIZO LA ELIMINACION DE ASIGNAMIENTO DE UN PERIFERICO%'
-  ORDER BY id_historial DESC ";
+                        $consulta = "SELECT[id_asignacion] ,[id] ,[tipo_maquina] ,[serial_perifericos] ,[descripcion_perifericos] ,[marca_perifericos] ,[modelo_perifericos] ,[placa_activo_perifericos] ,[sede_perifericos] ,[ubicacion_perifericos] ,[tipo] ,[tipo_toner] ,[estado] ,[gestion] ,[empresa] ,[fecha_de_garantia] ,[fecha_crea] ,[usua_crea] ,[fecha_modifica] ,[usua_modifica] ,[usua_asigna] ,[fecha_asigna] ,[cedula] ,[cargo] ,[primernombre] ,[segundonombre] ,[primerapellido] ,[segundoapellido] ,[estado_asignacion] ,[observaciones_desasigna] FROM [ControlTIC].[dbo].[asignacion_perifericos] WHERE cedula = '$cedula' AND estado_asignacion = 'NO VIGENTE' ";
                         $resultadoConsulta = odbc_exec($conexion, $consulta);
 
                         if (odbc_num_rows($resultadoConsulta) > 0) {
@@ -213,10 +134,6 @@ ORDER BY id_historial DESC ";
                                 echo '<td>' . $fila['ubicacion_perifericos'] . '</td>';
                                 echo '<td>' . $fila['tipo'] . '</td>';
                                 echo '<td>' . $fila['tipo_toner'] . '</td>';
-
-                                echo '<td>' . $fila['empresa'] . '</td>';
-
-
                                 echo '</tr>';
                             }
                         } else {

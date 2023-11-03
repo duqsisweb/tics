@@ -59,7 +59,8 @@ if (isset($_POST['id']) && isset($_POST['tipo_maquina']) && isset($_POST['servic
     $Usua_asigna = $_POST['Usua_asigna'];
     $observaciones_asigna = $_POST['observaciones_asigna'];
     $link_computador_asigna = $_POST['link_computador_asigna'];
-    
+
+
       // INSERTAR DATOS A LA TABLA ASIGNACION
       $queryAsignacion = "INSERT INTO ControlTIC..asignacion_computador (
         id, tipo_maquina, Service_tag, Serial_equipo, Nombre_equipo, Sede, Empresa,
@@ -67,14 +68,15 @@ if (isset($_POST['id']) && isset($_POST['tipo_maquina']) && isset($_POST['servic
         Tipo_discoduro, Capacidad_discoduro, Procesador, Propietario, Proveedor,
         Sistema_Operativo, Serial_cargador, Dominio, Tipo_usuario, Serial_activo_fijo,
         Fecha_ingreso_c, Targeta_Video, Estado, Gestion, Fecha_garantia_c, 
-        primernombre, segundonombre, primerapellido, segundoapellido, cedula, cargo, Usua_asigna, Fecha_asigna, observaciones_asigna, link_computador_asigna
+        primernombre, segundonombre, primerapellido, segundoapellido, cedula, cargo, Usua_asigna, Fecha_asigna, observaciones_asigna, link_computador_asigna,estado_asignacion
     ) VALUES (
         '$id', '$tipo_maquina', '$service_tag', '$serial_equipo', '$nombre_equipo', '$sede', '$empresa',
         '$marca_computador', '$modelo_computador', '$tipo_comp', '$tipo_memoria_ram', '$capacidad_ram',
         '$tipo_discoduro', '$capacidad_discoduro', '$procesador', '$propietario', '$proveedor',
         '$sistema_operativo', '$serial_cargador', '$dominio', '$tipo_usuario', '$serial_activo_fijo',
         '$Fecha_ingreso_c', '$tarjeta_video', 'ASIGNADO', 'ASIGNACION', '$Fecha_garantia_c', 
-        '$primernombre', '$segundonombre', '$primerapellido', '$segundoapellido','$cedula', '$cargo', '$Usua_asigna',  getdate(), '$observaciones_asigna', '$link_computador_asigna'
+        '$primernombre', '$segundonombre', '$primerapellido', '$segundoapellido','$cedula', '$cargo', '$Usua_asigna'
+        ,getdate(), '$observaciones_asigna', '$link_computador_asigna','VIGENTE'
     )";
 
     // INSERTAR DATOS A LA TABLA HISTORIAL COMPUTADOR
@@ -91,7 +93,8 @@ if (isset($_POST['id']) && isset($_POST['tipo_maquina']) && isset($_POST['servic
                 '$tipo_discoduro', '$capacidad_discoduro', '$procesador', '$propietario', '$proveedor',
                 '$sistema_operativo', '$serial_cargador', '$dominio', '$tipo_usuario', '$serial_activo_fijo',
                 '$Fecha_ingreso_c', '$tarjeta_video', 'ASIGNADO', 'ASIGNACION', '$Fecha_garantia_c', 
-                '$primernombre', '$segundonombre', '$primerapellido', '$segundoapellido','$cedula', '$cargo', '$observaciones_asigna', '$link_computador_asigna',CONVERT(datetime, Getdate(), 120),'SE REALIZO ASIGNAMIENTO DE COMPUTADOR','$Usua_asigna')";
+                '$primernombre', '$segundonombre', '$primerapellido', '$segundoapellido','$cedula', '$cargo', '$observaciones_asigna', '$link_computador_asigna'
+                ,CONVERT(datetime, Getdate(), 120),'SE ASIGNA UN ELEMENTO COMPUTADOR','$Usua_asigna')";
 
 
 
