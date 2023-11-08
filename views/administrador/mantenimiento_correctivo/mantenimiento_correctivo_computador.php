@@ -7,7 +7,6 @@ include '../../../conexionbd.php';
 if (isset($_SESSION['usuario'])) {
     require '../../../function/funciones.php';
 ?>
-
     <!DOCTYPE html>
     <html lang="en">
 
@@ -21,7 +20,6 @@ if (isset($_SESSION['usuario'])) {
             /* Ajusta el ancho según tus necesidades. */
         }
     </style>
-
     <!-- HEAD -->
     <?php require '../estilosadmin/head.php'; ?>
 
@@ -78,34 +76,59 @@ if (isset($_SESSION['usuario'])) {
                                     <th>TARGETA DE VIDEO</th>
                                     <th>ESTADO</th>
                                     <th>GESTION</th>
-                                    <th>FECHA DE GARANTIA</th>                            
+                                    <th>FECHA DE GARANTIA</th>
+                                    <th class="hidden-cell">OBSERVACIONES DE ULTIMO MANTENIMIENTO CORRECTIVO</th>
                                     <th>OBSERVACIONES DE ULTIMO MANTENIMIENTO CORRECTIVO</th>
                                     <th>AJUSTES</th>
-
-
-
                                 </tr>
                             </thead>
 
                             <tbody>
-
                                 <?php
                                 $datosEquipos = obtenerDatosEquiposcomputadormantenimiento($conexion);
 
+
                                 foreach ($datosEquipos as $row) {
                                     echo "<tr>";
-                                    foreach ($row as $key => $value) {
-                                        if ($key == '') {
-                                            echo "<td>$value</td>";
-                                        } else {
-                                            echo "<td>" . $value . "</td>";
-                                        }
-                                    }
-
+                                    echo "<td>" . $row['id'] . "</td>";
+                                    echo "<td>" . $row['tipo_maquina'] . "</td>";
+                                    echo "<td>" . $row['Service_tag'] . "</td>";
+                                    echo "<td>" . $row['Serial_equipo'] . "</td>";
+                                    echo "<td>" . $row['Nombre_equipo'] . "</td>";
+                                    echo "<td>" . $row['Sede'] . "</td>";
+                                    echo "<td>" . $row['Empresa'] . "</td>";
+                                    echo "<td>" . $row['Marca_computador'] . "</td>";
+                                    echo "<td>" . $row['Modelo_computador'] . "</td>";
+                                    echo "<td>" . $row['Tipo_comp'] . "</td>";
+                                    echo "<td>" . $row['Tipo_ram'] . "</td>";
+                                    echo "<td>" . $row['Memoria_ram'] . "</td>";
+                                    echo "<td>" . $row['Tipo_discoduro'] . "</td>";
+                                    echo "<td>" . $row['Capacidad_discoduro'] . "</td>";
+                                    echo "<td>" . $row['Procesador'] . "</td>";
+                                    echo "<td>" . $row['Propietario'] . "</td>";
+                                    echo "<td>" . $row['Proveedor'] . "</td>";
+                                    echo "<td>" . $row['Sistema_Operativo'] . "</td>";
+                                    echo "<td>" . $row['Serial_cargador'] . "</td>";
+                                    echo "<td>" . $row['Dominio'] . "</td>";
+                                    echo "<td>" . $row['Tipo_usuario'] . "</td>";
+                                    echo "<td>" . $row['Serial_activo_fijo'] . "</td>";
+                                    echo "<td>" . $row['Fecha_ingreso_c'] . "</td>";
+                                    echo "<td>" . $row['Targeta_Video'] . "</td>";
+                                    echo "<td>" . $row['Estado'] . "</td>";
+                                    echo "<td>" . $row['Gestion'] . "</td>";
+                                    echo "<td>" . $row['Fecha_garantia_c'] . "</td>";
+                                    echo "<td class='hidden-cell'>" . $row['observaciones_mantenimiento_c'] . "</td>";
+                                    echo "<td><button type='button' class='btn btn-success view-button4' data-bs-toggle='modal' data-bs-target='#exampleModalmc' data-row-id='" . $row['id'] . "'>Ver Observación</button></td>";
                                     // Agregar el botón "Editar" con el atributo data-id
-                                    echo '<td><button type="button" class="btn btn-warning btn-editar" data-id="' . $row['id'] . '">Editar</button></td>';
-
+                                    if ($row['Estado'] === 'CONFIGURACION') {
+                                        // Agregar el botón "Editar" solo cuando el valor de "ESTADO" es "CONFIGURACIÓN"
+                                        echo '<td><button type="button" class="btn btn-warning btn-editar" data-id="' . $row['id'] . '">Editar</button></td>';
+                                    } else {
+                                        // Si el valor de "ESTADO" no es "CONFIGURACIÓN", puedes mostrar un mensaje informativo o simplemente dejar la celda vacía.
+                                        echo '<td>Acción no permitida</td>';
+                                    }
                                     echo "</tr>";
+
 
                                     // Agregar un formulario de edición oculto para cada fila aqui comienza las ocultas
                                     echo "<tr style='display: none;' class='editar-form' id='editar-form-" . $row['id'] . "'>";
@@ -315,7 +338,8 @@ if (isset($_SESSION['usuario'])) {
                                         } else if ($key === 'Gestion') {
                                             echo "<td class=''><input type='text' name='Gestion' value='$value' disabled ></td>";
                                         } else if ($key === 'observaciones_mantenimiento_c') {
-                                            echo "<td class=''><input type='text' name='observaciones_mantenimiento_c' value='$value'  ></td>";
+                                            // echo "<td class=''><input type='text' name='observaciones_mantenimiento_c' value='$value' ></td>";
+                                            echo "<td class=''><textarea name='observaciones_mantenimiento_c' cols='50'  value='$value' oninput='convertirAMayusculas(this)' ></textarea></td>";
                                         } else {
                                             echo "<td class='campo-editable'>$value</td>";
                                         }
@@ -328,16 +352,13 @@ if (isset($_SESSION['usuario'])) {
 
                                 }
 
-
                                 ?>
                             </tbody>
                         </table>
-
                         <!-- SE CREA ESTE INPUT PARA CAMBIAR EL PARAMETRO DE USUARIO/USUA_CREA Y TOME EL VALOR SE DEJA OCULTO -->
                         <div>
                             <input type="hidden" name="usuario" value="<?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : ''; ?>">
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -346,14 +367,47 @@ if (isset($_SESSION['usuario'])) {
             <strong id="Usua_modifica" style="display: none;!important"><?php echo utf8_encode($_SESSION['usuario']); ?></strong>
 
         </section>
-
     </body>
+
+    <!-- MODAL DE OBSERVACIONES DE MANTENIMIENTO CORRECTIVO -->
+    <div class="modal fade" id="exampleModalmc" tabindex="-1" aria-labelledby="exampleModal4LabelmC" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModal4Labelmc">OBSERVACIONES DE MANTENIMIENTO CORRECTIVO</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="modal-content6">
+                        <!-- Aquí se mostrará la información dinámicamente -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT DE OBSERVACIONES DE MANTENIMIENTO CORRECTIVO -->
+    <script>
+        $(document).ready(function() {
+            // Manejar el clic en los botones "Ver Detalles"
+            $('.view-button4').click(function() {
+                var rowId = $(this).data('row-id'); // Obtener el ID de la fila
+                var description = $("td:eq(27)", $(this).closest("tr")).text(); // Obtener la descripción de la fila correspondiente
+
+                // Actualizar el contenido del modal con la descripción
+                $('#modal-content6').html(description);
+            });
+        });
+    </script>
 
     </html>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Inicio DataTable  elimina los duplicados en el excel y recarga la web-->
+    <!-- Inicio DataTable -->
     <script type="text/javascript">
         $(document).ready(function() {
             var lenguaje = $('#mtable').DataTable({
@@ -365,44 +419,7 @@ if (isset($_SESSION['usuario'])) {
                 iDisplayLength: 30,
                 searching: true,
                 dom: 'Bfrtip',
-                buttons: [{
-                    extend: 'excel',
-                    text: 'Exportar Excel',
-                    action: function(e, dt, button, config) {
-                        // Filtrar los duplicados en la columna "ID"
-                        var data = dt.rows().data().toArray();
-                        var uniqueData = [];
-                        var seen = {};
-
-                        data.forEach(function(row) {
-                            var id = row[0]; // Cambia el índice 0 al que corresponde a la columna "ID"
-                            if (!seen[id]) {
-                                uniqueData.push(row);
-                                seen[id] = true;
-                            }
-                        });
-
-                        dt.clear();
-                        dt.rows.add(uniqueData);
-                        dt.draw();
-
-                        // Ocultar las filas de edición antes de exportar
-                        $('.editar-form').hide();
-                        $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, button, config);
-                        // Restaurar los datos originales
-                        dt.clear();
-                        dt.rows.add(data);
-                        dt.draw();
-
-                        // Mostrar las filas de edición nuevamente después de exportar
-                        $('.editar-form').show();
-
-                        // Recargar la página después de la exportación
-                        setTimeout(function() {
-                            location.reload();
-                        }, 1000); // La recarga se produce después de 1 segundo (1000 ms)
-                    }
-                }],
+                buttons: ['excel'],
                 language: {
                     lengthMenu: 'Mostrar _MENU_ registros por página.',
                     zeroRecords: 'Lo sentimos. No se encontraron registros.',
@@ -419,29 +436,33 @@ if (isset($_SESSION['usuario'])) {
                     }
                 }
             });
+
+            // Agregar el controlador de evento draw.dt después de inicializar el DataTable
+            $('#mtable').on('draw.dt', function() {
+                // Agregar un controlador de clic para los botones "Editar" (incluso después de aplicar un filtro)
+                $('.btn-editar').on('click', function() {
+                    var id = $(this).data('id');
+                    // Oculta todas las filas de edición
+                    $('.editar-form').hide();
+                    // Muestra la fila de edición correspondiente al botón clicado
+                    $('#editar-form-' + id).show();
+                });
+            });
         });
     </script>
     <!-- Fin DataTable -->
 
-
+    <!-- Agregar los controladores de eventos para editar, guardar y cancelar -->
     <script>
         $(document).ready(function() {
             // Agregar un controlador de clic para los botones "Editar"
-            $('.btn-editar').click(function() {
-                // Obtener el ID de la fila a editar
+            $('.btn-editar').on('click', function() {
                 var id = $(this).data('id');
-
-                // Ocultar todos los campos editables en el formulario de edición
-                $('#mtable td.campo-editable').hide();
-
-                // Mostrar el formulario de edición para la fila correspondiente
+                // Oculta todas las filas de edición
+                $('.editar-form').hide();
+                // Muestra la fila de edición correspondiente al botón clicado
                 $('#editar-form-' + id).show();
-
-                // Mostrar los campos editables en el formulario de edición
-                $('#editar-form-' + id + ' .campo-editable').show();
             });
-
-
 
             // Agregar un controlador de clic para los botones "Guardar"
             $('.btn-guardar').click(function() {
@@ -471,6 +492,7 @@ if (isset($_SESSION['usuario'])) {
         });
     </script>
 
+
     <!-- AJAX PARA ENVIAR LA INFO -->
     <script>
         $(document).ready(function() {
@@ -483,10 +505,18 @@ if (isset($_SESSION['usuario'])) {
                 camposActualizados['Usua_modifica'] = nombreUsuario;
 
                 // Recopilar los valores de los campos editables
-                $('#editar-form-' + id + ' input[type="text"], #editar-form-' + id + ' select').each(function() {
+                $('#editar-form-' + id + ' input[type="text"], #editar-form-' + id + ' select, #editar-form-' + id + ' textarea').each(function() {
                     var nombreCampo = $(this).attr('name');
-                    var valorCampo = $(this).val();
+                    var valorCampo;
+
+                    if ($(this).is('textarea')) {
+                        valorCampo = $(this).val(); // Obtener el valor del textarea
+                    } else {
+                        valorCampo = $(this).val(); // Obtener el valor de los campos de entrada de texto y select
+                    }
+
                     camposActualizados[nombreCampo] = valorCampo;
+                    console.log(nombreCampo + ": " + valorCampo); // Agregar este console.log para depurar
                 });
 
                 // Agregar el ID a los campos actualizados
@@ -527,6 +557,12 @@ if (isset($_SESSION['usuario'])) {
     </script>
 
 
+    <!-- MAYUSCULAS -->
+    <script>
+        function convertirAMayusculas(input) {
+            input.value = input.value.toUpperCase();
+        }
+    </script>
 
 <?php } else { ?>
     <script language="JavaScript">

@@ -168,8 +168,10 @@ if (isset($_SESSION['usuario'])) {
                                 echo "<td>" . $row['Fecha_mantenimiento_inicio'] . "</td>";
                                 echo "<td>" . $row['Fecha_mantenimiento_fin'] . "</td>";
                                 echo "<td>" . $row['dias_restantes_mantenimiento'] . "</td>";
-                                echo "<td>" . $row['observaciones_mantenimiento'] . "</td>";
-                                echo "<td>" . $row['observaciones_mantenimiento_c'] . "</td>";
+                                echo "<td class='hidden-cell'>" . $row['observaciones_mantenimiento'] . "</td>";
+                                echo "<td><button type='button' class='btn btn-success view-button' data-bs-toggle='modal' data-bs-target='#exampleModalmp' data-row-id='" . $row['id'] . "'>Ver</button></td>";
+                                echo "<td class='hidden-cell'>" . $row['observaciones_mantenimiento_c'] . "</td>";
+                                echo "<td><button type='button' class='btn btn-success view-button' data-bs-toggle='modal' data-bs-target='#exampleModalmc' data-row-id='" . $row['id'] . "'>Ver</button></td>";
                                 echo "<td class='hidden-cell'>" . $row['descripcionmov'] . "</td>";
                                 echo "<td><button type='button' class='btn btn-success view-button' data-bs-toggle='modal' data-bs-target='#exampleModal' data-row-id='" . $row['id'] . "'>Ver</button></td>";
                                 echo "<td>" . $row['usuamov'] . "</td>";
@@ -241,8 +243,9 @@ if (isset($_SESSION['usuario'])) {
                             <th>FECHA INICIO MANTENIMIENTO</th>
                             <th>FECHA MANTENIMIENTO FINAL</th>
                             <th>DIAS RESTANTES DE MANTENIMIENTO</th>
-                            <th>OBSERVACIONES MANTENIMIENTO</th>
+                            <th>OBSERVACIONES MANTENIMIENTO PREVENTIVO</th>
                             <th class="hidden-cell">OBSERVACIONES MANTENIMIENTO</th>
+                            <th class="hidden-cell">OBSERVACIONES MANTENIMIENTO CORRECTIVO</th>
                             <th>OBSERVACIONES MANTENIMIENTO CORRECTIVO</th>
                             <th>MOVIMIENTO</th>
                             <th>FECHA MOVIMIENTO</th>
@@ -300,10 +303,17 @@ if (isset($_SESSION['usuario'])) {
                                 echo "<td>   <a target='_blank' href='" . $row['link_computador_desasigna'] . "'>" . $row['link_computador_desasigna'] . "</a></td>";
                                 echo "<td>" . $row['Fecha_mantenimiento_inicio'] . "</td>";
                                 echo "<td>" . $row['Fecha_mantenimiento_fin'] . "</td>";
-                                echo "<td>" . $row['dias_restantes_mantenimiento'] . "</td>";
+
+                                // Calcular los días restantes
+                                $fechaInicio = strtotime($row['Fecha_mantenimiento_inicio']);
+                                $fechaFin = strtotime($row['Fecha_mantenimiento_fin']);
+                                $diasRestantes = round(($fechaFin - $fechaInicio) / (60 * 60 * 24)) - 1;
+                                echo "<td>" . $diasRestantes . "</td>";
+
                                 echo "<td   class='hidden-cell'>" . $row['observaciones_mantenimiento'] . "</td>";
                                 echo "<td>  <button type='button' class='btn btn-success view-button4' data-bs-toggle='modal' data-bs-target='#exampleModal4' data-row-id='" . $row['id'] . "'>Ver Información</button></td>";
-                                echo "<td>" . $row['observaciones_mantenimiento_c'] . "</td>";
+                                echo "<td   class='hidden-cell'>" . $row['observaciones_mantenimiento_c'] . "</td>";
+                                echo "<td>  <button type='button' class='btn btn-success view-button6' data-bs-toggle='modal' data-bs-target='#exampleModalmc6' data-row-id='" . $row['observaciones_mantenimiento_c'] . "'>Ver Información</button></td>";
                                 echo "<td>" . $row['descripcionmov'] . "</td>";
                                 echo "<td>" . $row['fechamov'] . "</td>";
                                 echo "<td>" . $row['usuamov'] . "</td>";
@@ -323,7 +333,48 @@ if (isset($_SESSION['usuario'])) {
         </div>
 
 
-        <!-- MODAL DE CABECERA  -->
+
+
+        <!-- MODAL DE CABECERA OBSERVACIONES DE CABECERA ULTIMO MANTENIMIENTO CORRECTIVO -->
+        <div class="modal fade" id="exampleModalmp" tabindex="-1" aria-labelledby="exampleModalLabelmp" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabelmp">Descripción</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="modal-content7">
+                            <!-- Aquí se mostrará la información dinámicamente -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL DE CABECERA OBSERVACIONES DE CABECERA ULTIMO MANTENIMIENTO CORRECTIVO -->
+        <div class="modal fade" id="exampleModalmc" tabindex="-1" aria-labelledby="exampleModalLabelmc" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabelmc">Descripción</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="modal-content5">
+                            <!-- Aquí se mostrará la información dinámicamente -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL DE CABECERA DESCRIPCION -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -342,6 +393,7 @@ if (isset($_SESSION['usuario'])) {
                 </div>
             </div>
         </div>
+
 
         <!-- MODAL DE OBSERVACIONES DE ASIGNACION -->
         <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModal3Label" aria-hidden="true">
@@ -403,13 +455,62 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
 
-        <!-- SCRIPT DE OBSERVACIONES DE CABECERA -->
+        <!-- MODAL DE OBSERVACIONES DE MANTENIMIENTO CORRECTIVO -->
+        <div class="modal fade" id="exampleModalmc6" tabindex="-1" aria-labelledby="exampleModal4Labelm" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModal4Labelm">OBSERVACIONES DE MANTENIMIENTO CORRECTIVO</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="modal-content6">
+                            <!-- Aquí se mostrará la información dinámicamente -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SCRIPT DE OBSERVACIONES DE CABECERA ULTIMO MANTENIMIENTO CORRECTIVO  -->
+        <script>
+            $(document).ready(function() {
+                // Manejar el clic en los botones "Ver Detalles"
+                $('.view-button').click(function() {
+                    var rowId = $(this).data('row-id'); // Obtener el ID de la fila
+                    var description = $("td:eq(30)", $(this).closest("tr")).text(); // Obtener la descripción de la fila correspondiente
+
+                    // Actualizar el contenido del modal con la descripción
+                    $('#modal-content7').html(description);
+                });
+            });
+        </script>
+
+        <!-- SCRIPT DE OBSERVACIONES DE CABECERA ULTIMO MANTENIMIENTO CORRECTIVO  -->
         <script>
             $(document).ready(function() {
                 // Manejar el clic en los botones "Ver Detalles"
                 $('.view-button').click(function() {
                     var rowId = $(this).data('row-id'); // Obtener el ID de la fila
                     var description = $("td:eq(32)", $(this).closest("tr")).text(); // Obtener la descripción de la fila correspondiente
+
+                    // Actualizar el contenido del modal con la descripción
+                    $('#modal-content5').html(description);
+                });
+            });
+        </script>
+
+        <!-- SCRIPT DE OBSERVACIONES DE CABECERA -->
+        <script>
+            $(document).ready(function() {
+                // Manejar el clic en los botones "Ver Detalles"
+                $('.view-button').click(function() {
+                    var rowId = $(this).data('row-id'); // Obtener el ID de la fila
+                    var description = $("td:eq(34)", $(this).closest("tr")).text(); // Obtener la descripción de la fila correspondiente
 
                     // Actualizar el contenido del modal con la descripción
                     $('#modal-content').html(description);
@@ -455,6 +556,20 @@ if (isset($_SESSION['usuario'])) {
 
                     // Actualizar el contenido del modal con la descripción
                     $('#modal-content4').html(description);
+                });
+            });
+        </script>
+
+        <!-- SCRIPT DE OBSERVACIONES DE MANTENIMIENTO CORRECTIVO -->
+        <script>
+            $(document).ready(function() {
+                // Manejar el clic en los botones "Ver Detalles"
+                $('.view-button6').click(function() {
+                    var rowId = $(this).data('row-id'); // Obtener el ID de la fila
+                    var description = $("td:eq(45)", $(this).closest("tr")).text(); // Obtener la descripción de la fila correspondiente
+
+                    // Actualizar el contenido del modal con la descripción
+                    $('#modal-content6').html(description);
                 });
             });
         </script>

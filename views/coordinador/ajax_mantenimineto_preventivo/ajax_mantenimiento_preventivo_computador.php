@@ -168,7 +168,7 @@ if (
                         </div>
 
                         <div class="row columnas">
-                            <div class="col-md-12" >
+                            <div class="col-md-12">
                                 <button id="descargarPdf" type="button" class="btn btn-outline-danger pdf-button">Descargar en PDF</button>
                             </div>
                         </div>
@@ -180,7 +180,7 @@ if (
                                         <!-- Agrega los datos que necesitas aquí -->
                                     </button>
                                     <!-- btn escondido para la alerta -->
-                                    <button  id="registrarMantenimiento" type="button" class="btn btn-success showAlertButton pdf-button">REGISTRAR MANTENIMIENTO</button>
+                                    <button id="registrarMantenimiento" type="button" class="btn btn-success showAlertButton pdf-button">REGISTRAR MANTENIMIENTO</button>
                                 </div>
                             </div>
                         </div>
@@ -410,6 +410,10 @@ if (
                         var observaciones_mantenimiento = $('#observaciones_mantenimiento' + idToUpdate).val();
 
 
+                        
+                        console.log("observaciones de Mantenimientoooooooo maqwuina", observaciones_mantenimiento);
+
+
 
                         // Hacer el update mediante AJAX con el ID obtenido y las fechas para actualizar
                         $.ajax({
@@ -423,7 +427,7 @@ if (
                                 observaciones_mantenimiento: observaciones_mantenimiento
                             },
                             success: function(response) {
-                                console.log("Actualización exitosa:", response);
+                                console.log("Actualización exitosa para update de maquina:", response);
                                 // Activar el botón oculto correspondiente a la fila seleccionada
                                 $asignarBtn.trigger('click');
                                 setTimeout(function() {
@@ -439,6 +443,7 @@ if (
             });
         });
     </script>
+
 
 
     <!-- script para agregar los chack al text area -->

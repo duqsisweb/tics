@@ -27,7 +27,7 @@ if (isset($_SESSION['usuario'])) {
         <section style="margin-top: 100px;">
 
             <div class="alert alert-success" role="alert">
-                <p><?php echo utf8_encode($_SESSION['NOMBRE']); ?> Auxiliar</p>
+                <p><?php echo utf8_encode($_SESSION['NOMBRE']); ?> Coordinador</p>
             </div>
 
             <!-- PRIMER BLOQUE -->
@@ -185,7 +185,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title"> AGREGAR COMPLEMENTOS</h5>
                                 <p class="card-text">Personaliza y amplía al sistema de gestión de inventarios</p>
-                                <a href="" class="btn btn-success" id="ingresarBtn">Ingresar</a>
+                                <a href="complementos.php" class="btn btn-success">Ingresar</a>
                             </div>
 
                         </div>
@@ -199,7 +199,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">USUARIOS DEL SISTEMA GESTION TICS</h5>
                                 <p class="card-text">Registro de usuarios</p>
-                                <a href="" class="btn btn-success" id="ingresarBtn2">Ingresar</a>
+                                <a href="usuarios/usuarios.php" class="btn btn-success">Ingresar</a>
                             </div>
 
                         </div>
@@ -224,44 +224,7 @@ if (isset($_SESSION['usuario'])) {
 
     </body>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Selecciona el botón por su ID
-            const ingresarBtn = document.getElementById("ingresarBtn");
-
-            // Agrega un evento de clic al botón
-            ingresarBtn.addEventListener("click", function(e) {
-                e.preventDefault(); // Evita la navegación por enlace
-
-                // Muestra la alerta de SweetAlert
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: ' ¡No tienes permisos!',
-                    footer: ''
-                });
-            });
-        });
-        document.addEventListener("DOMContentLoaded", function() {
-            // Selecciona el botón por su ID
-            const ingresarBtn = document.getElementById("ingresarBtn2");
-
-            // Agrega un evento de clic al botón
-            ingresarBtn.addEventListener("click", function(e) {
-                e.preventDefault(); // Evita la acción por defecto del enlace (navegación)
-
-                // Muestra la alerta de SweetAlert
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: ' ¡No tienes permisos!',
-                    footer: ''
-                });
-            });
-        });
-    </script>
 
 
     <script>

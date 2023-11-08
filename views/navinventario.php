@@ -1,3 +1,14 @@
+<style>
+    .zoom-button {
+    transition: transform 0.3s; /* Agregar una transición suave de 0.3 segundos */
+}
+
+.zoom-button:hover {
+    transform: scale(1.2); /* Hacer zoom al 120% cuando el mouse está sobre el botón */
+}
+
+</style>
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"></a>
@@ -7,28 +18,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="../administrador/inicio_administrador.php">Inicio</a>
+              <button type="button" class="btn btn-light zoom-button" id="volverAtras">Volver Atrás</button>
                 </li>
-                <!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Listar Inventario
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="../views/coordinador/stock_computadores.php">COMPUTADORES</a></li>
-                        <li><a class="dropdown-item" href="../views/coordinador/stock_celulares.php">CELULARES</a></li>
-                        <li><a class="dropdown-item" href="../views/coordinador/stock_accesorios.php">ACCESORIOS</a></li>
-                        <li><a class="dropdown-item" href="../views/coordinador/stock_edcomunicacion.php">ELEMENTOS DE COMUNICACIÓN</a></li>
-                        <li><a class="dropdown-item" href="../views/coordinador/stock_perifericos.php">PERIFERICOS</a></li>
-                        <li><a class="dropdown-item" href="../views/coordinador/stock_almacenamiento.php">ALMACENAMIENTO</a></li>
-                        <li><a class="dropdown-item" href="../views/coordinador/stock_simcard.php">SIM CARD</a></li>
-                        <li><a class="dropdown-item" href="../views/coordinador/stock_dvr.php">DVR</a></li>
-                        <li><a class="dropdown-item" href="../views/coordinador/stock_cctv.php">CCTV</a></li>
-                        <li><a class="dropdown-item" href="../views/coordinador/stock_torre.php">TORRE</a></li>
-                    </ul>
-                </li> -->
-
             </ul>
 
         </div>
     </div>
 </nav>
+
+
+<script>
+        // Función que se ejecuta cuando se hace clic en el botón
+        document.getElementById("volverAtras").addEventListener("click", function() {
+            window.history.back(); // Navega hacia atrás en el historial del navegador
+        });
+    </script>

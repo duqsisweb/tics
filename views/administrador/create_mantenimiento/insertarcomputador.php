@@ -70,4 +70,28 @@ if ($resultHistorial) {
     echo "Error en la inserción en la tabla historial_computador: " . odbc_errormsg();
 }
 
+
+
+
+// Define las consultas de actualización
+$updateQuery1 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [Fecha_mantenimiento_inicio] = '$Fecha_mantenimiento_inicio' WHERE [id] = '$id'";
+$updateQuery2 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [Fecha_mantenimiento_fin] = '$Fecha_mantenimiento_fin' WHERE [id] = '$id'";
+$updateQuery3 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [Usua_mantenimiento] = '$usuario' WHERE [id] = '$id'";
+$updateQuery4 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [observaciones_mantenimiento] = '$observaciones_mantenimiento' WHERE [id] = '$id'";
+
+// Intenta ejecutar las consultas de actualización
+$resultUpdate1 = odbc_exec($conexion, $updateQuery1);
+$resultUpdate2 = odbc_exec($conexion, $updateQuery2);
+$resultUpdate3 = odbc_exec($conexion, $updateQuery3);
+$resultUpdate4 = odbc_exec($conexion, $updateQuery4);
+
+if ($resultUpdate1 && $resultUpdate2 && $resultUpdate3 && $resultUpdate4) {
+    echo "Actualizaciones exitosas en la tabla maquina_computador";
+} else {
+    // Si hay un error, muestra el mensaje de error
+    echo "Error en las actualizaciones en la tabla maquina_computador: " . odbc_errormsg();
+}
+
+
+
 }

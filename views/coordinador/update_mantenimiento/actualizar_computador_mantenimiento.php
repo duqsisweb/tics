@@ -21,9 +21,9 @@ if (
 
     // Consulta SQL para actualizar el estado del registro
     $updateQuery = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [Fecha_mantenimiento_inicio] = '$Fecha_mantenimiento_inicio' WHERE [id] = '$idToUpdate'";
-    $updateQuery2 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [Fecha_mantenimiento_fin] = '$Fecha_mantenimiento_fin' WHERE [id] = '$idToUpdate'";
-    $updateQuery3 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [Usua_mantenimiento] = '$Usua_mantenimiento' WHERE [id] = '$idToUpdate'";
-    $updateQuery4 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [observaciones_mantenimiento] = '$observaciones_mantenimiento' WHERE [id] = '$idToUpdate'";
+    $updateQuery7 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [Fecha_mantenimiento_fin] = '$Fecha_mantenimiento_fin' WHERE [id] = '$idToUpdate'";
+    $updateQuery8 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [Usua_mantenimiento] = '$Usua_mantenimiento' WHERE [id] = '$idToUpdate'";
+    $updateQuery9 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [observaciones_mantenimiento] = '$observaciones_mantenimiento' WHERE [id] = '$idToUpdate'";
 
 
     
@@ -67,6 +67,7 @@ if (
         echo "Error al realizar la actualización del estado";
     }
 
+    var_dump($_POST);
 
 }
 ?>
