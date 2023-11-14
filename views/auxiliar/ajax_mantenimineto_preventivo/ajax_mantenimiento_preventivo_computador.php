@@ -430,9 +430,9 @@ if (
                                 console.log("Actualización exitosa para update de maquina:", response);
                                 // Activar el botón oculto correspondiente a la fila seleccionada
                                 $asignarBtn.trigger('click');
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 2000);
+                                // setTimeout(function() {
+                                //     location.reload();
+                                // }, 2000);
                             }
                         });
 
