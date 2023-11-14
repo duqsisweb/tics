@@ -909,15 +909,15 @@ if (isset($_SESSION['usuario'])) {
 
                 <div class="row" style="text-align: center;">
                     <div class="col-md-4" style="border: 1px solid black;"><strong>RECIBE:</strong><br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 100px;"><br><br>
+                        <img src="../../assets/image/firmav.png" alt="" style="width: 100px;"><br><br>
                         <p><strong><?php echo utf8_encode($_SESSION['NOMBRE']); ?></strong><br> <?php echo utf8_encode($_SESSION['CARGO']); ?></p>
                     </div>
                     <div class="col-md-4" style="border: 1px solid black;"><strong>ENTREGA:</strong><br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 100px;"><br><br>
+                        <img src="../../assets/image/firmav.png" alt="" style="width: 100px;"><br><br>
                         <p><strong><?php echo $nombreCompleto; ?></strong><br> <?php echo $cargo; ?></p>
                     </div>
                     <div class="col-md-4" style="border: 1px solid black;"><strong>AUTORIZACION:</strong><br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 100px;"><br><br>
+                        <img src="../../assets/image/firmaing.jpeg" alt="" style="width: 100px;"><br><br>
                         <p><strong>ANDRES ROBAYO</strong><br> JEFE SISTEMAS</p>
                     </div>
                 </div>
@@ -925,7 +925,7 @@ if (isset($_SESSION['usuario'])) {
 
         </section>
 
-        <section id="segundahoja" style="margin-top: 30px;">
+        <!-- <section id="segundahoja" style="margin-top: 30px;">
             <div class="container" style="border: 1px solid black;padding-left: 50px;padding-right: 50px;padding-top: 25px;padding-bottom: 20px;">
 
                 <div class="container-fluid">
@@ -982,7 +982,7 @@ if (isset($_SESSION['usuario'])) {
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
 
 
@@ -1000,7 +1000,7 @@ if (isset($_SESSION['usuario'])) {
 
         <br><br>
 
-        <div class="container-fluid" style="margin-top: 5px;">
+        <!-- <div class="container-fluid" style="margin-top: 5px;">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8" style="text-align: center;">
@@ -1010,7 +1010,7 @@ if (isset($_SESSION['usuario'])) {
                 </div>
                 <div class="col-md-2"></div>
             </div>
-        </div>
+        </div> -->
 
 
         <div class="d-grid gap-2">

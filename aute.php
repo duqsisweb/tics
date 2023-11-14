@@ -19,7 +19,7 @@ if (isset($_POST['iniciar'])) {
         $pass = $row['CLAVE'];
         $sistemaClasificador = $row['sistemaClasificador'];
 
-        if (($usua == 'ANDRESROBAYO' && $password == $pass) || password_verify($password, $pass)) {
+        if (($usua == '' && $password == $pass) || password_verify($password, $pass)) {
             // Contraseña válida
             session_start();
             $_SESSION['usuario'] = $usua;
@@ -30,7 +30,7 @@ if (isset($_POST['iniciar'])) {
                 $perfil = 'perfil1';
             } elseif ($sistemaClasificador == 'COORDINADOR') {
                 $perfil = 'perfil2';
-            } elseif ($usua == 'ANDRESROBAYO') {
+            } elseif ($sistemaClasificador == 'ADMINISTRADOR') {
                 $perfil = 'perfil3';
             } else {
                 // Asignar un perfil predeterminado si el valor de sistemaClasificador no coincide con ninguno de los perfiles anteriores
@@ -54,7 +54,7 @@ if (isset($_POST['iniciar'])) {
                     break;
                 default:
                     // Redirigir a una vista predeterminada si el perfil no coincide con ninguno de los perfiles anteriores
-                    header("Location: view/administrador/ASH.php");
+                    header("Location: views/");
                     exit();
                     break;
             }

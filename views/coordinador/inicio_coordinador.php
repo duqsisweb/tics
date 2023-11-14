@@ -185,7 +185,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title"> AGREGAR COMPLEMENTOS</h5>
                                 <p class="card-text">Personaliza y amplía al sistema de gestión de inventarios</p>
-                                <a href="complementos.php" class="btn btn-success">Ingresar</a>
+                                <a href="" class="btn btn-success disabled">Ingresar</a>
                             </div>
 
                         </div>

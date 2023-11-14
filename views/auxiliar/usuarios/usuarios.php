@@ -45,7 +45,7 @@ if (isset($_SESSION['usuario'])) {
         <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
             <div class="container">
                 <div>
-                    <h3>CREACION Y GESTION DE USUARIOS</h3>
+                    <h3>GESTIÓN DE USUARIO</h3>
                 </div>
             </div>
         </div>
@@ -55,8 +55,6 @@ if (isset($_SESSION['usuario'])) {
 
         <body>
             <section class="sectionContenido">
-
-
 
                 <!-- inicio de POST ENVIAR -->
                 <?php
@@ -90,10 +88,10 @@ if (isset($_SESSION['usuario'])) {
 
                 <div>
                     <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading">ADMINISTRADOR</h4>
+                        <h4 class="alert-heading">AUXILIAR</h4>
                         <p><?php echo utf8_encode($_SESSION['NOMBRE']); ?></p>
                         <hr>
-                        <p class="mb-0">Módulo administración de usuarios, creación y acceso a Coordinadores, Facturadores.</p>
+                        <p class="mb-0">Módulo gestión de usuario</p>
                     </div>
                 </div>
 
@@ -106,68 +104,7 @@ if (isset($_SESSION['usuario'])) {
                 <div class="container" style="margin-top: 60px;">
                     <div class="row">
 
-                        <div class="col-md-4">
-                            <div style="text-align: center;">
-                                <h4>REGISTRO DE USUARIOS</h4>
-                            </div>
-
-                            <form method="POST">
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">NOMBRE</label>
-                                    <input name="name" type="text" class="form-control" id="name" aria-describedby="" oninput="convertirAMayusculas(this)"  autocomplete="off" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">CARGO</label>
-                                    <input name="cargo" type="text" class="form-control" id="cargo" aria-describedby="" oninput="convertirAMayusculas(this)"  autocomplete="off" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="" class="form-label">USUARIO</label>
-                                    <input name="usuario" type="text" class="form-control" id="" aria-describedby=""  oninput="convertirAMayusculas(this)"  autocomplete="off" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">PASSWORD</label>
-                                    <input name="password" type="password" class="form-control" id="" autocomplete="off" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">ROL DE USUARIO</label>
-                                    <select name="sistemaClasificador" class="form-select" aria-label="Default select example" id="tipo-usuario" required aria-required="true">
-                                        <option value="AUXILIAR">AUXILIAR</option>
-                                        <option value="COORDINADOR">COORDINADOR</option>
-
-                                    </select>
-                                </div>
-                                <button id="enviar" type="submit" class="btn btn-warning enviar" name="enviar" value="enviar" style="display:none"></button>
-
-                                <input type="hidden" name="created_at" value="<?php echo date('Y-m-d H:i:s', strtotime('now')); ?>"></input>
-                                <input type="hidden" name="Estado" value="1"></input>
-                                <input type="hidden" name="TipoUsuario" value="6"></input>
-                                <input type="hidden" name="cod_vendedor" value=""></input>
-                                <input type="hidden" name="estadopassword" value="1"></input>
-
-
-                            </form>
-
-
-
-                            <!-- btn guardar informacion  -->
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4"></div>
-                                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                                        <div class="text-center">
-                                            <button id="" class="btn btn-warning showAlertButton" name="enviar">Registrar</button>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4"></div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
+                      
 
                         <?php
                         if (isset($_POST['enviarEstado'])) {
@@ -197,15 +134,15 @@ if (isset($_SESSION['usuario'])) {
 
 
 
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div style="text-align: center;">
-                                <h4>Listado de usuarios</h4>
+                          
                             </div>
 
                             <form method="POST" action="">
                                 <?php
                                 $F = new funciones;
-                                if (count($F->usuarios()) !== 0) { ?>
+                                if (count($F->usuariosperfil($_SESSION['usuario'])) !== 0) { ?>
                                     <table class="table table-bordered dt-responsive table-hover display nowrap" id="mtable" cellspacing="0" style="text-align: center;">
                                         <thead>
                                             <tr class="encabezado table-dark" data-id="1">
@@ -219,7 +156,7 @@ if (isset($_SESSION['usuario'])) {
                                         <tbody style="text-align: center;">
                                             <?php
                                             $count = 0;
-                                            foreach ($F->usuarios() as $a) :
+                                            foreach ($F->usuariosperfil(($_SESSION['usuario'])) as $a) :
                                                 $count++;
                                             ?>
                                                 <tr>
@@ -228,8 +165,8 @@ if (isset($_SESSION['usuario'])) {
                                                     <td><?= $a['sistemaClasificador'] ?></td>
                                                     <td>
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault<?= $count ?>" name="usuarios[<?= $count ?>][Estado]" data-id="<?= $a['id'] ?>" value="<?= $a['Estado'] ?>" <?php if ($a['Estado'] == 1) echo 'checked'; ?>>
-                                                            <label class="form-check-label" for="flexSwitchCheckDefault<?= $count ?>"><?= ($a['Estado'] == 1) ? 'on' : 'off'; ?></label>
+                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexCheckIndeterminateDisabled<?= $count ?>" name="usuarios[<?= $count ?>][Estado]" data-id="<?= $a['id'] ?>" value="<?= $a['Estado'] ?>" <?php if ($a['Estado'] == 1) echo 'checked'; ?> disabled>
+                                                            <label class="form-check-label" for="flexCheckIndeterminateDisabled<?= $count ?>"><?= ($a['Estado'] == 1) ? 'on' : 'off'; ?></label>
                                                             <input type="hidden" name="usuarios[<?= $count ?>][email]" value="<?= $a['email'] ?>">
                                                         </div>
                                                     </td>
@@ -444,12 +381,12 @@ if (isset($_SESSION['usuario'])) {
 
 
 
-   <!-- MAYUSCULAS -->
-   <script>
-        function convertirAMayusculas(input) {
-            input.value = input.value.toUpperCase();
-        }
-    </script>
+        <!-- MAYUSCULAS -->
+        <script>
+            function convertirAMayusculas(input) {
+                input.value = input.value.toUpperCase();
+            }
+        </script>
 
 
     <?php } else { ?>

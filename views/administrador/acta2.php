@@ -391,7 +391,7 @@ if (isset($_SESSION['usuario'])) {
                     </div>
                     <div class="col-md-5" style="border: 1px solid black;text-align: center;">
                         <h6>
-                            <p style="margin-top: 10px;">ACTA DE ASIGNACION DE EQUIPOS</p>
+                            <p style="margin-top: 10px;">ACTA DE ASIGNACIÓN DE EQUIPOS</p>
                         </h6>
                     </div>
                     <div class="col-md-4 col-xs-12 col-sm-4" style="border: 1px solid black;">
@@ -900,15 +900,15 @@ if (isset($_SESSION['usuario'])) {
 
                 <div class="row" style="text-align: center;">
                     <div class="col-md-4" style="border: 1px solid black;"><strong>ENTREGA:</strong><br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 100px;"><br><br>
+                        <img src="../../assets/image/firmav.png" alt="" style="width: 100px;"><br><br>
                         <p><strong><?php echo utf8_encode($_SESSION['NOMBRE']); ?></strong><br> <?php echo utf8_encode($_SESSION['CARGO']); ?></p>
                     </div>
                     <div class="col-md-4" style="border: 1px solid black;"><strong>RECIBE:</strong><br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 100px;"><br><br>
+                        <img src="../../assets/image/firmav.png" alt="" style="width: 100px;"><br><br>
                         <p><strong><?php echo $nombreCompleto; ?></strong><br> <?php echo $cargo; ?></p>
                     </div>
                     <div class="col-md-4" style="border: 1px solid black;"><strong>AUTORIZACION:</strong><br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 100px;"><br><br>
+                    <img src="../../assets/image/firmaing.jpeg" alt="" style="width: 100px;"><br><br>
                         <p><strong>Andres Robayo</strong><br> Jefe de Sistemas</p>
                     </div>
                 </div>
@@ -959,15 +959,15 @@ if (isset($_SESSION['usuario'])) {
                 <div class="container-fluid" style="text-align: center;">
                     <div class="row">
                         <div class="col-md-4"><strong>ENTREGA:</strong><br><br>
-                            <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
+                            <img src="../../assets/image/firmav.png" alt="" style="width: 90px;"><br><br>
                             <p><strong><?php echo utf8_encode($_SESSION['NOMBRE']); ?></strong><br> <?php echo utf8_encode($_SESSION['CARGO']); ?></p>
                         </div>
                         <div class="col-md-4"><strong>RECIBE:</strong><br><br>
-                            <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
+                            <img src="../../assets/image/firmav.png" alt="" style="width: 90px;"><br><br>
                             <p><strong><?php echo $nombreCompleto; ?></strong><br> <?php echo $cargo; ?></p>
                         </div>
                         <div class="col-md-4"><strong>ENTREGA:</strong><br><br>
-                            <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
+                            <img src="../../assets/image/firmaing.jpeg" alt="" style="width: 90px;"><br><br>
                             <p><strong>ANDRES ROBAYO</strong><br> Jefe de Sistemas</p>
                         </div>
                     </div>

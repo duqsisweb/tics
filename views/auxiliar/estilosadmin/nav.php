@@ -92,7 +92,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="./inicio.php">Inicio </a>
                 </li>
-                <a class="btn btn-danger btnCloseSesion" href="../../closeSesion.php" role="button">Cerrar Sesión</a>
+                <a class="btn btn-danger btnCloseSesion" href="../../../closeSesion.php" role="button">Cerrar Sesión</a>
             </ul>
         </div>
     </div>

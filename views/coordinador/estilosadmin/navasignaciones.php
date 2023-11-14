@@ -1,3 +1,14 @@
+<style>
+    .zoom-button {
+    transition: transform 0.3s; /* Agregar una transición suave de 0.3 segundos */
+}
+
+.zoom-button:hover {
+    transform: scale(1.2); /* Hacer zoom al 120% cuando el mouse está sobre el botón */
+}
+
+</style>
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"></a>
@@ -7,20 +18,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="../administrador/inicio_administrador.php">Inicio</a>
+              <button type="button" class="btn btn-light zoom-button" id="volverAtras">Volver Atrás</button>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Usuarios
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="../administrador/asignacionesusuario.php">Usuarios con Asignaciones</a></li>
-                        <li><a class="dropdown-item" href="../administrador/asignaciones.php">Asignar Maquinas</a></li>
-                    </ul>
-                </li>
-
             </ul>
 
         </div>
     </div>
 </nav>
+
+
+<script>
+        // Función que se ejecuta cuando se hace clic en el botón
+        document.getElementById("volverAtras").addEventListener("click", function() {
+            window.history.back(); // Navega hacia atrás en el historial del navegador
+        });
+    </script>

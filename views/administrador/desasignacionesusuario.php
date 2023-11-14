@@ -157,7 +157,7 @@ if (isset($_SESSION['usuario'])) {
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container" style="text-align: center;">
                     <div>
-                        <h3>EQUIPOS DEVUELTOS DE USUARIOS</h3>
+                        <h3>DEVOLUCIÓN DE EQUIPOS</h3>
                     </div>
                 </div>
             </div>

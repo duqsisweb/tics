@@ -118,8 +118,8 @@ if (isset($_SESSION['usuario'])) {
 
                     $showSections = true;
 
-                                        //  MENSAJES SI LA CONSULTA ES EXITOSA O NO HAY INFORMACIÓN
-                                        echo '<div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    //  MENSAJES SI LA CONSULTA ES EXITOSA O NO HAY INFORMACIÓN
+                    echo '<div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
                                                 <div class="toast-header">
                                         <strong class="me-auto">Éxito</strong>
                                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
@@ -128,14 +128,14 @@ if (isset($_SESSION['usuario'])) {
                                         Consulta satisfactoria.
                                     </div>
                                 </div>';
-                                        echo '<script>
+                    echo '<script>
                                 var toastEl = document.querySelector(".toast");
                                 var toast = new bootstrap.Toast(toastEl);
                                 toast.show();
                             </script>';
-                                    } else {
-                                        // Mostrar un mensaje de error
-                                        echo '<div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                } else {
+                    // Mostrar un mensaje de error
+                    echo '<div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
                                     <div class="toast-header">
                                         <strong class="me-auto">Error</strong>
                                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
@@ -144,7 +144,7 @@ if (isset($_SESSION['usuario'])) {
                                         No se encontraron registros para la consulta.
                                     </div>
                                 </div>';
-                                        echo '<script>
+                    echo '<script>
                                 var toastEl = document.querySelector(".toast");
                                 var toast = new bootstrap.Toast(toastEl);
                                 toast.show();
@@ -245,7 +245,7 @@ if (isset($_SESSION['usuario'])) {
                                                         echo '<p class=""><strong>Cedula: ' . $cedula . '</strong></p>';
                                                         echo '<p class=""><strong>Cargo: ' . $cargo . '</strong></p>';
                                                     } ?>
-                                                    <input type="hidden" name="empresaOption" id="empresaOption" value="<?php echo $empresaOption ?>">
+                                                    <input type="text" name="empresaOption" id="empresaOption" value="<?php echo $empresaOption ?>">
 
                                                 </div>
                                             </div>
@@ -349,12 +349,22 @@ if (isset($_SESSION['usuario'])) {
 
 
 
+    <!-- SCRIPT MODAL ACTA -->
     <script>
         $('#exampleModal').on('show.bs.modal', function(event) {
             // Obtén la cédula y el cargo del PHP
             var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
             var cargo = '<?php echo $cargo; ?>'; // Obtener el cargo del PHP
             var nombreCompleto = '<?php echo $nombreCompleto; ?>'; // Obtener el nombre completo del PHP
+            var empresaOption = $('#empresaOption').val();
+
+
+            // Mostrar el log en la consola
+            console.log('Cedula:', cedula);
+            console.log('Cargo:', cargo);
+            console.log('Nombre Completo:', nombreCompleto);
+            console.log('Empresa Option:', empresaOption);
+
 
             // Realiza la solicitud AJAX aquí
             $.ajax({
@@ -363,7 +373,9 @@ if (isset($_SESSION['usuario'])) {
                 data: {
                     cedula: cedula,
                     cargo: cargo,
-                    nombreCompleto: nombreCompleto
+                    nombreCompleto: nombreCompleto,
+                    empresa: empresaOption  // Agrega empresaOption como parámetro
+
                 }, // Envía la cédula, el cargo y el nombre completo como parámetros
                 // dataType: 'html',
                 success: function(response) {
@@ -682,7 +694,15 @@ if (isset($_SESSION['usuario'])) {
     </script>
 
 
-
+    <script>
+        document.getElementById('asisteInput').addEventListener('input', function() {
+            var selectedValue = this.value;
+            var cedulaIndex = selectedValue.lastIndexOf('-'); // Índice del último guión
+            if (cedulaIndex !== -1) {
+                this.value = selectedValue.substring(cedulaIndex + 1).trim(); // Eliminar espacio adicional antes de la cédula
+            }
+        });
+    </script>
 
 
     </html>
