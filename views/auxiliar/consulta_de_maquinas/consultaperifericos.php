@@ -126,7 +126,29 @@ if (isset($_POST['tipo_perifericos'])) {
                             </td>
 
                             <td>
-                                <button id="enviarperifericos" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-primernombre="<?= $primernombre ?>" data-segundonombre="<?= $segundonombre ?>" data-primerapellido="<?= $primerapellido ?>" data-segundoapellido="<?= $segundoapellido ?>" data-cedula="<?= $cedula ?>" data-cargo="<?= $cargo ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-serial-perifericos="<?= $fila['serial_perifericos'] ?>" data-descripcion-perifericos="<?= $fila['descripcion_perifericos'] ?>" data-marca-perifericos="<?= $fila['marca_perifericos'] ?>" data-modelo-perifericos="<?= $fila['modelo_perifericos'] ?>" data-placa-activo-perifericos="<?= $fila['placa_activo_perifericos'] ?>" data-sede-perifericos="<?= $fila['sede_perifericos'] ?>" data-ubicacion-perifericos="<?= $fila['ubicacion_perifericos'] ?>" data-tipo="<?= $fila['tipo'] ?>" data-tipo-toner="<?= $fila['tipo_toner'] ?>" data-gestion-peri="<?= $fila['gestion_peri'] ?>" data-empresa="<?= $fila['empresa'] ?>" data-fecha-garantia-peri="<?= $fila['fecha_de_garantia_peri'] ?>" data-fecha-crea="<?= $fila['fecha_crea'] ?>" data-usua-crea="<?= $fila['usua_crea'] ?>" data-fecha-modifica="<?= $fila['fecha_modifica'] ?>" data-usua-modifica="<?= $fila['usua_modifica'] ?>" data-estado="<?= $fila['estado'] ?>" data-usua-asigna="<?php echo $Usua_asigna; ?>"></button>
+                                <button id="enviarperifericos" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" 
+                                data-id="<?= $fila['id'] ?>" 
+                                data-primernombre="<?= $primernombre ?>" 
+                                data-segundonombre="<?= $segundonombre ?>" 
+                                data-primerapellido="<?= $primerapellido ?>" 
+                                data-segundoapellido="<?= $segundoapellido ?>" 
+                                data-cedula="<?= $cedula ?>" data-cargo="<?= $cargo ?>" 
+                                data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" 
+                                data-serial-perifericos="<?= $fila['serial_perifericos'] ?>" 
+                                data-descripcion-perifericos="<?= $fila['descripcion_perifericos'] ?>" 
+                                data-marca-perifericos="<?= $fila['marca_perifericos'] ?>" 
+                                data-modelo-perifericos="<?= $fila['modelo_perifericos'] ?>" 
+                                data-placa-activo-perifericos="<?= $fila['placa_activo_perifericos'] ?>" 
+                                data-sede-perifericos="<?= $fila['sede_perifericos'] ?>" 
+                                data-ubicacion-perifericos="<?= $fila['ubicacion_perifericos'] ?>" 
+                                data-tipo="<?= $fila['tipo'] ?>" 
+                                data-tipo-toner="<?= $fila['tipo_toner'] ?>" 
+                                data-gestion-peri="<?= $fila['gestion_peri'] ?>" 
+                                data-empresa="<?= $fila['empresa'] ?>" 
+                                data-fecha-garantia-peri="<?= $fila['fecha_de_garantia_peri'] ?>" 
+                                data-usua-asigna="<?php echo $Usua_asigna; ?>">
+                            </button>
+
                                 <!-- btn escondido para la alerta -->
                                 <button id="" type="button" class="btn btn-outline-warning showAlertButton">ASIGNAR</button>
                             </td>

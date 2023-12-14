@@ -76,7 +76,7 @@ if ($resultHistorial) {
 // Define las consultas de actualización
 $updateQuery1 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [Fecha_mantenimiento_inicio] = '$Fecha_mantenimiento_inicio' WHERE [id] = '$id'";
 $updateQuery2 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [Fecha_mantenimiento_fin] = '$Fecha_mantenimiento_fin' WHERE [id] = '$id'";
-$updateQuery3 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [Usua_mantenimiento] = '$usuario' WHERE [id] = '$id'";
+$updateQuery3 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [usuamov] = '$usuario' WHERE [id] = '$id'";
 $updateQuery4 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [observaciones_mantenimiento] = '$observaciones_mantenimiento' WHERE [id] = '$id'";
 
 // Intenta ejecutar las consultas de actualización

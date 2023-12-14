@@ -53,7 +53,7 @@
             $output .= "Elemento: " . $fila['tipo_maquina'] . "\n";
             $output .= "Marca del Equipo: " . $fila['marca'] . "\n";
             $output .= "Modelo del Equipo:" . $fila['modelo'] . "\n";
-            $output .= "Capacidad" . $fila['capacidad'] . "\n";
+            $output .= "Capacidad: " . $fila['capacidad'] . "\n";
             $output .= "Memoria RAM: " . $fila['ram_celular'] . "\n";
             $output .= "Imei: " . $fila['imei'] . "\n";
             $output .= "-------------------------------------\n";

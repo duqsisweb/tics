@@ -79,11 +79,11 @@
 
            
         $output .= "-------------------------------------\n";
-        $output .= "Elemento:: " . $fila['tipo_maquina'] . "\n";
-        $output .= "Memoria RAM: " . $fila['tipo_acc'] . "\n";
+        $output .= "Elemento: " . $fila['tipo_maquina'] . "\n";
+        $output .= "Tipo: " . $fila['tipo_acc'] . "\n";
         $output .= "Marca : " . $fila['marca'] . "\n";
         $output .= "Modelo:" . $fila['modelo'] . "\n";
-        $output .= "Descripcion" . $fila['descripcion'] . "\n";
+        $output .= "Descripcion: " . $fila['descripcion'] . "\n";
 
         $output .= "-------------------------------------\n";
         }

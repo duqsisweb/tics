@@ -583,97 +583,6 @@ if (isset($_SESSION['usuario'])) {
                     </div>
                 </div>
 
-                <!-- AQUI MUESTRA LAS SECCION  DVR -->
-                <!-- <div class="container" style="margin-top: 50px;">
-                    <div class="row">
-
-                        <div class="col-md-2">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckdvr" value="8" name="selecciondeldvr">
-                                <label class="form-check-label" for="flexSwitchCheckdvr">DVR</label>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-2" id="fila1dvr" style="display: none;">
-
-                        </div>
-
-                        <div class="col-md-2" id="fila2dvr" style="display: none;">
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaldvr">
-                                Ver listado
-                            </button>
-                        </div>
-
-                        <div class="col-md-4" id="fila3dvr" style="display: none;"></div>
-
-                        <div class="col-md-2" id="fila4dvr" style="display: none;text-align: center;">
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modaldvrinformacion">Remover Asignación</button>
-                        </div>
-
-
-                    </div>
-                </div> -->
-
-                <!-- AQUI MUESTRA LAS SECCION  CCTV -->
-                <!-- <div class="container" style="margin-top: 50px;">
-                    <div class="row">
-
-                        <div class="col-md-3">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckcctv" value="9" name="selecciondelcctv">
-                                <label class="form-check-label" for="flexSwitchCheckcctv">CCTV</label>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-2" id="fila1cctv" style="display: none;">
-
-                        </div>
-
-                        <div class="col-md-2" id="fila2cctv" style="display: none;">
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalcctv">
-                                Ver listado
-                            </button>
-                        </div>
-
-                        <div class="col-md-5" id="fila3cctv" style="display: none;text-align: center;">
-
-                        </div>
-
-                    </div>
-                </div> -->
-
-                <!-- AQUI MUESTRA LAS SECCION  CCTV -->
-                <!-- <div class="container" style="margin-top: 50px;">
-                    <div class="row">
-
-                        <div class="col-md-3">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchChecktorre" value="10" name="selecciondeltorre">
-                                <label class="form-check-label" for="flexSwitchChecktorre">Torre</label>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-2" id="fila1torre" style="display: none;">
-
-                        </div>
-
-                        <div class="col-md-2" id="fila2torre" style="display: none;">
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaltorre">
-                                Ver listado
-                            </button>
-                        </div>
-
-                        <div class="col-md-5" id="fila3torre" style="display: none;text-align: center;">
-
-                        </div>
-
-                    </div>
-                </div> -->
-
-
                 <!-- BOTON DE GENERAR ACTA -->
                 <div style="text-align: center;">
                     <!-- Button trigger modal -->
@@ -978,48 +887,13 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
 
-        <!-- MODAL DE CCTV -->
-        <!-- <div class="modal fade" id="modalcctv" tabindex="-1" aria-labelledby="modalcctvLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modalcctvLabel">Listado de CCTV</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- MODAL DE TORRE -->
-        <!-- <div class="modal fade" id="modaltorre" tabindex="-1" aria-labelledby="modaltorreLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modaltorreLabel">Listado de Torre</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="saveChangesModalButton1">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
 
         <!-- MODAL ACTA -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Acta</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">ACTA DE ASIGNACIÓN DE EQUIPOS</h1>
 
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -1062,7 +936,6 @@ if (isset($_SESSION['usuario'])) {
                     cargo: cargo,
                     nombreCompleto: nombreCompleto,
                     empresa: empresaOptionValue
-
                 }, // Envía la cédula, el cargo y el nombre completo como parámetros
                 // dataType: 'html',
                 success: function(response) {

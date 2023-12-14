@@ -179,17 +179,7 @@ if (isset($_SESSION['usuario'])) {
                                 <button id="" type="submit" class="btn btn-warning enviarEstado" name="enviarEstado" value="" style="display:none"></button>
                             </form>
 
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4"></div>
-                                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                                        <div class="text-center">
-                                            <button id="" class="btn btn-success showAlertButtonestado" name="">Guardar</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4"></div>
-                                </div>
-                            </div>
+                          
                         </div>
 
 

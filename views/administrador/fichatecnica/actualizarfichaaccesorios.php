@@ -40,10 +40,10 @@ if (odbc_num_rows($resultado) > 0) {
     while ($fila = odbc_fetch_array($resultado)) {
         
         $output .= "-------------------------------------\n";
-        $output .= "Memoria RAM: " . $fila['tipo_acc'] . "\n";
+        $output .= "Tipo : " . $fila['tipo_acc'] . "\n";
         $output .= "Marca : " . $fila['marca'] . "\n";
         $output .= "Modelo:" . $fila['modelo'] . "\n";
-        $output .= "Descripcion" . $fila['descripcion'] . "\n";
+        $output .= "Descripcion: " . $fila['descripcion'] . "\n";
 
         $output .= "-------------------------------------\n";
     }

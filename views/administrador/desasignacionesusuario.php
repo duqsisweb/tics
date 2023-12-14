@@ -157,7 +157,7 @@ if (isset($_SESSION['usuario'])) {
             <div class="container-fluid" style="text-align: center;margin-bottom: 30px;">
                 <div class="container" style="text-align: center;">
                     <div>
-                        <h3>DEVOLUCIÓN DE EQUIPOS</h3>
+                        <h3>EQUIPOS DEVUELTOS DE USUARIOS</h3>
                     </div>
                 </div>
             </div>
@@ -328,7 +328,7 @@ if (isset($_SESSION['usuario'])) {
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Acta</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">ACTA DE DEVOLUCIÓN DE EQUIPOS</h1>
 
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>

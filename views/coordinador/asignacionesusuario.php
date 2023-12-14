@@ -355,6 +355,9 @@ if (isset($_SESSION['usuario'])) {
             var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
             var cargo = '<?php echo $cargo; ?>'; // Obtener el cargo del PHP
             var nombreCompleto = '<?php echo $nombreCompleto; ?>'; // Obtener el nombre completo del PHP
+            var empresaOption = $('#empresaOption').val();
+            var empresaOptionValue = "<?php echo $empresaOption; ?>";
+            
 
             // Realiza la solicitud AJAX aquí
             $.ajax({
@@ -363,7 +366,8 @@ if (isset($_SESSION['usuario'])) {
                 data: {
                     cedula: cedula,
                     cargo: cargo,
-                    nombreCompleto: nombreCompleto
+                    nombreCompleto: nombreCompleto,
+                    empresa: empresaOptionValue
                 }, // Envía la cédula, el cargo y el nombre completo como parámetros
                 // dataType: 'html',
                 success: function(response) {

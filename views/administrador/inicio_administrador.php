@@ -166,7 +166,7 @@ if (isset($_SESSION['usuario'])) {
                             <div class="card-body">
                                 <h5 class="card-title">Devolución de equipos</h5>
                                 <p class="card-text">Flujo de recursos con acta</p>
-                                <a href="desasignacionesusuario.php" class="btn btn-success">Ingresar</a>
+                                <a href="devolucionusuario.php" class="btn btn-success">Ingresar</a>
                             </div>
                         </div>
                     </div>

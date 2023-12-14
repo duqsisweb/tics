@@ -70,7 +70,8 @@
         <h6 style="color:aliceblue;margin-left: 10px;">CONTROL & <br> GESTIÓN <br> DE INVENTARIOS</h6>
     </a>
     <a href="">
-        <img class="logo" style="margin-right: 100px;" src="../../assets/image/faviconplanta.png">
+        <img class="logo" style="margin-right: 100px;" src="../../assets/image/duquesaypalmerasdelllano.png">
+        
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -152,7 +153,7 @@
                 "enable": true,
                 "distance": 150,
                 "color": "#ffffff",
-                "opacity": 0.4,
+                "opacity": 0.9,
                 "width": 1
             },
             "move": {
@@ -193,7 +194,7 @@
                 "bubble": {
                     "distance": 400,
                     "size": 40,
-                    "duration": 2,
+                    "duration": 3,
                     "opacity": 8,
                     "speed": 3
                 },

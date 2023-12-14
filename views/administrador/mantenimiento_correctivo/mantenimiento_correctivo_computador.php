@@ -8,7 +8,7 @@ if (isset($_SESSION['usuario'])) {
     require '../../../function/funciones.php';
 ?>
     <!DOCTYPE html>
-    <html lang="en">
+<html lang="en">
 
     <style>
         .hidden-cell {
@@ -368,6 +368,7 @@ if (isset($_SESSION['usuario'])) {
 
         </section>
     </body>
+</html>
 
     <!-- MODAL DE OBSERVACIONES DE MANTENIMIENTO CORRECTIVO -->
     <div class="modal fade" id="exampleModalmc" tabindex="-1" aria-labelledby="exampleModal4LabelmC" aria-hidden="true">
@@ -403,52 +404,55 @@ if (isset($_SESSION['usuario'])) {
         });
     </script>
 
-    </html>
+  
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Inicio DataTable -->
     <script type="text/javascript">
-        $(document).ready(function() {
-            var lenguaje = $('#mtable').DataTable({
-                info: false,
-                select: true,
-                destroy: true,
-                jQueryUI: true,
-                paginate: true,
-                iDisplayLength: 30,
-                searching: true,
-                dom: 'Bfrtip',
-                buttons: ['excel'],
-                language: {
-                    lengthMenu: 'Mostrar _MENU_ registros por página.',
-                    zeroRecords: 'Lo sentimos. No se encontraron registros.',
-                    info: 'Mostrando: _START_ de _END_ - Total registros: _TOTAL_',
-                    infoEmpty: 'No hay registros aún.',
-                    infoFiltered: '(filtrados de un total de _MAX_ registros)',
-                    search: 'Búsqueda',
-                    LoadingRecords: 'Cargando ...',
-                    Processing: 'Procesando...',
-                    SearchPlaceholder: 'Comience a teclear...',
-                    paginate: {
-                        previous: 'Anterior',
-                        next: 'Siguiente',
+            $(document).ready(function() {
+                var lenguaje = $('#mtable').DataTable({
+                    info: false,
+                    select: true,
+                    destroy: true,
+                    jQueryUI: true,
+                    paginate: true,
+                    iDisplayLength: 30,
+                    searching: true,
+                    dom: 'Bfrtip',
+                    buttons: ['excel'],
+                    language: {
+                        lengthMenu: 'Mostrar _MENU_ registros por página.',
+                        zeroRecords: 'Lo sentimos. No se encontraron registros.',
+                        info: 'Mostrando: _START_ de _END_ - Total registros: _TOTAL_',
+                        infoEmpty: 'No hay registros aún.',
+                        infoFiltered: '(filtrados de un total de _MAX_ registros)',
+                        search: 'Búsqueda',
+                        LoadingRecords: 'Cargando ...',
+                        Processing: 'Procesando...',
+                        SearchPlaceholder: 'Comience a teclear...',
+                        paginate: {
+                            previous: 'Anterior',
+                            next: 'Siguiente',
+                        }
                     }
-                }
-            });
+                });
 
-            // Agregar el controlador de evento draw.dt después de inicializar el DataTable
-            $('#mtable').on('draw.dt', function() {
-                // Agregar un controlador de clic para los botones "Editar" (incluso después de aplicar un filtro)
-                $('.btn-editar').on('click', function() {
+                // Cambia el controlador de clic para usar la delegación de eventos
+                $('#mtable').on('click', '.btn-editar', function() {
                     var id = $(this).data('id');
                     // Oculta todas las filas de edición
                     $('.editar-form').hide();
                     // Muestra la fila de edición correspondiente al botón clicado
                     $('#editar-form-' + id).show();
                 });
+
+                // Agregar el controlador de evento draw.dt después de inicializar el DataTable
+                $('#mtable').on('draw.dt', function() {
+                    // Oculta todas las filas de edición al dibujar DataTable
+                    $('.editar-form').hide();
+                });
             });
-        });
     </script>
     <!-- Fin DataTable -->
 

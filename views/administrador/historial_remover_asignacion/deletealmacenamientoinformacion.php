@@ -73,7 +73,7 @@ echo "</script>"; {
         ,'$observaciones_desasigna_alma'
         ,'$link_alma_desasigna'
         ,CONVERT(datetime, Getdate(), 120)
-        ,'SE ELIMINA ASIGNACION DE UN PERIFERICO'
+        ,'SE ELIMINA ASIGNACION DE UNA UNIDAD DE ALMACENAMIENTO'
         ,'$Usua_asigna'
     )";
 

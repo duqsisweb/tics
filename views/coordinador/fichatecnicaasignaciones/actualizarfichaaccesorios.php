@@ -83,7 +83,7 @@
         $output .= "Memoria RAM: " . $fila['tipo_acc'] . "\n";
         $output .= "Marca : " . $fila['marca'] . "\n";
         $output .= "Modelo:" . $fila['modelo'] . "\n";
-        $output .= "Descripcion" . $fila['descripcion'] . "\n";
+        $output .= "Descripcion: " . $fila['descripcion'] . "\n";
 
         $output .= "-------------------------------------\n";
         }

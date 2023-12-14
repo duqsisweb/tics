@@ -70,7 +70,7 @@
         <h6 style="color:aliceblue;margin-left: 10px;">CONTROL & <br> GESTIÓN <br> DE INVENTARIOS</h6>
     </a>
     <a href="">
-        <img class="logo" style="margin-right: 100px;" src="../../../assets/image/faviconplanta.png">
+    <img class="logo" style="margin-right: 100px;" src="../../assets/image/duquesaypalmerasdelllano.png">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

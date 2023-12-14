@@ -355,6 +355,8 @@ if (isset($_SESSION['usuario'])) {
             var cedula = '<?php echo $cedula; ?>'; // Obtener la cédula del PHP
             var cargo = '<?php echo $cargo; ?>'; // Obtener el cargo del PHP
             var nombreCompleto = '<?php echo $nombreCompleto; ?>'; // Obtener el nombre completo del PHP
+            var empresaOption = $('#empresaOption').val();
+            var empresaOptionValue = "<?php echo $empresaOption; ?>";
 
             // Realiza la solicitud AJAX aquí
             $.ajax({
@@ -363,7 +365,8 @@ if (isset($_SESSION['usuario'])) {
                 data: {
                     cedula: cedula,
                     cargo: cargo,
-                    nombreCompleto: nombreCompleto
+                    nombreCompleto: nombreCompleto,
+                    empresa: empresaOptionValue
                 }, // Envía la cédula, el cargo y el nombre completo como parámetros
                 // dataType: 'html',
                 success: function(response) {
@@ -380,29 +383,6 @@ if (isset($_SESSION['usuario'])) {
 
 
 
-    <script>
-        // Asegúrate de que jsPDF se haya cargado antes de ejecutar este código
-        $(document).ready(function() {
-            $('#exampleModal').on('show.bs.modal', function(event) {
-                // ... (código previo)
-
-                // Manejador para el botón de descarga en el modal
-                $('#descargarPDF').click(function() {
-                    // Obtén el contenido del modal
-                    var modalContent = $('#ajax-result').html();
-
-                    // Crea un nuevo documento PDF
-                    var doc = new jsPDF();
-
-                    // Agrega el contenido del modal al documento PDF
-                    doc.fromHTML(modalContent, 15, 15);
-
-                    // Descarga el archivo PDF
-                    doc.save('acta.pdf');
-                });
-            });
-        });
-    </script>
 
 
     <script>

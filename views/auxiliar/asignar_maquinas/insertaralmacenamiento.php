@@ -86,7 +86,7 @@ echo "</script>"; {
         ,'$observaciones_asigna_alma'
         ,'$link_alma_asigna'
         ,CONVERT(datetime, Getdate(), 120)
-        ,'SE REALIZO ASIGNAMIENTO DE UN PERIFERICO'
+        ,'SE REALIZO ASIGNAMIENTO DE UNA UNIDAD DE ALMACENAMIENTO'
         ,'$Usua_asigna'
     )";
 

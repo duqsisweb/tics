@@ -44,7 +44,6 @@ if (
         }
     </style>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
     <body>
 
@@ -65,6 +64,7 @@ if (
                                 <div class="usuario-mantenimiento">
                                     <strong>USUARIO:</strong>
                                     <?php echo $usuario; ?>
+                                    <input type="text" value="<?php echo $usuario; ?>" id="usuario">
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -176,7 +176,42 @@ if (
                         <div class="row columnas">
                             <div class="col-md-12">
                                 <div class="accion">
-                                    <button id="enviarcomputador" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" data-id="<?= $fila['id'] ?>" data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" data-service-tag="<?= $fila['Service_tag'] ?>" data-serial-equipo="<?= $fila['Serial_equipo'] ?>" data-nombre-equipo="<?= $fila['Nombre_equipo'] ?>" data-sede="<?= $fila['Sede'] ?>" data-empresa="<?= $fila['Empresa'] ?>" data-marca-computador="<?= $fila['Marca_computador'] ?>" data-modelo-computador="<?= $fila['Modelo_computador'] ?>" data-tipo-comp="<?= $fila['Tipo_comp'] ?>" data-tipo-memoria-ram="<?= $fila['tipo_memoria_ram'] ?>" data-memoria-ram="<?= $fila['Memoria_ram'] ?>" data-tipo-discoduro="<?= $fila['Tipo_discoduro'] ?>" data-capacidad-discoduro="<?= $fila['Capacidad_discoduro'] ?>" data-procesador="<?= $fila['Procesador'] ?>" data-propietario="<?= $fila['Propietario'] ?>" data-proveedor="<?= $fila['Proveedor'] ?>" data-sistema-operativo="<?= $fila['Sistema_Operativo'] ?>" data-serial-cargador="<?= $fila['Serial_cargador'] ?>" data-dominio="<?= $fila['Dominio'] ?>" data-tipo-usuario="<?= $fila['Tipo_usuario'] ?>" data-serial-activo-fijo="<?= $fila['Serial_activo_fijo'] ?>" data-fecha-ingreso-c="<?= $fila['Fecha_ingreso_c'] ?>" data-targeta-video="<?= $fila['Targeta_Video'] ?>" data-estado="<?= $fila['Estado'] ?>" data-gestion="<?= $fila['Gestion'] ?>" data-fecha-garantia-c="<?= $fila['Fecha_garantia_c'] ?>" data-segundonombre="<?php echo $segundonombre; ?>" data-primerapellido="<?php echo $primerapellido; ?>" data-segundoapellido="<?php echo $segundoapellido; ?>" data-cedula="<?php echo $cedula; ?>" data-cargo="<?php echo $cargo; ?>" data-usuario="<?php echo $usuario; ?>" data-fecha-inicio-mantenimiento="<?= $fila['fechaInicioMantenimiento'] ?>" data-observaciones-mantenimiento="<?= $fila['observaciones_mantenimiento'] ?>">
+                                    <button id="enviarcomputador" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" 
+                                    data-id="<?= $fila['id'] ?>" 
+                                    data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" 
+                                    data-service-tag="<?= $fila['Service_tag'] ?>" 
+                                    data-serial-equipo="<?= $fila['Serial_equipo'] ?>" 
+                                    data-nombre-equipo="<?= $fila['Nombre_equipo'] ?>" 
+                                    data-sede="<?= $fila['Sede'] ?>" 
+                                    data-empresa="<?= $fila['Empresa'] ?>" 
+                                    data-marca-computador="<?= $fila['Marca_computador'] ?>" 
+                                    data-modelo-computador="<?= $fila['Modelo_computador'] ?>" 
+                                    data-tipo-comp="<?= $fila['Tipo_comp'] ?>" 
+                                    data-tipo-memoria-ram="<?= $fila['tipo_memoria_ram'] ?>" 
+                                    data-memoria-ram="<?= $fila['Memoria_ram'] ?>" 
+                                    data-tipo-discoduro="<?= $fila['Tipo_discoduro'] ?>" 
+                                    data-capacidad-discoduro="<?= $fila['Capacidad_discoduro'] ?>" 
+                                    data-procesador="<?= $fila['Procesador'] ?>" 
+                                    data-propietario="<?= $fila['Propietario'] ?>" 
+                                    data-proveedor="<?= $fila['Proveedor'] ?>" 
+                                    data-sistema-operativo="<?= $fila['Sistema_Operativo'] ?>" 
+                                    data-serial-cargador="<?= $fila['Serial_cargador'] ?>" 
+                                    data-dominio="<?= $fila['Dominio'] ?>" 
+                                    data-tipo-usuario="<?= $fila['Tipo_usuario'] ?>" 
+                                    data-serial-activo-fijo="<?= $fila['Serial_activo_fijo'] ?>" 
+                                    data-fecha-ingreso-c="<?= $fila['Fecha_ingreso_c'] ?>" 
+                                    data-targeta-video="<?= $fila['Targeta_Video'] ?>" 
+                                    data-estado="<?= $fila['Estado'] ?>" 
+                                    data-gestion="<?= $fila['Gestion'] ?>" 
+                                    data-fecha-garantia-c="<?= $fila['Fecha_garantia_c'] ?>" 
+                                    data-segundonombre="<?php echo $segundonombre; ?>" 
+                                    data-primerapellido="<?php echo $primerapellido; ?>" 
+                                    data-segundoapellido="<?php echo $segundoapellido; ?>" 
+                                    data-cedula="<?php echo $cedula; ?>" 
+                                    data-cargo="<?php echo $cargo; ?>" 
+                                    data-usuario="<?php echo $usuario; ?>" 
+                                    data-fecha-inicio-mantenimiento="<?= $fila['fechaInicioMantenimiento'] ?>" 
+                                    data-observaciones-mantenimiento="<?= $fila['observaciones_mantenimiento'] ?>">
                                         <!-- Agrega los datos que necesitas aquí -->
                                     </button>
                                     <!-- btn escondido para la alerta -->
@@ -196,64 +231,54 @@ if (
 
     </body>
 
-    <script>
-        // Obtener el elemento textarea
-        var textarea = document.getElementById("observaciones_mantenimiento<?= $fila['id'] ?>");
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>  
 
-        // Agregar un evento de entrada para ajustar la altura
-        textarea.addEventListener("input", function() {
-            this.style.height = "auto";
-            this.style.height = (this.scrollHeight) + "px";
+<script>
+    // Función para convertir la sección en PDF y descargarlo
+    function descargarPDF() {
+        // Oculta los botones antes de generar el PDF
+        var pdfButtons = document.querySelectorAll('.pdf-button');
+        pdfButtons.forEach(function(button) {
+            button.style.display = 'none';
         });
-    </script>
 
-    <script>
-        // Función para convertir la sección en PDF y descargarlo
-        function descargarPDF() {
-            // Oculta los botones antes de generar el PDF
-            var pdfButtons = document.querySelectorAll('.pdf-button');
-            pdfButtons.forEach(function(button) {
-                button.style.display = 'none';
-            });
+        const elemento = document.getElementById('descargaresto'); // ID de la sección que deseas convertir a PDF
 
-            const elemento = document.getElementById('descargaresto'); // ID de la sección que deseas convertir a PDF
+        // Configuración de opciones para html2pdf
+        const opciones = {
+            margin: 10,
+            filename: 'documento.pdf', // Nombre del archivo PDF
+            image: {
+                type: 'jpeg',
+                quality: 0.98
+            },
+            html2canvas: {
+                scale: 2
+            },
+            jsPDF: {
+                unit: 'mm',
+                format: 'a4',
+                orientation: 'portrait'
+            },
+        };
 
-            // Configuración de opciones para html2pdf
-            const opciones = {
-                margin: 10,
-                filename: 'documento.pdf', // Nombre del archivo PDF
-                image: {
-                    type: 'jpeg',
-                    quality: 0.98
-                },
-                html2canvas: {
-                    scale: 2
-                },
-                jsPDF: {
-                    unit: 'mm',
-                    format: 'a4',
-                    orientation: 'portrait'
-                },
-            };
-
-            // Comienza la conversión y descarga
-            html2pdf()
-                .from(elemento)
-                .set(opciones)
-                .save()
-                .then(function() {
-                    // Restaura la visibilidad de los botones después de generar el PDF
-                    pdfButtons.forEach(function(button) {
-                        button.style.display = 'block';
-                    });
+        // Comienza la conversión y descarga
+        html2pdf()
+            .from(elemento)
+            .set(opciones)
+            .save()
+            .then(function() {
+                // Restaura la visibilidad de los botones después de generar el PDF
+                pdfButtons.forEach(function(button) {
+                    button.style.display = 'block';
                 });
-        }
+            });
+    }
 
-        // Asocia la función de descarga al botón
-        document.getElementById('descargarPdf').addEventListener('click', descargarPDF);
-    </script>
-
-
+    // Asocia la función de descarga al botón
+    document.getElementById('descargarPdf').addEventListener('click', descargarPDF);
+</script>
 
     <script>
         $(document).ready(function() {
@@ -262,8 +287,8 @@ if (
 
                 // Obtener el ID del equipo desde el botón
                 var equipoId = $(this).data('id');
+                var usuario = '<?php echo $usuario; ?>';
 
-                var usuario = $(this).data('usuario');
                 var id = $(this).data('id');
                 var tipo_maquina = $(this).data('tipo-maquina');
                 var service_tag = $(this).data('service-tag');
@@ -298,7 +323,7 @@ if (
                 var Fecha_mantenimiento_fin = $('#fechaFinal_' + equipoId).text();
 
 
-                console.log("Usuario :", usuario);
+                console.log("Usuarioo :", usuario);
                 console.log("Datos a enviar:");
                 console.log("ID:", id);
                 console.log("Tipo de máquina:", tipo_maquina);
@@ -338,8 +363,6 @@ if (
                     url: '../create_mantenimiento/insertarcomputador.php',
                     type: 'POST',
                     data: {
-
-
                         id: id,
                         tipo_maquina: tipo_maquina,
                         service_tag: service_tag,

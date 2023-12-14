@@ -3,7 +3,7 @@
 
 if (
     isset($_POST['idToUpdate'])  
-    &&  isset($_POST['Usua_mantenimiento'])
+    &&  isset($_POST['usuario'])
     && isset($_POST['observaciones_mantenimiento']) 
     && isset($_POST['Fecha_mantenimiento_inicio']) 
     &&  isset($_POST['Fecha_mantenimiento_fin']) 
@@ -14,16 +14,16 @@ if (
 
     // Obtener el ID para actualizar desde la solicitud POST
     $idToUpdate = $_POST['idToUpdate'];
-    $Usua_mantenimiento = $_POST['Usua_mantenimiento'];
+    $usuario = $_POST['usuario'];
     $observaciones_mantenimiento = $_POST['observaciones_mantenimiento'];
     $Fecha_mantenimiento_inicio = $_POST['Fecha_mantenimiento_inicio'];
     $Fecha_mantenimiento_fin = $_POST['Fecha_mantenimiento_fin'];
 
     // Consulta SQL para actualizar el estado del registro
     $updateQuery = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [Fecha_mantenimiento_inicio] = '$Fecha_mantenimiento_inicio' WHERE [id] = '$idToUpdate'";
-    $updateQuery7 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [Fecha_mantenimiento_fin] = '$Fecha_mantenimiento_fin' WHERE [id] = '$idToUpdate'";
-    $updateQuery8 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [Usua_mantenimiento] = '$Usua_mantenimiento' WHERE [id] = '$idToUpdate'";
-    $updateQuery9 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [observaciones_mantenimiento] = '$observaciones_mantenimiento' WHERE [id] = '$idToUpdate'";
+    $updateQuery2 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [Fecha_mantenimiento_fin] = '$Fecha_mantenimiento_fin' WHERE [id] = '$idToUpdate'";
+    $updateQuery3 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [usuamov] = '$usuario' WHERE [id] = '$idToUpdate'";
+    $updateQuery4 = "UPDATE [ControlTIC].[dbo].[maquina_computador] SET [observaciones_mantenimiento] = '$observaciones_mantenimiento' WHERE [id] = '$idToUpdate'";
 
 
     

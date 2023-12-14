@@ -1,12 +1,14 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
+date_default_timezone_set('america/bogota');
 session_start();
 error_reporting(0);
 
 include '../../conexionbd.php';
 if (isset($_SESSION['usuario'])) {
+    
     require '../../function/funciones.php';
-?>
+    ?>
 
 
     <?php
@@ -66,7 +68,7 @@ if (isset($_SESSION['usuario'])) {
                     ,[link_computador_asigna]
                     ,[observaciones_desasigna]
                 FROM [ControlTIC].[dbo].[asignacion_computador]
-        where cedula='$cedula'");
+        where cedula='$cedula'  and estado_asignacion like '%NO VIGENTE%' ");
     $arr = array();
     while ($Element = odbc_fetch_array($data)) {
         $arr[] = $Element;
@@ -103,7 +105,7 @@ if (isset($_SESSION['usuario'])) {
                             ,[estado_asignacion]
                             ,[observaciones_desasigna]
                         FROM [ControlTIC].[dbo].[asignacion_celular]
-                                                where cedula='$cedula' 
+                                                where cedula='$cedula'   and estado_asignacion like '%NO VIGENTE%'
                                                 
     ");
     $arr_celular = array();
@@ -138,7 +140,7 @@ if (isset($_SESSION['usuario'])) {
                 ,[descripcionmov]
                 ,[usuamov]
             FROM [ControlTIC].[dbo].[asignacion_accesorios]
-                                                where cedula='$cedula' 
+                                                where cedula='$cedula'   and estado_asignacion like '%NO VIGENTE%'
                                         
                     ");
     $arr_accesorios = array();
@@ -178,7 +180,7 @@ if (isset($_SESSION['usuario'])) {
             ,[empresa]
             ,[estado_asignacion]
             ,[observaciones_desasigna]
-        FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] where cedula='$cedula' 
+        FROM [ControlTIC].[dbo].[asignacion_edcomunicacion] where cedula='$cedula' and estado_asignacion like '%NO VIGENTE%'
         
             ");
     $arr_edcomunicacion = array();
@@ -217,8 +219,8 @@ if (isset($_SESSION['usuario'])) {
             ,[segundoapellido]
             ,[estado_asignacion]
             ,[observaciones_desasigna]
-        FROM [ControlTIC].[dbo].[asignacion_perifericos]
-                        where cedula='$cedula' 
+        FROM [ControlTIC].[dbo].[asignacion_perifericos] 
+                        where cedula='$cedula'   and estado_asignacion like '%NO VIGENTE%'
 
           ");
     $arr_perifericos = array();
@@ -256,7 +258,7 @@ if (isset($_SESSION['usuario'])) {
                     ,[empresa]
                     ,[estado_asignacion]
                     ,[observaciones_desasigna]
-                FROM [ControlTIC].[dbo].[asignacion_almacenamiento] where cedula='$cedula' 
+                FROM [ControlTIC].[dbo].[asignacion_almacenamiento] where cedula='$cedula'   and estado_asignacion like '%NO VIGENTE%'
                                                 
             ");
     $arr_almacenamiento = array();
@@ -295,7 +297,7 @@ if (isset($_SESSION['usuario'])) {
                 ,[estado_asignacion]
                 ,[observaciones_desasigna]
             FROM [ControlTIC].[dbo].[asignacion_simcard]
-                                    where cedula='$cedula' 
+                                    where cedula='$cedula'   and estado_asignacion like '%NO VIGENTE%'
         
             ");
     $arr_simcard = array();
@@ -341,7 +343,7 @@ if (isset($_SESSION['usuario'])) {
                     LEFT JOIN [ControlTIC].[dbo].[sede] as sed ON mc.sede_dvr = sed.id
                     LEFT JOIN [ControlTIC].[dbo].[estado] as estad ON mc.estado = estad.id
                     LEFT JOIN [ControlTIC].[dbo].empresa AS empresa ON mc.empresa = empresa.id 
-                     where cedula='$cedula' 
+                     where cedula='$cedula'   and estado_asignacion like '%NO VIGENTE%'
         
                 ");
     $arr_dvr = array();
@@ -372,10 +374,10 @@ if (isset($_SESSION['usuario'])) {
 
     <body>
 
-        <section id="descargaresto" style="font-size: 14px;">
+        <section id="descargaresto" style="font-size: 10px;">
             <div class="container">
                 <div class="row">
-                <div class="col-md-3" style="border: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
+                    <div class="col-md-3" style="border: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
                         <?php
                         if ($empresa == 1) {
                             echo '<img src="../../assets/image/duquesaacta.png" alt="" style="width: 150px;" >';
@@ -393,25 +395,42 @@ if (isset($_SESSION['usuario'])) {
                     </div>
                     <div class="col-md-4 col-xs-12 col-sm-4" style="border: 1px solid black;">
                         <h6>
-                            <p>GESTICS-SD-20-F<br>VERSIÓN 1</p>
+                            <p>VERSIÓN 2</p>
                         </h6>
                     </div>
                 </div>
 
                 <div class="row">
+                    <div class="col-md-12 col-xs-12 col-sm-12" style="border: 1px solid black;text-align: center;">
+                        <h6>
+                            <p>GESTICS-SD-19-F</p>
+                        </h6>
+                    </div>
+                </div>
+
+
+                <div class="row">
                     <div class="col-md-12 col-xs-12 col-sm-12" style="border: 1px solid black;text-align: right;">
-                        <p>FECHA DE DEVOLUCIÓN: <strong><?php echo date("Y-m-d H:i:s"); ?></strong></p>
+                        <p>FECHA DE DEVOLUCIÓN: <strong>
+                                <?php echo date("Y-m-d h:i:s"); ?>
+                            </strong></p>
                     </div>
                 </div>
                 <div class="row" style="border-left: 1px solid black;border-right:1px solid black ;">
                     <div class="col-md-4 col-xs-12 col-sm-4">
-                        <p>NOMBRE DEL TRABAJADOR QUE DEVUELVE:<br> <strong><?php echo $nombreCompleto; ?></strong></p>
+                        <p>NOMBRE DEL TRABAJADOR QUE DEVUELVE:<br> <strong>
+                                <?php echo $nombreCompleto; ?>
+                            </strong></p>
                     </div>
                     <div class="col-md-4 col-xs-12 col-sm-4">
-                        <p>CC/ IDENTIFICACIÓN DE TRABAJADOR:<br> <strong><?php echo $cedula; ?></strong></p>
+                        <p>CC/ IDENTIFICACIÓN DE TRABAJADOR:<br> <strong>
+                                <?php echo $cedula; ?>
+                            </strong></p>
                     </div>
                     <div class="col-md-4 col-xs-12 col-sm-4">
-                        <p>CARGO QUE DESEMPEÑA:<br> <strong><?php echo $cargo; ?></strong></p>
+                        <p>CARGO QUE DESEMPEÑA:<br> <strong>
+                                <?php echo $cargo; ?>
+                            </strong></p>
                     </div>
                 </div>
 
@@ -419,7 +438,9 @@ if (isset($_SESSION['usuario'])) {
                 <div class="row" style="border-left: 1px solid black;border-right:1px solid black ;text-align: center;">
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
-                        <p>NOMBRE DEL TRABAJADOR QUE DEVUELVE: <br> <strong><?php echo utf8_encode($_SESSION['NOMBRE']); ?></strong></p>
+                        <p>NOMBRE DEL TRABAJADOR QUE DEVUELVE: <br> <strong>
+                                <?php echo utf8_encode($_SESSION['NOMBRE']); ?>
+                            </strong></p>
                     </div>
                     <div class="col-md-2"></div>
                 </div>
@@ -452,10 +473,10 @@ if (isset($_SESSION['usuario'])) {
                     );
 
                     $columnasMostraraccesorios = array(
-                        'tipo_maquina' => '',
                         'descripcion' => '',
-                        'tipo_acc' => '',
                         'marca' => '',
+                        'modelo' => '',
+                        'tipo_acc' => '',
                         // Agrega aquí las columnas que deseas mostrar y sus etiquetas
                     );
 
@@ -576,7 +597,7 @@ if (isset($_SESSION['usuario'])) {
                 <div class="row" style="border: 1px solid black;">
 
                     <!-- empieza aqui  COMPUTADOR -->
-                    <div class="col-md-12" style="padding: 10px;">
+                    <div class="col-md-12" style="padding: 0px;">
                         <?php
                         // Check if there are computer assignment records
                         if (!empty($arr)) {
@@ -608,7 +629,7 @@ if (isset($_SESSION['usuario'])) {
                                 echo '<td style="padding-right: 20px;text-align: center">' . $fila['Memoria_ram'] . '</td>';
                                 echo '<td style="padding-right: 20px;text-align: center">' . $fila['Tipo_discoduro'] . '</td>';
                                 echo '<td style="padding-right: 20px;text-align: center">' . $fila['Capacidad_discoduro'] . '</td>';
-                                echo '<td style="padding-right: 20px;">' . $fila['observaciones_desasigna'] . '</td>';
+                                echo '<td style="padding-right: 20px;font-size: 9px;">' . $fila['observaciones_desasigna'] . '</td>';
                                 echo '</tr>';
                             }
 
@@ -764,7 +785,7 @@ if (isset($_SESSION['usuario'])) {
                                 echo '<td style="padding-right: 20px;text-align: center">' . $fila['serial_perifericos'] . '</td>';
                                 echo '<td style="padding-right: 20px;text-align: center">' . $fila['placa_activo_perifericos'] . '</td>';
                                 echo '<td style="padding-right: 20px;">' . $fila['observaciones_desasigna'] . '</td>';
-                                
+
                                 echo '</tr>';
                             }
 
@@ -908,39 +929,61 @@ if (isset($_SESSION['usuario'])) {
                 </div>
 
                 <div class="row" style="text-align: center;">
-                    <div class="col-md-4" style="border: 1px solid black;"><strong>RECIBE:</strong><br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 100px;"><br><br>
-                        <p><strong><?php echo utf8_encode($_SESSION['NOMBRE']); ?></strong><br> <?php echo utf8_encode($_SESSION['CARGO']); ?></p>
+                    <div class="col-md-4" style="border: 1px solid black;"><strong>ENTREGA:</strong><br><br>
+
+                        <?php
+                        $nombre = utf8_encode($_SESSION['NOMBRE']);
+                        $cargo = utf8_encode($_SESSION['CARGO']);
+
+                        if ($nombre == 'YADAH ZAMAR ALONSO REYES') {
+                            echo '<img src="../../assets/image/firmaya.png" alt="" style="width: 230px;"><br><br>';
+                        } elseif ($nombre == 'YON FREDI GONZALEZ TORRES') {
+                            echo '<img src="../../assets/image/firmas.jpeg" alt="" style="width: 90px;"><br><br>';
+                        } elseif ($nombre == 'DAIRO JOSE ORTEGA FONSECA') {
+                            echo '<img src="../../assets/image/firmas.jpeg" alt="" style="width: 90px;"><br><br>';
+                        } else {
+                            // Puedes agregar más casos según sea necesario
+                            // Si ninguno de los nombres coincide, puedes proporcionar un valor predeterminado o hacer algo diferente.
+                        }
+
+                        echo '<p><strong>' . $nombre . '</strong><br>' . $cargo . '</p>';
+                        ?>
+
                     </div>
                     <div class="col-md-4" style="border: 1px solid black;"><strong>ENTREGA:</strong><br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 100px;"><br><br>
-                        <p><strong><?php echo $nombreCompleto; ?></strong><br> <?php echo $cargo; ?></p>
+                        <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br>
+                        <p><strong>
+                                <?php echo $nombreCompleto; ?>
+                            </strong><br>
+                            <?php echo $cargo; ?>
+                        </p>
                     </div>
                     <div class="col-md-4" style="border: 1px solid black;"><strong>AUTORIZACION:</strong><br><br>
-                        <img src="../../assets/image/firma.png" alt="" style="width: 100px;"><br><br>
-                        <p><strong>ANDRES ROBAYO</strong><br> JEFE SISTEMAS</p>
+                        <img src="../../assets/image/firmaing.jpeg" alt="" style="width: 100px;"><br><br>
+                        <p><strong>ANDRES FABIAN ROBAYO</strong><br> JEFE SISTEMAS</p>
                     </div>
                 </div>
             </div>
 
         </section>
 
-        <section id="segundahoja" style="margin-top: 30px;">
-            <div class="container" style="border: 1px solid black;padding-left: 50px;padding-right: 50px;padding-top: 25px;padding-bottom: 20px;">
+        <!-- <section id="segundahoja" style="margin-top: 30px;">
+            <div class="container"
+                style="border: 1px solid black;padding-left: 50px;padding-right: 50px;padding-top: 25px;padding-bottom: 20px;">
 
                 <div class="container-fluid">
                     <div class="row">
-                    <div class="col-md-4" style="border: 0px solid black;padding-top: 10px;padding-bottom: 10px;">
-                        <?php
-                        if ($empresa == 1) {
-                            echo '<img src="../../assets/image/duquesaacta.png" alt="" style="width: 150px;" >';
-                        } elseif ($empresa == 2) {
-                            echo '<img src="../../assets/image/palmerasacta.png" alt="" style="width: 150px;">';
-                        } elseif ($empresa == 3) {
-                            echo '<img src="../../assets/image/j25acta.png" alt="" style="width: 150px;">';
-                        }
-                        ?>
-                    </div>
+                        <div class="col-md-4" style="border: 0px solid black;padding-top: 10px;padding-bottom: 10px;">
+                            <?php
+                            if ($empresa == 1) {
+                                echo '<img src="../../assets/image/duquesaacta.png" alt="" style="width: 150px;" >';
+                            } elseif ($empresa == 2) {
+                                echo '<img src="../../assets/image/palmerasacta.png" alt="" style="width: 150px;">';
+                            } elseif ($empresa == 3) {
+                                echo '<img src="../../assets/image/j25acta.png" alt="" style="width: 150px;">';
+                            }
+                            ?>
+                        </div>
                         <div class="col-md-8">
                             <h5 style="margin-left: 50px;margin-top: 15px;">ACUERDO ACTA DE DEVOLUCIÓN DE EQUIPOS</h5>
                         </div>
@@ -957,10 +1000,20 @@ if (isset($_SESSION['usuario'])) {
                 <div class="row">
                     <div class="col-md-12" style="text-align: justify;">
                         <p>Comedidamente se hace entrega del equipo que se describe en el documento anexo.</p><br>
-                        <p>Este equipo se entrega funcionando correctamente con los programas y recursos necesarios para el desarrollo de actividades propias de la empresa, por lo cual el usuario a quien se le hace entrega del mismo no puede realizar acciones de instalar nuevo software ni desinstalar los existentes sin previo aviso al área de Sistemas, esta última es quien se encarga de autorizar dichas acciones y efectuarlas si lo considera necesario.</p><br>
-                        <p>El usuario se hace responsable por el equipo entregado y accesorios relacionados en el anexo, cualquier daño provocado con o sin intensión es el usuario responsable quien asume los arreglos o reposición a que haya lugar.</p><br>
-                        <p>También cabe recordar que este equipo es de uso exclusivo de la compañía y con el fin de evitar inconvenientes legales con los entes de control, no es procedente almacenar archivos de audio y video ajenos a la empresa (música MP3, WAV) y otros formatos.</p><br>
-                        <p>En caso de que se encuentre alguna irregularidad o incumplimiento de estos acuerdos después de esta notificación durante la visita de un ente de control, el usuario del equipo será el responsable de las acciones legales y penales que esto conlleva.</p><br>
+                        <p>Este equipo se entrega funcionando correctamente con los programas y recursos necesarios para el
+                            desarrollo de actividades propias de la empresa, por lo cual el usuario a quien se le hace
+                            entrega del mismo no puede realizar acciones de instalar nuevo software ni desinstalar los
+                            existentes sin previo aviso al área de Sistemas, esta última es quien se encarga de autorizar
+                            dichas acciones y efectuarlas si lo considera necesario.</p><br>
+                        <p>El usuario se hace responsable por el equipo entregado y accesorios relacionados en el anexo,
+                            cualquier daño provocado con o sin intensión es el usuario responsable quien asume los arreglos
+                            o reposición a que haya lugar.</p><br>
+                        <p>También cabe recordar que este equipo es de uso exclusivo de la compañía y con el fin de evitar
+                            inconvenientes legales con los entes de control, no es procedente almacenar archivos de audio y
+                            video ajenos a la empresa (música MP3, WAV) y otros formatos.</p><br>
+                        <p>En caso de que se encuentre alguna irregularidad o incumplimiento de estos acuerdos después de
+                            esta notificación durante la visita de un ente de control, el usuario del equipo será el
+                            responsable de las acciones legales y penales que esto conlleva.</p><br>
                         <p>Como mutuo acuerdo firman los responsables:</p><br><br>
                     </div>
                 </div>
@@ -969,20 +1022,28 @@ if (isset($_SESSION['usuario'])) {
                     <div class="row">
                         <div class="col-md-4"><strong>ENTREGA:</strong><br><br>
                             <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
-                            <p><strong><?php echo utf8_encode($_SESSION['NOMBRE']); ?></strong><br> <?php echo utf8_encode($_SESSION['CARGO']); ?></p>
+                            <p><strong>
+                                    <?php echo utf8_encode($_SESSION['NOMBRE']); ?>
+                                </strong><br>
+                                <?php echo utf8_encode($_SESSION['CARGO']); ?>
+                            </p>
                         </div>
                         <div class="col-md-4"><strong>ENTREGA:</strong><br><br>
                             <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
-                            <p><strong><?php echo $nombreCompleto; ?></strong><br> <?php echo $cargo; ?></p>
+                            <p><strong>
+                                    <?php echo $nombreCompleto; ?>
+                                </strong><br>
+                                <?php echo $cargo; ?>
+                            </p>
                         </div>
                         <div class="col-md-4"><strong>RECIBE:</strong><br><br>
                             <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
-                            <p><strong>ANDRES ROBAYO</strong><br> JEFE SISTEMAS</p>
+                            <p><strong>ANDRES FABIAN ROBAYO</strong><br> JEFE SISTEMAS</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
 
 
@@ -991,7 +1052,8 @@ if (isset($_SESSION['usuario'])) {
                 <div class="col-md-2"></div>
                 <div class="col-md-8" style="text-align: center;">
                     <div class="d-grid gap-2">
-                        <button id="descargarPdf" type="button" class="btn btn-danger pdf-button">ACTA DE DEVOLUCIÓN DE EQUIPOS</button>
+                        <button id="descargarPdf" type="button" class="btn btn-danger pdf-button">ACTA DE DEVOLUCIÓN DE
+                            EQUIPOS</button>
                     </div>
                 </div>
                 <div class="col-md-2"></div>
@@ -1000,17 +1062,18 @@ if (isset($_SESSION['usuario'])) {
 
         <br><br>
 
-        <div class="container-fluid" style="margin-top: 5px;">
+        <!-- <div class="container-fluid" style="margin-top: 5px;">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8" style="text-align: center;">
                     <div class="d-grid gap-2">
-                        <button id="descargarPdfSegundaHoja" type="button" class="btn btn-danger pdf-button">ACUERDO ACTA DE DEVOLUCIÓN EQUIPOS</button>
+                        <button id="descargarPdfSegundaHoja" type="button" class="btn btn-danger pdf-button">ACUERDO ACTA DE
+                            DEVOLUCIÓN EQUIPOS</button>
                     </div>
                 </div>
                 <div class="col-md-2"></div>
             </div>
-        </div>
+        </div> -->
 
 
         <div class="d-grid gap-2">
@@ -1027,14 +1090,14 @@ if (isset($_SESSION['usuario'])) {
         function descargarPDF() {
             // Oculta los botones antes de generar el PDF
             var pdfButtons = document.querySelectorAll('.pdf-button');
-            pdfButtons.forEach(function(button) {
+            pdfButtons.forEach(function (button) {
                 button.style.display = 'none';
             });
 
             const elemento = document.getElementById('descargaresto'); // ID de la sección que deseas convertir a PDF
 
             // Cambiar el estilo de la sección antes de generar el PDF
-            elemento.style.fontSize = '10px';
+            elemento.style.fontSize = '9px';
 
             // Configuración de opciones para html2pdf
             const opciones = {
@@ -1059,9 +1122,9 @@ if (isset($_SESSION['usuario'])) {
                 .from(elemento)
                 .set(opciones)
                 .save()
-                .then(function() {
+                .then(function () {
                     // Restaura la visibilidad de los botones después de generar el PDF
-                    pdfButtons.forEach(function(button) {
+                    pdfButtons.forEach(function (button) {
                         button.style.display = 'block';
                     });
                 });
@@ -1078,7 +1141,7 @@ if (isset($_SESSION['usuario'])) {
         function descargarPDFSegundaHoja() {
             // Oculta los botones antes de generar el PDF
             var pdfButtons = document.querySelectorAll('.pdf-button');
-            pdfButtons.forEach(function(button) {
+            pdfButtons.forEach(function (button) {
                 button.style.display = 'none';
             });
 
@@ -1110,9 +1173,9 @@ if (isset($_SESSION['usuario'])) {
                 .from(elemento)
                 .set(opciones)
                 .save()
-                .then(function() {
+                .then(function () {
                     // Restaura la visibilidad de los botones después de generar el PDF
-                    pdfButtons.forEach(function(button) {
+                    pdfButtons.forEach(function (button) {
                         button.style.display = 'block';
                     });
                 });
@@ -1162,5 +1225,6 @@ if (isset($_SESSION['usuario'])) {
     <script languaje "JavaScript">
         alert("Acceso Incorrecto");
         window.location.href = "../login.php";
-    </script><?php
-            } ?>
+    </script>
+    <?php
+} ?>

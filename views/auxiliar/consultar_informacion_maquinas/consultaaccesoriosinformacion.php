@@ -92,7 +92,7 @@ while ($Element = odbc_fetch_array($data)) {
 
                         <!-- guardar la informacion en el boton -->
                         <td>
-                            <button id="enviaraccesorios" style="display: none;" type="submit" class="btn btn-outline-warning asignar-btn" 
+                            <button id="enviaraccesorios" style="display: none;" type="submit" class="btn btn-outline-danger asignar-btn" 
                             data-id="<?= $fila['id'] ?>" 
                             data-tipo-maquina="<?= $fila['tipo_maquina'] ?>" 
                             data-marca="<?= $fila['marca'] ?>" 
@@ -109,7 +109,7 @@ while ($Element = odbc_fetch_array($data)) {
                             data-cargo="<?= $cargo ?>" 
                             data-usua-asigna="<?php echo $Usua_asigna; ?>"></button>
                             <!-- btn escondido para la alerta -->
-                            <button id="" type="button" class="btn btn-outline-warning showAlertButton">ASIGNAR</button>
+                            <button id="" type="button" class="btn btn-outline-danger showAlertButton">REMOVER</button>
                         </td>
                     </tr>
                 <?php } ?>

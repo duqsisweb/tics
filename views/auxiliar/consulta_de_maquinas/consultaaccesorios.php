@@ -25,7 +25,8 @@ $data = odbc_exec($conexion, " SELECT
 ,[fecha_de_ingreso_acc]
 FROM [ControlTIC].[dbo].[maquina_accesorios] as mc
 LEFT JOIN [ControlTIC].[dbo].tipo_maquina as tipo_maquina ON mc.tipo_maquina = tipo_maquina.id
-LEFT JOIN [ControlTIC].[dbo].[descripcion_accesorios] as acc on mc.descripcion = acc.id ");
+LEFT JOIN [ControlTIC].[dbo].[descripcion_accesorios] as acc on mc.descripcion = acc.id
+where cantidad > 0 ");
 
 $arr = array();
 while ($Element = odbc_fetch_array($data)) {
