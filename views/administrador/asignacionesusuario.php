@@ -54,6 +54,15 @@ if (isset($_SESSION['usuario'])) {
             background-color: white !important;
             opacity: 0.9 !important;
         }
+
+        /* BNT ESTILO ZOMM */
+        .btn.zoom-on-hover {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .btn.zoom-on-hover:hover {
+            transform: scale(1.1);
+        }
     </style>
 
 
@@ -305,7 +314,7 @@ if (isset($_SESSION['usuario'])) {
 
                     <div style="text-align: center;">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" class="btn btn-warning zoom-on-hover" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Generar Acta
                         </button>
 
@@ -374,7 +383,7 @@ if (isset($_SESSION['usuario'])) {
                     cedula: cedula,
                     cargo: cargo,
                     nombreCompleto: nombreCompleto,
-                    empresa: empresaOption  // Agrega empresaOption como parámetro
+                    empresa: empresaOption // Agrega empresaOption como parámetro
 
                 }, // Envía la cédula, el cargo y el nombre completo como parámetros
                 // dataType: 'html',

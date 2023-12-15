@@ -88,6 +88,7 @@
                 <h6 style="color:aliceblue">CONTROL Y GESTIÓN DE INVENTARIOS</h6>
                 <p class="user"> Usuario <br><?php echo utf8_encode($_SESSION['usuario']); ?></p>
                 <p class="user"> Nombre <br><?php echo utf8_encode($_SESSION['NOMBRE']); ?></p>
+                <p class="user"> Cargo <br><?php echo utf8_encode($_SESSION['CARGO']); ?></p>
             </h5>
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item">

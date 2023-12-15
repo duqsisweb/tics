@@ -1284,6 +1284,7 @@ if (isset($_SESSION['usuario'])) {
                                             <label for="" class="form-label">Tipo</label>
                                             <select class="form-select" aria-label="" name="tipo" required>
                                                 <option value="" selected>SELECCIONE</option>
+                                                <option value="NINGUNA">NINGUNA</option>
                                                 <option value="LASER">LASER</option>
                                                 <option value="INYECCION">INYECCION</option>
                                                 <option value="ESCANER">ESCANER</option>

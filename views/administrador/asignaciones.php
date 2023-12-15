@@ -64,6 +64,15 @@ if (isset($_SESSION['usuario'])) {
                 background-color: white !important;
                 opacity: 0.9 !important;
             }
+
+            /* btn de zoom generar acta */
+            .btn.zoom-on-hover {
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .btn.zoom-on-hover:hover {
+                transform: scale(1.1);
+            }
         </style>
 
         <section style="margin-top: 100px;">
@@ -586,7 +595,7 @@ if (isset($_SESSION['usuario'])) {
                 <!-- BOTON DE GENERAR ACTA -->
                 <div style="text-align: center;">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-warning zoom-on-hover" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Generar Acta
                     </button>
                 </div>

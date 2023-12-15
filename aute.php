@@ -8,7 +8,7 @@ if (isset($_POST['iniciar'])) {
     $usuario = rtrim($_POST['usuario']);
     $password = rtrim($_POST['password']);
 
-    $resul = odbc_exec($conexion, "SELECT RTRIM(US.name) AS NOMBRE, RTRIM(US.email) AS EMAIL, RTRIM(US.password) AS CLAVE, [estadopassword], [sistemaClasificador]
+    $resul = odbc_exec($conexion, "SELECT RTRIM(US.cargo) AS CARGO, RTRIM(US.name) AS NOMBRE, RTRIM(US.email) AS EMAIL, RTRIM(US.password) AS CLAVE, [estadopassword], [sistemaClasificador]
     FROM  [ControlTIC].[dbo].[users] AS US
     WHERE US.email = '$usuario' and Estado = '1' ") or die(exit("Error al ejecutar consulta"));
 
@@ -16,6 +16,7 @@ if (isset($_POST['iniciar'])) {
         $row = odbc_fetch_array($resul);
         $Nombre = $row['NOMBRE'];
         $usua = $row['EMAIL'];
+        $Cargo = $row['CARGO'];
         $pass = $row['CLAVE'];
         $sistemaClasificador = $row['sistemaClasificador'];
 
@@ -24,6 +25,8 @@ if (isset($_POST['iniciar'])) {
             session_start();
             $_SESSION['usuario'] = $usua;
             $_SESSION['NOMBRE'] = $Nombre;
+            $_SESSION['CARGO'] = $Cargo;
+
 
             // Asignar perfil/rol basado en el valor de $sistemaClasificador
             if ($sistemaClasificador == 'AUXILIAR') {

@@ -6,9 +6,9 @@ error_reporting(0);
 
 include '../../conexionbd.php';
 if (isset($_SESSION['usuario'])) {
-    
+
     require '../../function/funciones.php';
-    ?>
+?>
 
 
     <?php
@@ -395,7 +395,17 @@ if (isset($_SESSION['usuario'])) {
                     </div>
                     <div class="col-md-4 col-xs-12 col-sm-4" style="border: 1px solid black;">
                         <h6>
-                            <p>VERSIÓN 2</p>
+                            <?php
+                            if ($empresa == 1) {
+                                echo '<p>VERSIÓN 2</p>';
+                            } elseif ($empresa == 2) {
+                                echo '<p>INF-FT-12</p>
+                                      <p>VERSIÓN 1</p>
+                                      <p>Fecha de Emisión: 14/12/2023</p>';
+                            } elseif ($empresa == 3) {
+                                echo '<p>GESTICS-SD-20-F</p>';
+                            }
+                            ?>
                         </h6>
                     </div>
                 </div>
@@ -403,7 +413,15 @@ if (isset($_SESSION['usuario'])) {
                 <div class="row">
                     <div class="col-md-12 col-xs-12 col-sm-12" style="border: 1px solid black;text-align: center;">
                         <h6>
-                            <p>GESTICS-SD-19-F</p>
+                            <?php
+                            if ($empresa == 1) {
+                                echo '<p>GESTICS-SD-20-F</p>';
+                            } elseif ($empresa == 2) {
+                                echo '<p></p>';
+                            } elseif ($empresa == 3) {
+                                echo '<p>GESTICS-SD-20-F</p>';
+                            }
+                            ?>
                         </h6>
                     </div>
                 </div>
@@ -929,18 +947,25 @@ if (isset($_SESSION['usuario'])) {
                 </div>
 
                 <div class="row" style="text-align: center;">
-                    <div class="col-md-4" style="border: 1px solid black;"><strong>ENTREGA:</strong><br><br>
+                    <div class="col-md-4" style="border: 1px solid black;"><strong>RECIBE:</strong><br>
 
                         <?php
                         $nombre = utf8_encode($_SESSION['NOMBRE']);
                         $cargo = utf8_encode($_SESSION['CARGO']);
 
+
                         if ($nombre == 'YADAH ZAMAR ALONSO REYES') {
                             echo '<img src="../../assets/image/firmaya.png" alt="" style="width: 230px;"><br><br>';
                         } elseif ($nombre == 'YON FREDI GONZALEZ TORRES') {
-                            echo '<img src="../../assets/image/firmas.jpeg" alt="" style="width: 90px;"><br><br>';
+                            echo ' <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br><br>';
                         } elseif ($nombre == 'DAIRO JOSE ORTEGA FONSECA') {
-                            echo '<img src="../../assets/image/firmas.jpeg" alt="" style="width: 90px;"><br><br>';
+                            echo ' <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br><br>';
+                        } elseif ($nombre == 'HECTOR EFREN GUERRERO BARRETO') {
+                            echo ' <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br><br>';
+                        } elseif ($nombre == 'JULY ANDREA GUERRERO ZAMORA') {
+                            echo ' <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br><br>';
+                        } elseif ($nombre == 'JOSE LUIS CASILIMAS MARTINEZ') {
+                            echo ' <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br><br>';
                         } else {
                             // Puedes agregar más casos según sea necesario
                             // Si ninguno de los nombres coincide, puedes proporcionar un valor predeterminado o hacer algo diferente.
@@ -955,96 +980,20 @@ if (isset($_SESSION['usuario'])) {
                         <p><strong>
                                 <?php echo $nombreCompleto; ?>
                             </strong><br>
-                            <?php echo $cargo; ?>
+                            <?php echo $cargo = isset($_GET['cargo']) ? $_GET['cargo'] : ''; ?>
                         </p>
                     </div>
-                    <div class="col-md-4" style="border: 1px solid black;"><strong>AUTORIZACION:</strong><br><br>
-                        <img src="../../assets/image/firmaing.jpeg" alt="" style="width: 100px;"><br><br>
-                        <p><strong>ANDRES FABIAN ROBAYO</strong><br> JEFE SISTEMAS</p>
+
+                    <div class="col-md-4" style="text-align: center; position: relative;border: 1px solid black">
+                        <strong>AUTORIZACIÓN:</strong><br><br><br>
+                        <img src="../../assets/image/firmaing.png" alt="" style="width: 170px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><br><br><br>
+                        <p><strong>ANDRES FABIAN ROBAYO</strong><br> JEFE DE SISTEMAS</p>
                     </div>
+
                 </div>
             </div>
 
         </section>
-
-        <!-- <section id="segundahoja" style="margin-top: 30px;">
-            <div class="container"
-                style="border: 1px solid black;padding-left: 50px;padding-right: 50px;padding-top: 25px;padding-bottom: 20px;">
-
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-4" style="border: 0px solid black;padding-top: 10px;padding-bottom: 10px;">
-                            <?php
-                            if ($empresa == 1) {
-                                echo '<img src="../../assets/image/duquesaacta.png" alt="" style="width: 150px;" >';
-                            } elseif ($empresa == 2) {
-                                echo '<img src="../../assets/image/palmerasacta.png" alt="" style="width: 150px;">';
-                            } elseif ($empresa == 3) {
-                                echo '<img src="../../assets/image/j25acta.png" alt="" style="width: 150px;">';
-                            }
-                            ?>
-                        </div>
-                        <div class="col-md-8">
-                            <h5 style="margin-left: 50px;margin-top: 15px;">ACUERDO ACTA DE DEVOLUCIÓN DE EQUIPOS</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row" style="margin-top: 30px;">
-                    <div class="col-md-12" style="text-align: left;">
-                        <h6 id="fecha-hora"></h6>
-                    </div>
-                </div>
-
-                <br>
-                <div class="row">
-                    <div class="col-md-12" style="text-align: justify;">
-                        <p>Comedidamente se hace entrega del equipo que se describe en el documento anexo.</p><br>
-                        <p>Este equipo se entrega funcionando correctamente con los programas y recursos necesarios para el
-                            desarrollo de actividades propias de la empresa, por lo cual el usuario a quien se le hace
-                            entrega del mismo no puede realizar acciones de instalar nuevo software ni desinstalar los
-                            existentes sin previo aviso al área de Sistemas, esta última es quien se encarga de autorizar
-                            dichas acciones y efectuarlas si lo considera necesario.</p><br>
-                        <p>El usuario se hace responsable por el equipo entregado y accesorios relacionados en el anexo,
-                            cualquier daño provocado con o sin intensión es el usuario responsable quien asume los arreglos
-                            o reposición a que haya lugar.</p><br>
-                        <p>También cabe recordar que este equipo es de uso exclusivo de la compañía y con el fin de evitar
-                            inconvenientes legales con los entes de control, no es procedente almacenar archivos de audio y
-                            video ajenos a la empresa (música MP3, WAV) y otros formatos.</p><br>
-                        <p>En caso de que se encuentre alguna irregularidad o incumplimiento de estos acuerdos después de
-                            esta notificación durante la visita de un ente de control, el usuario del equipo será el
-                            responsable de las acciones legales y penales que esto conlleva.</p><br>
-                        <p>Como mutuo acuerdo firman los responsables:</p><br><br>
-                    </div>
-                </div>
-
-                <div class="container-fluid" style="text-align: center;">
-                    <div class="row">
-                        <div class="col-md-4"><strong>ENTREGA:</strong><br><br>
-                            <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
-                            <p><strong>
-                                    <?php echo utf8_encode($_SESSION['NOMBRE']); ?>
-                                </strong><br>
-                                <?php echo utf8_encode($_SESSION['CARGO']); ?>
-                            </p>
-                        </div>
-                        <div class="col-md-4"><strong>ENTREGA:</strong><br><br>
-                            <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
-                            <p><strong>
-                                    <?php echo $nombreCompleto; ?>
-                                </strong><br>
-                                <?php echo $cargo; ?>
-                            </p>
-                        </div>
-                        <div class="col-md-4"><strong>RECIBE:</strong><br><br>
-                            <img src="../../assets/image/firma.png" alt="" style="width: 90px;"><br><br>
-                            <p><strong>ANDRES FABIAN ROBAYO</strong><br> JEFE SISTEMAS</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
 
 
         <div class="container-fluid" style="margin-top: 90px;">
@@ -1060,25 +1009,6 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
 
-        <br><br>
-
-        <!-- <div class="container-fluid" style="margin-top: 5px;">
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8" style="text-align: center;">
-                    <div class="d-grid gap-2">
-                        <button id="descargarPdfSegundaHoja" type="button" class="btn btn-danger pdf-button">ACUERDO ACTA DE
-                            DEVOLUCIÓN EQUIPOS</button>
-                    </div>
-                </div>
-                <div class="col-md-2"></div>
-            </div>
-        </div> -->
-
-
-        <div class="d-grid gap-2">
-
-
     </body>
 
     </html>
@@ -1090,7 +1020,7 @@ if (isset($_SESSION['usuario'])) {
         function descargarPDF() {
             // Oculta los botones antes de generar el PDF
             var pdfButtons = document.querySelectorAll('.pdf-button');
-            pdfButtons.forEach(function (button) {
+            pdfButtons.forEach(function(button) {
                 button.style.display = 'none';
             });
 
@@ -1122,9 +1052,9 @@ if (isset($_SESSION['usuario'])) {
                 .from(elemento)
                 .set(opciones)
                 .save()
-                .then(function () {
+                .then(function() {
                     // Restaura la visibilidad de los botones después de generar el PDF
-                    pdfButtons.forEach(function (button) {
+                    pdfButtons.forEach(function(button) {
                         button.style.display = 'block';
                     });
                 });
@@ -1141,7 +1071,7 @@ if (isset($_SESSION['usuario'])) {
         function descargarPDFSegundaHoja() {
             // Oculta los botones antes de generar el PDF
             var pdfButtons = document.querySelectorAll('.pdf-button');
-            pdfButtons.forEach(function (button) {
+            pdfButtons.forEach(function(button) {
                 button.style.display = 'none';
             });
 
@@ -1173,9 +1103,9 @@ if (isset($_SESSION['usuario'])) {
                 .from(elemento)
                 .set(opciones)
                 .save()
-                .then(function () {
+                .then(function() {
                     // Restaura la visibilidad de los botones después de generar el PDF
-                    pdfButtons.forEach(function (button) {
+                    pdfButtons.forEach(function(button) {
                         button.style.display = 'block';
                     });
                 });
@@ -1226,5 +1156,5 @@ if (isset($_SESSION['usuario'])) {
         alert("Acceso Incorrecto");
         window.location.href = "../login.php";
     </script>
-    <?php
+<?php
 } ?>

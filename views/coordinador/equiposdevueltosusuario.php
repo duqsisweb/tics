@@ -103,7 +103,7 @@ if (isset($_SESSION['usuario'])) {
                 }
 
                 if (isset($con)) {
-                    $data = odbc_exec($con, "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM $empresa..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 and CEDULA = '$CEDULA'");
+                    $data = odbc_exec($con, "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM $empresa..MTEMPLEA WHERE  CEDULA = '$CEDULA'");
                     $arr = array(); // Inicializar el arreglo para almacenar los resultados
                     while ($Element = odbc_fetch_array($data)) {
                         $arr[] = $Element;
@@ -193,7 +193,7 @@ if (isset($_SESSION['usuario'])) {
                                 <datalist id="asiste">
                                     <?php
                                     include '../../../conexionbd.php';
-                                    $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM DUQUESA..MTEMPLEA WHERE YEAR(FECRETIRO) = 2100 ORDER BY NOMBRE ASC;";
+                                    $query = "SELECT CEDULA, CODIGO, NOMBRE, NOMBRE2, APELLIDO, APELLIDO2, CARGO FROM DUQUESA..MTEMPLEA";
                                     $result = odbc_exec($conexion, $query);
 
                                     while ($admon = odbc_fetch_array($result)) {

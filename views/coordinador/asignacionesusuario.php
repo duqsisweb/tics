@@ -54,6 +54,15 @@ if (isset($_SESSION['usuario'])) {
             background-color: white !important;
             opacity: 0.9 !important;
         }
+
+        /* BNT ESTILO ZOMM */
+        .btn.zoom-on-hover {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .btn.zoom-on-hover:hover {
+            transform: scale(1.1);
+        }
     </style>
 
 
@@ -118,8 +127,8 @@ if (isset($_SESSION['usuario'])) {
 
                     $showSections = true;
 
-                                        //  MENSAJES SI LA CONSULTA ES EXITOSA O NO HAY INFORMACIÓN
-                                        echo '<div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    //  MENSAJES SI LA CONSULTA ES EXITOSA O NO HAY INFORMACIÓN
+                    echo '<div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
                                                 <div class="toast-header">
                                         <strong class="me-auto">Éxito</strong>
                                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
@@ -128,14 +137,14 @@ if (isset($_SESSION['usuario'])) {
                                         Consulta satisfactoria.
                                     </div>
                                 </div>';
-                                        echo '<script>
+                    echo '<script>
                                 var toastEl = document.querySelector(".toast");
                                 var toast = new bootstrap.Toast(toastEl);
                                 toast.show();
                             </script>';
-                                    } else {
-                                        // Mostrar un mensaje de error
-                                        echo '<div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                } else {
+                    // Mostrar un mensaje de error
+                    echo '<div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
                                     <div class="toast-header">
                                         <strong class="me-auto">Error</strong>
                                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
@@ -144,7 +153,7 @@ if (isset($_SESSION['usuario'])) {
                                         No se encontraron registros para la consulta.
                                     </div>
                                 </div>';
-                                        echo '<script>
+                    echo '<script>
                                 var toastEl = document.querySelector(".toast");
                                 var toast = new bootstrap.Toast(toastEl);
                                 toast.show();
@@ -305,7 +314,7 @@ if (isset($_SESSION['usuario'])) {
 
                     <div style="text-align: center;">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" class="btn btn-warning zoom-on-hover" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Generar Acta
                         </button>
 
@@ -357,7 +366,7 @@ if (isset($_SESSION['usuario'])) {
             var nombreCompleto = '<?php echo $nombreCompleto; ?>'; // Obtener el nombre completo del PHP
             var empresaOption = $('#empresaOption').val();
             var empresaOptionValue = "<?php echo $empresaOption; ?>";
-            
+
 
             // Realiza la solicitud AJAX aquí
             $.ajax({

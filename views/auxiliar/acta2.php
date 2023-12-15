@@ -363,6 +363,16 @@ if (isset($_SESSION['usuario'])) {
         <title>Información de Máquinas</title>
     </head>
 
+    <style>
+        .zoom-btn {
+            transition: transform 0.3s ease;
+        }
+
+        .zoom-btn:hover {
+            transform: scale(1.1);
+        }
+    </style>
+
     <!-- HEAD -->
     <?php
     require '../../views/head.php';
@@ -376,7 +386,7 @@ if (isset($_SESSION['usuario'])) {
     <body>
 
         <section id="descargaresto" style="font-size: 14px;">
-            <div class="container">
+            <div class="container" style="margin-bottom: 260px;">
 
                 <div class="row">
                     <div class="col-md-3" style="border: 1px solid black;padding-top: 10px;padding-bottom: 10px;">
@@ -923,8 +933,6 @@ if (isset($_SESSION['usuario'])) {
                     </div>
                     <!-- TERMINA DVR -->
 
-
-
                 </div>
                 <!-- AQUI FINALIZA TODO -->
 
@@ -955,18 +963,25 @@ if (isset($_SESSION['usuario'])) {
                 </div>
 
                 <div class="row" style="text-align: center;">
-                    <div class="col-md-4" style="border: 1px solid black;"><strong>ENTREGA:</strong><br><br>
+                    <div class="col-md-4" style="border: 1px solid black;"><strong>ENTREGA:</strong><br>
 
                         <?php
                         $nombre = utf8_encode($_SESSION['NOMBRE']);
                         $cargo = utf8_encode($_SESSION['CARGO']);
 
+
                         if ($nombre == 'YADAH ZAMAR ALONSO REYES') {
                             echo '<img src="../../assets/image/firmaya.png" alt="" style="width: 230px;"><br><br>';
                         } elseif ($nombre == 'YON FREDI GONZALEZ TORRES') {
-                            echo '<img src="../../assets/image/firmas.jpeg" alt="" style="width: 90px;"><br><br>';
+                            echo ' <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br><br>';
                         } elseif ($nombre == 'DAIRO JOSE ORTEGA FONSECA') {
-                            echo '<img src="../../assets/image/firmas.jpeg" alt="" style="width: 90px;"><br><br>';
+                            echo ' <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br><br>';
+                        } elseif ($nombre == 'HECTOR EFREN GUERRERO BARRETO') {
+                            echo ' <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br><br>';
+                        } elseif ($nombre == 'JULY ANDREA GUERRERO ZAMORA') {
+                            echo ' <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br><br>';
+                        } elseif ($nombre == 'JOSE LUIS CASILIMAS MARTINEZ') {
+                            echo ' <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br><br>';
                         } else {
                             // Puedes agregar más casos según sea necesario
                             // Si ninguno de los nombres coincide, puedes proporcionar un valor predeterminado o hacer algo diferente.
@@ -981,20 +996,21 @@ if (isset($_SESSION['usuario'])) {
                         <p><strong>
                                 <?php echo $nombreCompleto; ?>
                             </strong><br>
-                            <?php echo $cargo; ?>
+                            <?php echo $cargo = isset($_GET['cargo']) ? $_GET['cargo'] : ''; ?>
                         </p>
                     </div>
-                    <div class="col-md-4" style="border: 1px solid black; position: relative; text-align: center;">
-                        <strong>AUTORIZACION:</strong><br><br>
-                        <img src="../../assets/image/firmaing.png" alt="" style="width: 160px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><br><br><br>
+
+                    <div class="col-md-4" style="text-align: center; position: relative;border: 1px solid black">
+                        <strong>AUTORIZACIÓN:</strong><br><br><br>
+                        <img src="../../assets/image/firmaing.png" alt="" style="width: 170px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><br><br><br>
                         <p><strong>ANDRES FABIAN ROBAYO</strong><br> JEFE DE SISTEMAS</p>
                     </div>
+
                 </div>
+
             </div>
 
-        </section>
-
-        <section id="segundahoja" style="margin-top: 30px;">
+            <!-- SEGUNDO BLOQUE -->
             <div class="container" style="border: 1px solid black;padding-left: 50px;padding-right: 50px;padding-top: 25px;padding-bottom: 20px;">
 
                 <div class="container-fluid">
@@ -1045,19 +1061,26 @@ if (isset($_SESSION['usuario'])) {
                 </div>
 
                 <div class="container-fluid" style="text-align: center;">
-                    <div class="row">
-                        <div class="col-md-4"><strong>ENTREGA:</strong><br><br>
+                    <div class="row" style="text-align: center;">
+                        <div class="col-md-4"><strong>ENTREGA:</strong><br>
 
                             <?php
                             $nombre = utf8_encode($_SESSION['NOMBRE']);
                             $cargo = utf8_encode($_SESSION['CARGO']);
 
+
                             if ($nombre == 'YADAH ZAMAR ALONSO REYES') {
                                 echo '<img src="../../assets/image/firmaya.png" alt="" style="width: 230px;"><br><br>';
                             } elseif ($nombre == 'YON FREDI GONZALEZ TORRES') {
-                                echo '<img src="../../assets/image/firmas.jpeg" alt="" style="width: 90px;"><br><br>';
+                                echo ' <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br><br>';
                             } elseif ($nombre == 'DAIRO JOSE ORTEGA FONSECA') {
-                                echo '<img src="../../assets/image/firmas.jpeg" alt="" style="width: 90px;"><br><br>';
+                                echo ' <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br><br>';
+                            } elseif ($nombre == 'HECTOR EFREN GUERRERO BARRETO') {
+                                echo ' <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br><br>';
+                            } elseif ($nombre == 'JULY ANDREA GUERRERO ZAMORA') {
+                                echo ' <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br><br>';
+                            } elseif ($nombre == 'JOSE LUIS CASILIMAS MARTINEZ') {
+                                echo ' <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br><br>';
                             } else {
                                 // Puedes agregar más casos según sea necesario
                                 // Si ninguno de los nombres coincide, puedes proporcionar un valor predeterminado o hacer algo diferente.
@@ -1068,23 +1091,24 @@ if (isset($_SESSION['usuario'])) {
 
                         </div>
                         <div class="col-md-4"><strong>RECIBE:</strong><br><br>
-                            <img src="../../assets/image/firmas.jpeg" alt="" style="width: 90px;"><br><br>
+                            <img src="../../assets/image/firmas.jpeg" alt="" style="width: 100px;"><br><br>
                             <p><strong>
                                     <?php echo $nombreCompleto; ?>
                                 </strong><br>
-                                <?php echo $cargo; ?>
+                                <?php echo $cargo = isset($_GET['cargo']) ? $_GET['cargo'] : ''; ?>
                             </p>
                         </div>
+
                         <div class="col-md-4" style="text-align: center; position: relative;">
-                            <strong>ENTREGA:</strong><br><br><br>
-                            <img src="../../assets/image/firmaing.png" alt="" style="width: 160px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><br><br>
+                            <strong>AUTORIZACIÓN:</strong><br><br><br>
+                            <img src="../../assets/image/firmaing.png" alt="" style="width: 170px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><br><br><br>
                             <p><strong>ANDRES FABIAN ROBAYO</strong><br> JEFE DE SISTEMAS</p>
                         </div>
+
                     </div>
                 </div>
             </div>
         </section>
-
 
 
         <div class="container-fluid" style="margin-top: 90px;">
@@ -1092,31 +1116,13 @@ if (isset($_SESSION['usuario'])) {
                 <div class="col-md-2"></div>
                 <div class="col-md-8" style="text-align: center;">
                     <div class="d-grid gap-2">
-                        <button id="descargarPdf" type="button" class="btn btn-danger pdf-button">ACTA DE ASIGNACIÓN DE
-                            EQUIPOS</button>
+                        <button id="descargarPdf" type="button" class="btn btn-danger pdf-button zoom-btn">ACTA DE ASIGNACIÓN DE EQUIPOS</button>
                     </div>
                 </div>
                 <div class="col-md-2"></div>
             </div>
         </div>
 
-        <br><br>
-
-        <div class="container-fluid" style="margin-top: 5px;">
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8" style="text-align: center;">
-                    <div class="d-grid gap-2">
-                        <button id="descargarPdfSegundaHoja" type="button" class="btn btn-danger pdf-button">ACUERDO ACTA
-                            ENTREGA DE EQUIPOS</button>
-                    </div>
-                </div>
-                <div class="col-md-2"></div>
-            </div>
-        </div>
-
-
-        <div class="d-grid gap-2">
 
 
     </body>
@@ -1174,56 +1180,6 @@ if (isset($_SESSION['usuario'])) {
         document.getElementById('descargarPdf').addEventListener('click', descargarPDF);
     </script>
 
-
-    <!-- script para descargar segunda hoja -->
-    <script>
-        // Función para convertir la sección "segundahoja" en PDF y descargarla
-        function descargarPDFSegundaHoja() {
-            // Oculta los botones antes de generar el PDF
-            var pdfButtons = document.querySelectorAll('.pdf-button');
-            pdfButtons.forEach(function(button) {
-                button.style.display = 'none';
-            });
-
-            const elemento = document.getElementById('segundahoja'); // ID de la sección "segundahoja"
-
-            // Cambiar el estilo de la sección antes de generar el PDF (si es necesario)
-            elemento.style.fontSize = '14px';
-
-            // Configuración de opciones para html2pdf (puedes ajustar según tus necesidades)
-            const opciones = {
-                margin: 9,
-                filename: 'Acuerdo.pdf', // Nombre del archivo PDF para la segunda hoja
-                image: {
-                    type: 'jpeg',
-                    quality: 3
-                },
-                html2canvas: {
-                    scale: 2
-                },
-                jsPDF: {
-                    unit: 'mm',
-                    format: 'a4',
-                    orientation: 'portrait'
-                },
-            };
-
-            // Comienza la conversión y descarga
-            html2pdf()
-                .from(elemento)
-                .set(opciones)
-                .save()
-                .then(function() {
-                    // Restaura la visibilidad de los botones después de generar el PDF
-                    pdfButtons.forEach(function(button) {
-                        button.style.display = 'block';
-                    });
-                });
-        }
-
-        // Asocia la función de descarga al botón de la segunda hoja
-        document.getElementById('descargarPdfSegundaHoja').addEventListener('click', descargarPDFSegundaHoja);
-    </script>
 
 
     <!-- OBTENER LA FECHA ACTUAL -->
